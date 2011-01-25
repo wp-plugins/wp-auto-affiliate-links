@@ -128,31 +128,31 @@ function add_affiliate_links($content) {
 
 							//Added 3 times to cover first letter capped, and all uppercase
 							$patterns[] = '/ '. $key .' /';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. $key .'</a>';
+							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. $key .'</a> ';
 
 							$patterns[] = '/ '. ucfirst($key) .' /';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. ucfirst($key) .'</a>';
+							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. ucfirst($key) .'</a> ';
 
 							$patterns[] = '/ '. strtoupper($key) .' /';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. strtoupper($key) .'</a>';
+							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. strtoupper($key) .'</a> ';
 
 							$patterns[] = '/ '. $key .',/';
-							$replacements[] = '<a href="'. $link .'" target="_blank" >'. $key .'</a> ';
+							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. $key .'</a>,';
 
 							$patterns[] = '/ '. ucfirst($key) .',/';
-							$replacements[] = '<a href="'. $link .'" target="_blank" >'. ucfirst($key) .'</a> ';
+							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. ucfirst($key) .'</a>,';
 
 							$patterns[] = '/ '. strtoupper($key) .',/';
-							$replacements[] = '<a href="'. $link .'" target="_blank" >'. strtoupper($key) .'</a> ';
+							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. strtoupper($key) .'</a>,';
 
 							$patterns[] = '/ '. $key .'./';
-							$replacements[] = '<a href="'. $link .'" target="_blank" >'. $key .'</a> ';
+							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. $key .'</a>.';
 
 							$patterns[] = '/ '. ucfirst($key) .'./';
-							$replacements[] = '<a href="'. $link .'" target="_blank" >'. ucfirst($key) .'</a> ';
+							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. ucfirst($key) .'</a>.';
 
 							$patterns[] = '/ '. strtoupper($key) .'./';
-							$replacements[] = '<a href="'. $link .'" target="_blank" >'. strtoupper($key) .'</a> ';
+							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. strtoupper($key) .'</a>.';
 
 
 						}
