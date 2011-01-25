@@ -4,7 +4,7 @@ Donate link: http://www.flamescorpion.com
 Tags: affiliate, links
 Requires at least: 2.5.2
 Tested up to: 3.0.4
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -37,6 +37,9 @@ No theme changes are needed for this plugin.
 The blog functionality will not be affected in any way.
 
 == Changelog ==
+
+= 0.1.2 =
+* Fixed the issue where all links were decapitalized.
 
 = 0.1.1 =
 * Fixed the issue where links are accidentaly break html code. 
