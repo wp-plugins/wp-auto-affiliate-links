@@ -8,19 +8,28 @@ Version: 0.1.2
 Author URI: http://www.lucianapostol.com
 */
 
+add_action('admin_init', 'wpaal_actions');
 add_action('admin_menu', 'create_menu');
 add_filter('the_content', 'add_affiliate_links');
 
-function create_menu() {
 
-			add_options_page(__('Manage Affiliate Links', 'automated_affiliate_links'), __('Manage Affiliate Links', 'automated_affiliate_links')	, 10, basename(__FILE__), 'manage_affiliates' );
-
-}
-
-
-function manage_affiliates() {
+function wpaal_actions() {
 	global $wpdb;
 	$table_name = $wpdb->prefix . "automated_links";
+
+	if($_GET['action']=='delete') {
+
+		check_admin_referer('WP-auto-affiliate-links_delete_link');
+
+		$id = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_SPECIAL_CHARS)); // $_GET['id'];
+
+		$wpdb->query("DELETE FROM ". $table_name ." WHERE id = '". $id ."' LIMIT 1");
+
+		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
+
+
+	}
+
 
 	if($_POST['sent']=='ok') {
 			
@@ -32,21 +41,26 @@ function manage_affiliates() {
 
 		$rows_affected = $wpdb->insert( $table_name, array( 'link' => $link, 'keywords' => $keywords ) );
 
+		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
+
 			
 	}
 
 
-	if($_GET['action']=='delete') {
-
-		check_admin_referer('WP-auto-affiliate-links_delete_link');
-
-		$id = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_SPECIAL_CHARS)); // $_GET['id'];
-
-		$wpdb->query("DELETE FROM ". $table_name ." WHERE id = '". $id ."' LIMIT 1");
+}
 
 
-	}
 
+function create_menu() {
+
+			add_options_page(__('Manage Affiliate Links', 'automated_affiliate_links'), __('Manage Affiliate Links', 'automated_affiliate_links')	, 10, basename(__FILE__), 'manage_affiliates' );
+
+}
+
+
+function manage_affiliates() {
+	global $wpdb;
+	$table_name = $wpdb->prefix . "automated_links";
 
 
 
