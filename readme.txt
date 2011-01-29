@@ -4,7 +4,7 @@ Donate link: http://www.flamescorpion.com
 Tags: affiliate, links, post
 Requires at least: 2.5.2
 Tested up to: 3.0.4
-Stable tag: 0.1.3
+Stable tag: 0.1.4
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -38,8 +38,10 @@ The blog functionality will not be affected in any way.
 
 == Changelog ==
 
-= 0.1.3 =
+= 0.1.4 =
+* Added option to edit links and keywords that already exist
 
+= 0.1.3 =
 * Moved the add/delete actions to admin_init
 * Added redirects for add/delete actions so if you hit refresh the same action won't be repeated
 

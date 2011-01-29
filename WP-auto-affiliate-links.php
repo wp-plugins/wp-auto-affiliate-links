@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://www.flamescorpion.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 0.1.3
+Version: 0.1.4
 Author URI: http://www.lucianapostol.com
 */
 
@@ -35,16 +35,41 @@ function wpaal_actions() {
 			
 			check_admin_referer('WP-auto-affiliate-links_add_link');
 
+			
 			$link = filter_input(INPUT_POST, 'link', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['link'];
 			$keywords = filter_input(INPUT_POST, 'keywords', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['keywords'];
 
 
 		$rows_affected = $wpdb->insert( $table_name, array( 'link' => $link, 'keywords' => $keywords ) );
 
+		
+
 		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
 
 			
 	}
+
+
+
+	if($_POST['edit']=='ok') {
+			
+			check_admin_referer('WP-auto-affiliate-links_edit_link');
+			
+			$id = filter_input(INPUT_POST, 'edit_id', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['id'];
+			$link = filter_input(INPUT_POST, 'link', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['link'];
+			$keywords = filter_input(INPUT_POST, 'keywords', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['keywords'];
+
+
+		// $rows_affected = $wpdb->insert( $table_name, array( 'link' => $link, 'keywords' => $keywords ) );
+
+		$rows_affected = $wpdb->update( $table_name, array( 'link' => $link, 'keywords' => $keywords ), array( 'id' => $id ));
+
+		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
+
+			
+	}
+
+
 
 
 }
@@ -101,9 +126,27 @@ if ( function_exists('wp_nonce_field') )
 				$deletelink = '?page=WP-auto-affiliate-links.php&action=delete&id='. $id;
 				$deletelink = ( function_exists('wp_nonce_url') ) ? wp_nonce_url($deletelink, 'WP-auto-affiliate-links_delete_link') : $deletelink;
 
-				echo '<li><b>Link:</b> '. $link .'   &nbsp;&nbsp;<b>Keywords:</b> '. $keywords .'  &nbsp;&nbsp; <a href="'. $deletelink .'">Delete</a></li>';
+			//	echo '<li><b>Link:</b> '. $link .'   &nbsp;&nbsp;<b>Keywords:</b> '. $keywords .'  &nbsp;&nbsp; <a href="'. $deletelink .'">Delete</a></li>';
+			?>
 
+				<form name="edit-link-<?php echo $id; ?>" method="post">
 
+				<?php
+					if ( function_exists('wp_nonce_field') )
+						wp_nonce_field('WP-auto-affiliate-links_edit_link');
+				?>
+					
+					Link: <input type="text" name="link" value="<?php echo $link; ?>" />
+					Keywords: <input type="text" name="keywords" value="<?php echo $keywords; ?>" />
+					<input type="submit" name="ed" value="Edit" />
+					<input value="<?php echo $id; ?>" name="edit_id" type="hidden" />
+					<input type="hidden" name="edit" value="ok" />
+					<?php echo '<a href="'. $deletelink .'">Delete</a></li>'; ?>
+				</form>
+
+				
+
+			<?php
 		}
 
 		echo '
