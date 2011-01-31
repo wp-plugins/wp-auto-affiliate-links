@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://www.flamescorpion.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 0.1.4
+Version: 0.1.5
 Author URI: http://www.lucianapostol.com
 */
 
@@ -200,16 +200,16 @@ function add_affiliate_links($content) {
 							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. ucfirst($key) .'</a>,';
 
 							$patterns[] = '/ '. strtoupper($key) .',/';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. strtoupper($key) .'</a>,';
+							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. strtoupper($key) .'</a>,'; 
 
-							$patterns[] = '/ '. $key .'./';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. $key .'</a>.';
+							$patterns[] = '/ '. $key .'. /';
+							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. $key .'</a>. ';
 
-							$patterns[] = '/ '. ucfirst($key) .'./';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. ucfirst($key) .'</a>.';
+							$patterns[] = '/ '. ucfirst($key) .'. /';
+							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. ucfirst($key) .'</a>. ';
 
-							$patterns[] = '/ '. strtoupper($key) .'./';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. strtoupper($key) .'</a>.';
+							$patterns[] = '/ '. strtoupper($key) .'. /';
+							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. strtoupper($key) .'</a>. ';  
 
 
 						}
