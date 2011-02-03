@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Auto Affiliate Links
-Plugin URI: http://www.flamescorpion.com
+Plugin URI: http://www.flamescorpion.com/wp-auto-affiliate-links/
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
 Version: 0.1.5
