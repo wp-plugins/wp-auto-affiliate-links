@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://www.flamescorpion.com/wp-auto-affiliate-links/
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 0.1.5
+Version: 0.1.6
 Author URI: http://www.lucianapostol.com
 */
 
@@ -17,7 +17,7 @@ function wpaal_actions() {
 	global $wpdb;
 	$table_name = $wpdb->prefix . "automated_links";
 
-	if($_GET['action']=='delete') {
+	if($_GET['aal_action']=='delete') {
 
 		check_admin_referer('WP-auto-affiliate-links_delete_link');
 
@@ -31,7 +31,7 @@ function wpaal_actions() {
 	}
 
 
-	if($_POST['sent']=='ok') {
+	if($_POST['aal_sent']=='ok') {
 			
 			check_admin_referer('WP-auto-affiliate-links_add_link');
 
@@ -51,7 +51,7 @@ function wpaal_actions() {
 
 
 
-	if($_POST['edit']=='ok') {
+	if($_POST['aal_edit']=='ok') {
 			
 			check_admin_referer('WP-auto-affiliate-links_edit_link');
 			
@@ -109,7 +109,7 @@ if ( function_exists('wp_nonce_field') )
 		Affiliate link: <input type="text" name="link" value="http://" />
 		Keywords: <input type="text" name="keywords" />
 		<input type="submit" name="Save" />
-		<input type="hidden" name="sent" value="ok" />
+		<input type="hidden" name="aal_sent" value="ok" />
 	</form>
 	<br />
 	<br />
@@ -123,7 +123,7 @@ if ( function_exists('wp_nonce_field') )
 				$link = $row->link;
 				$keywords = $row->keywords;
 
-				$deletelink = '?page=WP-auto-affiliate-links.php&action=delete&id='. $id;
+				$deletelink = '?page=WP-auto-affiliate-links.php&aal_action=delete&id='. $id;
 				$deletelink = ( function_exists('wp_nonce_url') ) ? wp_nonce_url($deletelink, 'WP-auto-affiliate-links_delete_link') : $deletelink;
 
 			//	echo '<li><b>Link:</b> '. $link .'   &nbsp;&nbsp;<b>Keywords:</b> '. $keywords .'  &nbsp;&nbsp; <a href="'. $deletelink .'">Delete</a></li>';
@@ -140,7 +140,7 @@ if ( function_exists('wp_nonce_field') )
 					Keywords: <input type="text" name="keywords" value="<?php echo $keywords; ?>" />
 					<input type="submit" name="ed" value="Edit" />
 					<input value="<?php echo $id; ?>" name="edit_id" type="hidden" />
-					<input type="hidden" name="edit" value="ok" />
+					<input type="hidden" name="aal_edit" value="ok" />
 					<?php echo '<a href="'. $deletelink .'">Delete</a></li>'; ?>
 				</form>
 
