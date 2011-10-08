@@ -183,33 +183,17 @@ function add_affiliate_links($content) {
  
 						if(!in_array('/'. $key .'/', $patterns)) { 
 
-							//Added 3 times to cover first letter capped, and all uppercase
-							$patterns[] = '/ '. $key .' /';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. $key .'</a> ';
-
-							$patterns[] = '/ '. ucfirst($key) .' /';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. ucfirst($key) .'</a> ';
-
-							$patterns[] = '/ '. strtoupper($key) .' /';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. strtoupper($key) .'</a> ';
-
-							$patterns[] = '/ '. $key .',/';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. $key .'</a>,';
-
-							$patterns[] = '/ '. ucfirst($key) .',/';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. ucfirst($key) .'</a>,';
-
-							$patterns[] = '/ '. strtoupper($key) .',/';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. strtoupper($key) .'</a>,'; 
-
-							$patterns[] = '/ '. $key .'. /';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. $key .'</a>. ';
-
-							$patterns[] = '/ '. ucfirst($key) .'. /';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. ucfirst($key) .'</a>. ';
-
-							$patterns[] = '/ '. strtoupper($key) .'. /';
-							$replacements[] = ' <a href="'. $link .'" target="_blank" >'. strtoupper($key) .'</a>. ';  
+							$reg_post		=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))($name)/imsU';	
+							$reg			=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))\b($name)\b/imsU';
+							$strpos_fnc		=	 'stripos';
+								
+							//$url = 'http://www.zipr.com';
+							$url = $link;
+							//$name = 'zip';
+							$name = $key;
+							
+							$replace[] = "<a title=\"$1\" href=\"$url\">$1</a>";
+							$regexp[] = str_replace('$name', $name, $reg);	
 
 
 						}
@@ -226,9 +210,16 @@ function add_affiliate_links($content) {
 
 
 
-		$content = preg_replace($patterns, $replacements, $content);
+	//	$content = preg_replace($patterns, $replacements, $content);
 
-		$content = preg_replace('/<a(.*?)><a(.*?)>(.*?)a>(.*?)a>/', '<a$1>$3a>' ,$content);
+	//	$content = preg_replace('/<a(.*?)><a(.*?)>(.*?)a>(.*?)a>/', '<a$1>$3a>' ,$content);
+
+
+		
+		
+	$content = preg_replace($regexp, $replace, $content);	
+		
+		
 	//	$content = preg_replace('/<(.*?)<a(.*?)>(.*?)<(.*?)a>(.*?)>/', '<$1$3$5>' ,$content);
 
 				
