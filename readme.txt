@@ -3,7 +3,7 @@ Contributors: Lucian Apostol
 Donate link: http://www.flamescorpion.com
 Tags: affiliate, links, post
 Requires at least: 2.5.2
-Tested up to: 3.0.4
+Tested up to: 3.2.1
 Stable tag: 0.1.7
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
