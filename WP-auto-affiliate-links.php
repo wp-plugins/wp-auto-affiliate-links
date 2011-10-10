@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://www.flamescorpion.com/wp-auto-affiliate-links/
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 0.1.7
+Version: 0.1.8
 Author URI: http://www.lucianapostol.com
 */
 
@@ -217,7 +217,7 @@ function add_affiliate_links($content) {
 
 		
 		
-	$content = preg_replace($regexp, $replace, $content);	
+	if($regexp[0]) $content = preg_replace($regexp, $replace, $content);	
 		
 		
 	//	$content = preg_replace('/<(.*?)<a(.*?)>(.*?)<(.*?)a>(.*?)>/', '<$1$3$5>' ,$content);
