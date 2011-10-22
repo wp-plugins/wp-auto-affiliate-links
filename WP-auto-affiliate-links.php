@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://www.flamescorpion.com/wp-auto-affiliate-links/
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 0.1.9
+Version: 0.1.9.1
 Author URI: http://www.lucianapostol.com
 */
 
@@ -93,6 +93,16 @@ function manage_affiliates() {
 
 
 	echo '<h1>Manage Affiliate Links</h1>
+	<br /><br />
+	<span style="color: red;">If you like this plugin, please donate to support the continued development. There are many features that are awaiting on line.</span>
+	<br /><br />
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="RGNWD2T23VX2J">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
 	<br /><br />
 	<p>After you add the affiliate links, make sure you write keywords in the respective field, separated by comma. If you don\'t enter any keyword, that link won\'t be displayed.</p>
 	<p>After you hit save, all keywords entered found in the content will be replaced with the links to the affiliate page</p>
