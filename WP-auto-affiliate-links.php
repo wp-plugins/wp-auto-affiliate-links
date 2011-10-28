@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://www.flamescorpion.com/wp-auto-affiliate-links/
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 0.1.9.1
+Version: 0.1.9.2
 Author URI: http://www.lucianapostol.com
 */
 
@@ -138,7 +138,7 @@ if ( function_exists('wp_nonce_field') )
 
 			//	echo '<li><b>Link:</b> '. $link .'   &nbsp;&nbsp;<b>Keywords:</b> '. $keywords .'  &nbsp;&nbsp; <a href="'. $deletelink .'">Delete</a></li>';
 			?>
-
+				<li style="">
 				<form name="edit-link-<?php echo $id; ?>" method="post">
 
 				<?php
@@ -146,12 +146,12 @@ if ( function_exists('wp_nonce_field') )
 						wp_nonce_field('WP-auto-affiliate-links_edit_link');
 				?>
 					
-					Link: <input type="text" name="link" value="<?php echo $link; ?>" />
-					Keywords: <input type="text" name="keywords" value="<?php echo $keywords; ?>" />
-					<input type="submit" name="ed" value="Edit" />
+					Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="link" value="<?php echo $link; ?>" />
+					Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="keywords" value="<?php echo $keywords; ?>" />
+					<input style="margin: 5px 2px;" type="submit" name="ed" value="Edit" />
 					<input value="<?php echo $id; ?>" name="edit_id" type="hidden" />
 					<input type="hidden" name="aal_edit" value="ok" />
-					<?php echo '<a href="'. $deletelink .'">Delete</a></li>'; ?>
+					<?php echo '<a onclick="alert(\'Are you sure you want to delete this automated link?\');" href="'. $deletelink .'">Delete</a></li>'; ?>
 				</form>
 
 				
