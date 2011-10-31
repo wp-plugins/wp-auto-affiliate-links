@@ -3,8 +3,8 @@ Contributors: Lucian Apostol
 Donate link: http://www.flamescorpion.com
 Tags: affiliate, links, post
 Requires at least: 2.5.2
-Tested up to: 3.2.1
-Stable tag: 0.1.9.2
+Tested up to: 3.3
+Stable tag: 2.0
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -37,6 +37,9 @@ No theme changes are needed for this plugin.
 The blog functionality will not be affected in any way.
 
 == Changelog ==
+
+= 2.0 =
+* Added auto-suggestions for keywords based on most used words in the content
 
 = 0.1.9.2 =
 * Made changes to the user interface for a better experience
