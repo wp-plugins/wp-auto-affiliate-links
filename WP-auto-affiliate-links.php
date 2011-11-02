@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://www.flamescorpion.com/wp-auto-affiliate-links/
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.0
+Version: 2.1
 Author URI: http://www.flamescorpion.com
 */
 
@@ -68,6 +68,18 @@ function wpaal_actions() {
 
 			
 	}
+	
+	
+	if($_POST['aal_settings_submit']) { 
+	
+		$showhome = filter_input(INPUT_POST, 'showhome', FILTER_SANITIZE_SPECIAL_CHARS);
+		
+		delete_option('aal_showhome');
+		add_option( 'aal_showhome', $showhome);
+	
+		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
+	
+	}
 
 
 
@@ -90,7 +102,8 @@ function manage_affiliates() {
 
 
 	$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
-
+	$showhome = get_option('aal_showhome');
+	if($showhome) $shsel = 'checked'; else $shsel2 = 'checked';
 
 	echo '<h1>Manage Affiliate Links</h1>
 	<br /><br />
@@ -102,6 +115,15 @@ function manage_affiliates() {
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
+
+<br /><br />
+<h3>General Options</h3>
+<form name="aal_settings" id="" method="post">
+Add links on homepage: <input type="radio" name="showhome" value="1" '. $shsel .'/> Yes <input type="radio" name="showhome" value="0" '. $shsel2 .'/> No <br />
+<input type="hidden" name="aal_settings_submit" value="1" />
+<input type="submit" value="Save" />
+</form>
+<br /><br />
 
 	<br /><br />
 	<p>After you add the affiliate links, make sure you write keywords in the respective field, separated by comma. If you don\'t enter any keyword, that link won\'t be displayed.</p>
@@ -245,6 +267,7 @@ if ( function_exists('wp_nonce_field') )
 
 function add_affiliate_links($content) {
 		global $wpdb;
+		$showhome = get_option('aal_showhome');
 		$table_name = $wpdb->prefix . "automated_links";
 		$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
 
@@ -297,9 +320,11 @@ function add_affiliate_links($content) {
 	//	$content = preg_replace('/<a(.*?)><a(.*?)>(.*?)a>(.*?)a>/', '<a$1>$3a>' ,$content);
 
 
-		
-		
-	if($regexp[0]) $content = preg_replace($regexp, $replace, $content);	
+		//wp_reset_query();
+		//print_r(is_home()); die();
+		if($_SERVER['REQUEST_URI']=='/' || $_SERVER['REQUEST_URI']=='/index.php') $ishome = 1; else $ishome=0;
+	if(!$ishome) $content = preg_replace($regexp, $replace, $content);	
+	else if($showhome) if($regexp[0]) $content = preg_replace($regexp, $replace, $content);	
 		
 		
 	//	$content = preg_replace('/<(.*?)<a(.*?)>(.*?)<(.*?)a>(.*?)>/', '<$1$3$5>' ,$content);
