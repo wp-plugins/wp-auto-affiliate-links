@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: WP Auto Affiliate Links
-Plugin URI: http://www.flamescorpion.com/wp-auto-affiliate-links/
+Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.2.1
-Author URI: http://www.flamescorpion.com
+Version: 2.2.2
+Author URI: http://autoaffiliatelinks.com
 */
 
 add_action('admin_init', 'wpaal_actions');
@@ -74,12 +74,18 @@ function wpaal_actions() {
 	
 		$showhome = filter_input(INPUT_POST, 'showhome', FILTER_SANITIZE_SPECIAL_CHARS);
 		$notimes = filter_input(INPUT_POST, 'notimes', FILTER_SANITIZE_SPECIAL_CHARS);
+			$aal_exclude = filter_input(INPUT_POST, 'aal_exclude', FILTER_SANITIZE_SPECIAL_CHARS);
 		
 		delete_option('aal_showhome');
 		add_option( 'aal_showhome', $showhome);
 		
 		delete_option('aal_notimes');
 		add_option( 'aal_notimes', $notimes);
+		
+
+		
+		delete_option('aal_exclude');
+		add_option( 'aal_exclude', $aal_exclude);
 	
 		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
 	
@@ -107,6 +113,7 @@ function manage_affiliates() {
 
 	$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
 	$showhome = get_option('aal_showhome');
+	$excludeposts = get_option('aal_exclude');
 	if($showhome) $shsel = 'checked'; else $shsel2 = 'checked';
 	$notimes = get_option('aal_notimes');
 
@@ -127,6 +134,9 @@ function manage_affiliates() {
 Add links on homepage: <input type="radio" name="showhome" value="1" '. $shsel .'/> Yes <input type="radio" name="showhome" value="0" '. $shsel2 .'/> No <br />
 How many times every keyword should appear on a post ( max ): <input type="text" name="notimes" value="'. $notimes .'" size="1" /><br />
 <input type="hidden" name="aal_settings_submit" value="1" />
+<br />
+Exclude posts or pages to display affiliate links: ( Enter post IDs, sepparated by comma ):<br />
+<input type="text" name="aal_exclude" value="'. $excludeposts .'" size="50" /><br />
 <input type="submit" value="Save" />
 </form>
 <br /><br />
@@ -275,6 +285,8 @@ function add_affiliate_links($content) {
 		global $wpdb;
 		$showhome = get_option('aal_showhome');
 		$notimes = get_option('aal_notimes'); if(!$notimes) $notimes = -1;
+		$aal_exclude = get_option('aal_exclude');
+		$excludearray = explode(',',$aal_exclude);
 		$table_name = $wpdb->prefix . "automated_links";
 		$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
 
@@ -326,13 +338,17 @@ function add_affiliate_links($content) {
 
 	//	$content = preg_replace('/<a(.*?)><a(.*?)>(.*?)a>(.*?)a>/', '<a$1>$3a>' ,$content);
 
+			global $post;
+			//echo $post->ID;
 
 		//wp_reset_query();
 		//print_r(is_home()); die();
+		if(in_array($post->ID, $excludearray)) { }
+		else {
 		if(is_array($regexp)) { if($_SERVER['REQUEST_URI']=='/' || $_SERVER['REQUEST_URI']=='/index.php') $ishome = 1; else $ishome=0;
 	if(!$ishome) $content = preg_replace($regexp, $replace, $content,$notimes);	
 	else if($showhome) if($regexp[0]) $content = preg_replace($regexp, $replace, $content,$notimes);	 }
-		
+		}
 		
 	//	$content = preg_replace('/<(.*?)<a(.*?)>(.*?)<(.*?)a>(.*?)>/', '<$1$3$5>' ,$content);
 
