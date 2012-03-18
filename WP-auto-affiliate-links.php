@@ -4,14 +4,21 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.2.3.2
+Version: 2.3
 Author URI: http://autoaffiliatelinks.com
 */
+
+error_reporting(E_ALL & ~E_NOTICE);
 
 add_action('admin_init', 'wpaal_actions');
 add_action('admin_menu', 'create_menu');
 add_filter('the_content', 'add_affiliate_links');
-error_reporting(E_ALL & ~E_NOTICE);
+
+add_action('init', 'wpaal_rewrite_rules');
+add_filter('query_vars', 'wpaal_add_query_var');
+//add_action('plugins_loaded','wpaal_check_for_goto');
+add_action('wp','wpaal_check_for_goto');
+
 
 function wpaal_actions() {
 	global $wpdb;
@@ -305,6 +312,8 @@ function add_affiliate_links($content) {
 							$reg			=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))\b($name)\b/imsU';
 							$strpos_fnc		=	 'stripos';
 								
+								
+							$link = get_option( 'home' ) . "/goto/" . wpaal_generateSlug($key);
 							$url = $link;
 							$name = $key;
 							
@@ -338,6 +347,102 @@ function add_affiliate_links($content) {
 
 
 }  // add_affiliate_links end
+
+
+
+
+// Contribution of Jos Steenbergen
+// Rewrite engine for links
+
+
+
+
+function wpaal_check_for_goto() { 
+       global $wpdb;
+       global $wp_query;
+
+	   
+	   //echo $wp_query->query_vars['goto'];
+       if(isset($wp_query->query_vars['goto'])) {
+       //echo $wp_query->query_vars['goto'];
+       //echo 'having goto';
+	  // die();
+
+
+       $table_name = $wpdb->prefix . "automated_links";
+               $myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
+
+                               $patterns = array();
+
+               if(is_null($myrows)) return;
+               else foreach($myrows as $row) {
+
+                               $link = $row->link;
+                               //$link = get_option( 'home' ) . "/goto/" . wpaal_generateSlug($row->keywords);
+                               $keywords = $row->keywords;
+
+                               if(!is_null($keywords)) {
+                                       $keys = explode(',',$keywords);
+
+                                       foreach($keys as $key) {
+
+                                               $key = trim($key);
+
+                                               if(!in_array($key, $patterns)) {
+
+                                                       //Added 3 times to cover first letter capped, and all uppercase
+                                                       $patterns[] = wpaal_generateSlug($key);
+                                                       $redirect_link[] = $link;
+                                               }
+
+                                       }
+
+
+                               }
+
+               }
+               if (in_array($wp_query->query_vars['goto'], $patterns)) {
+                       // link exist so find the corresponding key
+                       //echo "Founded link: " . $redirect_link[array_search($wp_query->query_vars['goto'], $patterns)] . "/r/n";
+                       wp_redirect( $redirect_link[array_search($wp_query->query_vars['goto'], $patterns)], 301 );
+                       exit;
+               }
+
+               //print_r($patterns);
+               //print_r($redirect_link);
+
+               //die();
+               }
+       //print_r($array = $GLOBALS['wp_query']->query_vars);
+
+
+}
+
+function wpaal_rewrite_rules() {
+		add_rewrite_tag('%goto%','([^&]+)');
+       add_rewrite_rule( 'goto/?([^/]*)', 'index.php?goto=$matches[1]', 'top');
+       }
+function wpaal_add_query_var($vars)  { 
+       $vars[] = 'goto';
+       return $vars;
+       }
+
+
+
+
+
+function wpaal_generateSlug($phrase)
+{
+       $maxLength = 45;
+       $result = strtolower($phrase);
+
+       $result = preg_replace("/[^a-z0-9\s-]/", "", $result);
+       $result = trim(preg_replace("/[\s-]+/", " ", $result));
+       $result = trim(substr($result, 0, $maxLength));
+       $result = preg_replace("/\s/", "-", $result);
+
+       return $result;
+}
 
 
 
