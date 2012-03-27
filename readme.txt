@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post
 Requires at least: 2.5.2
 Tested up to: 3.3
-Stable tag: 2.3
+Stable tag: 2.3.1
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -28,6 +28,14 @@ This section describes how to install the plugin and get it working.
 
 == Frequently Asked Questions ==
 
+= The plugin will modify the content in the database ? =
+
+No, the plugin only add the links when the page is rendered. The content remain intact in your database.
+
+= Cloacked links are not working, what should I do ? =
+
+For now, disable cloacked links in the management page. If you want to help us to figure out the issue please send us a note. We are working to make this working for all.
+
 = Do i have to change my theme to make the plugin work? =
 
 No theme changes are needed for this plugin. 
@@ -37,6 +45,9 @@ No theme changes are needed for this plugin.
 The blog functionality will not be affected in any way.
 
 == Changelog ==
+
+= 2.3.1 =
+* Added option to choose if you want to show original or cloacked links. 
 
 = 2.3 = 
 * Now all affiliate links are cloacked. Contribution of Jos Steenbergen

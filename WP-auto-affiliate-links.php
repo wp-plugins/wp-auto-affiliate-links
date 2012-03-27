@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.3
+Version: 2.3.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -76,6 +76,7 @@ function wpaal_actions() {
 		$showhome = filter_input(INPUT_POST, 'showhome', FILTER_SANITIZE_SPECIAL_CHARS);
 		$notimes = filter_input(INPUT_POST, 'notimes', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_exclude = filter_input(INPUT_POST, 'aal_exclude', FILTER_SANITIZE_SPECIAL_CHARS);
+		$iscloacked = filter_input(INPUT_POST, 'aal_iscloacked', FILTER_SANITIZE_SPECIAL_CHARS);
 		
 		//Delete the settings and re-add them
 		delete_option('aal_showhome');
@@ -86,6 +87,9 @@ function wpaal_actions() {
 				
 		delete_option('aal_exclude');
 		add_option( 'aal_exclude', $aal_exclude);
+		
+		delete_option('aal_iscloacked');
+		add_option( 'aal_iscloacked', $iscloacked);
 	
 		//Redirect to the plugin default page
 		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
@@ -115,7 +119,8 @@ function manage_affiliates() {
 	$excludeposts = get_option('aal_exclude');
 	if($showhome) $shsel = 'checked'; else $shsel2 = 'checked';
 	$notimes = get_option('aal_notimes');
-	
+	$iscloacked = get_option('aal_iscloacked');
+	if($iscloacked) $isc1 = 'checked'; else $isc2 = 'checked';
 	
 	
 	//Render the page
@@ -132,6 +137,7 @@ function manage_affiliates() {
 	<br /><br />
 	<h3>General Options</h3>
 	<form name="aal_settings" id="" method="post">
+	Cloack links: <input type="radio" name="aal_iscloacked" value="1" '. $isc1 .'/> Yes <input type="radio" name="aal_iscloacked" value="0" '. $isc2 .'/> No (Disable this if the cloacked links are not working for you)<br />
 	Add links on homepage: <input type="radio" name="showhome" value="1" '. $shsel .'/> Yes <input type="radio" name="showhome" value="0" '. $shsel2 .'/> No <br />
 	How many times every keyword should appear on a post ( max ): <input type="text" name="notimes" value="'. $notimes .'" size="1" /><br />
 	<input type="hidden" name="aal_settings_submit" value="1" />
@@ -285,6 +291,7 @@ function add_affiliate_links($content) {
 		$showhome = get_option('aal_showhome');
 		$notimes = get_option('aal_notimes'); if(!$notimes) $notimes = -1;
 		$aal_exclude = get_option('aal_exclude');
+		$iscloacked = get_option('aal_iscloacked');
 		$excludearray = explode(',',$aal_exclude);
 		$table_name = $wpdb->prefix . "automated_links";
 		$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
@@ -313,7 +320,7 @@ function add_affiliate_links($content) {
 							$strpos_fnc		=	 'stripos';
 								
 								
-							$link = get_option( 'home' ) . "/goto/" . wpaal_generateSlug($key);
+							if($iscloacked) $link = get_option( 'home' ) . "/goto/" . wpaal_generateSlug($key);
 							$url = $link;
 							$name = $key;
 							
