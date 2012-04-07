@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post
 Requires at least: 2.5.2
 Tested up to: 3.3
-Stable tag: 2.3.1
+Stable tag: 2.3.2
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -45,6 +45,10 @@ No theme changes are needed for this plugin.
 The blog functionality will not be affected in any way.
 
 == Changelog ==
+
+= 2.3.2 =
+* Changed the admin panel settings menu link name from Manage Affiliate Links to Wp Auto Affiliate Links to eliminate any confusion.
+* Changed some function names to prevent clashes with other plugins
 
 = 2.3.1 =
 * Added option to choose if you want to show original or cloacked links. 

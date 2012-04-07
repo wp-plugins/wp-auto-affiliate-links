@@ -4,15 +4,15 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.3.1
+Version: 2.3.2
 Author URI: http://autoaffiliatelinks.com
 */
 
 error_reporting(E_ALL & ~E_NOTICE);
 
 add_action('admin_init', 'wpaal_actions');
-add_action('admin_menu', 'create_menu');
-add_filter('the_content', 'add_affiliate_links');
+add_action('admin_menu', 'wpaal_create_menu');
+add_filter('the_content', 'wpaal_add_affiliate_links');
 
 add_action('init', 'wpaal_rewrite_rules');
 add_filter('query_vars', 'wpaal_add_query_var');
@@ -101,14 +101,14 @@ function wpaal_actions() {
 
 
 // Add Wp Auto Affiliate Links to Wordpress Admnistration panel menu
-function create_menu() {
+function wpaal_create_menu() {
 
-	add_options_page(__('Manage Affiliate Links', 'automated_affiliate_links'), __('Manage Affiliate Links', 'automated_affiliate_links')	, 10, basename(__FILE__), 'manage_affiliates' );
+	add_options_page(__('Wp Auto Affiliate Links', 'automated_affiliate_links'), __('Wp Auto Affiliate Links', 'automated_affiliate_links')	, 10, basename(__FILE__), 'wpaal_manage_affiliates' );
 
 }
 
 //Function that will render the administration page
-function manage_affiliates() {
+function wpaal_manage_affiliates() {
 	global $wpdb;
 	$table_name = $wpdb->prefix . "automated_links";
 
@@ -284,7 +284,7 @@ function manage_affiliates() {
 
 
 // The function that will actually add links when the post content is rendered
-function add_affiliate_links($content) {
+function wpaal_add_affiliate_links($content) {
 		global $wpdb;
 		
 		//Getting the keywords and options
