@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.3.3
+Version: 2.4
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -77,6 +77,7 @@ function wpaal_actions() {
 		$notimes = filter_input(INPUT_POST, 'notimes', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_exclude = filter_input(INPUT_POST, 'aal_exclude', FILTER_SANITIZE_SPECIAL_CHARS);
 		$iscloacked = filter_input(INPUT_POST, 'aal_iscloacked', FILTER_SANITIZE_SPECIAL_CHARS);
+		$targeto = filter_input(INPUT_POST, 'aal_target', FILTER_SANITIZE_SPECIAL_CHARS);
 		
 		//Delete the settings and re-add them
 		delete_option('aal_showhome');
@@ -90,6 +91,9 @@ function wpaal_actions() {
 		
 		delete_option('aal_iscloacked');
 		add_option( 'aal_iscloacked', $iscloacked);
+		
+		delete_option('aal_target');
+		add_option( 'aal_target', $targeto);
 	
 		//Redirect to the plugin default page
 		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
@@ -121,6 +125,8 @@ function wpaal_manage_affiliates() {
 	$notimes = get_option('aal_notimes');
 	$iscloacked = get_option('aal_iscloacked');
 	if($iscloacked) $isc1 = 'checked'; else $isc2 = 'checked';
+	$targeto = get_option('aal_target');
+	if($targeto=="_blank") $tsc1 = 'checked'; else $tsc2 = 'checked';
 	
 	
 	//Render the page
@@ -139,6 +145,7 @@ function wpaal_manage_affiliates() {
 	<form name="aal_settings" id="" method="post">
 	Cloack links: <input type="radio" name="aal_iscloacked" value="1" '. $isc1 .'/> Yes <input type="radio" name="aal_iscloacked" value="0" '. $isc2 .'/> No (Disable this if the cloacked links are not working for you)<br />
 	Add links on homepage: <input type="radio" name="showhome" value="1" '. $shsel .'/> Yes <input type="radio" name="showhome" value="0" '. $shsel2 .'/> No <br />
+	Target: <input type="radio" name="aal_target" value="_blank" '. $tscl .'/> New window <input type="radio" name="aal_target" value="_self" '. $tsc2 .'/> Same Window <br />
 	How many times every keyword should appear on a post ( max ): <input type="text" name="notimes" value="'. $notimes .'" size="1" /><br />
 	<input type="hidden" name="aal_settings_submit" value="1" />
 	<br />
@@ -292,6 +299,7 @@ function wpaal_add_affiliate_links($content) {
 		$notimes = get_option('aal_notimes'); if(!$notimes) $notimes = -1;
 		$aal_exclude = get_option('aal_exclude');
 		$iscloacked = get_option('aal_iscloacked');
+		$targeto = get_option('aal_target');
 		$excludearray = explode(',',$aal_exclude);
 		$table_name = $wpdb->prefix . "automated_links";
 		$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
@@ -325,7 +333,7 @@ function wpaal_add_affiliate_links($content) {
 							$name = $key;
 							
 							
-							$replace[] = "<a title=\"$1\" target=\"_blank\" href=\"$url\">$1</a>";
+							$replace[] = "<a title=\"$1\" target=\"". $targeto ."\" href=\"$url\">$1</a>";
 							$regexp[] = str_replace('$name', $name, $reg);	
 
 
@@ -464,6 +472,9 @@ register_activation_hook(__FILE__,'aal_install');
 function aal_install() {
 	global $wpdb;
 	$table_name = $wpdb->prefix . "automated_links";
+	
+	delete_option('aal_target');
+	add_option( 'aal_target', '_blank');
 
 	if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
 
