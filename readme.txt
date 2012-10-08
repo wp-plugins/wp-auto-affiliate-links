@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post
 Requires at least: 2.5.2
 Tested up to: 3.4.2
-Stable tag: 2.5
+Stable tag: 2.5.1
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -45,6 +45,9 @@ No theme changes are needed for this plugin.
 The blog functionality will not be affected in any way.
 
 == Changelog ==
+
+= 2.5.1 =
+* Fixed an error that generated a warning and in some configurations prevented the execution
 
 = 2.5 = 
 * Added option to make the links nofollow or dofollow
