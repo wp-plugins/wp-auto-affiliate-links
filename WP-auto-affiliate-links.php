@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.5.1
+Version: 2.6
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -13,7 +13,7 @@ add_action('admin_menu', 'wpaal_create_menu');
 add_filter('the_content', 'wpaal_add_affiliate_links');
 
 add_action('init', 'wpaal_rewrite_rules');
-add_filter('query_vars', 'wpaal_add_query_var');
+add_action('wp', 'wpaal_add_query_var');
 //add_action('plugins_loaded','wpaal_check_for_goto');
 add_action('wp','wpaal_check_for_goto');
 
@@ -305,6 +305,8 @@ function wpaal_add_affiliate_links($content) {
 		$notimes = get_option('aal_notimes'); if(!$notimes) $notimes = -1;
 		$aal_exclude = get_option('aal_exclude');
 		$iscloacked = get_option('aal_iscloacked');
+		//$iscloacked = 0;
+		
 		$targeto = get_option('aal_target');
 		$relationo = get_option('aal_relation');
 		$excludearray = explode(',',$aal_exclude);
@@ -385,10 +387,8 @@ function wpaal_add_affiliate_links($content) {
 function wpaal_check_for_goto() { 
        global $wpdb;
        global $wp_query;
-
-	   
-	   //echo $wp_query->query_vars['goto'];
-       if(isset($wp_query->query_vars['goto'])) {
+	
+       if(isset($wp_query->query_vars['goto'])) { 
        //echo $wp_query->query_vars['goto'];
        //echo 'having goto';
 	  // die();
@@ -447,8 +447,15 @@ function wpaal_rewrite_rules() {
 		add_rewrite_tag('%goto%','([^&]+)');
        add_rewrite_rule( 'goto/?([^/]*)', 'index.php?goto=$matches[1]', 'top');
        }
-function wpaal_add_query_var($vars)  { 
-       $vars[] = 'goto';
+function wpaal_add_query_var($vars)  {  //print_r($vars); die();
+global $wp_query;
+
+//print_r($wp_query->query_vars); die();
+
+//	$vars[] = 'goto';
+
+	set_query_var('goto',$wp_query->query_vars['attachment']);
+       
        return $vars;
        }
 
