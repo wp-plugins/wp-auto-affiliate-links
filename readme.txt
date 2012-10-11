@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: Lucian Apostol
 Donate link: http://autoaffiliatelinks.com
-Tags: affiliate, links, post
+Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 3.4.2
-Stable tag: 2.6
+Stable tag: 2.6.1
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -12,19 +12,23 @@ Provide an interface to add your affiliate links and associate them with keyword
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
-What you get is an administration page where you add all your affiliate links you want displayed on your blog, and where you can activate and de-activate the plugin. 
+You can manage your affiliate links trough an administration page, under the "Settings" menu category. You have to add affiliate links, and specify one or more keywords for each. The plugin will add them when a page is viewed. Your content won't be modified in the database. 
 
-When you add a link, you need to specify keywords that will be used to match the content from your website. Whenever tht keyword is displayed, a link to the affiliate website is added.
+You will have options to make the links nofollow or dofollow, to open in new page or same page and to cloack links. The plugin will give you the most used 20 keywords from your content si you can easily add affiliate links to appear when they are displayed. 
+
+You have the option to limit the number of links that are added to each post or page.
 
 
 == Installation ==
 
 This section describes how to install the plugin and get it working.
 
-1. Upload the plugin to the `/wp-content/plugins/` directory
+1. Upload the plugin to the `/wp-content/plugins/` directory or download it directly from your administration panel.
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Go to 'Manage Affiliate Links' link in your Administration Panel Menu
-4. Add affiliate links and keywords
+3. Go to 'Wp Auto Affiliate Links' link, under "Settings",  in your Administration Panel Menu.
+4. Add your affiliate links, along with one or more keywords. Do this for every affiliate link you want to display.
+5. Select if you want your links to be nofollow, cloacked, to open in new window, and the maximum number of lniks that are added to every article. On some environments, the cloacking of the links is impossible. If you experience problems, turn the cloacking off and it should work just fine.
+6. If you don't get it how to make it work, or if something goes wrong, please consult http://autoaffiliatelinks.com for more info and use the contact form on the website to report the problem or to ask for help.
 
 == Frequently Asked Questions ==
 
@@ -34,17 +38,36 @@ No, the plugin only add the links when the page is rendered. The content remain 
 
 = Cloacked links are not working, what should I do ? =
 
-For now, disable cloacked links in the management page. If you want to help us to figure out the issue please send us a note. We are working to make this working for all.
+Link cloacking can cause problems on some environments ( shared hosting with too much restrictions ). If you experience problems please turn cloacking off.
 
 = Do i have to change my theme to make the plugin work? =
 
 No theme changes are needed for this plugin. 
 
-= How it will affect my design and blog functionality =
+= How it will affect my design and blog functionality ? =
 
-The blog functionality will not be affected in any way.
+The blog functionality will not be affected in any way. Links will be added in your content and they will look just like normal links. 
+
+= How do I make links nofollow ? =
+
+On the plugin management page: "Wp Auto Affiliate Links" under "Settings", you will have the option to set a link to have rel="nofollow" attribute.
+
+= How do I make the links to open in new window ? =
+
+On the plugin management page: "Wp Auto Affiliate Links" under "Settings", you will have the option to set the links to open in new or in the same window. By default, links will open in a new window. As a matter of fact, it is better for external links to open in new window, so the user will notice that he is on another website right now, and to have your website still open, if he want to read more or to visit another link.
+
+= Can I add the same affiliate link with more keywords ? =
+
+Yes. You can add more keywords in the same box, sepparated by comma. For example: "android,smartphone,phones". If you add the same link 3 times with different keywords the result will be the same: The link will appear for all the keywords added. 
+
+= Can I add more links for the same keyword ? =
+
+If you add more links with the same keyword, only the first occurence of the keyword will add the first link. If the same keyword appear again in the article, the second link will be added on it.
 
 == Changelog ==
+
+= 2.7 =
+* Changed description to match the latest udpates
 
 = 2.6 =
 * Modified the cloacking system to work with the latest versions of wordpress
