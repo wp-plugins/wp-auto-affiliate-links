@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.6.1
+Version: 2.7
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -136,7 +136,7 @@ function wpaal_manage_affiliates() {
 	//Render the page
 	echo '<h1>Manage Affiliate Links</h1>
 	<br /><br />
-	<span style="color: red;">If you like this plugin, please donate to support the continued development. There are many features that are awaiting on line.</span>
+	<span style="color: red;">The PRO version of this plugin was released. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Wp Auto Affiliate Links PRO</a> automatically get links from Amazon, Clickbank, shareasale, or you can insert manually. Based on the content of the target links, the plugin will automatically add affiliate links trough the content. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Find out more</a>.</span>
 	<br /><br />
 	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 	<input type="hidden" name="cmd" value="_s-xclick">
@@ -433,10 +433,6 @@ function wpaal_check_for_goto() {
                        exit;
                }
 
-               //print_r($patterns);
-               //print_r($redirect_link);
-
-               //die();
                }
        //print_r($array = $GLOBALS['wp_query']->query_vars);
 
@@ -449,10 +445,6 @@ function wpaal_rewrite_rules() {
        }
 function wpaal_add_query_var($vars)  {  //print_r($vars); die();
 global $wp_query;
-
-//print_r($wp_query->query_vars); die();
-
-//	$vars[] = 'goto';
 
 	set_query_var('goto',$wp_query->query_vars['attachment']);
        
