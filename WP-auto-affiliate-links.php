@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.7
+Version: 2.7.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -79,23 +79,12 @@ function wpaal_actions() {
 		$relationo = filter_input(INPUT_POST, 'aal_relation', FILTER_SANITIZE_SPECIAL_CHARS);
 		
 		//Delete the settings and re-add them
-		delete_option('aal_showhome');
-		add_option( 'aal_showhome', $showhome);
-		
-		delete_option('aal_notimes');
-		add_option( 'aal_notimes', $notimes);
-				
-		delete_option('aal_exclude');
-		add_option( 'aal_exclude', $aal_exclude);
-		
-		delete_option('aal_iscloacked');
-		add_option( 'aal_iscloacked', $iscloacked);
-		
-		delete_option('aal_target');
-		add_option( 'aal_target', $targeto);
-
-		delete_option('aal_relation');
-		add_option( 'aal_relation', $relationo);
+		delete_option('aal_showhome'); add_option( 'aal_showhome', $showhome);		
+		delete_option('aal_notimes'); add_option( 'aal_notimes', $notimes);				
+		delete_option('aal_exclude'); add_option( 'aal_exclude', $aal_exclude);		
+		delete_option('aal_iscloacked'); add_option( 'aal_iscloacked', $iscloacked);		
+		delete_option('aal_target'); add_option( 'aal_target', $targeto);
+		delete_option('aal_relation'); add_option( 'aal_relation', $relationo);
 		
 		//Redirect to the plugin default page
 		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
@@ -183,7 +172,6 @@ function wpaal_manage_affiliates() {
 	Here is a list with most used keywords in all your blog. Click on each and it will be added in the form above so you can assign a link for it.
 	<br />
 	';
-	
 	
 	//Search trough your post to generate reccomend most used keywords
 	$searchposts  = get_posts(array('numberposts' => 5,  'post_type'  => 'post'));
@@ -288,13 +276,9 @@ function wpaal_manage_affiliates() {
 		}
 
 		echo '
-	</ul>
-
-	
-	';
+	</ul>';
 	
 }  // manage_affliates end
-
 
 // The function that will actually add links when the post content is rendered
 function wpaal_add_affiliate_links($content) {
@@ -350,12 +334,8 @@ function wpaal_add_affiliate_links($content) {
 
 
 						}
-
 					}
-
-
 				}
-
 		}
 
 		global $post;
@@ -369,20 +349,13 @@ function wpaal_add_affiliate_links($content) {
 			if(!$ishome) $content = preg_replace($regexp, $replace, $content,$notimes);	
 				else if($showhome) if($regexp[0]) $content = preg_replace($regexp, $replace, $content,$notimes);	 }
 		}				
-
 		return $content;
 
 
 }  // add_affiliate_links end
 
-
-
-
 // Contribution of Jos Steenbergen
 // Rewrite engine for links
-
-
-
 
 function wpaal_check_for_goto() { 
        global $wpdb;
@@ -419,10 +392,7 @@ function wpaal_check_for_goto() {
                                                        $patterns[] = wpaal_generateSlug($key);
                                                        $redirect_link[] = $link;
                                                }
-
                                        }
-
-
                                }
 
                }
@@ -435,8 +405,6 @@ function wpaal_check_for_goto() {
 
                }
        //print_r($array = $GLOBALS['wp_query']->query_vars);
-
-
 }
 
 function wpaal_rewrite_rules() {
@@ -451,10 +419,6 @@ global $wp_query;
        return $vars;
        }
 
-
-
-
-
 function wpaal_generateSlug($phrase)
 {
        $maxLength = 45;
@@ -468,39 +432,26 @@ function wpaal_generateSlug($phrase)
        return $result;
 }
 
-
-
-
-
-
-
 // Installation
 
 register_activation_hook(__FILE__,'aal_install');
 
 function aal_install() {
-	global $wpdb;
+	global $wpdb; 
 	$table_name = $wpdb->prefix . "automated_links";
 	
-	delete_option('aal_target');
-	add_option( 'aal_target', '_blank');
-	
-	delete_option('aal_relation');
-	add_option( 'aal_relation', 'nofollow');
+	delete_option('aal_target'); add_option( 'aal_target', '_blank');
+	delete_option('aal_relation'); add_option( 'aal_relation', 'nofollow');
 
 	if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
 
-
-		$sql = "CREATE TABLE " . $table_name . " (
+	$sql = "CREATE TABLE " . $table_name . " (
 	  id mediumint(9) NOT NULL AUTO_INCREMENT,
 	  link text NOT NULL,
 	  keywords text,
 	  UNIQUE KEY id (id)
 	);";
-
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		dbDelta($sql);
-
 	}
-
 }
