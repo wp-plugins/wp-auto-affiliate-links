@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.7.1
+Version: 2.7.2
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -329,7 +329,7 @@ function wpaal_add_affiliate_links($content) {
 							$name = $key;
 							
 							
-							$replace[] = "<a title=\"$1\" target=\"". $targeto ."\" ". $relo ." href=\"$url\">$1</a>";
+							$replace[] = "<a title=\"$1\" class=\"aal\" target=\"". $targeto ."\" ". $relo ." href=\"$url\">$1</a>";
 							$regexp[] = str_replace('$name', $name, $reg);	
 
 
