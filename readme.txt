@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 3.4.2
-Stable tag: 2.7.3
+Stable tag: 2.8
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -65,6 +65,9 @@ Yes. You can add more keywords in the same box, sepparated by comma. For example
 If you add more links with the same keyword, only the first occurence of the keyword will add the first link. If the same keyword appear again in the article, the second link will be added on it.
 
 == Changelog ==
+
+= 2.8 =
+* Made dbDelta function to work. When the plugin is upgraded, the database tables are also upgraded. 
 
 = 2.7.3 =
 * Added uninstall file. When the plugin is uninstalled ( deleted from the plugins administration ), the database is cleaned. 
