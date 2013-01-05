@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.9
+Version: 2.9.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -16,25 +16,42 @@ add_action('init', 'wpaal_rewrite_rules');
 add_action('wp', 'wpaal_add_query_var');
 //add_action('plugins_loaded','wpaal_check_for_goto');
 add_action('wp','wpaal_check_for_goto');
+add_action('wp_print_scripts', 'ajax_load_scripts');
+
+
+
+function ajax_load_scripts() {
+	// load our jquery file that sends the $.post request
+	wp_enqueue_script( "ajax", plugin_dir_url( __FILE__ ) . '/ajax.js', array( 'jquery' ) );
+ 
+	// make the ajaxurl var available to the above script
+	wp_localize_script( 'ajax', 'ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );	
+}
+
+function ajaxDeleteLink(){
+    
+            if(isset($_POST['id'])){
+                global $wpdb;
+                $table_name = $wpdb->prefix . "automated_links";
+                
+                //Security check and input sanitize
+		$id = intval(filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS)); // $_GET['id'];
+		
+		//Add to database and redirect to the plugin default page
+		$wpdb->query("DELETE FROM ". $table_name ." WHERE id = '". $id ."' LIMIT 1");
+                
+                die();
+            }
+	
+}
+
+add_action('wp_ajax_delete_link', 'ajaxDeleteLink');
 
 
 function wpaal_actions() {
 	global $wpdb;
 	$table_name = $wpdb->prefix . "automated_links";
 
-	
-	//Check if an item was deleted to proceed
-	if($_GET['aal_action']=='delete') {
-
-		//Security check and input sanitize
-		check_admin_referer('WP-auto-affiliate-links_delete_link');
-		$id = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_SPECIAL_CHARS)); // $_GET['id'];
-		
-		//Add to database and redirect to the plugin default page
-		$wpdb->query("DELETE FROM ". $table_name ." WHERE id = '". $id ."' LIMIT 1");
-		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
-
-	}
 
 
 	//Check if a keyword was submitted and add it to the database
@@ -236,12 +253,17 @@ function wpaal_manage_affiliates() {
 	}
 	
 	// Showing existent affiliate links with edit and delete options
+	
+	
 	echo '
+	
 	<br />
 	<br />
 	<h3>Affiliate Links:</h3>
 	<ul>
 		';
+		
+		
 
 	foreach($myrows as $row) {
 				
@@ -261,13 +283,15 @@ function wpaal_manage_affiliates() {
 		if ( function_exists('wp_nonce_field') )
 			wp_nonce_field('WP-auto-affiliate-links_edit_link');
 		?>
-					
+		<div class="box">	
 			Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="link" value="<?php echo $link; ?>" />
 			Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="keywords" value="<?php echo $keywords; ?>" />
 			<input style="margin: 5px 2px;" type="submit" name="ed" value="Edit" />
 			<input value="<?php echo $id; ?>" name="edit_id" type="hidden" />
 			<input type="hidden" name="aal_edit" value="ok" />
-			<?php echo '<a onclick="alert(\'Are you sure you want to delete this automated link?\');" href="'. $deletelink .'">Delete</a></li>'; ?>
+            <a href="#" id="<?php echo $id; ?>" class="delete">Delete</a>
+		</div>
+			<?php //echo '<a onclick="alert(\'Are you sure you want to delete this automated link?\');" href="'. $deletelink .'">Delete</a></li>'; ?>
 		</form>
 
 				

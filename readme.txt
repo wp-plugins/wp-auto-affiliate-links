@@ -65,6 +65,8 @@ Yes. You can add more keywords in the same box, sepparated by comma. For example
 If you add more links with the same keyword, only the first occurence of the keyword will add the first link. If the same keyword appear again in the article, the second link will be added on it.
 
 == Changelog ==
+= 2.9.1 =
+* Delete link functionality is done now through ajax (without refreshing page)
 
 = 2.9 =
 * Updated the database table fields to match the pro version of the plugin.
