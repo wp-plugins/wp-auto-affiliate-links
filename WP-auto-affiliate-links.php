@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.9.1
+Version: 2.9.2
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -16,9 +16,8 @@ add_action('init', 'wpaal_rewrite_rules');
 add_action('wp', 'wpaal_add_query_var');
 //add_action('plugins_loaded','wpaal_check_for_goto');
 add_action('wp','wpaal_check_for_goto');
-add_action('wp_print_scripts', 'ajax_load_scripts');
 
-
+// Loading ajax functionability 
 
 function ajax_load_scripts() {
 	// load our jquery file that sends the $.post request
@@ -27,6 +26,11 @@ function ajax_load_scripts() {
 	// make the ajaxurl var available to the above script
 	wp_localize_script( 'ajax', 'ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );	
 }
+
+add_action('wp_print_scripts', 'ajax_load_scripts');
+wp_enqueue_script( 'json-form');  
+add_action('wp_ajax_delete_link', 'ajaxDeleteLink');
+add_action('wp_ajax_add_link', 'ajaxAddLink');
 
 function ajaxDeleteLink(){
     
@@ -45,28 +49,26 @@ function ajaxDeleteLink(){
 	
 }
 
-add_action('wp_ajax_delete_link', 'ajaxDeleteLink');
-
-
-function wpaal_actions() {
-	global $wpdb;
-	$table_name = $wpdb->prefix . "automated_links";
-
-
-
-	//Check if a keyword was submitted and add it to the database
-	if($_POST['aal_sent']=='ok') {
-			
+function ajaxAddLink(){
+    
+            	global $wpdb;
+                $table_name = $wpdb->prefix . "automated_links";
+     	
 		// Security check and sanitize	
-		check_admin_referer('WP-auto-affiliate-links_add_link');
 		$link = filter_input(INPUT_POST, 'link', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['link'];
 		$keywords = filter_input(INPUT_POST, 'keywords', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['keywords'];
 		
 		// Add to database and redirection to the plugin default page
 		$rows_affected = $wpdb->insert( $table_name, array( 'link' => $link, 'keywords' => $keywords ) );
-		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
-			
-	}
+}
+
+
+
+function wpaal_actions() {
+    
+        global $wpdb;
+        $table_name = $wpdb->prefix . "automated_links";
+                
 
 	//Check if a keyword was edited
 	if($_POST['aal_edit']=='ok') {
@@ -140,7 +142,8 @@ function wpaal_manage_affiliates() {
 	
 	
 	//Render the page
-	echo '<h1>Manage Affiliate Links</h1>
+        ?>
+        <h1>Manage Affiliate Links</h1>
 	<br /><br />
 	<span style="color: red;">The PRO version of this plugin was released. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Wp Auto Affiliate Links PRO</a> automatically get links from Amazon, Clickbank, shareasale, or you can insert manually. Based on the content of the target links, the plugin will automatically add affiliate links trough the content. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Find out more</a>.</span>
 	<br /><br />
@@ -153,16 +156,16 @@ function wpaal_manage_affiliates() {
 	<br /><br />
 	<h3>General Options</h3>
 	<form name="aal_settings" id="" method="post">
-	Cloack links: <input type="radio" name="aal_iscloacked" value="1" '. $isc1 .'/> Yes <input type="radio" name="aal_iscloacked" value="0" '. $isc2 .'/> No (Disable this if the cloacked links are not working for you)<br />
-	Add links on homepage: <input type="radio" name="showhome" value="1" '. $shsel .'/> Yes <input type="radio" name="showhome" value="0" '. $shsel2 .'/> No <br />
-	Target: <input type="radio" name="aal_target" value="_blank" '. $tscl .'/> New window <input type="radio" name="aal_target" value="_self" '. $tsc2 .'/> Same Window <br />
-	How many times every keyword should appear on a post ( max ): <input type="text" name="notimes" value="'. $notimes .'" size="1" /><br />
-	Relation: <input type="radio" name="aal_relation" value="nofollow" '. $rsc1 .'/> Nofollow <input type="radio" name="aal_relation" value="dofollow" '. $rsc2 .'/> Dofollow <br />
-	How many times every keyword should appear on a post ( max ): <input type="text" name="notimes" value="'. $notimes .'" size="1" /><br />
+	Cloack links: <input type="radio" name="aal_iscloacked" value="1" <?php echo $isc1;?>/> Yes <input type="radio" name="aal_iscloacked" value="0" <?php echo $isc2;?> /> No (Disable this if the cloacked links are not working for you)<br />
+	Add links on homepage: <input type="radio" name="showhome" value="1" <?php echo $shsel;?> /> Yes <input type="radio" name="showhome" value="0" <?php echo $shsel2 ;?>/> No <br />
+	Target: <input type="radio" name="aal_target" value="_blank" <?php echo $tscl;?> /> New window <input type="radio" name="aal_target" value="_self" <?php echo $tsc2 ;?>/> Same Window <br />
+	How many times every keyword should appear on a post ( max ): <input type="text" name="notimes" value="<?php echo $notimes ;?>" size="1" /><br />
+	Relation: <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1;?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br />
+	How many times every keyword should appear on a post ( max ): <input type="text" name="notimes" value="<?php echo $notimes;?>" size="1" /><br />
 	<input type="hidden" name="aal_settings_submit" value="1" />
 	<br />
 	Exclude posts or pages to display affiliate links: ( Enter post IDs, sepparated by comma ):<br />
-	<input type="text" name="aal_exclude" value="'. $excludeposts .'" size="50" /><br />
+	<input type="text" name="aal_exclude" value="<?php echo $excludeposts ;?>" size="50" /><br />
 	<input type="submit" value="Save" />
 	</form>
 	<br /><br />
@@ -170,26 +173,21 @@ function wpaal_manage_affiliates() {
 	<p>After you add the affiliate links, make sure you write keywords in the respective field, separated by comma. If you don\'t enter any keyword, that link won\'t be displayed.</p>
 	<p>After you hit save, all keywords entered found in the content will be replaced with the links to the affiliate page</p>
 	<br /><br />
-	<form name="add-link" method="post">';
 
-	//Adding security to the form
-	if ( function_exists('wp_nonce_field') )
-		wp_nonce_field('WP-auto-affiliate-links_add_link');
-
-	echo '
-	Affiliate link: <input type="text" name="link" value="http://" />
-	Keywords: <input type="text" name="keywords" id="formkeywords" />
-	<input type="submit" name="Save" />
-	<input type="hidden" name="aal_sent" value="ok" />
-	</form>
+        <form name="add-link" method="post" action="<?php echo admin_url( "admin-ajax.php");?>" id="add_link">
+            <input type="hidden" name="action" value="add_link" />
+            Affiliate link: <input type="text" name="link" value="http://" id="formlink" />
+            Keywords: <input type="text" name="keywords" id="formkeywords" />
+            <input type="submit" name="Save" />
+        </form>
 	<br />
 	<br />
 	Suggestions:
 	<br />
 	Here is a list with most used keywords in all your blog. Click on each and it will be added in the form above so you can assign a link for it.
 	<br />
-	';
 	
+	<?php
 	//Search trough your post to generate reccomend most used keywords
 	$searchposts  = get_posts(array('numberposts' => 5,  'post_type'  => 'post'));
 	foreach($searchposts as $spost) {
@@ -254,17 +252,16 @@ function wpaal_manage_affiliates() {
 	
 	// Showing existent affiliate links with edit and delete options
 	
+	?>
 	
-	echo '
-	
-	<br />
-	<br />
+	<br /><br />
+        
 	<h3>Affiliate Links:</h3>
-	<ul>
-		';
-		
-		
-
+	
+        <ul class="links">
+        
+         <?php
+	
 	foreach($myrows as $row) {
 				
 		$id = $row->id;
@@ -276,32 +273,30 @@ function wpaal_manage_affiliates() {
 
 		//echo '<li><b>Link:</b> '. $link .'   &nbsp;&nbsp;<b>Keywords:</b> '. $keywords .'  &nbsp;&nbsp; <a href="'. $deletelink .'">Delete</a></li>';
 		?>
-		<li style="">
-		<form name="edit-link-<?php echo $id; ?>" method="post">
+		    <form name="edit-link-<?php echo $id; ?>" method="post">
 
-		<?php
-		if ( function_exists('wp_nonce_field') )
-			wp_nonce_field('WP-auto-affiliate-links_edit_link');
-		?>
-		<div class="box">	
-			Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="link" value="<?php echo $link; ?>" />
-			Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="keywords" value="<?php echo $keywords; ?>" />
-			<input style="margin: 5px 2px;" type="submit" name="ed" value="Edit" />
-			<input value="<?php echo $id; ?>" name="edit_id" type="hidden" />
-			<input type="hidden" name="aal_edit" value="ok" />
-            <a href="#" id="<?php echo $id; ?>" class="delete">Delete</a>
-		</div>
-			<?php //echo '<a onclick="alert(\'Are you sure you want to delete this automated link?\');" href="'. $deletelink .'">Delete</a></li>'; ?>
-		</form>
+                    <?php
+                    if ( function_exists('wp_nonce_field') )
+                            wp_nonce_field('WP-auto-affiliate-links_edit_link');
+                    ?>
+                        <li style="" class="box">
+                            Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="link" value="<?php echo $link; ?>" />
+                            Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="keywords" value="<?php echo $keywords; ?>" />
+                            <input style="margin: 5px 2px;" type="submit" name="ed" value="Edit" />
+                            <input value="<?php echo $id; ?>" name="edit_id" type="hidden" />
+                            <input type="hidden" name="aal_edit" value="ok" />
+                            <a href="#" id="<?php echo $id; ?>" class="delete"><img src="<?php echo plugin_dir_url(__FILE__);?>images/delete.png"/></a>
+                        </li>    
+                            <?php //echo '<a onclick="alert(\'Are you sure you want to delete this automated link?\');" href="'. $deletelink .'">Delete</a></li>'; ?>
+                    </form>
+                
 
 				
 
 			<?php
-		}
-
-		echo '
-	</ul>';
-	
+		} ?>
+    </ul>
+<?	
 }  // manage_affliates end
 
 // The function that will actually add links when the post content is rendered
