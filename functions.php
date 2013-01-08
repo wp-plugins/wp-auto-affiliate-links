@@ -4,7 +4,7 @@
 
 
 //Load css stylesheets
-function load_css() {
+function aal_load_css() {
 	
         //load css styles
         wp_register_style( 'tabs', plugins_url('css/tabs.css', __FILE__) );
@@ -14,7 +14,7 @@ function load_css() {
 }
 
 //load javascript files
-function load_js() {
+function aal_load_js() {
 	
         // load our jquery file that sends the $.post request
 	wp_enqueue_script( "js", plugin_dir_url( __FILE__ ) . 'js/js.js', array( 'jquery' ) );
@@ -26,7 +26,7 @@ function load_js() {
 }
 
 //Delete link button (called by ajax)
-function DeleteLink(){
+function aalDeleteLink(){
     
             if(isset($_POST['id'])){
                 global $wpdb;
@@ -42,8 +42,29 @@ function DeleteLink(){
             }
 }
 
+//Change General setings through ajax 
+function aalChangeOptions(){	
+		//Input check
+		$aal_showhome = filter_input(INPUT_POST, 'aal_showhome', FILTER_SANITIZE_SPECIAL_CHARS);
+		$aal_notimes = filter_input(INPUT_POST, 'aal_notimes', FILTER_SANITIZE_SPECIAL_CHARS);
+		$aal_exclude = filter_input(INPUT_POST, 'aal_exclude', FILTER_SANITIZE_SPECIAL_CHARS);
+		$aal_iscloacked = filter_input(INPUT_POST, 'aal_iscloacked', FILTER_SANITIZE_SPECIAL_CHARS);
+		$aal_targeto = filter_input(INPUT_POST, 'aal_target', FILTER_SANITIZE_SPECIAL_CHARS);
+		$aal_relationo = filter_input(INPUT_POST, 'aal_relation', FILTER_SANITIZE_SPECIAL_CHARS);
+		
+		//Delete the settings and re-add them		
+                delete_option('aal_iscloacked'); add_option( 'aal_iscloacked', $aal_iscloacked);		
+		delete_option('aal_showhome'); add_option( 'aal_showhome', $aal_showhome);		
+		delete_option('aal_notimes'); add_option( 'aal_notimes', $aal_notimes);				
+		delete_option('aal_exclude'); add_option( 'aal_exclude', $aal_exclude);		
+		delete_option('aal_target'); add_option( 'aal_target', $aal_targeto);
+		delete_option('aal_relation'); add_option( 'aal_relation', $aal_relationo);
+                
+           die();
+}
+
 //Add link form (called by ajax)
-function AddLink(){
+function aalAddLink(){
     
             	global $wpdb;
                 $table_name = $wpdb->prefix . "automated_links";
@@ -58,7 +79,7 @@ function AddLink(){
 
 //Get list of link showed on Add Affiliate Links tab
 
-function getLinks($myrows){
+function aalGetLinks($myrows){
          foreach($myrows as $row) {
 
                                     $id = $row->id;
@@ -91,7 +112,7 @@ function getLinks($myrows){
 
 //Get keyoword sugestions for Add Afiliates Link Tab
 
-function getSugestions(){
+function aalGetSugestions(){
     
         //Search trough your post to generate reccomend most used keywords
         $searchposts  = get_posts(array('numberposts' => 5,  'post_type'  => 'post'));

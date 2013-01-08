@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.9.3
+Version: 2.9.4
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -16,10 +16,11 @@ add_filter('the_content', 'wpaal_add_affiliate_links');
 add_action('init', 'wpaal_rewrite_rules');
 add_action('wp', 'wpaal_add_query_var');
 add_action('wp','wpaal_check_for_goto');
-add_action('wp_print_scripts', 'load_css');
-add_action('wp_print_scripts', 'load_js');
-add_action('wp_ajax_delete_link', 'DeleteLink');
-add_action('wp_ajax_add_link', 'AddLink');
+add_action('wp_print_scripts', 'aal_load_css');
+add_action('wp_print_scripts', 'aal_load_js');
+add_action('wp_ajax_delete_link', 'aalDeleteLink');
+add_action('wp_ajax_add_link', 'aalAddLink');
+add_action('wp_ajax_change_options', 'aalChangeOptions');
 
 
 // Add Wp Auto Affiliate Links to Wordpress Admnistration panel menu
@@ -49,29 +50,7 @@ function wpaal_actions() {
 			
 	}
 	
-	//Check if settings was changed
-	if($_POST['aal_settings_submit']) { 
 	
-		//Input check
-		$showhome = filter_input(INPUT_POST, 'showhome', FILTER_SANITIZE_SPECIAL_CHARS);
-		$notimes = filter_input(INPUT_POST, 'notimes', FILTER_SANITIZE_SPECIAL_CHARS);
-		$aal_exclude = filter_input(INPUT_POST, 'aal_exclude', FILTER_SANITIZE_SPECIAL_CHARS);
-		$iscloacked = filter_input(INPUT_POST, 'aal_iscloacked', FILTER_SANITIZE_SPECIAL_CHARS);
-		$targeto = filter_input(INPUT_POST, 'aal_target', FILTER_SANITIZE_SPECIAL_CHARS);
-		$relationo = filter_input(INPUT_POST, 'aal_relation', FILTER_SANITIZE_SPECIAL_CHARS);
-		
-		//Delete the settings and re-add them
-		delete_option('aal_showhome'); add_option( 'aal_showhome', $showhome);		
-		delete_option('aal_notimes'); add_option( 'aal_notimes', $notimes);				
-		delete_option('aal_exclude'); add_option( 'aal_exclude', $aal_exclude);		
-		delete_option('aal_iscloacked'); add_option( 'aal_iscloacked', $iscloacked);		
-		delete_option('aal_target'); add_option( 'aal_target', $targeto);
-		delete_option('aal_relation'); add_option( 'aal_relation', $relationo);
-		
-		//Redirect to the plugin default page
-		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
-	
-	}
 
 }  // wpaal_actions end
 
@@ -84,17 +63,25 @@ function wpaal_manage_affiliates() {
 
 	//Load the keywords and options
 	$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
+        
+        $iscloacked = get_option('aal_iscloacked');
+	if($iscloacked=='true') $isc = 'checked'; else $isc = '';
+        
 	$showhome = get_option('aal_showhome');
-	$excludeposts = get_option('aal_exclude');
-	if($showhome) $shsel = 'checked'; else $shsel2 = 'checked';
+        if($showhome=='true') $shse = 'checked'; else $shsel = '';
+        
 	$notimes = get_option('aal_notimes');
-	$iscloacked = get_option('aal_iscloacked');
-	if($iscloacked) $isc1 = 'checked'; else $isc2 = 'checked';
+        
 	$targeto = get_option('aal_target');
 	if($targeto=="_blank") $tsc1 = 'checked'; else $tsc2 = 'checked';
-	$relationo = get_option('aal_relation');
-	if($relationo=="_blank") $rsc1 = 'checked'; else $rsc2 = 'checked';
 	
+        
+        $relationo = get_option('aal_relation');
+	if($relationo=="nofollow") $rsc1 = 'checked'; else $rsc2 = 'checked';
+	
+        
+        $excludeposts = get_option('aal_exclude');
+        
 	
 	//Render the page
         ?>
@@ -120,20 +107,20 @@ function wpaal_manage_affiliates() {
         <!-- tab "panes" -->
         <div class="panes">
             <div>
-                <h3>General Options</h3>
-                <form name="aal_settings" id="" method="post">
-                Cloack links: <input type="radio" name="aal_iscloacked" value="1" <?php echo $isc1;?>/> Yes <input type="radio" name="aal_iscloacked" value="0" <?php echo $isc2;?> /> No (Disable this if the cloacked links are not working for you)<br />
-                Add links on homepage: <input type="radio" name="showhome" value="1" <?php echo $shsel;?> /> Yes <input type="radio" name="showhome" value="0" <?php echo $shsel2 ;?>/> No <br />
-                Target: <input type="radio" name="aal_target" value="_blank" <?php echo $tscl;?> /> New window <input type="radio" name="aal_target" value="_self" <?php echo $tsc2 ;?>/> Same Window <br />
-                How many times every keyword should appear on a post ( max ): <input type="text" name="notimes" value="<?php echo $notimes ;?>" size="1" /><br />
-                Relation: <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1;?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br />
-                How many times every keyword should appear on a post ( max ): <input type="text" name="notimes" value="<?php echo $notimes;?>" size="1" /><br />
-                <input type="hidden" name="aal_settings_submit" value="1" />
+                <h3>General Options</h3><?php //echo 'asd'.get_option('aal_target');?>
+                <form name="aal_settings" id="changeOptions" method="post">
+                <b>Cloack links:</b> <input type="checkbox" name="aal_iscloacked" id="aal_iscloacked"  <?php echo $isc;?> /> (Disable this if the cloacked links are not working for you)<br /><br />
+                <b>Add links on homepage:</b> <input type="checkbox" name="showhome" id="showhome" <?php echo $shse;?> /> <br /><br />
+                <b>Target:</b> <input type="radio" name="aal_target" value="_blank" <?php echo $tsc1;?> /> New window <input type="radio" name="aal_target" value="_self" <?php echo $tsc2 ;?>/> Same Window <br /><br />
+                <b>How many times every keyword should appear on a post ( max ):</b> <input type="text" name="notimes" id="notimes" value="<?php echo $notimes ;?>" size="1" /><br /><br />
+                <b>Relation:</b> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1;?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br />
+                <input type="hidden" name="aal_settings_submit" id="aal_settings_submit" value="1" />
                 <br />
                 Exclude posts or pages to display affiliate links: ( Enter post IDs, sepparated by comma ):<br />
                 <input type="text" name="aal_exclude" value="<?php echo $excludeposts ;?>" size="50" /><br />
                 <input type="submit" value="Save" />
                 </form>
+                <span id="status"> </span>
             </div>
             <div>
                     <p>After you add the affiliate links, make sure you write keywords in the respective field, separated by comma. If you don\'t enter any keyword, that link won\'t be displayed.</p>
@@ -148,13 +135,13 @@ function wpaal_manage_affiliates() {
                     </form>
                     
                     <br/>Here is a list with most used keywords in all your blog. Click on each and it will be added in the form above so you can assign a link for it.<br />
-                                <?php getSugestions();?>
+                                <?php aalGetSugestions();?>
                     
                             <h3>Affiliate Links:</h3>
 
                             <ul class="links">
 
-                             <?php getLinks($myrows); // Showing existent affiliate links with edit and delete options ?>
+                             <?php aalGetLinks($myrows); // Showing existent affiliate links with edit and delete options ?>
                             
                                 
                             </ul>
@@ -210,7 +197,7 @@ function wpaal_add_affiliate_links($content) {
 							$strpos_fnc		=	 'stripos';
 								
 								
-							if($iscloacked) $link = get_option( 'home' ) . "/goto/" . wpaal_generateSlug($key);
+							if($iscloacked=='true') $link = get_option( 'home' ) . "/goto/" . wpaal_generateSlug($key);
 							$url = $link;
 							$name = $key;
 							
@@ -233,7 +220,7 @@ function wpaal_add_affiliate_links($content) {
 			if(is_array($regexp)) { if($_SERVER['REQUEST_URI']=='/' || $_SERVER['REQUEST_URI']=='/index.php') $ishome = 1; else $ishome=0;
 			
 			if(!$ishome) $content = preg_replace($regexp, $replace, $content,$notimes);	
-				else if($showhome) if($regexp[0]) $content = preg_replace($regexp, $replace, $content,$notimes);	 }
+				else if($showhome=='true') if($regexp[0]) $content = preg_replace($regexp, $replace, $content,$notimes);	 }
 		}				
 		return $content;
 

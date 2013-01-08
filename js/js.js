@@ -80,5 +80,46 @@ jQuery(document).ready(function() {
      
     //Add new link
 
+jQuery("#changeOptions").submit(function() {
+        
+        var keyword = jQuery("#formkeywords").val();
+        var link = jQuery("#formlink").val();
+        
+        
+            var aal_iscloacked = jQuery("#aal_iscloacked").is(":checked");
+            var aal_showhome= jQuery("#showhome").is(":checked");
+            var aal_notimes= jQuery("#notimes").val();
+            var aal_target= $('#changeOptions input[type=radio][name=aal_target]:checked').val();
+            var aal_relation= $('input[name=aal_relation]:checked', '#changeOptions').val();
+            
+            console.log(aal_target);
+            
+            var data = {
+                        action: 'change_options',
+                        aal_iscloacked: aal_iscloacked,
+                        aal_showhome:aal_showhome,
+                        aal_notimes:aal_notimes,
+                        aal_target:aal_target,
+                        aal_relation:aal_relation
+                       };
+
+            jQuery.ajax({
+                    type: "POST",
+                    url: ajax_script.ajaxurl,
+                    data: data,
+                    cache: false,
+                    success: function(){
+
+                     jQuery("#status").text('Options Saved');
+
+                    }
+
+               });
+            
+       
+    
+        return false;
+     }); 
+
 }); 
 
