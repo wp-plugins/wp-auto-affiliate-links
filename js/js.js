@@ -17,7 +17,7 @@ jQuery(document).ready(function() {
 
 //Delete Link called through AJAX
 
-    jQuery(".delete").click(function() {
+    jQuery(".aal_delete_link").click(function() {
         
     var answer = confirm("Are you sure you want to delete this automated link?");
     
@@ -25,7 +25,7 @@ jQuery(document).ready(function() {
         
         var linkContainer = jQuery(this).parent();
         var id = jQuery(this).attr("id");
-        var data = {action: 'delete_link',id: id};
+        var data = {action: 'aal_delete_link',id: id};
         
             jQuery.ajax({
                     type: "POST",
@@ -43,22 +43,22 @@ jQuery(document).ready(function() {
 
 // Add Link (Called through AJAX)
 
-    jQuery("#add_link").submit(function() {
+    jQuery("#aal_add_new_link_form").submit(function() {
         
-        var keyword = jQuery("#formkeywords").val();
+        var keywords = jQuery("#formkeywords").val();
         var link = jQuery("#formlink").val();
         
         if(isValidURL(link)){
         
-        if(keyword!=''){
+        if(keywords!=''){
         
             jQuery("#formlink").val("");
             jQuery("#formkeywords").val("");
 
             var data = {
-                        action: 'add_link',
+                        action: 'aal_add_link',
                         link: link,
-                        keywords:keyword
+                        keywords:keywords
                        };
 
             jQuery.ajax({
@@ -98,7 +98,7 @@ jQuery("#changeOptions").submit(function() {
             //console.log(aal_target);
             
             var data = {
-                        action: 'change_options',
+                        action: 'aal_change_options',
                         aal_iscloacked: aal_iscloacked,
                         aal_showhome:aal_showhome,
                         aal_notimes:aal_notimes,
@@ -113,7 +113,7 @@ jQuery("#changeOptions").submit(function() {
                     cache: false,
                     success: function(){
 
-                     jQuery("#status").text('Options Saved');
+                     jQuery(".aal_add_link_status").text('Options Saved');
 
                     }
 
@@ -144,7 +144,7 @@ jQuery("#changeOptions").submit(function() {
                     success: function(){
                      
                      jQuery(".aal_exclude_posts").append('<span>Post ID :<input type="text" value="'+id+'"/></span>');
-                     jQuery("#exclude_status").text('Exclude ID added');
+                     jQuery(".aal_exclude_status").text('Exclude ID added');
 
                     }
 

@@ -18,9 +18,9 @@ add_action('wp', 'wpaal_add_query_var');
 add_action('wp','wpaal_check_for_goto');
 add_action('wp_print_scripts', 'aal_load_css');
 add_action('wp_print_scripts', 'aal_load_js');
-add_action('wp_ajax_delete_link', 'aalDeleteLink');
-add_action('wp_ajax_add_link', 'aalAddLink');
-add_action('wp_ajax_change_options', 'aalChangeOptions');
+add_action('wp_ajax_aal_delete_link', 'aalDeleteLink');
+add_action('wp_ajax_aal_add_link', 'aalAddLink');
+add_action('wp_ajax_aal_change_options', 'aalChangeOptions');
 add_action('wp_ajax_aal_add_exclude_posts', 'aalAddExcludePost');
 add_action('wp_ajax_aal_update_exclude_posts', 'aalUpdateExcludePosts');
 
@@ -126,7 +126,7 @@ function wpaal_manage_affiliates() {
                     <b>Relation:</b> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1;?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br /><br />
                     <input type="submit" value="Save" />
                 </form>
-                <span id="status"> </span>
+                <span class="aal_add_link_status"> </span>
             </div>
             
             <div>
@@ -155,7 +155,7 @@ function wpaal_manage_affiliates() {
                 ?>
                 </form>
                 
-                <span id="exclude_status"> </span>
+                <span class="aal_exclude_status"> </span>
             </div>
             
             <div>
@@ -163,7 +163,7 @@ function wpaal_manage_affiliates() {
                     <p>After you hit save, all keywords entered found in the content will be replaced with the links to the affiliate page</p>
 
 
-                    <form name="add-link" method="post" action="<?php echo admin_url( "admin-ajax.php");?>" id="add_link">
+                    <form name="add-link" method="post" action="<?php echo admin_url( "admin-ajax.php");?>" id="aal_add_new_link_form">
                         <input type="hidden" name="action" value="add_link" />
                         Affiliate link: <input type="text" name="link" value="http://" id="formlink" />
                         Keywords: <input type="text" name="keywords" id="formkeywords" />
