@@ -66,15 +66,16 @@ If you add more links with the same keyword, only the first occurence of the key
 
 == Changelog ==
 = 2.9.5 =
-*Moved exclude posts into separate tab
-*Make delete and add exclude posts AJAX based
+* Moved exclude posts into separate tab
+* Make delete and add exclude posts AJAX based
+
 = 2.9.4 =
-*General setings also converted to AJAX 
+* General setings also converted to AJAX 
 
 = 2.9.3 =
-*Imported tabs menu from paid version and
-*Some changes to the design 
-*Better file and folder structure
+* Imported tabs menu from paid version and
+* Some changes to the design 
+* Better file and folder structure
 
 = 2.9.2 =
 * Added icon for delete button
