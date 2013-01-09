@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.9.4
+Version: 2.9.5
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -21,6 +21,10 @@ add_action('wp_print_scripts', 'aal_load_js');
 add_action('wp_ajax_delete_link', 'aalDeleteLink');
 add_action('wp_ajax_add_link', 'aalAddLink');
 add_action('wp_ajax_change_options', 'aalChangeOptions');
+add_action('wp_ajax_aal_add_exclude_posts', 'aalAddExcludePost');
+add_action('wp_ajax_aal_update_exclude_posts', 'aalUpdateExcludePosts');
+
+//add_action('wp_ajax_exclude_posts', 'aalExcludePosts');
 
 
 // Add Wp Auto Affiliate Links to Wordpress Admnistration panel menu
@@ -99,29 +103,61 @@ function wpaal_manage_affiliates() {
         
         	
         <ul class="tabs">
-                <li><a href="#generalsettings" title="generalsettings" onclick="document.location.hash = '#generalsettings;'">General Settings</a></li>
-                <li><a href="#generalsettings" title="generalsettings" onclick="document.location.hash = '#generalsettings';" >Add Affiliate Links</a></li>
+                <li><a href="" title="General Settings" onclick="document.location.hash = '#generalsettings;'">General Settings</a></li>
+                <li><a href="" title="Exclude posts" onclick="document.location.hash = '#excludeposts';" >Exclude posts</a></li>
+                <li><a href="" title="Add Affiliate Links" onclick="document.location.hash = '#addlinks';" >Add Affiliate Links</a></li>
                 
         </ul>
 
         <!-- tab "panes" -->
         <div class="panes">
             <div>
-                <h3>General Options</h3><?php //echo 'asd'.get_option('aal_target');?>
+                <h3>General Options</h3>
+                
                 <form name="aal_settings" id="changeOptions" method="post">
-                <b>Cloack links:</b> <input type="checkbox" name="aal_iscloacked" id="aal_iscloacked"  <?php echo $isc;?> /> (Disable this if the cloacked links are not working for you)<br /><br />
-                <b>Add links on homepage:</b> <input type="checkbox" name="showhome" id="showhome" <?php echo $shse;?> /> <br /><br />
-                <b>Target:</b> <input type="radio" name="aal_target" value="_blank" <?php echo $tsc1;?> /> New window <input type="radio" name="aal_target" value="_self" <?php echo $tsc2 ;?>/> Same Window <br /><br />
-                <b>How many times every keyword should appear on a post ( max ):</b> <input type="text" name="notimes" id="notimes" value="<?php echo $notimes ;?>" size="1" /><br /><br />
-                <b>Relation:</b> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1;?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br />
-                <input type="hidden" name="aal_settings_submit" id="aal_settings_submit" value="1" />
-                <br />
-                Exclude posts or pages to display affiliate links: ( Enter post IDs, sepparated by comma ):<br />
-                <input type="text" name="aal_exclude" value="<?php echo $excludeposts ;?>" size="50" /><br />
-                <input type="submit" value="Save" />
+                    <b>Cloack links:</b> <input type="checkbox" name="aal_iscloacked" id="aal_iscloacked"  <?php echo $isc;?> /> (Disable this if the cloacked links are not working for you)<br /><br />
+                    
+                    <b>Add links on homepage:</b> <input type="checkbox" name="showhome" id="showhome" <?php echo $shse;?> /> <br /><br />
+                    
+                    <b>Target:</b> <input type="radio" name="aal_target" value="_blank" <?php echo $tsc1;?> /> New window <input type="radio" name="aal_target" value="_self" <?php echo $tsc2 ;?>/> Same Window <br /><br />
+                    
+                    <b>How many times every keyword should appear on a post ( max ):</b> <input type="text" name="notimes" id="notimes" value="<?php echo $notimes ;?>" size="1" /><br /><br />
+                    
+                    <b>Relation:</b> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1;?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br /><br />
+                    <input type="submit" value="Save" />
                 </form>
                 <span id="status"> </span>
             </div>
+            
+            <div>
+               
+                <h3>Exclude posts</h3>
+                <form name="aal_add_exclude_posts_form" id="aal_add_exclude_posts_form" method="post">
+                    <b>Enter post ID </b>:
+                    <input type="text" name="aal_exclude_post_id" id="aal_add_exclude_post_id"  size="10" />
+                    <input type="submit" value="Exclude Post"/>
+                </form>
+                
+                <p>Excluded Posts ID's</p>
+                <form class="aal_exclude_posts">
+                <?php 
+                $aal_exclude_posts=get_option('aal_exclude');
+                $aal_exclude_posts_array=explode(',', $aal_exclude_posts);
+                
+                foreach ($aal_exclude_posts_array as $aal_exclude_post_id)
+                    echo "<span>
+                            Post ID: <input type='text' name='aal_exclude_posts' class='all_exclude_post_item' value='".$aal_exclude_post_id."'/> 
+                            <a href='javascript:' id='".$aal_exclude_post_id."' class='aal_delete_exclude_link'><img src='".plugin_dir_url(__FILE__)."images/delete.png'/></a><br/>
+                          </span>";
+                
+               
+                
+                ?>
+                </form>
+                
+                <span id="exclude_status"> </span>
+            </div>
+            
             <div>
                     <p>After you add the affiliate links, make sure you write keywords in the respective field, separated by comma. If you don\'t enter any keyword, that link won\'t be displayed.</p>
                     <p>After you hit save, all keywords entered found in the content will be replaced with the links to the affiliate page</p>
@@ -137,14 +173,14 @@ function wpaal_manage_affiliates() {
                     <br/>Here is a list with most used keywords in all your blog. Click on each and it will be added in the form above so you can assign a link for it.<br />
                                 <?php aalGetSugestions();?>
                     
-                            <h3>Affiliate Links:</h3>
+                    <h3>Affiliate Links:</h3>
 
-                            <ul class="links">
+                    <ul class="links">
 
-                             <?php aalGetLinks($myrows); // Showing existent affiliate links with edit and delete options ?>
-                            
-                                
-                            </ul>
+                         <?php aalGetLinks($myrows); // Showing existent affiliate links with edit and delete options ?>
+
+
+                    </ul>
             </div>
             
      </div>

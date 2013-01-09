@@ -1,7 +1,7 @@
 jQuery(document).ready(function() { 
 
     // setup ul.tabs to work as tabs for each div directly under div.panes
-    $("ul.tabs").tabs("div.panes > div");
+    jQuery("ul.tabs").tabs("div.panes > div");
  
 
     function isValidURL(url){
@@ -14,6 +14,8 @@ jQuery(document).ready(function() {
     }
 
     }
+
+//Delete Link called through AJAX
 
     jQuery(".delete").click(function() {
         
@@ -37,8 +39,9 @@ jQuery(document).ready(function() {
         }
 
                 return false;
-        }); // Delete Link 
+        }); 
 
+// Add Link (Called through AJAX)
 
     jQuery("#add_link").submit(function() {
         
@@ -78,7 +81,7 @@ jQuery(document).ready(function() {
         return false;
      }); 
      
-    //Add new link
+//General Options CHANGE
 
 jQuery("#changeOptions").submit(function() {
         
@@ -92,7 +95,7 @@ jQuery("#changeOptions").submit(function() {
             var aal_target= $('#changeOptions input[type=radio][name=aal_target]:checked').val();
             var aal_relation= $('input[name=aal_relation]:checked', '#changeOptions').val();
             
-            console.log(aal_target);
+            //console.log(aal_target);
             
             var data = {
                         action: 'change_options',
@@ -120,6 +123,82 @@ jQuery("#changeOptions").submit(function() {
     
         return false;
      }); 
+ 
+ 
+ jQuery("#aal_add_exclude_posts_form").submit(function() {
+            
+            
+            var id = jQuery("#aal_add_exclude_post_id").val();
+            
+            var data = {
+                        action: 'aal_add_exclude_posts',
+                        aal_post: id,
+
+                       };
+
+            jQuery.ajax({
+                    type: "POST",
+                    url: ajax_script.ajaxurl,
+                    data: data,
+                    cache: false,
+                    success: function(){
+                     
+                     jQuery(".aal_exclude_posts").append('<span>Post ID :<input type="text" value="'+id+'"/></span>');
+                     jQuery("#exclude_status").text('Exclude ID added');
+
+                    }
+
+               });
+            
+       
+    
+        return false;
+     }); 
+
+
+jQuery(".aal_delete_exclude_link").click(function() {
+        
+    var answer = confirm("Are you sure you want to delete this exclude link?");
+    
+        if (answer){
+        
+        //delete selected exclude id box from the form 
+        var linkContainer = jQuery(this).parent();
+        linkContainer.slideUp('slow', function() {jQuery(this).remove();
+            
+});
+        
+        var removeItem=jQuery(this).closest('span').find('.all_exclude_post_item').val();
+        //console.log(test);
+        
+        var posts=new Array();
+        
+        jQuery(".all_exclude_post_item").each(function(){
+            posts.push(jQuery(this).val());
+        });
+        
+        posts=jQuery.grep(posts,function(value){
+            return value!=removeItem;
+        });
+        
+        
+        var data = {action: 'aal_update_exclude_posts',aal_exclude_posts:posts};
+            
+            jQuery.ajax({
+                    type: "POST",
+                    url: ajax_script.ajaxurl,
+                    data: data,
+                    cache: false,
+                    success: function(){
+                    console.log('succes');                    
+                    }
+                });
+            }
+
+                return false;
+        }); 
+
+
 
 }); 
 

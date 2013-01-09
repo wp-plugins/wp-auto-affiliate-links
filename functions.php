@@ -63,6 +63,33 @@ function aalChangeOptions(){
            die();
 }
 
+function aalUpdateExcludePosts(){
+            
+    //$update_exclude_posts= filter_input(INPUT_POST, 'aal_exclude_posts', FILTER_SANITIZE_SPECIAL_CHARS);
+    $update_exclude_posts=  $_POST['aal_exclude_posts'];
+    $update_exclude_posts=  implode(',', $update_exclude_posts);
+    $update_exclude_posts=mysql_real_escape_string(htmlentities($update_exclude_posts));
+    delete_option('aal_exclude');add_option( 'aal_exclude', $update_exclude_posts);
+
+    
+    die();
+}
+
+function aalAddExcludePost(){
+            
+                $aal_exclude_id= filter_input(INPUT_POST, 'aal_post', FILTER_SANITIZE_SPECIAL_CHARS);
+                $aal_posts =get_option('aal_exclude');
+                
+                if($aal_posts=='')$aal_exclude=$aal_exclude_id;
+                    else $aal_exclude=$aal_posts.",".$aal_exclude_id;
+                    
+                 
+                delete_option('aal_exclude');add_option( 'aal_exclude', $aal_exclude);
+                 
+                die();
+}
+
+
 //Add link form (called by ajax)
 function aalAddLink(){
     
@@ -85,9 +112,6 @@ function aalGetLinks($myrows){
                                     $id = $row->id;
                                     $link = $row->link;
                                     $keywords = $row->keywords;
-
-                                    $deletelink = '?page=WP-auto-affiliate-links.php&aal_action=delete&id='. $id;
-                                    $deletelink = ( function_exists('wp_nonce_url') ) ? wp_nonce_url($deletelink, 'WP-auto-affiliate-links_delete_link') : $deletelink;
 
                                     ?>
                                         <form name="edit-link-<?php echo $id; ?>" method="post">
