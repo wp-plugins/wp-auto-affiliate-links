@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.9.5.4
+Version: 2.9.5.5
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -110,7 +110,7 @@ function aalAddLink(){
                 $table_name = $wpdb->prefix . "automated_links";
      	
 		// Security check and sanitize	
-		$link = filter_input(INPUT_POST, 'link', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['link'];
+		$link = filter_input(INPUT_POST, 'aal_link', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['link'];
 		$keywords = filter_input(INPUT_POST, 'keywords', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['keywords'];
 		
 		// Add to database 
@@ -128,18 +128,18 @@ function aalGetLinks($myrows){
 
                                     ?>
                                         <form name="edit-link-<?php echo $id; ?>" method="post">
-
+                                        <input value="<?php echo $id; ?>" name="edit_id" type="hidden" />
+                                        <input type="hidden" name="aal_edit" value="ok" />
+                                                
                                         <?php
                                         if ( function_exists('wp_nonce_field') )
                                                 wp_nonce_field('WP-auto-affiliate-links_edit_link');
                                         ?>
-                                            <li style="" class="box">
-                                                Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="link" value="<?php echo $link; ?>" />
-                                                Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="keywords" value="<?php echo $keywords; ?>" />
+                                            <li style="" class="aal_links_box">
+                                                Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="aal_link" value="<?php echo $link; ?>" />
+                                                Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="aal_keywords" value="<?php echo $keywords; ?>" />
                                                 <input style="margin: 5px 2px;" type="submit" name="ed" value="Edit" />
-                                                <input value="<?php echo $id; ?>" name="edit_id" type="hidden" />
-                                                <input type="hidden" name="aal_edit" value="ok" />
-                                                <a href="#" id="<?php echo $id; ?>" class="delete"><img src="<?php echo plugin_dir_url(__FILE__);?>images/delete.png"/></a>
+                                                <a href="#" id="<?php echo $id; ?>" class="aalDeleteLink"><img src="<?php echo plugin_dir_url(__FILE__);?>images/delete.png"/></a>
                                             </li>    
                                         </form>
 
@@ -281,8 +281,8 @@ function wpaal_actions() {
 		//Security and input check
 		check_admin_referer('WP-auto-affiliate-links_edit_link');		
 		$id = filter_input(INPUT_POST, 'edit_id', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['id'];
-		$link = filter_input(INPUT_POST, 'link', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['link'];
-		$keywords = filter_input(INPUT_POST, 'keywords', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['keywords'];
+		$link = filter_input(INPUT_POST, 'aal_link', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['link'];
+		$keywords = filter_input(INPUT_POST, 'aal_keywords', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['keywords'];
 
 		//Update the database and redirect
 		$rows_affected = $wpdb->update( $table_name, array( 'link' => $link, 'keywords' => $keywords ), array( 'id' => $id ));
@@ -403,7 +403,7 @@ function wpaal_manage_affiliates() {
                     <form name="add-link" method="post" action="<?php echo admin_url( "admin-ajax.php");?>" id="aal_add_new_link_form">
                         <input type="hidden" name="action" value="add_link" />
                         Affiliate link: <input type="text" name="link" value="http://" id="formlink" />
-                        Keywords: <input type="text" name="keywords" id="formkeywords" />
+                        Keywords: <input type="text" name="aal_keywords" id="formkeywords" />
                         <input type="submit" name="Save" />
                     </form>
                     
@@ -412,7 +412,7 @@ function wpaal_manage_affiliates() {
                     
                     <h3>Affiliate Links:</h3>
 
-                    <ul class="links">
+                    <ul class="aal_links">
 
                          <?php aalGetLinks($myrows); // Showing existent affiliate links with edit and delete options ?>
 

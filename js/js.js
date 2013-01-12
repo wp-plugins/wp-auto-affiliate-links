@@ -17,7 +17,7 @@ jQuery(document).ready(function() {
 
 //Delete Link called through AJAX
 
-    jQuery(".aal_delete_link").click(function() {
+    jQuery(".aalDeleteLink").click(function() {
         
     var answer = confirm("Are you sure you want to delete this automated link?");
     
@@ -68,7 +68,7 @@ jQuery(document).ready(function() {
                     cache: false,
                     success: function(){
 
-                    jQuery(".links").append('<li>Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="link" value="'+link+'" />Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="keywords" value="'+keywords+'" /></li>');
+                    jQuery(".aal_links").append('<li>Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="aal_link" value="'+link+'" />Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="aal_keywords" value="'+keywords+'" /></li>');
 
                     }
 
