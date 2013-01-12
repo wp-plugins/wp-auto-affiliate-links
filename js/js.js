@@ -68,7 +68,7 @@ jQuery(document).ready(function() {
                     cache: false,
                     success: function(){
 
-                    jQuery(".links").append('<li>Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="link" value="'+link+'" />Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="keywords" value="'+keyword+'" /></li>');
+                    jQuery(".links").append('<li>Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="link" value="'+link+'" />Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="keywords" value="'+keywords+'" /></li>');
 
                     }
 
