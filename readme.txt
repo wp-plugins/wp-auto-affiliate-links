@@ -66,7 +66,8 @@ If you add more links with the same keyword, only the first occurence of the key
 
 == Changelog ==
 = 2.9.5.5 =
-Fixed edit bug and made some modifications that fixed some compatibility problems
+*Fixed edit bug and made some modifications that fixed some compatibility problems
+
 = 2.9.5.4 =
 * Fixed add new link problem (link was visible just after refresh)
 
