@@ -1,8 +1,24 @@
 jQuery(document).ready(function() { 
 
-    // setup ul.tabs to work as tabs for each div directly under div.panes
-    jQuery("ul.tabs").tabs("div.panes > div");
- 
+
+      var aalLocation = document.location.hash;
+          aalLocation = aalLocation.substr(1);
+          if(aalLocation) { jQuery("#"+aalLocation).show(); }
+                else { jQuery("#aal_panel1").show(); }
+
+
+
+     function aalChangeTab() {
+       
+               jQuery("#aal_panel1").hide();
+               jQuery("#aal_panel2").hide();
+               jQuery("#aal_panel3").hide();
+               
+       
+     var aalLocation = document.location.hash;
+         aalLocation = aalLocation.substr(1);
+         jQuery("#"+aalLocation).show();
+}
 
     function isValidURL(url){
     var RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
@@ -16,9 +32,8 @@ jQuery(document).ready(function() {
     }
 
 //Delete Link called through AJAX
-
-    jQuery(".aalDeleteLink").click(function() {
-        
+jQuery(".aalDeleteLink").live('click',function() {
+              
     var answer = confirm("Are you sure you want to delete this automated link?");
     
         if (answer){
@@ -45,30 +60,34 @@ jQuery(document).ready(function() {
 
     jQuery("#aal_add_new_link_form").submit(function() {
         
-        var keywords = jQuery("#formkeywords").val();
-        var link = jQuery("#formlink").val();
+        var aal_keywords = jQuery("#aal_formkeywords").val();
+        var aal_link = jQuery("#aal_formlink").val();
         
-        if(isValidURL(link)){
+        if(isValidURL(aal_link)){
         
-        if(keywords!=''){
+        if(aal_keywords!=''){
         
-            jQuery("#formlink").val("");
-            jQuery("#formkeywords").val("");
+            jQuery("#aal_formlink").val("");
+            jQuery("#aal_formkeywords").val("");
 
             var data = {
                         action: 'aal_add_link',
-                        link: link,
-                        keywords:keywords
+                        aal_link: aal_link,
+                        aal_keywords:aal_keywords
                        };
 
             jQuery.ajax({
                     type: "POST",
                     url: ajax_script.ajaxurl,
                     data: data,
+                    dataType: "json",
                     cache: false,
-                    success: function(){
-
-                    jQuery(".aal_links").append('<li>Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="aal_link" value="'+link+'" />Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="aal_keywords" value="'+keywords+'" /></li>');
+                    success: function(data){
+                        
+                    jQuery(".aal_links").append('<li>Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="aal_link" value="'+aal_link+'" />\
+                                                  Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="aal_keywords" value="'+aal_keywords+'" /> \
+                                                  <a href="#" id="'+data['aal_delete_id']+'" class="aalDeleteLink"><img src="'+ajax_script.aal_plugin_url+'images/delete.png"/></a>\
+                                                </li>');
 
                     }
 
@@ -83,17 +102,15 @@ jQuery(document).ready(function() {
      
 //General Options CHANGE
 
-jQuery("#changeOptions").submit(function() {
+jQuery("#aal_changeOptions").submit(function() {
         
-        var keyword = jQuery("#formkeywords").val();
-        var link = jQuery("#formlink").val();
-        
+      
         
             var aal_iscloacked = jQuery("#aal_iscloacked").is(":checked");
-            var aal_showhome= jQuery("#showhome").is(":checked");
-            var aal_notimes= jQuery("#notimes").val();
-            var aal_target= $('#changeOptions input[type=radio][name=aal_target]:checked').val();
-            var aal_relation= $('input[name=aal_relation]:checked', '#changeOptions').val();
+            var aal_showhome= jQuery("#aal_showhome").is(":checked");
+            var aal_notimes= jQuery("#aal_notimes").val();
+            var aal_target= jQuery('#aal_changeOptions input[type=radio][name=aal_target]:checked').val();
+            var aal_relation= jQuery('input[name=aal_relation]:checked', '#changeOptions').val();
             
             //console.log(aal_target);
             
@@ -140,12 +157,13 @@ jQuery("#changeOptions").submit(function() {
                     type: "POST",
                     url: ajax_script.ajaxurl,
                     data: data,
+                    dataType:"json",
                     cache: false,
-                    success: function(){
+                    success: function(data){
                      
-                     jQuery(".aal_exclude_posts").append('<span>Post ID :<input type="text" value="'+id+'"/></span>');
-                     jQuery(".aal_exclude_status").text('Exclude ID added');
-
+                     jQuery(".aal_exclude_posts").append('<span>Post ID :<input type="text" value="'+id+'"/><a href="javascript:;" id="'+id+'" class="aal_delete_exclude_link"><img src="'+ajax_script.aal_plugin_url+'images/delete.png"/></a></span><br/>');
+                     jQuery(".aal_exclude_status").append('<p><i>Exclude ID added!</i></p>');
+                     
                     }
 
                });
@@ -156,7 +174,7 @@ jQuery("#changeOptions").submit(function() {
      }); 
 
 
-jQuery(".aal_delete_exclude_link").click(function() {
+jQuery(".aal_delete_exclude_link").live('click',function() {
         
     var answer = confirm("Are you sure you want to delete this exclude link?");
     
@@ -190,7 +208,7 @@ jQuery(".aal_delete_exclude_link").click(function() {
                     data: data,
                     cache: false,
                     success: function(){
-                    console.log('succes');                    
+                    //console.log('succes');                    
                     }
                 });
             }

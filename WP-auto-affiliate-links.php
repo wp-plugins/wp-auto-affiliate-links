@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.9.5.5
+Version: 2.9.5.6
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -31,10 +31,12 @@ function aal_load_js() {
 	
         // load our jquery file that sends the $.post request
 	wp_enqueue_script( "js", plugin_dir_url( __FILE__ ) . 'js/js.js', array( 'jquery' ) );
-	wp_enqueue_script( "tabs", plugin_dir_url( __FILE__ ) . 'js/jquery.tools.min.js', array( 'jquery' ) );
+	//wp_enqueue_script( "tabs", plugin_dir_url( __FILE__ ) . 'js/jquery.tools.min.js', array( 'jquery' ) );
+        
+        $aal_plugin_url=plugin_dir_url(__FILE__);
         
         // make the ajaxurl var available to the above script
-	wp_localize_script( 'js', 'ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );	
+	wp_localize_script( 'js', 'ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php'),'aal_plugin_url' =>$aal_plugin_url  ) );	
         
 }
 
@@ -110,11 +112,19 @@ function aalAddLink(){
                 $table_name = $wpdb->prefix . "automated_links";
      	
 		// Security check and sanitize	
-		$link = filter_input(INPUT_POST, 'aal_link', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['link'];
-		$keywords = filter_input(INPUT_POST, 'keywords', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['keywords'];
+		$aal_link = filter_input(INPUT_POST, 'aal_link', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['link'];
+		$aal_keywords = filter_input(INPUT_POST, 'aal_keywords', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['keywords'];
 		
 		// Add to database 
-		$rows_affected = $wpdb->insert( $table_name, array( 'link' => $link, 'keywords' => $keywords ) );
+		$rows_affected = $wpdb->insert( $table_name, array( 'link' => $aal_link, 'keywords' => $aal_keywords ) );
+                
+                $aal_delete_id=$wpdb->insert_id;
+                
+                $aal_json=array('aal_delete_id'=>$aal_delete_id);
+                
+                echo json_encode($aal_json);
+                
+                die();
 }
 
 //Get list of link showed on Add Affiliate Links tab
@@ -122,9 +132,9 @@ function aalAddLink(){
 function aalGetLinks($myrows){
          foreach($myrows as $row) {
 
-                                    $id = $row->id;
-                                    $link = $row->link;
-                                    $keywords = $row->keywords;
+                                    $aal_id = $row->id;
+                                    $aal_link = $row->link;
+                                    $aal_keywords = $row->keywords;
 
                                     ?>
                                         <form name="edit-link-<?php echo $id; ?>" method="post">
@@ -136,10 +146,10 @@ function aalGetLinks($myrows){
                                                 wp_nonce_field('WP-auto-affiliate-links_edit_link');
                                         ?>
                                             <li style="" class="aal_links_box">
-                                                Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="aal_link" value="<?php echo $link; ?>" />
-                                                Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="aal_keywords" value="<?php echo $keywords; ?>" />
+                                                Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="aal_link" value="<?php echo $aal_link; ?>" />
+                                                Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="aal_keywords" value="<?php echo $aal_keywords; ?>" />
                                                 <input style="margin: 5px 2px;" type="submit" name="ed" value="Edit" />
-                                                <a href="#" id="<?php echo $id; ?>" class="aalDeleteLink"><img src="<?php echo plugin_dir_url(__FILE__);?>images/delete.png"/></a>
+                                                <a href="#" id="<?php echo $aal_id; ?>" class="aalDeleteLink"><img src="<?php echo plugin_dir_url(__FILE__);?>images/delete.png"/></a>
                                             </li>    
                                         </form>
 
@@ -208,7 +218,7 @@ function aalGetSugestions(){
         $final = array_slice($final, 0, 19);
         foreach($final as $fin) {
                 if($fin!='' && $fin!=' ' && $fin!= '   ') {
-                        echo '<a href="javascript:;" onclick="document.getElementById(\'formkeywords\').value=\''. $fin .'\'">'. $fin .'</a>&nbsp;';
+                        echo '<a href="javascript:;" onclick="document.getElementById(\'aal_formkeywords\').value=\''. $fin .'\'">'. $fin .'</a>&nbsp;';
                 }
 
         }
@@ -340,25 +350,25 @@ function wpaal_manage_affiliates() {
         
         	
         <ul class="tabs">
-                <li><a href="" title="General Settings" onclick="document.location.hash = '#generalsettings;'">General Settings</a></li>
-                <li><a href="" title="Exclude posts" onclick="document.location.hash = '#excludeposts';" >Exclude posts</a></li>
-                <li><a href="" title="Add Affiliate Links" onclick="document.location.hash = '#addlinks';" >Add Affiliate Links</a></li>
+                <li><a href="javascript:;" title="General Settings" onclick="jQuery('#aal_panel1').show(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').hide();document.location.hash = '#aal_panel1';">General Settings</a></li>
+                <li><a href="javascript:;" title="Exclude posts" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').show(); jQuery('#aal_panel3').hide();document.location.hash = '#aal_panel2';" >Exclude posts</a></li>
+                <li><a href="javascript:;" title="Add Affiliate Links" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').show();document.location.hash = '#aal_panel3';" >Add Affiliate Links</a></li>
                 
         </ul>
 
         <!-- tab "panes" -->
-        <div class="panes">
-            <div>
+        <div class="aal_panes">
+            <div id="aal_panel1">
                 <h3>General Options</h3>
                 
-                <form name="aal_settings" id="changeOptions" method="post">
+                <form name="aal_settings" id="aal_changeOptions" method="post">
                     <b>Cloack links:</b> <input type="checkbox" name="aal_iscloacked" id="aal_iscloacked"  <?php echo $isc;?> /> (Disable this if the cloacked links are not working for you)<br /><br />
                     
-                    <b>Add links on homepage:</b> <input type="checkbox" name="showhome" id="showhome" <?php echo $shse;?> /> <br /><br />
+                    <b>Add links on homepage:</b> <input type="checkbox" name="showhome" id="aal_showhome" <?php echo $shse;?> /> <br /><br />
                     
                     <b>Target:</b> <input type="radio" name="aal_target" value="_blank" <?php echo $tsc1;?> /> New window <input type="radio" name="aal_target" value="_self" <?php echo $tsc2 ;?>/> Same Window <br /><br />
                     
-                    <b>How many times every keyword should appear on a post ( max ):</b> <input type="text" name="notimes" id="notimes" value="<?php echo $notimes ;?>" size="1" /><br /><br />
+                    <b>How many times every keyword should appear on a post ( max ):</b> <input type="text" name="notimes" id="aal_notimes" value="<?php echo $notimes ;?>" size="1" /><br /><br />
                     
                     <b>Relation:</b> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1;?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br /><br />
                     <input type="submit" value="Save" />
@@ -366,8 +376,8 @@ function wpaal_manage_affiliates() {
                 <span class="aal_add_link_status"> </span>
             </div>
             
-            <div>
-               
+            <div id="aal_panel2">
+                
                 <h3>Exclude posts</h3>
                 <form name="aal_add_exclude_posts_form" id="aal_add_exclude_posts_form" method="post">
                     <b>Enter post ID </b>:
@@ -382,6 +392,7 @@ function wpaal_manage_affiliates() {
                 $aal_exclude_posts_array=explode(',', $aal_exclude_posts);
                 
                 foreach ($aal_exclude_posts_array as $aal_exclude_post_id)
+                  if($aal_exclude_post_id!='')
                     echo "<span>
                             Post ID: <input type='text' name='aal_exclude_posts' class='all_exclude_post_item' value='".$aal_exclude_post_id."'/> 
                             <a href='javascript:' id='".$aal_exclude_post_id."' class='aal_delete_exclude_link'><img src='".plugin_dir_url(__FILE__)."images/delete.png'/></a><br/>
@@ -395,15 +406,15 @@ function wpaal_manage_affiliates() {
                 <span class="aal_exclude_status"> </span>
             </div>
             
-            <div>
+            <div id="aal_panel3">
                     <p>After you add the affiliate links, make sure you write keywords in the respective field, separated by comma. If you don\'t enter any keyword, that link won\'t be displayed.</p>
                     <p>After you hit save, all keywords entered found in the content will be replaced with the links to the affiliate page</p>
 
 
                     <form name="add-link" method="post" action="<?php echo admin_url( "admin-ajax.php");?>" id="aal_add_new_link_form">
                         <input type="hidden" name="action" value="add_link" />
-                        Affiliate link: <input type="text" name="link" value="http://" id="formlink" />
-                        Keywords: <input type="text" name="aal_keywords" id="formkeywords" />
+                        Affiliate link: <input type="text" name="link" value="http://" id="aal_formlink" />
+                        Keywords: <input type="text" name="aal_keywords" id="aal_formkeywords" />
                         <input type="submit" name="Save" />
                     </form>
                     
