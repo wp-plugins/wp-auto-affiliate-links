@@ -6,7 +6,10 @@ jQuery(document).ready(function() {
           if(aalLocation) { jQuery("#"+aalLocation).show(); }
                 else { jQuery("#aal_panel1").show(); }
 
-
+          jQuery('#tabs li > a').click(function() {
+        	  jQuery('#tabs li').removeClass();
+        	  jQuery(this).parent().addClass('current');
+        	});
 
      function aalChangeTab() {
        

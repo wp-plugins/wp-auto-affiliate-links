@@ -11,4 +11,5 @@
 	
 	$wpdb->query('DROP TABLE '.  $table_name .'');
 	
+	aal_load_css();
 ?>
