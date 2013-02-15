@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 2.9.5.8
+Version: 3.0
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -302,6 +302,34 @@ function wpaal_actions() {
 	}
 	
 	
+	if($_POST['aal_import_check']) {
+	
+		//$sasid = filter_input(INPUT_POST, 'aal_sasid', FILTER_SANITIZE_SPECIAL_CHARS);
+		//$scontent = file_get_contents($_FILES['aal_sasfeed']['tmp_name']);
+		//print_r($_FILES['aal_sasfeed']);
+		
+		
+		$handle = fopen($_FILES['aal_import_file']['tmp_name'], "r");
+		while (($data = fgetcsv($handle, 1000, "|")) !== FALSE) {
+		//print_r($data);
+		//$link = str_replace("YOURUSERID", $sasid, $data[4]);
+		$link = $data[1];
+		$keywords = $data[0];
+		if($link && $keywords) $wpdb->insert( $table_name, array( 'link' => $link, 'keywords' => $keywords ) );
+		}
+		fclose($handle);
+		
+		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
+		
+		// echo $scontent;
+		
+		//die();
+		
+	
+	
+	}
+	
+	
 
 }  // wpaal_actions end
 
@@ -340,20 +368,22 @@ function wpaal_manage_affiliates() {
 	<br /><br />
 	<span style="color: red;">The PRO version of this plugin was released. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Wp Auto Affiliate Links PRO</a> automatically get links from Amazon, Clickbank, shareasale, or you can insert manually. Based on the content of the target links, the plugin will automatically add affiliate links trough the content. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Find out more</a>.</span>
 	<br /><br />
-	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+	<!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 	<input type="hidden" name="cmd" value="_s-xclick">
 	<input type="hidden" name="hosted_button_id" value="RGNWD2T23VX2J">
 	<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 	<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 	</form>
-	<br /><br />
+	<br /><br /> -->
         
         	
         <ul class="tabs" id="tabs">
-                <li><a href="javascript:;" title="General Settings" onclick="jQuery('#aal_panel1').show(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').hide();document.location.hash = '#aal_panel1';">General Settings</a></li>
-                <li><a href="javascript:;" title="Exclude posts" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').show(); jQuery('#aal_panel3').hide();document.location.hash = '#aal_panel2';" >Exclude posts</a></li>
-                <li><a href="javascript:;" title="Add Affiliate Links" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').show();document.location.hash = '#aal_panel3';" >Add Affiliate Links</a></li>
-                
+                <li><a href="javascript:;" title="General Settings" onclick="jQuery('#aal_panel1').show(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').hide();document.location.hash = '#aal_panel1';">General Settings</a></li>
+                <li><a href="javascript:;" title="Exclude posts" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').show(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').hide();document.location.hash = '#aal_panel2';" >Exclude posts</a></li>
+                <li><a href="javascript:;" title="Add Affiliate Links" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').show();jQuery('#aal_panel4').hide();document.location.hash = '#aal_panel3';" >Add Affiliate Links</a></li>
+				<li><a href="javascript:;" title="Import" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').show();document.location.hash = '#aal_panel4';" >Import</a></li>
+				<!-- <li><a href="javascript:;" title="Add Affiliate Links" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').show();document.location.hash = '#aal_panel3';" >Add Affiliate Links</a></li>
+                   -->                          
         </ul>
 
         <!-- tab "panes" -->
@@ -430,6 +460,26 @@ function wpaal_manage_affiliates() {
 
                     </ul>
             </div>
+			
+			
+			<div id="aal_panel4">
+				<br />
+				<h3>Import Links</h3>
+				<br />
+				<br />
+				Upload your datafeed. The columns should be separated by a vertical bar "|", and the format should be: "keyword|url". All the links inside the datafeed will be added to your affiliate links. 
+				<br />
+				<br />
+				
+				
+			<form name="aal_import_form" method="post" enctype="multipart/form-data" onsubmit="">
+			Upload the file here:    <input name="aal_import_file" type="file" /><br />
+			<input type="submit" value="Import" /><input type="hidden" name="MAX_FILE_SIZE" value="10000000" /><input type="hidden" name="aal_import_check" value="1" />
+			</form>
+				
+				
+				
+			</div>
             
      </div>
         
