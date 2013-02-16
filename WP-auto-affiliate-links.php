@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.0
+Version: 3.0.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -308,9 +308,13 @@ function wpaal_actions() {
 		//$scontent = file_get_contents($_FILES['aal_sasfeed']['tmp_name']);
 		//print_r($_FILES['aal_sasfeed']);
 		
+		$separator = $_POST['aal_import_separator'];
+		if($separator=='tab') $separator = "\t";
+		if(!$separator) $separator = "|";
+		
 		
 		$handle = fopen($_FILES['aal_import_file']['tmp_name'], "r");
-		while (($data = fgetcsv($handle, 1000, "|")) !== FALSE) {
+		while (($data = fgetcsv($handle, 1000, $separator)) !== FALSE) {
 		//print_r($data);
 		//$link = str_replace("YOURUSERID", $sasid, $data[4]);
 		$link = $data[1];
@@ -467,13 +471,14 @@ function wpaal_manage_affiliates() {
 				<h3>Import Links</h3>
 				<br />
 				<br />
-				Upload your datafeed. The columns should be separated by a vertical bar "|", and the format should be: "keyword|url". All the links inside the datafeed will be added to your affiliate links. 
+				Upload your datafeed. The format should be keyword,url. The separator is the character who separate the columns, it can be a comma ( , ), a vertical bar ( | ) or a tab ( exactly 4 spaces ). For tab, just write "tab" in the text field. If you don't know, open the feed file in notepad or any other simple text editor. You can edit your datafeed in Microsoft Excell or Libre Office Calc. Make sure you save the file in csv format ( not in xls or odt ). Upon saving, you can select the separator. All the links inside the datafeed will be added to your affiliate links. 
 				<br />
 				<br />
 				
 				
 			<form name="aal_import_form" method="post" enctype="multipart/form-data" onsubmit="">
 			Upload the file here:    <input name="aal_import_file" type="file" /><br />
+			Separator: <input name="aal_import_separator" type="text" value="|"/><br />
 			<input type="submit" value="Import" /><input type="hidden" name="MAX_FILE_SIZE" value="10000000" /><input type="hidden" name="aal_import_check" value="1" />
 			</form>
 				
