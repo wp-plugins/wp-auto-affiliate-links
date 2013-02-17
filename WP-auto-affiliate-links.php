@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.0.2
+Version: 3.0.3
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -426,12 +426,17 @@ function wpaal_manage_affiliates() {
                 $aal_exclude_posts_array=explode(',', $aal_exclude_posts);
                 
                 foreach ($aal_exclude_posts_array as $aal_exclude_post_id)
-                  if($aal_exclude_post_id!='')
+                  if($aal_exclude_post_id!='') { 
+						$exclude_title = get_the_title($aal_exclude_post_id);
+						if(!$exclude_title) $status = 'post with the given id does not exist';
+							else $status = get_post_status($aal_exclude_post_id);
+						
+				  
                     echo "<span>
-                            Post ID: <input type='text' name='aal_exclude_posts' class='all_exclude_post_item' value='".$aal_exclude_post_id."'/> <a href='".get_permalink($aal_exclude_post_id)."'>".get_the_title($aal_exclude_post_id)."</a> 
-                            <a href='javascript:' id='".$aal_exclude_post_id."' class='aal_delete_exclude_link'><img src='".plugin_dir_url(__FILE__)."images/delete.png'/></a><br/>
+                            Post ID: <input type='text' name='aal_exclude_posts' class='all_exclude_post_item' value='".$aal_exclude_post_id."'/> <a href='".get_permalink($aal_exclude_post_id)."'>".get_the_title($aal_exclude_post_id)."</a>  -  ". $status ."                            <a href='javascript:' id='".$aal_exclude_post_id."' class='aal_delete_exclude_link'><img src='".plugin_dir_url(__FILE__)."images/delete.png'/></a><br/>
                           </span>";
-                
+					
+				}
                
                 
                 ?>
