@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.0.3
+Version: 3.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -334,6 +334,32 @@ function wpaal_actions() {
 	}
 	
 	
+	
+	if($_POST['aal_export_check']) {				
+		
+		$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
+		//$separator = $_POST['aal_import_separator'];
+		//if($separator=='tab') $separator = "\t";
+		//if(!$separator) $separator = "|";
+		$separator = "|";
+		
+		$File = 'aal_export.txt';
+header("Content-Disposition: attachment; filename=\"" . basename($File) . "\"");
+header('Content-type: text/plain');
+header("Connection: close");
+		
+foreach($myrows as $row) {
+
+	echo $row->keywords . $separator . $row->link . "\n";
+
+}
+		
+		die();
+		
+		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");	
+	}
+	
+	
 
 }  // wpaal_actions end
 
@@ -382,12 +408,12 @@ function wpaal_manage_affiliates() {
         
         	
         <ul class="tabs" id="tabs">
-                <li><a href="javascript:;" title="General Settings" onclick="jQuery('#aal_panel1').show(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').hide();document.location.hash = '#aal_panel1';">General Settings</a></li>
-                <li><a href="javascript:;" title="Exclude posts" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').show(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').hide();document.location.hash = '#aal_panel2';" >Exclude posts</a></li>
-                <li><a href="javascript:;" title="Add Affiliate Links" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').show();jQuery('#aal_panel4').hide();document.location.hash = '#aal_panel3';" >Add Affiliate Links</a></li>
-				<li><a href="javascript:;" title="Import" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').show();document.location.hash = '#aal_panel4';" >Import</a></li>
-				<!-- <li><a href="javascript:;" title="Add Affiliate Links" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').show();document.location.hash = '#aal_panel3';" >Add Affiliate Links</a></li>
-                   -->                          
+                <li><a href="javascript:;" title="General Settings" onclick="jQuery('#aal_panel1').show(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').hide();jQuery('#aal_panel5').hide();document.location.hash = '#aal_panel1';">General Settings</a></li>
+                <li><a href="javascript:;" title="Exclude posts" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').show(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').hide();jQuery('#aal_panel5').hide();document.location.hash = '#aal_panel2';" >Exclude posts</a></li>
+                <li><a href="javascript:;" title="Add Affiliate Links" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').show();jQuery('#aal_panel4').hide();jQuery('#aal_panel5').hide();document.location.hash = '#aal_panel3';" >Add Affiliate Links</a></li>
+				<li><a href="javascript:;" title="Import" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').show();jQuery('#aal_panel5').hide();document.location.hash = '#aal_panel4';" >Import</a></li>
+				<li><a href="javascript:;" title="Export" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').hide();jQuery('#aal_panel5').show();document.location.hash = '#aal_panel5';" >Export</a></li>
+                                            
         </ul>
 
         <!-- tab "panes" -->
@@ -492,6 +518,27 @@ function wpaal_manage_affiliates() {
 			</select>
 			<br />
 			<input type="submit" value="Import" /><input type="hidden" name="MAX_FILE_SIZE" value="10000000" /><input type="hidden" name="aal_import_check" value="1" />
+			</form>
+				
+				
+				
+			</div>
+			
+			
+			
+			
+			<div id="aal_panel5">
+				<br />
+				<h3>Export Links</h3>
+				<br />
+				<br />
+				Here you can export your links so you can import to another blog or to make a backup. You can import this file later using the "Import" tab.
+				<br />
+				<br />
+				
+				
+			<form name="aal_export_form" method="post" enctype="multipart/form-data" onsubmit="">
+			<input type="submit" value="Click here to export your links" /><input type="hidden" name="aal_export_check" value="1" />
 			</form>
 				
 				
