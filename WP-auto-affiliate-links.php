@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.1.2
+Version: 3.1.3
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -310,6 +310,7 @@ function wpaal_actions() {
 		
 		$separator = $_POST['aal_import_separator'];
 		if($separator=='tab') $separator = "\t";
+		if($separator=='other') $separator = $_POST['aal_import_other'];
 		if(!$separator) $separator = "|";
 		
 		
@@ -509,13 +510,15 @@ function wpaal_manage_affiliates() {
 				
 			<form name="aal_import_form" method="post" enctype="multipart/form-data" onsubmit="">
 			Upload the file here:    <input name="aal_import_file" type="file" /><br />
-			Separator: <select name="aal_import_separator">
+			Separator: <select name="aal_import_separator" onchange="if(document.aal_import_form.aal_import_separator.options[document.aal_import_form.aal_import_separator.selectedIndex].value == 'other') document.aal_import_form.aal_import_other.style.display = 'block'; else document.aal_import_form.aal_import_other.style.display = 'none';">
 			<option value="|">| ( vertical line )</option>
 			<option value="tab">Tab</option>
 			<option value=",">, ( comma )</option>
 			<option value=";">; ( semicolon )</option>
 			<option value=".">. ( dot )</option>
+			<option value="other">other ( specify below )</option>
 			</select>
+			<br /><input type="text" name="aal_import_other" value="|" style="display: none;"/>
 			<br />
 			<input type="submit" value="Import" /><input type="hidden" name="MAX_FILE_SIZE" value="10000000" /><input type="hidden" name="aal_import_check" value="1" />
 			</form>
