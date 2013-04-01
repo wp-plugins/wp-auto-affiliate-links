@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.1.3
+Version: 3.1.4
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -407,13 +407,25 @@ function wpaal_manage_affiliates() {
 	</form>
 	<br /><br /> -->
         
+
+<script type="text/javascript">
+function hideAllTabs(panelName) {
+
+	 jQuery('.aal_panes').children().hide();
+	 jQuery("div#" + panelName).show();
+	document.location.hash = '#' + panelName;
+
+
+}
+</script>
         	
         <ul class="tabs" id="tabs">
-                <li><a href="javascript:;" title="General Settings" onclick="jQuery('#aal_panel1').show(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').hide();jQuery('#aal_panel5').hide();document.location.hash = '#aal_panel1';">General Settings</a></li>
-                <li><a href="javascript:;" title="Exclude posts" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').show(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').hide();jQuery('#aal_panel5').hide();document.location.hash = '#aal_panel2';" >Exclude posts</a></li>
-                <li><a href="javascript:;" title="Add Affiliate Links" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').show();jQuery('#aal_panel4').hide();jQuery('#aal_panel5').hide();document.location.hash = '#aal_panel3';" >Add Affiliate Links</a></li>
-				<li><a href="javascript:;" title="Import" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').show();jQuery('#aal_panel5').hide();document.location.hash = '#aal_panel4';" >Import</a></li>
-				<li><a href="javascript:;" title="Export" onclick="jQuery('#aal_panel1').hide(); jQuery('#aal_panel2').hide(); jQuery('#aal_panel3').hide();jQuery('#aal_panel4').hide();jQuery('#aal_panel5').show();document.location.hash = '#aal_panel5';" >Export</a></li>
+                <li><a href="javascript:;" title="General Settings" onclick="hideAllTabs('aal_panel1'); ">General Settings</a></li>
+                <li><a href="javascript:;" title="Exclude posts" onclick="hideAllTabs('aal_panel2');" >Exclude posts</a></li>
+ 		 <li><a href="javascript:;" title="Modules" onclick="hideAllTabs('aal_panel31');" >Modules</a></li>
+                <li><a href="javascript:;" title="Add Affiliate Links" onclick="hideAllTabs('aal_panel3');" >Add Affiliate Links</a></li>
+		<li><a href="javascript:;" title="Import" onclick="hideAllTabs('aal_panel4');" >Import</a></li>
+		<li><a href="javascript:;" title="Export" onclick="hideAllTabs('aal_panel5');" >Export</a></li>
                                             
         </ul>
 
@@ -496,6 +508,13 @@ function wpaal_manage_affiliates() {
 
                     </ul>
             </div>
+
+	 <div id="aal_panel31">
+
+
+
+
+	</div>
 			
 			
 			<div id="aal_panel4">
