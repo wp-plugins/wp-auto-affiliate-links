@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.1.4
+Version: 3.2
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -511,6 +511,12 @@ function hideAllTabs(panelName) {
 
 	 <div id="aal_panel31">
 
+
+	<h3>Modules</h3>
+	<br />
+	Modules functionality to be added soon. You will be able to install modules to do different tasks. Modules are files built especially for this plugin, that can be added here. 
+
+	Meanwhile, you can check <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Wp Auto Affiliate Links PRO</a> which is full featured and have all the modules already installed. 
 
 
 
