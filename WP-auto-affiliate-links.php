@@ -4,11 +4,45 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.2
+Version: 3.2.1
 Author URI: http://autoaffiliatelinks.com
 */
 
 
+
+// Classes
+
+global $aalModules; $aalModules = array();
+$aalFiles = scandir(plugin_dir_path(__FILE__) . 'modules');
+$aalModuleFiles = array();
+foreach($aalFiles as $aalFile) { if(substr($aalFile, -4)=='.php') { $aalModuleFiles[] = $aalFile;  include(plugin_dir_path(__FILE__) . 'modules/' . $aalFile); } }
+
+
+//print_r($aalModuleFiles);
+
+
+class aalModule
+{
+    var $shortname;
+    var $nicename;
+    var $hooks = array();
+
+
+	function aalModule($shortname,$nicename) {
+		
+		$this->shortname = $shortname;
+		$this->nicename = $nicename;
+
+	}
+
+	function aalModuleHook($hook,$fname) {
+		
+		$this->hooks[$hook] = $fname;
+		
+	}
+
+
+}
 
 
 
@@ -426,11 +460,55 @@ function hideAllTabs(panelName) {
                 <li><a href="javascript:;" title="Add Affiliate Links" onclick="hideAllTabs('aal_panel3');" >Add Affiliate Links</a></li>
 		<li><a href="javascript:;" title="Import" onclick="hideAllTabs('aal_panel4');" >Import</a></li>
 		<li><a href="javascript:;" title="Export" onclick="hideAllTabs('aal_panel5');" >Export</a></li>
+		<?php global $aalModules;
+		foreach($aalModules as $aalMod) {
+		
+			?>
+				<li><a href="javascript:;" title="<?php echo $aalMod->nicename; ?>" onclick="hideAllTabs('<?php echo $aalMod->shortname; ?>Tab');" ><?php echo $aalMod->nicename; ?></a></li>
+
+
+			<?
+		
+
+		}
+
+		?>
                                             
         </ul>
 
         <!-- tab "panes" -->
         <div class="aal_panes">
+
+
+
+		<?php global $aalModules;
+		foreach($aalModules as $aalMod) {
+		
+			?>
+
+			<div id="<?php echo $aalMod->shortname; ?>Tab">
+				<br />
+                <h3><?php echo $aalMod->nicename; ?></h3>
+				<br />
+				<br />
+				<? echo call_user_func($aalMod->hooks['content']); ?>
+
+
+
+			</div>
+
+			<?
+		
+
+		}
+
+		?>
+
+
+
+
+
+
             <div id="aal_panel1">
                 <h3>General Options</h3>
                 
