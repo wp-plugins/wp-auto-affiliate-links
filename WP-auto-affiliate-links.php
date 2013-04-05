@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.2.1
+Version: 3.2.2
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -336,37 +336,7 @@ function wpaal_actions() {
 	}
 	
 	
-	if($_POST['aal_import_check']) {
-	
-		//$sasid = filter_input(INPUT_POST, 'aal_sasid', FILTER_SANITIZE_SPECIAL_CHARS);
-		//$scontent = file_get_contents($_FILES['aal_sasfeed']['tmp_name']);
-		//print_r($_FILES['aal_sasfeed']);
-		
-		$separator = $_POST['aal_import_separator'];
-		if($separator=='tab') $separator = "\t";
-		if($separator=='other') $separator = $_POST['aal_import_other'];
-		if(!$separator) $separator = "|";
-		
-		
-		$handle = fopen($_FILES['aal_import_file']['tmp_name'], "r");
-		while (($data = fgetcsv($handle, 1000, $separator)) !== FALSE) {
-		//print_r($data);
-		//$link = str_replace("YOURUSERID", $sasid, $data[4]);
-		$link = $data[1];
-		$keywords = $data[0];
-		if($link && $keywords) $wpdb->insert( $table_name, array( 'link' => $link, 'keywords' => $keywords ) );
-		}
-		fclose($handle);
-		
-		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
-		
-		// echo $scontent;
-		
-		//die();
-		
-	
-	
-	}
+
 	
 	
 	
@@ -592,6 +562,9 @@ function hideAllTabs(panelName) {
 
 	<h3>Modules</h3>
 	<br />
+	<br />
+	To add modules, copy and paste the module file into /modules/ subdirectory in wp-auto-affiliate-links plugin folder. 
+	<br /><br />
 	Modules functionality to be added soon. You will be able to install modules to do different tasks. Modules are files built especially for this plugin, that can be added here. 
 
 	Meanwhile, you can check <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Wp Auto Affiliate Links PRO</a> which is full featured and have all the modules already installed. 
