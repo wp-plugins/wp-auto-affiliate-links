@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.2.2
+Version: 3.3
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -295,7 +295,7 @@ add_action('admin_init', 'wpaal_actions');
 add_action('admin_menu', 'wpaal_create_menu');
 add_filter('the_content', 'wpaal_add_affiliate_links');
 add_action('init', 'wpaal_rewrite_rules');
-add_action('wp', 'wpaal_add_query_var');
+add_action('query_vars', 'wpaal_add_query_var');
 add_action('wp','wpaal_check_for_goto');
 add_action('wp_print_scripts', 'aal_load_css');
 add_action('wp_print_scripts', 'aal_load_js');
@@ -424,7 +424,7 @@ function hideAllTabs(panelName) {
 </script>
         	
         <ul class="tabs" id="tabs">
-                <li><a href="javascript:;" title="General Settings" onclick="hideAllTabs('aal_panel1'); ">General Settings</a></li>
+                <li><a href="javascript:;" title="General Settings" onclick="hideAllTabs('aal_panel1');  ">General Settings</a></li>
                 <li><a href="javascript:;" title="Exclude posts" onclick="hideAllTabs('aal_panel2');" >Exclude posts</a></li>
  		 <li><a href="javascript:;" title="Modules" onclick="hideAllTabs('aal_panel31');" >Modules</a></li>
                 <li><a href="javascript:;" title="Add Affiliate Links" onclick="hideAllTabs('aal_panel3');" >Add Affiliate Links</a></li>
@@ -681,7 +681,15 @@ function wpaal_add_affiliate_links($content) {
 							$strpos_fnc		=	 'stripos';
 								
 								
-							if($iscloacked=='true') $link = get_option( 'home' ) . "/goto/" . wpaal_generateSlug($key);
+							$redid = $row->id;
+							if($iscloacked=='true')  {
+								
+							global $wp_rewrite; // echo $wp_rewrite->permalink_structure;
+							if($wp_rewrite->permalink_structure) $link = get_option( 'home' ) . "/goto/" . $redid . "/" . wpaal_generateSlug($key);
+							else $link = et_option( 'home' ) . "/?goto=" . $redid;	
+								
+								
+								} //$link = get_option( 'home' ) . "/goto/" . wpaal_generateSlug($key);
 							$url = $link;
 							$name = $key;
 							
@@ -714,7 +722,7 @@ function wpaal_add_affiliate_links($content) {
 // Contribution of Jos Steenbergen
 // Rewrite engine for links
 
-function wpaal_check_for_goto() { 
+/* function wpaal_check_for_goto() { 
        global $wpdb;
        global $wp_query;
 	
@@ -762,19 +770,27 @@ function wpaal_check_for_goto() {
 
                }
        //print_r($array = $GLOBALS['wp_query']->query_vars);
-}
+} */
 
 function wpaal_rewrite_rules() {
 		add_rewrite_tag('%goto%','([^&]+)');
                 add_rewrite_rule( 'goto/?([^/]*)', 'index.php?goto=$matches[1]', 'top');
        }
-function wpaal_add_query_var($vars)  {  //print_r($vars); die();
+/* function wpaal_add_query_var($vars)  {  //print_r($vars); die();
         global $wp_query;
 
 	set_query_var('goto',$wp_query->query_vars['attachment']);
        
        return $vars;
+       } */
+       
+function wpaal_add_query_var($vars)  { 
+       $vars[] = 'goto';
+       return $vars;
        }
+       
+       
+       
 
 function wpaal_generateSlug($phrase)
 {
@@ -788,6 +804,84 @@ function wpaal_generateSlug($phrase)
 
        return $result;
 }
+
+
+function wpaal_check_for_goto() { 
+       global $wpdb;
+       global $wp_query;
+
+	   
+	   //echo $wp_query->query_vars['goto'];
+       if(isset($wp_query->query_vars['goto'])) {
+       //echo $wp_query->query_vars['goto'];
+       //echo 'having goto';
+	  // die();
+
+
+       $table_name = $wpdb->prefix . "automated_links";
+              // $myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
+
+             /*                  $patterns = array();
+
+               if(is_null($myrows)) return;
+               else foreach($myrows as $row) {
+
+                               $link = $row->link;
+							   $redid = $row->id;
+                               //$link = get_option( 'home' ) . "/goto/" . wpaal_generateSlug($row->keywords);
+                               $keywords = $row->keywords;
+
+                               if(!is_null($keywords)) {
+                                       $keys = explode(',',$keywords);
+
+                                       foreach($keys as $key) {
+
+                                               $key = trim($key);
+
+                                               if(!in_array($key, $patterns)) {
+
+                                                       //Added 3 times to cover first letter capped, and all uppercase
+                                                       $patterns[] = wpaal_generateSlug($key);
+                                                       $redirect_link[] = $link;
+                                               }
+
+                                       }
+
+
+                               }
+
+               } */
+              /* if (in_array($wp_query->query_vars['goto'], $patterns)) {
+                       // link exist so find the corresponding key
+                       //echo "Founded link: " . $redirect_link[array_search($wp_query->query_vars['goto'], $patterns)] . "/r/n";
+                       wp_redirect( $redirect_link[array_search($wp_query->query_vars['goto'], $patterns)], 301 );
+                       exit;
+               } */
+
+			
+				global $wp_rewrite;// echo $wp_rewrite->permalink_structure;
+				// echo $wp_query->query_vars['goto']; die();
+				if($wp_query->query_vars['goto'] && is_numeric($wp_query->query_vars['goto'])) { 
+
+					$rerow = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name ." WHERE id='". $wp_query->query_vars['goto'] ."'  ");
+					//print_r($rerow);
+					if($rerow[0]->link) wp_redirect( $rerow[0]->link, 302 );
+					 
+				}
+
+               //print_r($patterns);
+               //print_r($redirect_link);
+
+               //die();
+               }
+       //print_r($array = $GLOBALS['wp_query']->query_vars);
+
+
+}
+
+
+
+
 
 // Installation
 
