@@ -113,7 +113,7 @@ jQuery("#aal_changeOptions").submit(function() {
             var aal_showhome= jQuery("#aal_showhome").is(":checked");
             var aal_notimes= jQuery("#aal_notimes").val();
             var aal_target= jQuery('#aal_changeOptions input[type=radio][name=aal_target]:checked').val();
-            var aal_relation= jQuery('input[name=aal_relation]:checked', '#changeOptions').val();
+            var aal_relation= jQuery('#aal_changeOptions input[type=radio][name=aal_relation]:checked').val();
             
             //console.log(aal_target);
             
