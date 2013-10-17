@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.5.2
+Version: 3.5.3
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -491,7 +491,7 @@ function hideAllTabs(panelName) {
                 <h3>General Options</h3>
                 
                 <form name="aal_settings" id="aal_changeOptions" method="post">
-                    <b>Cloack links:</b> <input type="checkbox" name="aal_iscloacked" id="aal_iscloacked"  <?php echo $isc;?> /> (Disable this if the cloacked links are not working for you)<br /><br />
+                    <b>Cloak links:</b> <input type="checkbox" name="aal_iscloacked" id="aal_iscloacked"  <?php echo $isc;?> /> (Disable this if the cloaked links are not working for you)<br /><br />
                     
                     <b>Add links on homepage:</b> <input type="checkbox" name="showhome" id="aal_showhome" <?php echo $shse;?> /> <br /><br />
                     

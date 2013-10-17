@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 3.6.1
-Stable tag: 3.5.2
+Stable tag: 3.5.3
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -14,7 +14,7 @@ Provide an interface to add your affiliate links and associate them with keyword
 
 You can manage your affiliate links trough an administration page, under the "Settings" menu category. You have to add affiliate links, and specify one or more keywords for each. The plugin will add them when a page is viewed. Your content won't be modified in the database. 
 
-You will have options to make the links nofollow or dofollow, to open in new page or same page and to cloack links. The plugin will give you the most used 20 keywords from your content si you can easily add affiliate links to appear when they are displayed. 
+You will have options to make the links nofollow or dofollow, to open in new page or same page and to cloak links. The plugin will give you the most used 20 keywords from your content si you can easily add affiliate links to appear when they are displayed. 
 
 You have the option to limit the number of links that are added to each post or page.
 
@@ -27,7 +27,7 @@ This section describes how to install the plugin and get it working.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Go to 'Wp Auto Affiliate Links' link, under "Settings",  in your Administration Panel Menu.
 4. Add your affiliate links, along with one or more keywords. Do this for every affiliate link you want to display.
-5. Select if you want your links to be nofollow, cloacked, to open in new window, and the maximum number of lniks that are added to every article. On some environments, the cloacking of the links is impossible. If you experience problems, turn the cloacking off and it should work just fine.
+5. Select if you want your links to be nofollow, cloaked, to open in new window, and the maximum number of lniks that are added to every article. On some environments, the cloaking of the links is impossible. If you experience problems, turn the cloaking off and it should work just fine.
 6. If you don't get it how to make it work, or if something goes wrong, please consult http://autoaffiliatelinks.com for more info and use the contact form on the website to report the problem or to ask for help.
 
 == Frequently Asked Questions ==
@@ -36,9 +36,9 @@ This section describes how to install the plugin and get it working.
 
 No, the plugin only add the links when the page is rendered. The content remain intact in your database.
 
-= Cloacked links are not working, what should I do ? =
+= Cloaked links are not working, what should I do ? =
 
-Link cloacking can cause problems on some environments ( shared hosting with too much restrictions ). If you experience problems please turn cloacking off.
+Link cloaking can cause problems on some environments ( shared hosting with too much restrictions ). If you experience problems please turn cloaking off.
 
 = Do i have to change my theme to make the plugin work? =
 
@@ -67,9 +67,12 @@ If you add more links with the same keyword, only the first occurence of the key
 == Changelog ==
 
 = 3.5.2 =
+* Corrected some spelling errors
+
+= 3.5.2 =
 * Trying to fix the nofollow radio selector which semms to not working on some environments
 
-= 3.6.1 = 
+= 3.5.1 = 
 * Fixed Nofollow radio selector
 * Tested the plugin with 3.6.1 Wordpress version
 * Minor interface changes
@@ -187,7 +190,7 @@ If you add more links with the same keyword, only the first occurence of the key
 * Changed description to match the latest udpates
 
 = 2.6 =
-* Modified the cloacking system to work with the latest versions of wordpress
+* Modified the cloaking system to work with the latest versions of wordpress
 
 = 2.5.1 =
 * Fixed an error that generated a warning and in some configurations prevented the execution
@@ -209,10 +212,10 @@ If you add more links with the same keyword, only the first occurence of the key
 * Changed some function names to prevent clashes with other plugins
 
 = 2.3.1 =
-* Added option to choose if you want to show original or cloacked links. 
+* Added option to choose if you want to show original or cloaked links. 
 
 = 2.3 = 
-* Now all affiliate links are cloacked. Contribution of Jos Steenbergen
+* Now all affiliate links are cloaked. Contribution of Jos Steenbergen
 
 = 2.2.3.2 =
 * Verification, reindenting and commenting the plugin code
