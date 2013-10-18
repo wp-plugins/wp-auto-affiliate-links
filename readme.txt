@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 3.6.1
-Stable tag: 3.5.4
+Stable tag: 3.5.4.1
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -65,6 +65,9 @@ Yes. You can add more keywords in the same box, sepparated by comma. For example
 If you add more links with the same keyword, only the first occurence of the keyword will add the first link. If the same keyword appear again in the article, the second link will be added on it.
 
 == Changelog ==
+
+= 3.5.4.1 = 
+* Changed some simple javascript code into jquery ( for suggested keywords )
 
 = 3.5.4 = 
 * Added 100 more keywords to suggestion list. The list will be hidden but upon a click it will expand and the most 100 keywords will be displayed with the possibility to be added to the form.
