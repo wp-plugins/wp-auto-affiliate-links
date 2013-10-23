@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.5.4.3
+Version: 3.5.4.4
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -202,7 +202,21 @@ function aalGetLinks($myrows){
 
 //Get keyoword sugestions for Add Afiliates Link Tab
 
-function aalGetSugestions(){
+function aalGetSugestions($myrows){
+	
+		$alllinks = array();
+		foreach($myrows as $row) { 
+			$keys = explode(',',$row->keywords);
+			foreach($keys as $key) {
+			
+				$alllinks[] = trim($key);	
+				
+			}
+			
+		
+		}
+		
+		//print_r($alllinks);
     
         //Search trough your post to generate reccomend most used keywords
         $searchposts  = get_posts(array('numberposts' => 5,  'post_type'  => 'post'));
@@ -226,7 +240,7 @@ function aalGetSugestions(){
         $final=array(); $times=array();
         foreach($karray as $kws) {
 
-                if(!in_array($kws,$final)) { 
+                if(!in_array($kws,$final)) if(!in_array($kws,$alllinks)) { 
                         $final[] = $kws;
                         $times[]=1;
                 }
@@ -595,7 +609,7 @@ function hideAllTabs(panelName) {
                     </form>
                     
                     <br/>Here is a list with most used keywords in all your blog. Click on each and it will be added in the form above so you can assign a link for it.<br />
-                                <?php aalGetSugestions();?>
+                                <?php aalGetSugestions($myrows);?>
                     
                     <h3>Affiliate Links:</h3>
 
