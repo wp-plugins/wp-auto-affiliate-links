@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.5.6.1
+Version: 3.5.7
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -158,10 +158,19 @@ function aalAddLink(){
 		$aal_link = filter_input(INPUT_POST, 'aal_link', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['link'];
 		$aal_keywords = filter_input(INPUT_POST, 'aal_keywords', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['keywords'];
 		
+		$check = $wpdb->get_results( "SELECT * FROM ". $table_name ." WHERE link = '". $aal_link ."' " );		
+		
 		// Add to database 
-		$rows_affected = $wpdb->insert( $table_name, array( 'link' => $aal_link, 'keywords' => $aal_keywords ) );
+		if($check) { 
+				$wpdb->update( $table_name, array( 'keywords' => $check[0]->keywords .','. $aal_keywords), array( 'link' => $aal_link ) );
+				$aal_delete_id=$check[0]->id;
+			}
+		else {
+			$rows_affected = $wpdb->insert( $table_name, array( 'link' => $aal_link, 'keywords' => $aal_keywords ) );
+			$aal_delete_id=$wpdb->insert_id;
+		}
+        
                 
-                $aal_delete_id=$wpdb->insert_id;
                 
                 $aal_json=array('aal_delete_id'=>$aal_delete_id);
                 
@@ -856,6 +865,56 @@ function wpaal_check_for_goto() {
 
 }
 
+
+function aal_admin_notice() {
+	
+	$aal_notice_dismissed = get_option('aal_option_dismissed'); 
+	if(!$aal_notice_dismissed)
+	{
+    ?>
+    <div id="aal_notice_div" class="updated">
+        <p align="center"><?php _e( '<a href="http://autoaffiliatelinks.com/our-products/wp-auto-affiliate-links-pro/">Wo Auto Affiliate Links PRO 2.0</a> has been released. Affiliate Links can be automatically extracted from Amazon, Clickbank, Shareasale, commission junction and to be automatically displayed in your content. Check it out <a href="http://autoaffiliatelinks.com/our-products/wp-auto-affiliate-links-pro/"> here</a>. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a>', 'wp-auto-affiliate-links' ); ?></p>
+    </div>
+    
+<script type="text/javascript">
+	function aalDismiss() {
+
+
+        var data = {action: 'aal_dismiss_notice'};
+        
+            jQuery.ajax({
+                    type: "POST",
+                    url: ajax_script.ajaxurl,
+                    data: data,
+                    cache: false,
+                    success: function(){
+                    jQuery("#aal_notice_div").slideUp('slow', function() {jQuery("#aal_notice_div").remove();});
+                                        }
+                });
+        	
+		
+		
+	}
+
+</script>    
+    
+    
+    <?php
+	}
+	
+}
+
+
+function aalDismissNotice() {
+
+		add_option('aal_option_dismissed',true);
+	
+	
+}
+
+
+add_action( 'admin_notices', 'aal_admin_notice' );
+add_action('wp_ajax_aal_dismiss_notice', 'aalDismissNotice');
 
 
 
