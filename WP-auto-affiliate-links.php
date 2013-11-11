@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.5.7
+Version: 3.6
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -386,8 +386,8 @@ add_action('wp_ajax_aal_update_exclude_posts', 'aalUpdateExcludePosts');
 // Add Wp Auto Affiliate Links to Wordpress Admnistration panel menu
 function wpaal_create_menu() {
 
-add_menu_page( 'Auto Affiliate Links', 'Auto Affiliate', 'publish_pages', 'aal_topmenu', 'wpaal_manage_affiliates', $icon_url, $position );	
-add_submenu_page( 'aal_topmenu', 'Wp Auto Affiliate Links', 'Wp Auto Affiliate Links', 'publish_pages', $menu_slug, 'wpaal_manage_affiliates' );
+add_menu_page( 'Auto Affiliate Links', 'Wp Auto Affiliate Links', 'publish_pages', 'aal_topmenu', 'wpaal_manage_affiliates', $icon_url, $position );	
+add_submenu_page( 'aal_topmenu', 'General Settings', 'General Settings', 'publish_pages', 'aal_general_settings', 'wpaal_general_settings' );
 
 }
 
@@ -447,14 +447,11 @@ foreach($myrows as $row) {
 }  // wpaal_actions end
 
 
-//Function that will render the administration page
-function wpaal_manage_affiliates() {
+function wpaal_general_settings() {
 	global $wpdb;
-	$table_name = $wpdb->prefix . "automated_links";
+	$table_name = $wpdb->prefix . "automated_links";	
+	
 
-
-	//Load the keywords and options
-	$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
         
         $iscloacked = get_option('aal_iscloacked');
 	if($iscloacked=='true') $isc = 'checked'; else $isc = '';
@@ -469,7 +466,42 @@ function wpaal_manage_affiliates() {
 	
         
         $relationo = get_option('aal_relation');
-	if($relationo=="nofollow") $rsc1 = 'checked'; else $rsc2 = 'checked';
+	if($relationo=="nofollow") $rsc1 = 'checked'; else $rsc2 = 'checked';	
+	
+	?>
+	
+                <h1>General Settings</h1>
+                <div>
+                <form name="aal_settings" id="aal_changeOptions" method="post">
+                    <b>Cloak links:</b> <input type="checkbox" name="aal_iscloacked" id="aal_iscloacked"  <?php echo $isc;?> /> (Disable this if the cloaked links are not working for you)<br /><br />
+                    
+                    <b>Add links on homepage:</b> <input type="checkbox" name="showhome" id="aal_showhome" <?php echo $shse;?> /> <br /><br />
+                    
+                    <b>Target:</b> <input type="radio" name="aal_target" value="_blank" <?php echo $tsc1;?> /> New window <input type="radio" name="aal_target" value="_self" <?php echo $tsc2 ;?>/> Same Window <br /><br />
+                    
+                    <b>How many times every keyword should appear on a post ( max ):</b> <input type="text" name="notimes" id="aal_notimes" value="<?php echo $notimes ;?>" size="1" /><br /><br />
+                    <?php //echo $relationo; ?>
+                    <b>Relation:</b> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1; ?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br /><br />
+                    <input type="submit" value="Save" />
+                </form>
+                <span class="aal_add_link_status"> </span>	
+				</div>
+	
+	
+	<?php
+}
+
+
+
+
+//Function that will render the administration page
+function wpaal_manage_affiliates() {
+	global $wpdb;
+	$table_name = $wpdb->prefix . "automated_links";
+
+
+	//Load the keywords and options
+	$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
 	
         
         $excludeposts = get_option('aal_exclude');
@@ -504,7 +536,7 @@ function hideAllTabs(panelName) {
         	
         <ul class="aal_tabs" id="aal_tabs">
    <li><a href="javascript:;" title="Add Affiliate Links" onclick="hideAllTabs('aal_panel3');" >Add Affiliate Links</a></li>
-                <li><a href="javascript:;" title="General Settings" onclick="hideAllTabs('aal_panel1');  ">General Settings</a></li>
+               <!-- <li><a href="javascript:;" title="General Settings" onclick="hideAllTabs('aal_panel1');  ">General Settings</a></li> -->
                 <li><a href="javascript:;" title="Exclude posts" onclick="hideAllTabs('aal_panel2');" >Exclude posts</a></li>
  		 <li><a href="javascript:;" title="Modules" onclick="hideAllTabs('aal_panel31');" >Modules</a></li>
                 
@@ -560,21 +592,7 @@ function hideAllTabs(panelName) {
 
 
             <div id="aal_panel1">
-                <h3>General Options</h3>
-                
-                <form name="aal_settings" id="aal_changeOptions" method="post">
-                    <b>Cloak links:</b> <input type="checkbox" name="aal_iscloacked" id="aal_iscloacked"  <?php echo $isc;?> /> (Disable this if the cloaked links are not working for you)<br /><br />
-                    
-                    <b>Add links on homepage:</b> <input type="checkbox" name="showhome" id="aal_showhome" <?php echo $shse;?> /> <br /><br />
-                    
-                    <b>Target:</b> <input type="radio" name="aal_target" value="_blank" <?php echo $tsc1;?> /> New window <input type="radio" name="aal_target" value="_self" <?php echo $tsc2 ;?>/> Same Window <br /><br />
-                    
-                    <b>How many times every keyword should appear on a post ( max ):</b> <input type="text" name="notimes" id="aal_notimes" value="<?php echo $notimes ;?>" size="1" /><br /><br />
-                    <?php //echo $relationo; ?>
-                    <b>Relation:</b> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1; ?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br /><br />
-                    <input type="submit" value="Save" />
-                </form>
-                <span class="aal_add_link_status"> </span>
+
             </div>
             
             <div id="aal_panel2">
