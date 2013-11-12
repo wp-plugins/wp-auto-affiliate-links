@@ -63,7 +63,7 @@ global $wpdb;
 		}
 		fclose($handle);
 		
-		wp_redirect("options-general.php?page=WP-auto-affiliate-links.php");
+		wp_redirect("admin.php?page=aal_topmenu#aal_panel4");
 		
 		// echo $scontent;
 		
