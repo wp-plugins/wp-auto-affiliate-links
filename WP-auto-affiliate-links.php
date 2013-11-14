@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.6.0.2
+Version: 3.6.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -470,23 +470,31 @@ function wpaal_general_settings() {
 	
 	?>
 	
-                <h1>General Settings</h1>
-                <div>
+	
+<div class="wrap">  
+        <div class="icon32" id="icon-options-general"></div>  
+        
+        
+                <h2>General Settings</h2>
+                <div class="aal_general_settings">
                 <form name="aal_settings" id="aal_changeOptions" method="post">
-                    <b>Cloak links:</b> <input type="checkbox" name="aal_iscloacked" id="aal_iscloacked"  <?php echo $isc;?> /> (Disable this if the cloaked links are not working for you)<br /><br />
+                    <span class="aal_label">Cloak links:</span> <input type="checkbox" name="aal_iscloacked" id="aal_iscloacked"  <?php echo $isc;?> /> (Disable this if the cloaked links are not working for you)<br /><br />
                     
-                    <b>Add links on homepage:</b> <input type="checkbox" name="showhome" id="aal_showhome" <?php echo $shse;?> /> <br /><br />
+                    <span class="aal_label">Add links on homepage:</span> <input type="checkbox" name="showhome" id="aal_showhome" <?php echo $shse;?> /> <br /><br />
                     
-                    <b>Target:</b> <input type="radio" name="aal_target" value="_blank" <?php echo $tsc1;?> /> New window <input type="radio" name="aal_target" value="_self" <?php echo $tsc2 ;?>/> Same Window <br /><br />
+                    <span class="aal_label">Target:</span> <input type="radio" name="aal_target" value="_blank" <?php echo $tsc1;?> /> New window <input type="radio" name="aal_target" value="_self" <?php echo $tsc2 ;?>/> Same Window <br /><br />
                     
-                    <b>How many times every keyword should appear on a post ( max ):</b> <input type="text" name="notimes" id="aal_notimes" value="<?php echo $notimes ;?>" size="1" /><br /><br />
+                    <span class="aal_label">How many times every keyword should appear on a post ( max ):</span> <input type="text" name="notimes" id="aal_notimes" value="<?php echo $notimes ;?>" size="1" /><br /><br />
                     <?php //echo $relationo; ?>
-                    <b>Relation:</b> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1; ?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br /><br />
-                    <input type="submit" value="Save" />
+                    <span class="aal_label">Relation:</span> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1; ?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br /><br />
+                   
+                   
+                   <p class="submit"> <input type="submit" class="button-primary"  value="Save Changes" /> </p>
                 </form>
                 <span class="aal_add_link_status"> </span>	
 				</div>
 	
+	</div>
 	
 	<?php
 }
