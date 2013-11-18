@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.6.2.1
+Version: 3.6.2.2
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -74,111 +74,6 @@ function aal_load_js() {
         
 }
 
-//Delete link button (called by ajax)
-function aalDeleteLink(){
-    
-            if(isset($_POST['id'])){
-                global $wpdb;
-                $table_name = $wpdb->prefix . "automated_links";
-                
-                //Security check and input sanitize
-		$id = intval(filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS)); // $_GET['id'];
-		
-		//Add to database and redirect to the plugin default page
-		$wpdb->query("DELETE FROM ". $table_name ." WHERE id = '". $id ."' LIMIT 1");
-                
-                die();
-            }
-}
-
-//Change General setings through ajax 
-function aalChangeOptions(){	
-		//Input check
-		$aal_showhome = filter_input(INPUT_POST, 'aal_showhome', FILTER_SANITIZE_SPECIAL_CHARS);
-		$aal_notimes = filter_input(INPUT_POST, 'aal_notimes', FILTER_SANITIZE_SPECIAL_CHARS);
-		$aal_exclude = filter_input(INPUT_POST, 'aal_exclude', FILTER_SANITIZE_SPECIAL_CHARS);
-		$aal_iscloacked = filter_input(INPUT_POST, 'aal_iscloacked', FILTER_SANITIZE_SPECIAL_CHARS);
-		$aal_targeto = filter_input(INPUT_POST, 'aal_target', FILTER_SANITIZE_SPECIAL_CHARS);
-		$aal_relationo = filter_input(INPUT_POST, 'aal_relation', FILTER_SANITIZE_SPECIAL_CHARS);
-		
-		//Delete the settings and re-add them		
-                delete_option('aal_iscloacked'); add_option( 'aal_iscloacked', $aal_iscloacked);		
-		delete_option('aal_showhome'); add_option( 'aal_showhome', $aal_showhome);		
-		delete_option('aal_notimes'); add_option( 'aal_notimes', $aal_notimes);				
-		delete_option('aal_exclude'); add_option( 'aal_exclude', $aal_exclude);		
-		delete_option('aal_target'); add_option( 'aal_target', $aal_targeto);
-		delete_option('aal_relation'); add_option( 'aal_relation', $aal_relationo);
-                
-           die();
-}
-
-function aalUpdateExcludePosts(){
-            
-    //$update_exclude_posts= filter_input(INPUT_POST, 'aal_exclude_posts', FILTER_SANITIZE_SPECIAL_CHARS);
-    $update_exclude_posts=  $_POST['aal_exclude_posts'];
-    $update_exclude_posts=  implode(',', $update_exclude_posts);
-    $update_exclude_posts=mysql_real_escape_string(htmlentities($update_exclude_posts));
-    delete_option('aal_exclude');add_option( 'aal_exclude', $update_exclude_posts);
-
-    
-    die();
-}
-
-function aalAddExcludePost(){
-            
-                $aal_exclude_id= filter_input(INPUT_POST, 'aal_post', FILTER_SANITIZE_SPECIAL_CHARS);
-                $aal_posts =get_option('aal_exclude');
-                
-                $post = get_post($aal_exclude_id);
-                $data['post_title'] = $post->post_title;
-                if(!$post->ID) {
-                die('nopost');
-					}
-               
-                
-                if($aal_posts=='')$aal_exclude=$aal_exclude_id;
-                    else $aal_exclude=$aal_posts.",".$aal_exclude_id;
-                    
-                 
-                delete_option('aal_exclude');add_option( 'aal_exclude', $aal_exclude);
-                echo " <a href='".get_permalink($post->ID)."'>".get_the_title($post->ID)."</a>  -  ". get_post_status($post->ID) ."                            ";
-                
-                 
-                die();
-}
-
-
-//Add link form (called by ajax)
-function aalAddLink(){
-    
-            	global $wpdb;
-                $table_name = $wpdb->prefix . "automated_links";
-     	
-		// Security check and sanitize	
-		$aal_link = filter_input(INPUT_POST, 'aal_link', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['link'];
-		$aal_keywords = filter_input(INPUT_POST, 'aal_keywords', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['keywords'];
-		
-		$check = $wpdb->get_results( "SELECT * FROM ". $table_name ." WHERE link = '". $aal_link ."' " );		
-		
-		// Add to database 
-		if($check) { 
-				$wpdb->update( $table_name, array( 'keywords' => $check[0]->keywords .','. $aal_keywords), array( 'link' => $aal_link ) );
-				$aal_delete_id=$check[0]->id;
-			}
-		else {
-			$rows_affected = $wpdb->insert( $table_name, array( 'link' => $aal_link, 'keywords' => $aal_keywords ) );
-			$aal_delete_id=$wpdb->insert_id;
-		}
-        
-                
-                
-                $aal_json=array('aal_delete_id'=>$aal_delete_id);
-                
-                echo json_encode($aal_json);
-                
-                die();
-}
-
 //Get list of link showed on Add Affiliate Links tab
 
 function aalGetLinks($myrows){
@@ -209,137 +104,14 @@ function aalGetLinks($myrows){
                           <?php } 
 }
 
-//Get keyoword sugestions for Add Afiliates Link Tab
-
-function aalGetSugestions($myrows){
-	
-		$alllinks = array();
-		foreach($myrows as $row) { 
-			$keys = explode(',',$row->keywords);
-			foreach($keys as $key) {
-			
-				$alllinks[] = trim($key);	
-				
-			}
-			
-		
-		}
-		
-		//print_r($alllinks);
-    
-        //Search trough your post to generate reccomend most used keywords
-        $searchposts  = get_posts(array('numberposts' => 5,  'post_type'  => 'post'));
-        foreach($searchposts as $spost) {
-                $wholestring .=  ' '. $spost->post_content;
-        }
-
-        $wholestring = strip_tags($wholestring);
-        $wholestring = ereg_replace("[^A-Za-z0-9]", " ", $wholestring );
-
-        //Replace common words
-			
-        $wholestring = aal_removecommonwords($wholestring);
-
-        //Turning the string into an array
-        $karray = explode(" ",strtolower($wholestring));
-
-        //Coountin how many times each keyword appear
-        $final=array(); $times=array();
-        foreach($karray as $kws) {
-
-                if(!in_array($kws,$final)) if(!in_array($kws,$alllinks)) { 
-                        $final[] = $kws;
-                        $times[]=1;
-                }
-                else{
-                        foreach($final as $in => $test) {
-                                if($test==$kws) $times[$in]++;
-                        }
-                }
-
-        }	
-
-        //Sorting the array
-        $length = count($final);
-        $sw=1;
-        while($sw!=0) {
-                $sw=0;
-                for($i=0;$i<$length-1;$i++) {
-                        if($times[$i]<$times[$i+1]) {
-                                $aux = $final[$i];
-                                $final[$i] = $final[$i+1];
-                                $final[$i+1] = $aux;
-                                $aux = $times[$i];
-                                $times[$i] = $times[$i+1];
-                                $times[$i+1] = $aux;
-                                $sw=1;
-
-                        }
-                }
-        }
-		$extended = array_slice($final, 0, 100);
-        //Taking only the most used 20 keywords and displaying them
-        $final = array_slice($final, 0, 19);
-       /*  foreach($final as $fin) {
-                if($fin!='' && $fin!=' ' && $fin!= '   ') {
-                        echo '<a href="javascript:;" onclick="document.getElementById(\'aal_formkeywords\').value=\''. $fin .'\'">'. $fin .'</a>&nbsp;';
-                }
-
-        } */
-        echo '   <a href="javascript:;" id="aal_moresug" >Show suggestions >></a>
-        <div id="aal_extended" style="padding: 20px;">';
-        	
-         foreach($extended as $fin) {
-                if($fin!='' && $fin!=' ' && $fin!= '   ') {
-                        echo $fin .'&nbsp;&nbsp;&nbsp;<span><a class="aal_sugkey" href="javascript:;"  title="'. $fin .'">Add >> </a></span><br />';
-                }
-                
-             }       
-        	
-        
-        echo '
-        </div>
-        
-<script type="text/javascript">
-
-
-jQuery(".aal_sugkey").click(function() { 
- 		if(jQuery("#aal_formkeywords").val())  {
- 				jQuery("#aal_formkeywords").val(jQuery("#aal_formkeywords").val() + ", " + jQuery(this).attr("title"));
- 			}
- 			else { 
- 				jQuery("#aal_formkeywords").val(jQuery(this).attr("title"));
- 		}
- 		jQuery(this).hide();
-});
-
-
-jQuery("#aal_moresug").click(function() {
- 		jQuery("#aal_extended").toggle();
-});
-
-
-</script>        
-        
-        
-        
-        ';        
-        
-        
-        
-        
-}
-
-
-
-
-
-
 
 
 include(plugin_dir_path(__FILE__) . 'aal_install.php');
 include(plugin_dir_path(__FILE__) . 'aal_cloaking.php');
 include(plugin_dir_path(__FILE__) . 'aal_functions.php');
+include(plugin_dir_path(__FILE__) . 'aal_ajax.php');
+include(plugin_dir_path(__FILE__) . 'aal_engine.php');
+include(plugin_dir_path(__FILE__) . 'aal_settings.php');
 
 add_action('admin_init', 'wpaal_actions');
 add_action('admin_menu', 'wpaal_create_menu');
@@ -425,57 +197,7 @@ foreach($myrows as $row) {
 }  // wpaal_actions end
 
 
-function wpaal_general_settings() {
-	global $wpdb;
-	$table_name = $wpdb->prefix . "automated_links";	
-	
 
-        
-        $iscloacked = get_option('aal_iscloacked');
-	if($iscloacked=='true') $isc = 'checked'; else $isc = '';
-        
-	$showhome = get_option('aal_showhome');
-        if($showhome=='true') $shse = 'checked'; else $shsel = '';
-        
-	$notimes = get_option('aal_notimes');
-        
-	$targeto = get_option('aal_target');
-	if($targeto=="_blank") $tsc1 = 'checked'; else $tsc2 = 'checked';
-	
-        
-        $relationo = get_option('aal_relation');
-	if($relationo=="nofollow") $rsc1 = 'checked'; else $rsc2 = 'checked';	
-	
-	?>
-	
-	
-<div class="wrap">  
-        <div class="icon32" id="icon-options-general"></div>  
-        
-        
-                <h2>General Settings</h2>
-                <div class="aal_general_settings">
-                <form name="aal_settings" id="aal_changeOptions" method="post">
-                    <span class="aal_label">Cloak links:</span> <input type="checkbox" name="aal_iscloacked" id="aal_iscloacked"  <?php echo $isc;?> /> (Disable this if the cloaked links are not working for you)<br /><br />
-                    
-                    <span class="aal_label">Add links on homepage:</span> <input type="checkbox" name="showhome" id="aal_showhome" <?php echo $shse;?> /> <br /><br />
-                    
-                    <span class="aal_label">Target:</span> <input type="radio" name="aal_target" value="_blank" <?php echo $tsc1;?> /> New window <input type="radio" name="aal_target" value="_self" <?php echo $tsc2 ;?>/> Same Window <br /><br />
-                    
-                    <span class="aal_label">How many times every keyword should appear on a post ( max ):</span> <input type="text" name="notimes" id="aal_notimes" value="<?php echo $notimes ;?>" size="1" /><br /><br />
-                    <?php //echo $relationo; ?>
-                    <span class="aal_label">Relation:</span> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1; ?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br /><br />
-                   
-                   
-                   <p class="submit"> <input type="submit" class="button-primary"  value="Save Changes" /> </p>
-                </form>
-                <span class="aal_add_link_status"> </span>	
-				</div>
-	
-	</div>
-	
-	<?php
-}
 
 
 
@@ -721,98 +443,7 @@ function hideAllTabs(panelName) {
 
  <?php  }  // manage_affliates end
 
-// The function that will actually add links when the post content is rendered
-function wpaal_add_affiliate_links($content) {
-		global $wpdb;
-		
-		$timecounter = microtime(true);
-	//	echo $timecounter . "<br/>";
-		
-		//Getting the keywords and options
-		$showhome = get_option('aal_showhome');
-		$notimes = get_option('aal_notimes'); if(!$notimes) $notimes = -1;
-		$aal_exclude = get_option('aal_exclude');
-		$iscloacked = get_option('aal_iscloacked');
-		//$iscloacked = 0;
-		
-		$targeto = get_option('aal_target');
-		$relationo = get_option('aal_relation');
-		$excludearray = explode(',',$aal_exclude);
-		$table_name = $wpdb->prefix . "automated_links";
-		$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
-		
-		if($relationo=='nofollow') $relo = ' rel="nofollow" ';
-		else $relo = '';
 
-		$patterns = array();
-
-		//If no keywords are set, exit the function
-		if(is_null($myrows)) return $content;
-		
-		else foreach($myrows as $row) {
-				
-				$link = $row->link;
-				$keywords = $row->keywords;
-
-				if(!is_null($keywords)) {
-					$keys = explode(',',$keywords);
-
-					foreach($keys as $key) {
-		
-						$key = trim($key);
- 						if($key) if(!in_array('/'. $key .'/', $patterns)) { 
-
-							//regular expression setup
-							$reg_post		=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))($name)/imsU';	
-							$reg			=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))\b($name)\b/imsU';
-							$strpos_fnc		=	 'stripos';
-								
-								
-							$redid = $row->id;
-							if($iscloacked=='true')  {
-								
-							global $wp_rewrite; // echo $wp_rewrite->permalink_structure;
-							if($wp_rewrite->permalink_structure) $link = get_option( 'home' ) . "/goto/" . $redid . "/" . wpaal_generateSlug($key);
-							else $link = get_option( 'home' ) . "/?goto=" . $redid;	
-								
-								
-								} //$link = get_option( 'home' ) . "/goto/" . wpaal_generateSlug($key);
-							$url = $link;
-							$name = $key;
-							
-							
-							$replace[] = "<a title=\"$1\" class=\"aal\" target=\"". $targeto ."\" ". $relo ." href=\"$url\">$1</a>";
-							$regexp[] = str_replace('$name', $name, $reg);	
-
-
-						}
-					}
-				}
-		}
-		
-		$timecounter = microtime(true);
-		//echo $timecounter . "<br/>";
-
-		global $post;
-
-		//Check if the post is set for exclusion and do nothing
-		if(in_array($post->ID, $excludearray)) { }
-		else {
-			//Check to see if it is the homepage
-			if(is_array($regexp)) { if($_SERVER['REQUEST_URI']=='/' || $_SERVER['REQUEST_URI']=='/index.php') $ishome = 1; else $ishome=0;
-			
-			if(!$ishome) $content = preg_replace($regexp, $replace, $content,$notimes);	
-				else if($showhome=='true') if($regexp[0]) $content = preg_replace($regexp, $replace, $content,$notimes);	 }
-		}
-		
-		
-		$timecounter = microtime(true);
-		//echo $timecounter . "<br/>";		
-						
-		return $content;
-
-
-}  // add_affiliate_links end
 
 
 
