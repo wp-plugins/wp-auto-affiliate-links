@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.6.2.2
+Version: 3.6.2.3
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -112,6 +112,7 @@ include(plugin_dir_path(__FILE__) . 'aal_functions.php');
 include(plugin_dir_path(__FILE__) . 'aal_ajax.php');
 include(plugin_dir_path(__FILE__) . 'aal_engine.php');
 include(plugin_dir_path(__FILE__) . 'aal_settings.php');
+include(plugin_dir_path(__FILE__) . 'aal_exclude.php');
 
 add_action('admin_init', 'wpaal_actions');
 add_action('admin_menu', 'wpaal_create_menu');
@@ -137,6 +138,7 @@ add_action('wp_ajax_aal_update_exclude_posts', 'aalUpdateExcludePosts');
 function wpaal_create_menu() {
 
 add_menu_page( 'Auto Affiliate Links', 'Wp Auto Affiliate Links', 'publish_pages', 'aal_topmenu', 'wpaal_manage_affiliates', $icon_url, $position );	
+add_submenu_page( 'aal_topmenu', 'Exclude Posts', 'Exclude Posts', 'publish_pages', 'aal_exclude_posts', 'wpaal_exclude_posts' );
 add_submenu_page( 'aal_topmenu', 'General Settings', 'General Settings', 'publish_pages', 'aal_general_settings', 'wpaal_general_settings' );
 
 }
@@ -244,8 +246,9 @@ function hideAllTabs(panelName) {
         	
         <ul class="aal_tabs" id="aal_tabs">
    <li><a href="javascript:;" title="Add Affiliate Links" onclick="hideAllTabs('aal_panel3');" >Add Affiliate Links</a></li>
-               <!-- <li><a href="javascript:;" title="General Settings" onclick="hideAllTabs('aal_panel1');  ">General Settings</a></li> -->
+               <!-- <li><a href="javascript:;" title="General Settings" onclick="hideAllTabs('aal_panel1');  ">General Settings</a></li>
                 <li><a href="javascript:;" title="Exclude posts" onclick="hideAllTabs('aal_panel2');" >Exclude posts</a></li>
+                 -->
  		 <li><a href="javascript:;" title="Modules" onclick="hideAllTabs('aal_panel31');" >Modules</a></li>
                 
 		<li><a href="javascript:;" title="Import" onclick="hideAllTabs('aal_panel4');" >Import</a></li>
@@ -305,37 +308,7 @@ function hideAllTabs(panelName) {
             
             <div id="aal_panel2">
                 
-                <h3>Exclude posts</h3>
-                <form name="aal_add_exclude_posts_form" id="aal_add_exclude_posts_form" method="post">
-                    <b>Enter post ID </b>:
-                    <input type="text" name="aal_exclude_post_id" id="aal_add_exclude_post_id"  size="10" />
-                    <input type="submit" value="Exclude Post"/>
-                </form>
-                
-                <p>Excluded Posts ID's</p>
-                <form class="aal_exclude_posts">
-                <?php 
-                $aal_exclude_posts=get_option('aal_exclude');
-                $aal_exclude_posts_array=explode(',', $aal_exclude_posts);
-                
-                foreach ($aal_exclude_posts_array as $aal_exclude_post_id)
-                  if($aal_exclude_post_id!='') { 
-						$exclude_title = get_the_title($aal_exclude_post_id);
-						if(!$exclude_title) $status = 'post with the given id does not exist';
-							else $status = get_post_status($aal_exclude_post_id);
-						
-				  
-                    echo "<span>
-                            Post ID: <input type='text' name='aal_exclude_posts' class='all_exclude_post_item' value='".$aal_exclude_post_id."'/> <a href='".get_permalink($aal_exclude_post_id)."'>".get_the_title($aal_exclude_post_id)."</a>  -  ". $status ."                            <a href='javascript:' id='".$aal_exclude_post_id."' class='aal_delete_exclude_link'><img src='".plugin_dir_url(__FILE__)."images/delete.png'/></a><br/>
-                          </span>";
-					
-				}
-               
-                
-                ?>
-                </form>
-                
-                <span class="aal_exclude_status"> </span>
+           
             </div>
             
             <div id="aal_panel3">
