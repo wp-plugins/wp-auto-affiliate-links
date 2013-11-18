@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.6.1
+Version: 3.6.2
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -332,36 +332,15 @@ jQuery("#aal_moresug").click(function() {
         
 }
 
-//Installation of plugin
-function aal_install() {
-	global $wpdb; 
-	$table_name = $wpdb->prefix . "automated_links";
-	
-
-	//if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
-
-	$sql = "CREATE TABLE " . $table_name . " (
-	  id mediumint(9) NOT NULL AUTO_INCREMENT,
-	  link text NOT NULL,
-	  keywords text,
-	  meta text,
-	  medium varchar(255),
-	  grup int(5),
-	  grup_desc varchar(255),
-	  UNIQUE KEY id (id)
-	);";
-    
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-        dbDelta($sql);
-	
-}
 
 
 
 
 
 
-//require "aal_functions.php";
+
+include(plugin_dir_path(__FILE__) . 'aal_install.php');
+include(plugin_dir_path(__FILE__) . 'aal_cloaking.php');
 
 add_action('admin_init', 'wpaal_actions');
 add_action('admin_menu', 'wpaal_create_menu');
@@ -747,6 +726,9 @@ function hideAllTabs(panelName) {
 function wpaal_add_affiliate_links($content) {
 		global $wpdb;
 		
+		$timecounter = microtime(true);
+		echo $timecounter . "<br/>";
+		
 		//Getting the keywords and options
 		$showhome = get_option('aal_showhome');
 		$notimes = get_option('aal_notimes'); if(!$notimes) $notimes = -1;
@@ -808,6 +790,9 @@ function wpaal_add_affiliate_links($content) {
 					}
 				}
 		}
+		
+		$timecounter = microtime(true);
+		echo $timecounter . "<br/>";
 
 		global $post;
 
@@ -819,134 +804,17 @@ function wpaal_add_affiliate_links($content) {
 			
 			if(!$ishome) $content = preg_replace($regexp, $replace, $content,$notimes);	
 				else if($showhome=='true') if($regexp[0]) $content = preg_replace($regexp, $replace, $content,$notimes);	 }
-		}				
+		}
+		
+		
+		$timecounter = microtime(true);
+		echo $timecounter . "<br/>";		
+						
 		return $content;
 
 
 }  // add_affiliate_links end
 
-// Contribution of Jos Steenbergen
-// Rewrite engine for links
 
-function wpaal_rewrite_rules() {
-		add_rewrite_tag('%goto%','([^&]+)');
-                add_rewrite_rule( 'goto/?([^/]*)', 'index.php?goto=$matches[1]', 'top');
-       }
-       
-function wpaal_add_query_var($vars)  { 
-       $vars[] = 'goto';
-       return $vars;
-       }
-       
-       
-       
-
-function wpaal_generateSlug($phrase)
-{
-       $maxLength = 45;
-       $result = strtolower($phrase);
-
-       $result = preg_replace("/[^a-z0-9\s-]/", "", $result);
-       $result = trim(preg_replace("/[\s-]+/", " ", $result));
-       $result = trim(substr($result, 0, $maxLength));
-       $result = preg_replace("/\s/", "-", $result);
-
-       return $result;
-}
-
-
-function wpaal_check_for_goto() { 
-       global $wpdb;
-       global $wp_query;
-
-	   
-	   //echo $wp_query->query_vars['goto'];
-       if(isset($wp_query->query_vars['goto'])) {
-       //echo $wp_query->query_vars['goto'];
-       //echo 'having goto';
-	  // die();
-
-
-       $table_name = $wpdb->prefix . "automated_links";
-              // $myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
-
- 			
-				global $wp_rewrite;// echo $wp_rewrite->permalink_structure;
-				// echo $wp_query->query_vars['goto']; die();
-				if($wp_query->query_vars['goto'] && is_numeric($wp_query->query_vars['goto'])) { 
-
-					$rerow = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name ." WHERE id='". $wp_query->query_vars['goto'] ."'  ");
-					//print_r($rerow);
-					if($rerow[0]->link) wp_redirect( $rerow[0]->link, 302 );
-					 
-				}
-
-               //print_r($patterns);
-               //print_r($redirect_link);
-
-               //die();
-               }
-       //print_r($array = $GLOBALS['wp_query']->query_vars);
-
-
-}
-
-
-function aal_admin_notice() {
-	
-	$aal_notice_dismissed = get_option('aal_option_dismissed'); 
-	if(!$aal_notice_dismissed)
-	{
-    ?>
-    <div id="aal_notice_div" class="updated">
-        <p align="center"><?php _e( '<a href="http://autoaffiliatelinks.com/our-products/wp-auto-affiliate-links-pro/">Wo Auto Affiliate Links PRO 2.0</a> has been released. Affiliate Links can be automatically extracted from Amazon, Clickbank, Shareasale, commission junction and to be automatically displayed in your content. Check it out <a href="http://autoaffiliatelinks.com/our-products/wp-auto-affiliate-links-pro/"> here</a>. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a>', 'wp-auto-affiliate-links' ); ?></p>
-    </div>
-    
-<script type="text/javascript">
-	function aalDismiss() {
-
-
-        var data = {action: 'aal_dismiss_notice'};
-        
-            jQuery.ajax({
-                    type: "POST",
-                    url: ajax_script.ajaxurl,
-                    data: data,
-                    cache: false,
-                    success: function(){
-                    jQuery("#aal_notice_div").slideUp('slow', function() {jQuery("#aal_notice_div").remove();});
-                                        }
-                });
-        	
-		
-		
-	}
-
-</script>    
-    
-    
-    <?php
-	}
-	
-}
-
-
-function aalDismissNotice() {
-
-		add_option('aal_option_dismissed',true);
-	
-	
-}
-
-
-add_action( 'admin_notices', 'aal_admin_notice' );
-add_action('wp_ajax_aal_dismiss_notice', 'aalDismissNotice');
-
-
-
-
-// Installation
-
-register_activation_hook(__FILE__,'aal_install');
 
 ?>
