@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.6.2.5
+Version: 3.6.2.6
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -229,7 +229,7 @@ function hideAllTabs(panelName) {
 				<li><a href="javascript:;" title="<?php echo $aalMod->nicename; ?>" onclick="hideAllTabs('<?php echo $aalMod->shortname; ?>Tab');" ><?php echo $aalMod->nicename; ?></a></li>
 
 
-			<?
+			<?php
 		
 
 		}
@@ -253,13 +253,13 @@ function hideAllTabs(panelName) {
                 <h3><?php echo $aalMod->nicename; ?></h3>
 				<br />
 				<br />
-				<? echo call_user_func($aalMod->hooks['content']); ?>
+				<?php echo call_user_func($aalMod->hooks['content']); ?>
 
 
 
 			</div>
 
-			<?
+			<?php
 		
 
 		}

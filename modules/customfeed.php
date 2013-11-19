@@ -29,7 +29,7 @@ function aalCustomFeedDisplay() {
 			<input type="submit" value="Import" /><input type="hidden" name="MAX_FILE_SIZE" value="10000000" /><input type="hidden" name="aal_import_check" value="1" />
 			</form>
 				
-	<?
+	<?php
 
 }
 
