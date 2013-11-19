@@ -4,45 +4,12 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.6.2.3
+Version: 3.6.2.4
 Author URI: http://autoaffiliatelinks.com
 */
 
 
 
-// Classes
-
-global $aalModules; $aalModules = array();
-$aalFiles = scandir(plugin_dir_path(__FILE__) . 'modules');
-$aalModuleFiles = array();
-foreach($aalFiles as $aalFile) { if(substr($aalFile, -4)=='.php') { $aalModuleFiles[] = $aalFile;  include(plugin_dir_path(__FILE__) . 'modules/' . $aalFile); } }
-
-
-//print_r($aalModuleFiles);
-
-
-class aalModule
-{
-    var $shortname;
-    var $nicename;
-    var $hooks = array();
-
-
-	function aalModule($shortname,$nicename) {
-		
-		$this->shortname = $shortname;
-		$this->nicename = $nicename;
-
-	}
-
-	function aalModuleHook($hook,$fname) {
-		
-		$this->hooks[$hook] = $fname;
-		
-	}
-
-
-}
 
 
 
@@ -113,6 +80,7 @@ include(plugin_dir_path(__FILE__) . 'aal_ajax.php');
 include(plugin_dir_path(__FILE__) . 'aal_engine.php');
 include(plugin_dir_path(__FILE__) . 'aal_settings.php');
 include(plugin_dir_path(__FILE__) . 'aal_exclude.php');
+include(plugin_dir_path(__FILE__) . 'aal_modules.php');
 
 add_action('admin_init', 'wpaal_actions');
 add_action('admin_menu', 'wpaal_create_menu');
@@ -138,8 +106,9 @@ add_action('wp_ajax_aal_update_exclude_posts', 'aalUpdateExcludePosts');
 function wpaal_create_menu() {
 
 add_menu_page( 'Auto Affiliate Links', 'Wp Auto Affiliate Links', 'publish_pages', 'aal_topmenu', 'wpaal_manage_affiliates', $icon_url, $position );	
-add_submenu_page( 'aal_topmenu', 'Exclude Posts', 'Exclude Posts', 'publish_pages', 'aal_exclude_posts', 'wpaal_exclude_posts' );
 add_submenu_page( 'aal_topmenu', 'General Settings', 'General Settings', 'publish_pages', 'aal_general_settings', 'wpaal_general_settings' );
+add_submenu_page( 'aal_topmenu', 'Modules', 'Modules', 'publish_pages', 'aal_modules', 'wpaal_modules' );
+add_submenu_page( 'aal_topmenu', 'Exclude Posts', 'Exclude Posts', 'publish_pages', 'aal_exclude_posts', 'wpaal_exclude_posts' );
 
 }
 
@@ -248,9 +217,9 @@ function hideAllTabs(panelName) {
    <li><a href="javascript:;" title="Add Affiliate Links" onclick="hideAllTabs('aal_panel3');" >Add Affiliate Links</a></li>
                <!-- <li><a href="javascript:;" title="General Settings" onclick="hideAllTabs('aal_panel1');  ">General Settings</a></li>
                 <li><a href="javascript:;" title="Exclude posts" onclick="hideAllTabs('aal_panel2');" >Exclude posts</a></li>
-                 -->
+                 
  		 <li><a href="javascript:;" title="Modules" onclick="hideAllTabs('aal_panel31');" >Modules</a></li>
-                
+                -->
 		<li><a href="javascript:;" title="Import" onclick="hideAllTabs('aal_panel4');" >Import</a></li>
 		<li><a href="javascript:;" title="Export" onclick="hideAllTabs('aal_panel5');" >Export</a></li>
 		<?php global $aalModules;
@@ -337,17 +306,6 @@ function hideAllTabs(panelName) {
             </div>
 
 	 <div id="aal_panel31">
-
-
-	<h3>Modules</h3>
-	<br />
-	<br />
-	To add modules, copy and paste the module file into /modules/ subdirectory in wp-auto-affiliate-links plugin folder. 
-	<br /><br />
-	Modules functionality to be added soon. You will be able to install modules to do different tasks. Modules are files built especially for this plugin, that can be added here. 
-
-	Meanwhile, you can check <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Wp Auto Affiliate Links PRO</a> which is full featured and have all the modules already installed. 
-
 
 
 	</div>
