@@ -59,7 +59,14 @@ function wpaal_general_settings() {
                     
                     <span class="aal_label">Target:</span> <input type="radio" name="aal_target" value="_blank" <?php echo $tsc1;?> /> New window <input type="radio" name="aal_target" value="_self" <?php echo $tsc2 ;?>/> Same Window <br /><br />
                     
-                    <span class="aal_label">How many times every keyword should appear on a post ( max ):</span> <input type="text" name="notimes" id="aal_notimes" value="<?php echo $notimes ;?>" size="1" /><br /><br />
+                    <span class="aal_label">Link Frequency:</span> <select name="notimes" id="aal_notimes" value="<?php echo $notimes ;?>" size="1" />
+                    	<option value="1" <?php if($notimes=="1") echo "SELECTED"; ?> >Very Low</option>
+						<option value="2" <?php if($notimes=="2") echo "SELECTED"; ?> >Low</option>
+						<option value="3" <?php if($notimes=="3") echo "SELECTED"; ?> >Average</option>
+						<option value="4" <?php if($notimes=="4") echo "SELECTED"; ?> >High</option>
+						<option value="5" <?php if($notimes=="5") echo "SELECTED"; ?> >Very High</option>
+					</select>                    
+                    <br /><br />
                     <?php //echo $relationo; ?>
                     <span class="aal_label">Relation:</span> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1; ?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br /><br />
                    
