@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.6.2.6
+Version: 3.6.2.7
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -81,6 +81,7 @@ include(plugin_dir_path(__FILE__) . 'aal_engine.php');
 include(plugin_dir_path(__FILE__) . 'aal_settings.php');
 include(plugin_dir_path(__FILE__) . 'aal_exclude.php');
 include(plugin_dir_path(__FILE__) . 'aal_modules.php');
+include(plugin_dir_path(__FILE__) . 'aal_importexport.php');
 
 add_action('admin_init', 'wpaal_actions');
 add_action('admin_menu', 'wpaal_create_menu');
@@ -109,6 +110,7 @@ add_menu_page( 'Auto Affiliate Links', 'Wp Auto Affiliate Links', 'publish_pages
 add_submenu_page( 'aal_topmenu', 'General Settings', 'General Settings', 'publish_pages', 'aal_general_settings', 'wpaal_general_settings' );
 add_submenu_page( 'aal_topmenu', 'Modules', 'Modules', 'publish_pages', 'aal_modules', 'wpaal_modules' );
 add_submenu_page( 'aal_topmenu', 'Exclude Posts', 'Exclude Posts', 'publish_pages', 'aal_exclude_posts', 'wpaal_exclude_posts' );
+add_submenu_page( 'aal_topmenu', 'Import/Export', 'Import/Export', 'publish_pages', 'aal_import_export', 'wpaal_import_export' );
 
 }
 
@@ -215,13 +217,7 @@ function hideAllTabs(panelName) {
         	
         <ul class="aal_tabs" id="aal_tabs">
    <li><a href="javascript:;" title="Add Affiliate Links" onclick="hideAllTabs('aal_panel3');" >Add Affiliate Links</a></li>
-               <!-- <li><a href="javascript:;" title="General Settings" onclick="hideAllTabs('aal_panel1');  ">General Settings</a></li>
-                <li><a href="javascript:;" title="Exclude posts" onclick="hideAllTabs('aal_panel2');" >Exclude posts</a></li>
-                 
- 		 <li><a href="javascript:;" title="Modules" onclick="hideAllTabs('aal_panel31');" >Modules</a></li>
-                -->
-		<li><a href="javascript:;" title="Import" onclick="hideAllTabs('aal_panel4');" >Import</a></li>
-		<li><a href="javascript:;" title="Export" onclick="hideAllTabs('aal_panel5');" >Export</a></li>
+
 		<?php global $aalModules;
 		foreach($aalModules as $aalMod) {
 		
@@ -312,59 +308,14 @@ function hideAllTabs(panelName) {
 			
 			
 			<div id="aal_panel4">
-				<br />
-				<h3>Import Links</h3>
-				<br />
-				<br />
-				Upload your datafeed. The format should be keyword,url. The separator is the character who separate the columns, it can be a comma ( , ), a vertical bar ( | ) or a tab ( exactly 4 spaces ). For tab, just write "tab" in the text field. If you don't know, open the feed file in notepad or any other simple text editor. You can edit your datafeed in Microsoft Excell or Libre Office Calc. Make sure you save the file in csv format ( not in xls or odt ). Upon saving, you can select the separator. All the links inside the datafeed will be added to your affiliate links. 
-				<br />
-				<br />
-				
-				
-			<form name="aal_import_form" method="post" enctype="multipart/form-data" onsubmit="">
-			Upload the file here:    <input name="aal_import_file" type="file" /><br />
-			Separator: <select name="aal_import_separator" onchange="if(document.aal_import_form.aal_import_separator.options[document.aal_import_form.aal_import_separator.selectedIndex].value == 'other') document.aal_import_form.aal_import_other.style.display = 'block'; else document.aal_import_form.aal_import_other.style.display = 'none';">
-			<option value="|">| ( vertical line )</option>
-			<option value="tab">Tab</option>
-			<option value=",">, ( comma )</option>
-			<option value=";">; ( semicolon )</option>
-			<option value=".">. ( dot )</option>
-			<option value="other">other ( specify below )</option>
-			</select>
-			<br /><input type="text" name="aal_import_other" value="|" style="display: none;"/>
-			<br />
-			<input type="submit" value="Import" /><input type="hidden" name="MAX_FILE_SIZE" value="10000000" /><input type="hidden" name="aal_import_check" value="1" />
-			</form>
-				
-				
-				
+		
 			</div>
 			
 			
 			
 			
 			<div id="aal_panel5">
-				<br />
-				<h3>Export Links</h3>
-				<br />
-				<br />
-				Here you can export your links so you can import to another blog or to make a backup. You can import this file later using the "Import" tab.
-				<br />
-				<br />
-				
-				
-			<form name="aal_export_form" method="post" enctype="multipart/form-data" onsubmit="">
-			Separator: <select name="aal_export_separator">
-			<option value="|">| ( vertical line )</option>
-			<option value="tab">Tab</option>
-			<option value=",">, ( comma )</option>
-			<option value=";">; ( semicolon )</option>
-			<option value=".">. ( dot )</option>
-			</select>
-			<input type="submit" value="Click here to export your links" /><input type="hidden" name="aal_export_check" value="1" />
-			</form>
-				
-				
+	
 				
 			</div>
             

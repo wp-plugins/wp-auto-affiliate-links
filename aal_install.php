@@ -65,8 +65,9 @@ function aal_admin_notice() {
 
 
 function aalDismissNotice() {
-
-		add_option('aal_option_dismissed',true);
+	
+		delete_option('aal_option_dismissed');
+		add_option('aal_option_dismissed2',true);
 	
 	
 }
