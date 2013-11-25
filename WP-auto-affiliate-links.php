@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.6.7
+Version: 3.6.8
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -199,7 +199,9 @@ function wpaal_manage_affiliates() {
 	
 	//Render the page
         ?>
-        <h1>Manage Affiliate Links</h1>
+<div class="wrap">  
+        <div class="icon32" id="icon-options-general"></div>  
+        <h2>Wp Auto Affiliate Links PRO</h2>
 	<br /><br />
 	<div class="updated" style="text-align:center;padding: 10px;"><a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Wp Auto Affiliate Links PRO 2.0 </a> has been released. The PRO version will automatically display links from amazon, clickbank, shareasale and comission junction. Yout only have to setup and activate your prefered networks and links will be extracted automatically. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Find out more</a>.</div>
 	<br /><br />
@@ -213,35 +215,7 @@ function wpaal_manage_affiliates() {
 	<br /><br /> -->
         
 
-<script type="text/javascript">
-function hideAllTabs(panelName) {
 
-	 jQuery('.aal_panes').children().hide();
-	 jQuery("div#" + panelName).show();
-	document.location.hash = '#' + panelName;
-
-
-}
-</script>
-        	
-        <ul class="aal_tabs" id="aal_tabs">
-   <li><a href="javascript:;" title="Add Affiliate Links" onclick="hideAllTabs('aal_panel3');" >Add Affiliate Links</a></li>
-
-                                            
-        </ul>
-
-        <!-- tab "panes" -->
-        <div class="aal_panes">
-
-
-            <div id="aal_panel1">
-
-            </div>
-            
-            <div id="aal_panel2">
-                
-           
-            </div>
             
             <div id="aal_panel3">
                     <p>After you add the affiliate links, make sure you write keywords in the respective field, separated by comma. If you don\'t enter any keyword, that link won\'t be displayed.</p>
@@ -266,28 +240,10 @@ function hideAllTabs(panelName) {
 
 
                     </ul>
-            </div>
+                    
+                    </div>
+    </div>
 
-	 <div id="aal_panel31">
-
-
-	</div>
-			
-			
-			<div id="aal_panel4">
-		
-			</div>
-			
-			
-			
-			
-			<div id="aal_panel5">
-	
-				
-			</div>
-            
-     </div>
-        
 
 
  <?php  }  // manage_affliates end

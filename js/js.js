@@ -1,28 +1,6 @@
 jQuery(document).ready(function() { 
 
 
-      var aalLocation = document.location.hash;
-          aalLocation = aalLocation.substr(1);
-          if(aalLocation) { jQuery("#"+aalLocation).show(); }
-                else { jQuery("#aal_panel3").show(); }
-
-          jQuery('#aal_tabs li > a').click(function() {
-        	  jQuery('#aal_tabs li').removeClass();
-        	  jQuery(this).parent().addClass('current');
-        	});
-
-     function aalChangeTab() {
-       
-               jQuery("#aal_panel1").hide();
-               jQuery("#aal_panel2").hide();
-               jQuery("#aal_panel3").hide();
-               
-       
-     var aalLocation = document.location.hash;
-         aalLocation = aalLocation.substr(1);
-         jQuery("#"+aalLocation).show();
-}
-
     function isValidURL(url){
     var RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 
