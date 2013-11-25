@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.6.2.7
+Version: 3.6.7
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -106,11 +106,20 @@ add_action('wp_ajax_aal_update_exclude_posts', 'aalUpdateExcludePosts');
 // Add Wp Auto Affiliate Links to Wordpress Admnistration panel menu
 function wpaal_create_menu() {
 
-add_menu_page( 'Auto Affiliate Links', 'Wp Auto Affiliate Links', 'publish_pages', 'aal_topmenu', 'wpaal_manage_affiliates', $icon_url, $position );	
-add_submenu_page( 'aal_topmenu', 'General Settings', 'General Settings', 'publish_pages', 'aal_general_settings', 'wpaal_general_settings' );
-add_submenu_page( 'aal_topmenu', 'Modules', 'Modules', 'publish_pages', 'aal_modules', 'wpaal_modules' );
-add_submenu_page( 'aal_topmenu', 'Exclude Posts', 'Exclude Posts', 'publish_pages', 'aal_exclude_posts', 'wpaal_exclude_posts' );
-add_submenu_page( 'aal_topmenu', 'Import/Export', 'Import/Export', 'publish_pages', 'aal_import_export', 'wpaal_import_export' );
+	add_menu_page( 'Auto Affiliate Links', 'Wp Auto Affiliate Links', 'publish_pages', 'aal_topmenu', 'wpaal_manage_affiliates', $icon_url, $position );	
+	add_submenu_page( 'aal_topmenu', 'General Settings', 'General Settings', 'publish_pages', 'aal_general_settings', 'wpaal_general_settings' );
+	add_submenu_page( 'aal_topmenu', 'Modules', 'Modules', 'publish_pages', 'aal_modules', 'wpaal_modules' );
+
+global $aalModules;
+		foreach($aalModules as $aalMod) {
+			
+		add_submenu_page( 'aal_topmenu', $aalMod->nicename, $aalMod->nicename, 'publish_pages', $aalMod->shortname, $aalMod->hooks['content'] );			
+			
+		}
+
+
+	add_submenu_page( 'aal_topmenu', 'Exclude Posts', 'Exclude Posts', 'publish_pages', 'aal_exclude_posts', 'wpaal_exclude_posts' );
+	add_submenu_page( 'aal_topmenu', 'Import/Export', 'Import/Export', 'publish_pages', 'aal_import_export', 'wpaal_import_export' );
 
 }
 
@@ -218,53 +227,11 @@ function hideAllTabs(panelName) {
         <ul class="aal_tabs" id="aal_tabs">
    <li><a href="javascript:;" title="Add Affiliate Links" onclick="hideAllTabs('aal_panel3');" >Add Affiliate Links</a></li>
 
-		<?php global $aalModules;
-		foreach($aalModules as $aalMod) {
-		
-			?>
-				<li><a href="javascript:;" title="<?php echo $aalMod->nicename; ?>" onclick="hideAllTabs('<?php echo $aalMod->shortname; ?>Tab');" ><?php echo $aalMod->nicename; ?></a></li>
-
-
-			<?php
-		
-
-		}
-
-		?>
                                             
         </ul>
 
         <!-- tab "panes" -->
         <div class="aal_panes">
-
-
-
-		<?php global $aalModules;
-		foreach($aalModules as $aalMod) {
-		
-			?>
-
-			<div id="<?php echo $aalMod->shortname; ?>Tab">
-				<br />
-                <h3><?php echo $aalMod->nicename; ?></h3>
-				<br />
-				<br />
-				<?php echo call_user_func($aalMod->hooks['content']); ?>
-
-
-
-			</div>
-
-			<?php
-		
-
-		}
-
-		?>
-
-
-
-
 
 
             <div id="aal_panel1">
