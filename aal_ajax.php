@@ -41,7 +41,8 @@ function aalAddLink(){
 		else {
 			$rows_affected = $wpdb->insert( $table_name, array( 'link' => $aal_link, 'keywords' => $aal_keywords ) );
 			$aal_delete_id=$wpdb->insert_id;
-		}
+		} 
+		
         
                 
                 
