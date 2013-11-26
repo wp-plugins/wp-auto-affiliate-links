@@ -6,7 +6,7 @@ function wpaal_add_affiliate_links($content) {
 		global $wpdb;
 		
 		$timecounter = microtime(true);
-	//	echo $timecounter . "<br/>";
+		//echo $timecounter . "<br/>";
 		
 		//Getting the keywords and options
 		$showhome = get_option('aal_showhome');
@@ -60,7 +60,7 @@ function wpaal_add_affiliate_links($content) {
 							$url = $link;
 							$name = $key;
 							
-							
+							$keys2[] = $name;
 							$replace[] = "<a title=\"$1\" class=\"aal\" target=\"". $targeto ."\" ". $relo ." href=\"$url\">$1</a>";
 							$regexp[] = str_replace('$name', $name, $reg);	
 
@@ -81,9 +81,40 @@ function wpaal_add_affiliate_links($content) {
 			//Check to see if it is the homepage
 			if(is_array($regexp)) { if($_SERVER['REQUEST_URI']=='/' || $_SERVER['REQUEST_URI']=='/index.php') $ishome = 1; else $ishome=0;
 			
-			if(!$ishome) $content = preg_replace($regexp, $replace, $content,$notimes);	
-				else if($showhome=='true') if($regexp[0]) $content = preg_replace($regexp, $replace, $content,$notimes);	 }
+				if(!$ishome || $showhome=='true') {
+					
+					
+										
+					
+					
+					
+			
+			
+			
+				//if(!$ishome && $regexp[0]) $content = preg_replace($regexp, $replace, $content,1,$count);	
+				//	else if($showhome=='true') if($regexp[0]) $content = preg_replace($regexp, $replace, $content,1);
+				
+					$sofar = 0;
+					foreach($regexp as $regnumber => $reg1) {
+						
+						$count = 0;
+						if(stripos($content, $keys2[$regnumber]) !== false) $content = preg_replace($reg1, $replace[$regnumber], $content,1,$count);
+						if($count>0) $sofar++;
+						if($sofar >= $notimes) continue;
+						
+					
+					}				
+				
+				
+					
+				
+				}
+				
+				
+				
+			}
 		}
+		
 		
 		
 		$timecounter = microtime(true);
