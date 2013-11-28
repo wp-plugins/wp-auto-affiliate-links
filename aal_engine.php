@@ -4,6 +4,7 @@
 // The function that will actually add links when the post content is rendered
 function wpaal_add_affiliate_links($content) {
 		global $wpdb;
+		if(!is_main_query()) return $content;
 		
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";
