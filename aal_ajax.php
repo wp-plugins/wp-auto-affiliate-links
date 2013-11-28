@@ -31,7 +31,7 @@ function aalAddLink(){
 		$aal_link = filter_input(INPUT_POST, 'aal_link', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['link'];
 		$aal_keywords = filter_input(INPUT_POST, 'aal_keywords', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['keywords'];
 		
-		$check = $wpdb->get_results( "SELECT * FROM ". $table_name ." WHERE link = '". $aal_link ."' " );		
+		$check = aalGetLinkByUrl($aal_link);	
 		
 		// Add to database 
 		if($check) { 

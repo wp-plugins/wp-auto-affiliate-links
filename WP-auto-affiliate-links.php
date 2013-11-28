@@ -4,18 +4,9 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.7
+Version: 3.7.1
 Author URI: http://autoaffiliatelinks.com
 */
-
-
-
-
-
-
-//functions used in plugin
-
-
 
 //Load css stylesheets
 function aal_load_css() {
@@ -31,45 +22,13 @@ function aal_load_css() {
 function aal_load_js() {
 	
         // load our jquery file that sends the $.post request
-	wp_enqueue_script( "js", plugin_dir_url( __FILE__ ) . 'js/js.js', array( 'jquery' ) );
-	//wp_enqueue_script( "tabs", plugin_dir_url( __FILE__ ) . 'js/jquery.tools.min.js', array( 'jquery' ) );
-        
+		wp_enqueue_script( "js", plugin_dir_url( __FILE__ ) . 'js/js.js', array( 'jquery' ) );
         $aal_plugin_url=plugin_dir_url(__FILE__);
-        
         // make the ajaxurl var available to the above script
-	wp_localize_script( 'js', 'ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php'),'aal_plugin_url' =>$aal_plugin_url  ) );	
-        
+		wp_localize_script( 'js', 'ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php'),'aal_plugin_url' =>$aal_plugin_url  ) );	     
 }
 
 //Get list of link showed on Add Affiliate Links tab
-
-function aalGetLinks($myrows){
-         foreach($myrows as $row) {
-
-                                    $aal_id = $row->id;
-                                    $aal_link = $row->link;
-                                    $aal_keywords = $row->keywords;
-
-                                    ?>
-                                        <form name="edit-link-<?php echo $aal_id; ?>" method="post">
-                                        <input value="<?php echo $aal_id; ?>" name="edit_id" type="hidden" />
-                                        <input type="hidden" name="aal_edit" value="ok" />
-                                                
-                                        <?php
-                                        if ( function_exists('wp_nonce_field') )
-                                                wp_nonce_field('WP-auto-affiliate-links_edit_link');
-                                        ?>
-                                            <li style="" class="aal_links_box">
-                                                Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="aal_link" value="<?php echo $aal_link; ?>" />
-                                                Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="aal_keywords" value="<?php echo $aal_keywords; ?>" />
-                                                <input style="margin: 5px 2px;" type="submit" name="ed" value="Edit" />
-                                                <a href="#" id="<?php echo $aal_id; ?>" class="aalDeleteLink"><img src="<?php echo plugin_dir_url(__FILE__);?>images/delete.png"/></a>
-                                            </li>    
-                                        </form>
-
-                                            
-                          <?php } 
-}
 
 
 
@@ -82,6 +41,10 @@ include(plugin_dir_path(__FILE__) . 'aal_settings.php');
 include(plugin_dir_path(__FILE__) . 'aal_exclude.php');
 include(plugin_dir_path(__FILE__) . 'aal_modules.php');
 include(plugin_dir_path(__FILE__) . 'aal_importexport.php');
+
+
+include(plugin_dir_path(__FILE__) . 'classes/link.php');
+
 
 add_action('admin_init', 'wpaal_actions');
 add_action('admin_menu', 'wpaal_create_menu');
@@ -98,7 +61,6 @@ add_action('wp_ajax_aal_add_exclude_posts', 'aalAddExcludePost');
 add_action('wp_ajax_aal_update_exclude_posts', 'aalUpdateExcludePosts');
 
 //add_action('wp_ajax_exclude_posts', 'aalExcludePosts');
-
 
 
 
@@ -236,7 +198,7 @@ function wpaal_manage_affiliates() {
 
                     <ul class="aal_links">
 
-                         <?php aalGetLinks($myrows); // Showing existent affiliate links with edit and delete options ?>
+                         <?php AalLink::showAll(); // Showing existent affiliate links with edit and delete options ?>
 
 
                     </ul>
