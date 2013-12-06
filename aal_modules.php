@@ -3,12 +3,20 @@
 // Classes
 
 global $aalModules; $aalModules = array();
-$aalFiles = scandir(plugin_dir_path(__FILE__) . 'modules');
+$moduledir = plugin_dir_path(__FILE__) . 'modules';
+$aalFiles = scandir($moduledir);
 $aalModuleFiles = array();
 foreach($aalFiles as $aalFile) {
 	 if(substr($aalFile, -4)=='.php') { 
 	 	$aalModuleFiles[] = $aalFile;  
-		 include(plugin_dir_path(__FILE__) . 'modules/' . $aalFile); 
+		 include($moduledir .'/'. $aalFile); 
+	 }
+	 elseif (is_dir($moduledir . '/' . $aalFile) && $aalFile != '.' && $aalFile != '..') {   
+	 	
+	 	$subfiles = scandir($moduledir . '/' . $aalFile);
+	 		if(file_exists($moduledir . '/' . $aalFile .'/' . $aalFile .'.php')) include($moduledir . '/' . $aalFile .'/' . $aalFile .'.php'); 
+	 		elseif(file_exists($moduledir . '/' . $aalFile .'/index.php')) include($moduledir . '/' . $aalFile .'/index.php'); 
+	 	
 	 }
  }
 
@@ -57,11 +65,13 @@ function wpaal_modules() {
                 <h2>Modules</h2>
                 <br /><br /><br />
                 
-	To add modules, copy and paste the module file into /modules/ subdirectory in wp-auto-affiliate-links plugin folder. 
+	To add modules, upload the module files into /modules/ subdirectory in wp-auto-affiliate-links/ plugin folder. Once they are uploaded, every module will create a link into the Wp Auto Affiliate Links top menu. 
 	<br /><br />
-	Modules functionality to be added soon. You will be able to install modules to do different tasks. Modules are files built especially for this plugin, that can be added here. 
+	You can get more modules from <a href="http://autoaffiliatelinks.com">Auto Affiliate Links Modules</a>
+	<br /><br />
+	<h3>Active modules</h3>
 
-	Meanwhile, you can check <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Wp Auto Affiliate Links PRO</a> which is full featured and have all the modules already installed. 
+	If a module is causing your problems, just delete the files trough ftp. 
  
 	
 	<?php

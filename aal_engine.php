@@ -24,13 +24,32 @@ function wpaal_add_affiliate_links($content) {
 		
 		if($relationo=='nofollow') $relo = ' rel="nofollow" ';
 		else $relo = '';
+		
+		//regular expression setup
+		$reg_post		=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))($name)/imsU';	
+		$reg			=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))\b($name)\b/imsU';
+		$strpos_fnc		=	 'stripos';		
+		global $wp_rewrite; 
+		global $post;
+
 
 		$patterns = array();
+		
+		//If the post is set for exclusion, exit
+		if(in_array($post->ID, $excludearray)) return $content;
+		
+		
+			//Check to see if it is the homepage
+			if($_SERVER['REQUEST_URI']=='/' || $_SERVER['REQUEST_URI']=='/index.php') $ishome = 1; else $ishome=0;	
+			//If it is home and ishome is set do none, then exit the function
+			if($ishome && !$showhome=='true') return $content;
+		
+
 
 		//If no keywords are set, exit the function
-		if(is_null($myrows)) return $content;
+		if(!is_null($myrows)) {
 		
-		else foreach($myrows as $row) {
+		foreach($myrows as $row) {
 				
 				$link = $row->link;
 				$keywords = $row->keywords;
@@ -42,17 +61,11 @@ function wpaal_add_affiliate_links($content) {
 		
 						$key = trim($key);
  						if($key) if(!in_array('/'. $key .'/', $patterns)) { 
-
-							//regular expression setup
-							$reg_post		=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))($name)/imsU';	
-							$reg			=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))\b($name)\b/imsU';
-							$strpos_fnc		=	 'stripos';
-								
 								
 							$redid = $row->id;
 							if($iscloacked=='true')  {
 								
-							global $wp_rewrite; // echo $wp_rewrite->permalink_structure;
+							// echo $wp_rewrite->permalink_structure;
 							if($wp_rewrite->permalink_structure) $link = get_option( 'home' ) . "/goto/" . $redid . "/" . wpaal_generateSlug($key);
 							else $link = get_option( 'home' ) . "/?goto=" . $redid;	
 								
@@ -69,31 +82,19 @@ function wpaal_add_affiliate_links($content) {
 						}
 					}
 				}
-		}
+		} //endforeach
+		
+		} //endif
 		
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";
 
-		global $post;
+		
 
-		//Check if the post is set for exclusion and do nothing
-		if(in_array($post->ID, $excludearray)) { }
-		else {
-			//Check to see if it is the homepage
-			if(is_array($regexp)) { if($_SERVER['REQUEST_URI']=='/' || $_SERVER['REQUEST_URI']=='/index.php') $ishome = 1; else $ishome=0;
+
 			
-				if(!$ishome || $showhome=='true') {
+				if(is_array($regexp)) { 
 					
-					
-										
-					
-					
-					
-			
-			
-			
-				//if(!$ishome && $regexp[0]) $content = preg_replace($regexp, $replace, $content,1,$count);	
-				//	else if($showhome=='true') if($regexp[0]) $content = preg_replace($regexp, $replace, $content,1);
 				
 					$sofar = 0;
 					foreach($regexp as $regnumber => $reg1) {
@@ -106,15 +107,20 @@ function wpaal_add_affiliate_links($content) {
 					
 					}				
 				
-				
-					
-				
 				}
 				
 				
-				
-			}
-		}
+				//If the manual replacement did not found enough links
+				if($sofar<$notimes) {
+						
+					
+					
+					
+					
+					
+					
+				}
+		
 		
 		
 		
