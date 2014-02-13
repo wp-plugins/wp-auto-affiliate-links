@@ -22,6 +22,14 @@ function wpaal_add_affiliate_links($content) {
 		$table_name = $wpdb->prefix . "automated_links";
 		$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
 		
+		$clickbankid = get_option('aal_clickbankid');
+		$clickbankcat = get_option('aal_clickbankcat');
+		$clickbankgravity = get_option('aal_clickbankgravity');
+		$clickbankactive = get_option('aal_clickbankactive');
+		
+		
+		$apikey = get_option('aal_apikey');
+		
 		if($relationo=='nofollow') $relo = ' rel="nofollow" ';
 		else $relo = '';
 		
@@ -42,7 +50,7 @@ function wpaal_add_affiliate_links($content) {
 			//Check to see if it is the homepage
 			if($_SERVER['REQUEST_URI']=='/' || $_SERVER['REQUEST_URI']=='/index.php') $ishome = 1; else $ishome=0;	
 			//If it is home and ishome is set do none, then exit the function
-			if($ishome && !$showhome=='true') return $content;
+			if($ishome && $showhome!='true') return $content;
 		
 
 
@@ -111,15 +119,68 @@ function wpaal_add_affiliate_links($content) {
 				
 				
 				//If the manual replacement did not found enough links
-				if($sofar<$notimes) {
+				if($sofar<$notimes && $clickbankactive) {
+					
+		$aaldivnumber = rand(1,10000);			
+					
+		$left = $notimes - $sofar;		
+		$content = $content .= ' 
+
+		<script type="text/javascript" src="'. plugin_dir_url( __FILE__ ) . 'js/api.js "></script>
+		<script type="text/javascript">
+		jQuery(document).ready(function() { 
+		
+			aal_divnumber = "'. $aaldivnumber .'";
+			aal_target = "'. $targeto .'";
+			aal_relation = \''. $relo .'\';
+			aal_postid = "post-'. $post->ID .'"; // urlencode($content)
+			aalapidata = {content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", notimes: "'. $left .'"};		
+
+		
+			aal_retrievelinks(aalapidata,aal_divnumber,aal_target,aal_relation);
+		
+		
+		 });
+		
+		</script>		
+		
+		';
+		
+		$content = $content .'<div id="aalcontent_'. $aaldivnumber .'"></div>';
 						
 					
+				/* $getcontent = 'content='. urlencode($content) .'&clickbankid='. $clickbankid;	
+				$products = aal_post($getcontent,'http://autoaffiliatelinks.com/api/pro.php');
+				$products = json_decode($products);
+				
+				
+				
+				//print_r($products);
+				//echo $products;
+
+					foreach($products as $product) {
+						
+						$name = $product->key;
+						$url = $product->url;
+
+						$replacesingle = "<a title=\"$1\" class=\"aal\" target=\"". $targeto ."\" ". $relo ." href=\"$url\">$1</a>";
+						$regexpsingle = str_replace('$name', $name, $reg);						
+
+						//$content = preg_replace($regexpsingle, $replacesingle, $content,1,$count);
+						//if($count>0) $sofar++;
+
 					
 					
 					
-					
+					}  */
+
+
+
 					
 				}
+				
+		
+
 		
 		
 		
@@ -127,10 +188,34 @@ function wpaal_add_affiliate_links($content) {
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";		
 						
-		return $content;
+		return $content; 
 
 
 }  // add_affiliate_links end
+
+
+function aal_post($requestJson,$postUrl) {
+
+
+    //Get length of post
+    $postlength = strlen($requestJson);
+
+    //open connection
+    $ch = curl_init();
+
+    //set the url, number of POST vars, POST data
+    curl_setopt($ch,CURLOPT_URL,$postUrl);
+    curl_setopt($ch,CURLOPT_POST,$postlength);
+    curl_setopt($ch,CURLOPT_POSTFIELDS,$requestJson);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($ch);
+
+    //close connection
+    curl_close($ch);
+
+    return $response;
+}
 
 
 

@@ -3,8 +3,8 @@ Contributors: Lucian Apostol
 Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
-Tested up to: 3.7.1
-Stable tag: 3.7.2
+Tested up to: 3.8.1
+Stable tag: 3.8
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -64,7 +64,18 @@ Yes. You can add more keywords in the same box, sepparated by comma. For example
 
 If you add more links with the same keyword, only the first occurence of the keyword will add the first link. If the same keyword appear again in the article, the second link will be added on it.
 
+= How Clickbank links work =
+
+First you have to request an API key from the "API Key" menu. Then, from the "Clickbank Links" menu you will have to enter your affiliate id, category and minimum gravity ( leave 0 for all links ), and set the plugin to "active". Once you do this links from clickbank will start to show on your pages.
+
 == Changelog ==
+
+= 3.8 =
+* Major improvements on replacement engine, site speed and keyword matching
+* New functionality added: Clickbank links can be automatically extracted and displayed, based on user selection
+* To reduce page load on the plugin, the clickbank link search and replacement is done on our servers
+* The access to the servers is done trough an API key
+* For clickbank links, the user inputs his affiliate code, prefered category and minimum gravity. All links are automatically generated, there is no need to add keywords for amazon.
 
 = 3.7.2 =
 * Reordered some code for better performance and visibility

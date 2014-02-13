@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.7.2
+Version: 3.8
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -41,14 +41,14 @@ include(plugin_dir_path(__FILE__) . 'aal_settings.php');
 include(plugin_dir_path(__FILE__) . 'aal_exclude.php');
 include(plugin_dir_path(__FILE__) . 'aal_modules.php');
 include(plugin_dir_path(__FILE__) . 'aal_importexport.php');
-
+include(plugin_dir_path(__FILE__) . 'aal_apimanagement.php');
 
 include(plugin_dir_path(__FILE__) . 'classes/link.php');
 
 
 add_action('admin_init', 'wpaal_actions');
 add_action('admin_menu', 'wpaal_create_menu');
-add_filter('the_content', 'wpaal_add_affiliate_links');
+add_filter('the_content', 'wpaal_add_affiliate_links',120);
 add_action('init', 'wpaal_rewrite_rules');
 add_action('query_vars', 'wpaal_add_query_var');
 add_action('wp','wpaal_check_for_goto');
@@ -71,6 +71,7 @@ function wpaal_create_menu() {
 	add_menu_page( 'Auto Affiliate Links', 'Wp Auto Affiliate Links', 'publish_pages', 'aal_topmenu', 'wpaal_manage_affiliates', $icon_url, $position );	
 	add_submenu_page( 'aal_topmenu', 'General Settings', 'General Settings', 'publish_pages', 'aal_general_settings', 'wpaal_general_settings' );
 	add_submenu_page( 'aal_topmenu', 'Modules', 'Modules', 'publish_pages', 'aal_modules', 'wpaal_modules' );
+	add_submenu_page( 'aal_topmenu', 'API Key', 'API Key', 'publish_pages', 'aal_apimanagement', 'wpaal_apimanagement' );
 
 global $aalModules;
 		foreach($aalModules as $aalMod) {
