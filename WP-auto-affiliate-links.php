@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.8
+Version: 3.8.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -166,7 +166,8 @@ function wpaal_manage_affiliates() {
         <div class="icon32" id="icon-options-general"></div>  
         <h2>Wp Auto Affiliate Links PRO</h2>
 	<br /><br />
-	<div class="updated" style="text-align:center;padding: 10px;"><a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Wp Auto Affiliate Links PRO 2.0 </a> has been released. The PRO version will automatically display links from amazon, clickbank, shareasale and comission junction. Yout only have to setup and activate your prefered networks and links will be extracted automatically. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Find out more</a>.</div>
+	<?php /* <div class="updated" style="text-align:center;padding: 10px;"><a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Wp Auto Affiliate Links PRO 2.0 </a> has been released. The PRO version will automatically display links from amazon, clickbank, shareasale and comission junction. Yout only have to setup and activate your prefered networks and links will be extracted automatically. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Find out more</a>.</div>
+	*/ ?>
 	<br /><br />
 	<!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 	<!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
