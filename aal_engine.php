@@ -122,29 +122,28 @@ function wpaal_add_affiliate_links($content) {
 				if($sofar<$notimes && $clickbankactive) {
 					
 		$aaldivnumber = rand(1,10000);			
+		
+		// data-relation="'. $relo .'"
 					
 		$left = $notimes - $sofar;		
-		$content = $content .= ' 
+	/*	$content = $content .= ' 
+		
+		<div id="aal_api_data" data-divnumber="'. $aaldivnumber .'" data-target="'. $targeto .'"  data-postid="post-'. $post->ID .'" data-content="'. urlencode($content) .'" data-apikey="'. $apikey .'" data-clickbankid="'. $clickbankid .'" data-clickbankcat="'. $clickbankcat .'" data-clickbankgravity="'. $clickbankgravity .'" data-notimes="'. $left .'" data-apidata=\'{content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", notimes: "'. $left .'"}\' ></div>
 
-		<script type="text/javascript" src="'. plugin_dir_url( __FILE__ ) . 'js/api.js "></script>
-		<script type="text/javascript">
-		jQuery(document).ready(function() { 
+		<script type="text/javascript" src="'. plugin_dir_url( __FILE__ ) . 'js/api.js "></script>		
 		
-			aal_divnumber = "'. $aaldivnumber .'";
-			aal_target = "'. $targeto .'";
-			aal_relation = \''. $relo .'\';
-			aal_postid = "post-'. $post->ID .'"; // urlencode($content)
-			aalapidata = {content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", notimes: "'. $left .'"};		
+		'; */
+		
+$content = $content .= ' 
+		
+		<div id="aal_api_data" data-divnumber="'. $aaldivnumber .'" data-target="'. $targeto .'"  data-postid="post-'. $post->ID .'" data-apikey="'. $apikey .'" data-clickbankid="'. $clickbankid .'" data-clickbankcat="'. $clickbankcat .'" data-clickbankgravity="'. $clickbankgravity .'" data-notimes="'. $left .'" data-apidata=\'{content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", notimes: "'. $left .'"}\' ></div>
 
+		<script type="text/javascript" src="'. plugin_dir_url( __FILE__ ) . 'js/api.js "></script>		
 		
-			aal_retrievelinks(aalapidata,aal_divnumber,aal_target,aal_relation);
+		';		
 		
 		
-		 });
 		
-		</script>		
-		
-		';
 		
 		$content = $content .'<div id="aalcontent_'. $aaldivnumber .'"></div>';
 						

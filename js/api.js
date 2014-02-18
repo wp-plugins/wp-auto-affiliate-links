@@ -1,11 +1,42 @@
+jQuery(document).ready(function() { 
+
+
+			datadiv = document.getElementById('aal_api_data');		
+			aal_divnumber = datadiv.getAttribute('data-divnumber');
+			aal_target = datadiv.getAttribute('data-target');
+			aal_relation = datadiv.getAttribute('data-relation');
+			aal_postid = datadiv.getAttribute('data-postid');
+			aal_apikey = datadiv.getAttribute('data-apikey');
+			aal_clickbankid = datadiv.getAttribute('data-clickbankid');
+			aal_clickbankgravity = datadiv.getAttribute('data-clickbankgravity');
+			aal_notimes = datadiv.getAttribute('data-notimes');
+			aal_clickbankcat = datadiv.getAttribute('data-clickbankcat');
+			// aal_content = datadiv.getAttribute('data-content');
+			aal_content = encodeURIComponent(document.getElementById('aalcontent_' + aal_divnumber).parentNode.innerHTML);
+			//aalapidata = datadiv.getAttribute('data-apidata');		
+			
+			//console.log(aal_divnumber);
+			//console.log(aal_content);
+			
+			
+			aalapidata = {content: aal_content, apikey: aal_apikey, clickbankid: aal_clickbankid, clickbankcat: aal_clickbankcat,  clickbankgravity: aal_clickbankgravity, notimes: aal_notimes};
+			//alert(aalapidata);
+
+		
+			aal_retrievelinks(aalapidata,aal_divnumber,aal_target,aal_relation);
+		
+		
+		 });
+
+
 
 
 function aal_retrievelinks(aalapidata,aal_divnumber,aal_target,aal_relation) {
 	
 	//alert('aaa');
-	//alert(aalapidata);
+	//console.log(aalapidata);
 
-//var aalapidata = {action: 'aal_update_exclude_posts',aal_exclude_posts:'aaa'};
+	//aalapidata = {action: 'aal_update_exclude_posts',aal_exclude_posts:'aaa'};
  jQuery.ajax({
                     type: "POST",
                     url: "http://autoaffiliatelinks.com/api/pro.php",
@@ -15,9 +46,9 @@ function aal_retrievelinks(aalapidata,aal_divnumber,aal_target,aal_relation) {
                     //console.log('succes');   
                     
              
-                   // alert(returned);
                    
-                   //alert(returned);
+                   
+                  //console.log(returned);
                     
 	var parray = jQuery.parseJSON(returned);
 	var spydiv = document.getElementById('aalcontent_' + aal_divnumber);
@@ -29,8 +60,8 @@ function aal_retrievelinks(aalapidata,aal_divnumber,aal_target,aal_relation) {
 	
 	parray.forEach(function(entry) {
 		
+	var re2 = new RegExp("(?!(?:[^<\\[]+[>\\]]|[^>\\]]+<\/a>))\\b("+ entry.key +")\\b","i");
 	var re = new RegExp("(?!(?:[^<\\[]+[>\\]]|[^>\\]]+<\/a>))\\b("+ entry.key +")\\b","i");
-
 	acontent = acontent.replace(re, '<a title="$1" class="aal" target="' + aal_target + '" ' + aal_relation + ' href="'+ entry.url +'">$1</a>');	    
 	    
 	    
