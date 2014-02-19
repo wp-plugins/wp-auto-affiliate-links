@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.8.2
+Version: 3.8.2.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -190,7 +190,7 @@ function wpaal_manage_affiliates() {
                         <input type="hidden" name="action" value="add_link" />
                         Affiliate link: <input type="text" name="link" value="http://" id="aal_formlink" />
                         Keywords: <input type="text" name="aal_keywords" id="aal_formkeywords" />
-                        <input type="submit" name="Save" />
+                        <input type="submit" name="Save" value="Save" />
                     </form>
                     
                     <br/>Here is a list with most used keywords in all your blog. Click on each and it will be added in the form above so you can assign a link for it.<br />
