@@ -16,11 +16,13 @@ function aal_install() {
 	  medium varchar(255),
 	  grup int(5),
 	  grup_desc varchar(255),
-	  UNIQUE KEY id (id)
-	);";
+	  PRIMARY KEY (id)
+	  );";
     
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);
+        $wpdb->last_error;
+       // die();
 	
 }
 
@@ -79,8 +81,6 @@ add_action('wp_ajax_aal_dismiss_notice', 'aalDismissNotice');
 
 
 
-// Installation
 
-register_activation_hook(__FILE__,'aal_install');
 
 ?>
