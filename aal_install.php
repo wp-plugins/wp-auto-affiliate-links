@@ -29,12 +29,12 @@ function aal_install() {
 
 function aal_admin_notice() {
 	
-	$aal_notice_dismissed = get_option('aal_option_dismissed3'); 
+	$aal_notice_dismissed = get_option('aal_option_dismissed4'); 
 	if(!$aal_notice_dismissed)
 	{
     ?>
     <div id="aal_notice_div" class="updated">
-        <p align="center"><?php _e( 'Thank you for using Wp Auto Affiliate Links. We are pleased to announce that there is a premium brand new feature in the plugin: Automated clickbank links. Links from clickbank will be automatically generated based on your content. You will need to <a href="'. admin_url() .'admin.php?page=aal_apimanagement">request an api key</a> and then <a href="'. admin_url() .'admin.php?page=clickbank">set-up clickbank</a>. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a>', 'wp-auto-affiliate-links' ); ?></p>
+        <p align="center"><?php _e( 'A major bug that prevented users to save links has been fixed. If you was affected by the bug you have to deactivate and reactivate the plugin to make it work. To activate clickbank links you will need to <a href="'. admin_url() .'admin.php?page=aal_apimanagement">request an api key</a> and then <a href="'. admin_url() .'admin.php?page=clickbank">set-up clickbank</a>. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a>', 'wp-auto-affiliate-links' ); ?></p>
     </div>
     
 <script type="text/javascript">
@@ -68,8 +68,8 @@ function aal_admin_notice() {
 
 function aalDismissNotice() {
 	
-		delete_option('aal_option_dismissed3');
-		add_option('aal_option_dismissed3',true);
+		delete_option('aal_option_dismissed4');
+		add_option('aal_option_dismissed4',true);
 	
 	
 }

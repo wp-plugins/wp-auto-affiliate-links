@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.8.3
+Version: 3.8.3.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -184,6 +184,7 @@ function wpaal_manage_affiliates() {
 	<br /><br /> -->
         
 
+<div class="updated"><br />If your links are not saved after you refresh the page, update the plugin to the latest version and then deactivate it and activate it again. This will fix your problem.<br /><br /></div>
 
             
             <div id="aal_panel3">
