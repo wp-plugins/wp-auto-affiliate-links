@@ -140,7 +140,7 @@ $content = $content .= '
 		
 		<div id="aal_api_data" data-divnumber="'. $aaldivnumber .'" data-target="'. $targeto .'"  data-postid="post-'. $post->ID .'" data-apikey="'. $apikey .'" data-clickbankid="'. $clickbankid .'" data-clickbankcat="'. $clickbankcat .'" data-clickbankgravity="'. $clickbankgravity .'"  data-aurl="'. $aurl .'" data-notimes="'. $left .'" data-apidata=\'{content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", aurl: "'. $aurl .'", notimes: "'. $left .'"}\' ></div>
 
-		<script type="text/javascript" src="'. plugin_dir_url( __FILE__ ) . 'js/api.js "></script>		
+		
 		
 		';		
 		
