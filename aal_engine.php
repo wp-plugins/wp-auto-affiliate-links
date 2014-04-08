@@ -27,6 +27,12 @@ function wpaal_add_affiliate_links($content) {
 		$clickbankgravity = get_option('aal_clickbankgravity');
 		$clickbankactive = get_option('aal_clickbankactive');
 		
+		$amazonid = get_option('aal_amazonid');
+		$amazonapikey = get_option('aal_amazonapikey'); 
+		$amazonsecret = get_option('aal_amazonsecret'); 
+		$amazoncat = get_option('aal_amazoncat');
+		$amazonactive = get_option('aal_amazonactive');
+		
 		
 		$apikey = get_option('aal_apikey');
 		
@@ -119,7 +125,10 @@ function wpaal_add_affiliate_links($content) {
 				
 				
 				//If the manual replacement did not found enough links
-				if($sofar<$notimes && $clickbankactive) {
+				if($sofar<$notimes && ($clickbankactive || $amazonactive)) {
+					
+					if(!$clickbankactive) { $clickbankid = ''; }
+					if(!$amazonactive) { $amazonid = ''; }
 					
 		$aaldivnumber = rand(1,10000);			
 		
@@ -138,10 +147,8 @@ $aurl = get_permalink($post->ID);;
 		
 $content = $content .= ' 
 		
-		<div id="aal_api_data" data-divnumber="'. $aaldivnumber .'" data-target="'. $targeto .'"  data-postid="post-'. $post->ID .'" data-apikey="'. $apikey .'" data-clickbankid="'. $clickbankid .'" data-clickbankcat="'. $clickbankcat .'" data-clickbankgravity="'. $clickbankgravity .'"  data-aurl="'. $aurl .'" data-notimes="'. $left .'" data-apidata=\'{content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", aurl: "'. $aurl .'", notimes: "'. $left .'"}\' ></div>
+		<div id="aal_api_data" data-divnumber="'. $aaldivnumber .'" data-target="'. $targeto .'"  data-postid="post-'. $post->ID .'" data-apikey="'. $apikey .'" data-clickbankid="'. $clickbankid .'" data-clickbankcat="'. $clickbankcat .'" data-clickbankgravity="'. $clickbankgravity .'"  data-amazonid="'. $amazonid .'" data-amazoncat="'. $amazoncat .'" data-amazonactive="'. $amazonactive .'" data-clickbankactive="'. $clickbankactive .'" data-aurl="'. $aurl .'" data-notimes="'. $left .'" data-apidata=\'{content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", amazonid: "'. $amazonid .'", amazoncat: "'. $amazoncat .'", amazonactive: "'. $amazonactive .'", clickbankactive: "'. $clickbankactive .'", aurl: "'. $aurl .'", notimes: "'. $left .'"}\' ></div>
 
-		
-		
 		';		
 		
 		
