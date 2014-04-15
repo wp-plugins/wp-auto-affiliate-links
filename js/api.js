@@ -53,7 +53,7 @@ function aal_retrievelinks(aalapidata,aal_divnumber,aal_target,aal_relation) {
              
                    
                    
-                  //console.log(returned);
+                  console.log(returned);
                     
 	var parray = jQuery.parseJSON(returned);
 	var spydiv = document.getElementById('aalcontent_' + aal_divnumber);

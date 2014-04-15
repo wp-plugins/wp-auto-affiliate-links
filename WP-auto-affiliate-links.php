@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.9
+Version: 3.9.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -21,12 +21,22 @@ function aal_load_css() {
 //load javascript files
 function aal_load_js() {
 	
-        // load our jquery file that sends the $.post request
+		
+		wp_enqueue_script( "aal_apijs", plugin_dir_url( __FILE__ ) . 'js/api.js', array( 'jquery' ) );
+	
+        // load our jquery file that sends the $.post request1
 		wp_enqueue_script( "js", plugin_dir_url( __FILE__ ) . 'js/js.js', array( 'jquery' ) );
         $aal_plugin_url=plugin_dir_url(__FILE__);
         // make the ajaxurl var available to the above script
 		wp_localize_script( 'js', 'ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php'),'aal_plugin_url' =>$aal_plugin_url  ) );	     
 }
+
+function aal_load_front_scripts() {
+	
+	wp_enqueue_script( "aal_apijs", plugin_dir_url( __FILE__ ) . 'js/api.js', array( 'jquery' ) );
+	
+}
+
 
 //Get list of link showed on Add Affiliate Links tab
 
@@ -59,7 +69,7 @@ add_action('wp_ajax_aal_add_link', 'aalAddLink');
 add_action('wp_ajax_aal_change_options', 'aalChangeOptions');
 add_action('wp_ajax_aal_add_exclude_posts', 'aalAddExcludePost');
 add_action('wp_ajax_aal_update_exclude_posts', 'aalUpdateExcludePosts');
-add_action('wp_head', 'aal_wphead');
+//add_action('wp_enqueue_script', 'aal_load_front_scripts');
 
 // Installation
 
@@ -148,13 +158,7 @@ foreach($myrows as $row) {
 
 
 
-function aal_wphead() {
-	
-	$header = '<script type="text/javascript" src="'. plugin_dir_url( __FILE__ ) . 'js/api.js "></script>	';	
-	
-	echo $header;
-	
-}
+
 	
 
 
