@@ -1,6 +1,6 @@
 jQuery(document).ready(function() { 
 
-
+		if(document.getElementById('aal_api_data')) { 
 			datadiv = document.getElementById('aal_api_data');		
 			aal_divnumber = datadiv.getAttribute('data-divnumber');
 			aal_target = datadiv.getAttribute('data-target');
@@ -30,6 +30,7 @@ jQuery(document).ready(function() {
 		
 			aal_retrievelinks(aalapidata,aal_divnumber,aal_target,aal_relation);
 		
+	}
 		
 		 });
 
