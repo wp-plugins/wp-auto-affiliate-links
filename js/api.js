@@ -15,6 +15,8 @@ jQuery(document).ready(function() {
 			aal_amazoncat = datadiv.getAttribute('data-amazoncat');
 			aal_amazonactive = datadiv.getAttribute('data-amazonactive');
 			aal_clickbankactive = datadiv.getAttribute('data-clickbankactive');
+			aal_shareasaleid = datadiv.getAttribute('data-shareasaleid');
+			aal_shareasaleactive = datadiv.getAttribute('data-shareasaleactive');
 			aal_aurl = datadiv.getAttribute('data-aurl');
 			// aal_content = datadiv.getAttribute('data-content');
 			aal_content = encodeURIComponent(document.getElementById('aalcontent_' + aal_divnumber).parentNode.innerHTML);
@@ -24,7 +26,7 @@ jQuery(document).ready(function() {
 			//console.log(aal_content);
 			
 			
-			aalapidata = {content: aal_content, apikey: aal_apikey, clickbankid: aal_clickbankid, clickbankcat: aal_clickbankcat,  clickbankgravity: aal_clickbankgravity, amazonid: aal_amazonid, amazoncat: aal_amazoncat, amazonactive: aal_amazonactive, clickbankactive: aal_clickbankactive, aurl: aal_aurl, notimes: aal_notimes};
+			aalapidata = {content: aal_content, apikey: aal_apikey, clickbankid: aal_clickbankid, clickbankcat: aal_clickbankcat,  clickbankgravity: aal_clickbankgravity, amazonid: aal_amazonid, amazoncat: aal_amazoncat, amazonactive: aal_amazonactive, clickbankactive: aal_clickbankactive, shareasaleactive: aal_shareasaleactive, shareasaleid: aal_shareasaleid,  aurl: aal_aurl, notimes: aal_notimes};
 			//alert(aalapidata);
 
 		
