@@ -130,7 +130,7 @@ function wpaal_add_affiliate_links($content) {
 				
 				
 				//If the manual replacement did not found enough links
-				if($sofar<$notimes && ($clickbankactive || $amazonactive || $shareasaleactive)) {
+				if($sofar<$notimes && ($clickbankactive || $amazonactive || $shareasaleactive) && $apikey) {
 					
 					if(!$clickbankactive) { $clickbankid = ''; }
 					if(!$amazonactive) { $amazonid = ''; }

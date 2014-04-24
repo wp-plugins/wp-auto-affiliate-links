@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.10
+Version: 3.10.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -33,8 +33,10 @@ function aal_load_js() {
 
 function aal_load_front_scripts() {
 	
-	wp_register_script( 'aal_apijs', plugin_dir_url( __FILE__ ) . 'js/api.js', array( 'jquery' ) );
-	wp_enqueue_script( 'aal_apijs');
+	if(get_option('aal_apikey')) { 
+		wp_register_script( 'aal_apijs', plugin_dir_url( __FILE__ ) . 'js/api.js', array( 'jquery' ) );
+		wp_enqueue_script( 'aal_apijs');
+	}
 	
 }
 
@@ -87,10 +89,10 @@ function wpaal_create_menu() {
 	add_menu_page( 'Auto Affiliate Links', 'Wp Auto Affiliate Links', 'publish_pages', 'aal_topmenu', 'wpaal_manage_affiliates', $icon_url, $position );	
 	add_submenu_page( 'aal_topmenu', 'General Settings', 'General Settings', 'publish_pages', 'aal_general_settings', 'wpaal_general_settings' );
 	add_submenu_page( 'aal_topmenu', 'Modules', 'Modules', 'publish_pages', 'aal_modules', 'wpaal_modules' );
-	add_submenu_page( 'aal_topmenu', 'API Key', 'API Key', 'publish_pages', 'aal_apimanagement', 'wpaal_apimanagement' );
+	add_submenu_page( 'aal_topmenu', 'Activate PRO features', 'Activate PRO features', 'publish_pages', 'aal_apimanagement', 'wpaal_apimanagement' );
 
 global $aalModules;
-		foreach($aalModules as $aalMod) {
+		if(get_option('aal_apikey')) foreach($aalModules as $aalMod) {
 			
 		add_submenu_page( 'aal_topmenu', $aalMod->nicename, $aalMod->nicename, 'publish_pages', $aalMod->shortname, $aalMod->hooks['content'] );			
 			
