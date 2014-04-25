@@ -32,9 +32,12 @@ function aalGetSugestions($myrows){
         //Replace common words
 			
         $wholestring = aal_removecommonwords($wholestring);
+        
 
         //Turning the string into an array
         $karray = explode(" ",strtolower($wholestring));
+        $karray = aal_removenumbers($karray);
+        $karray = aal_removeshortkeys($karray);
 
         //Coountin how many times each keyword appear
         $final=array(); $times=array();
@@ -84,7 +87,7 @@ function aalGetSugestions($myrows){
         	
          foreach($extended as $fin) {
                 if($fin!='' && $fin!=' ' && $fin!= '   ') {
-                        echo $fin .'&nbsp;&nbsp;&nbsp;<span><a class="aal_sugkey" href="javascript:;"  title="'. $fin .'">Add >> </a></span><br />';
+                        echo '<div class="aal_sugbox">'. $fin .'&nbsp;&nbsp;&nbsp;<span><a class="aal_sugkey" href="javascript:;"  title="'. $fin .'">Add >> </a></span></div>';
                 }
                 
              }       
@@ -92,6 +95,7 @@ function aalGetSugestions($myrows){
         
         echo '
         </div>
+        <div style="clear: both;" ></div>
         
 <script type="text/javascript">
 
@@ -142,6 +146,29 @@ function aal_commonwords() {
 	
 	
 	return $commonWords;
+}
+
+
+function aal_removenumbers($karray) {
+
+	foreach($karray as $id => $key) {
+		if(is_numeric($key))	unset($karray[$id]);
+	}
+	
+	$karray = array_values($karray);
+
+	return $karray;
+}
+
+function aal_removeshortkeys($karray) {
+
+	foreach($karray as $id => $key) {
+		if(strlen($key)<6)	unset($karray[$id]);
+	}
+	
+	$karray = array_values($karray);
+
+	return $karray;
 }
 
 
