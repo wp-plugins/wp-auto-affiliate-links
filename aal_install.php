@@ -29,12 +29,12 @@ function aal_install() {
 
 function aal_admin_notice() {
 	
-	$aal_notice_dismissed = get_option('aal_option_dismissed5'); 
+	$aal_notice_dismissed = get_option('aal_option_dismissed6'); 
 	if(!$aal_notice_dismissed)
 	{
     ?>
     <div id="aal_notice_div" class="updated">
-        <p align="center"><?php _e( 'Update: Amazon links can be automatically added from amazon, you only have to <a href="'. admin_url() .'admin.php?page=aal_apimanagement">request an api key</a> and then <a href="'. admin_url() .'admin.php?page=clickbank">set-up amazon</a>. with your amazon ID and to select a category. This feature will be available for free for a limited time. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a>', 'wp-auto-affiliate-links' ); ?></p>
+        <p align="center"><?php _e( 'Update: Amazon, Clickbank and Shareasale links can be automatically added from amazon, you only have to <a href="'. admin_url() .'admin.php?page=aal_apimanagement">request an api key</a> and then <a href="'. admin_url() .'admin.php?page=clickbank">set-up amazon</a>. with your amazon ID and to select a category. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a>', 'wp-auto-affiliate-links' ); ?></p>
     </div>
     
 <script type="text/javascript">
@@ -74,7 +74,8 @@ function aalDismissNotice() {
 		delete_option('aal_option_dismissed3');
 		delete_option('aal_option_dismissed4');
 		delete_option('aal_option_dismissed5');
-		add_option('aal_option_dismissed5',true);
+		delete_option('aal_option_dismissed6');
+		add_option('aal_option_dismissed6',true);
 	
 	
 }

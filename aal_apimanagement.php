@@ -51,6 +51,8 @@ $apikey = get_option('aal_apikey');
         
                  <h2>Api Key Management</h2>
                 <br /><br />
+                <b>Revenue sharing. </b> If you activate PRO features and then you set-up Amazon and Clickbank links, along with your automatically generated links there will be one link with our affiliate code from amazon or clickbank. This will ensure the continued development of the plugin and if the outcome is good it will keep the PRO features of the plugin FREE. If you do not want this just disable Amazon and Clickbank links, or contact us and maybe we can work something out. 
+                <br /><br />
                 <?php echo $errormsg; ?>
                 <br />
                 <?php if($apikey) {
