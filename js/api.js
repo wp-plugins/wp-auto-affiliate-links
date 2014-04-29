@@ -1,7 +1,10 @@
 jQuery(document).ready(function() { 
 
-		if(document.getElementById('aal_api_data')) { 
-			datadiv = document.getElementById('aal_api_data');		
+		//if(document.getElementById('aal_api_data')) { 
+		
+		jQuery("div[id*='aal_api_data']").each(function() { //console.log(this.getAttribute('data-divnumber'));
+			//datadiv = document.getElementById('aal_api_data');		
+			datadiv = this;
 			aal_divnumber = datadiv.getAttribute('data-divnumber');
 			aal_target = datadiv.getAttribute('data-target');
 			aal_relation = datadiv.getAttribute('data-relation');
@@ -32,8 +35,8 @@ jQuery(document).ready(function() {
 		
 			aal_retrievelinks(aalapidata,aal_divnumber,aal_target,aal_relation);
 		
-	}
-		
+	//}
+		});
 		 });
 
 
