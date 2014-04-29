@@ -10,13 +10,17 @@ Provide an interface to add your affiliate links and associate them with keyword
 
 == Description ==
 
-Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
+Wp Auto Affiliate Links will automatically add affiliate links into your content. You can manually set affiliate links and keywords where they should be added into your content, or you can let the plugin to automatically extract and display links from Amazon, Clickbank or Shareasale.
 
-You can manage your affiliate links trough an administration page, under the "Settings" menu category. You have to add affiliate links, and specify one or more keywords for each. The plugin will add them when a page is viewed. Your content won't be modified in the database. 
+If you prefer to select your keywords and add your links manually, you can do this from "Wp Auto Affiliate Links" menu in your administration panel. In "General Settings" you can set if you want the links to be cloaked, if you want them to be added on your homepage or not and several other options.
 
-You will have options to make the links nofollow or dofollow, to open in new page or same page and to cloak links. The plugin will give you the most used 20 keywords from your content si you can easily add affiliate links to appear when they are displayed. 
+Also, you will have options to make the links nofollow or dofollow, to open in new page or same page and to cloak links. The plugin will give you the most used 100 keywords from your content si you can easily add affiliate links to appear when they are displayed. 
 
-You have the option to limit the number of links that are added to each post or page.
+You can limit the number of links that are shown in every article. The frequency range from "Very Low" to "Very High". At Very Low level only 1 link will be displayed in every article. At "Very High" frequency a maximum of 5 links will be added to every article.
+
+If you choose to automatically generate and display links from Amazon, Clickbank or Shareasale you have to first request an API key, and then to activate each module. The links will be added trough javascript so you do not have to worry about nofollowing and search engines. 
+
+Your content won't be modified in any way. The links are added when the content is displayed.
 
 
 == Installation ==
