@@ -46,7 +46,7 @@ function wpaal_add_affiliate_links($content) {
 		
 		//regular expression setup
 		$reg_post		=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))($name)/imsU';	
-		$reg			=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>+))(?!(?:[^<\[]+[>\]]|[^>\]]+<\/h.>+))\b($name)\b/imsU';
+		$reg			=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+(<\/a>|<\/h.>)))\b($name)\b/imsU';
 		$strpos_fnc		=	 'stripos';		
 		global $wp_rewrite; 
 		global $post;
