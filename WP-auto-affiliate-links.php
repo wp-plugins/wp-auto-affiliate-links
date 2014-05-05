@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.10.6
+Version: 4.0
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -194,20 +194,10 @@ function wpaal_manage_affiliates() {
         <div class="icon32" id="icon-options-general"></div>  
         <h2>Wp Auto Affiliate Links PRO</h2>
 	<br /><br />
-	<?php /* <div class="updated" style="text-align:center;padding: 10px;"><a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Wp Auto Affiliate Links PRO 2.0 </a> has been released. The PRO version will automatically display links from amazon, clickbank, shareasale and comission junction. Yout only have to setup and activate your prefered networks and links will be extracted automatically. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Find out more</a>.</div>
-	*/ ?>
-	<br /><br />
-	<!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	<!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	<input type="hidden" name="cmd" value="_s-xclick">
-	<input type="hidden" name="hosted_button_id" value="RGNWD2T23VX2J">
-	<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-	<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-	</form>
-	<br /><br /> -->
         
 
-<div class="updated"><br />If your links are not saved after you refresh the page, update the plugin to the latest version and then deactivate it and activate it again. This will fix your problem.<br /><br /></div>
+<div class="updated"><br />If you have any problems or questions about the plugin, please help us improve it and leave us a message using the <a href="http://autoaffiliatelinks.com/support-help/support-contact/">contact form on our website</a> or on <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">wordpress support forums</a>. If you like the plugin and it works fine for you then please leave us a <a href="http://wordpress.org/support/view/plugin-reviews/wp-auto-affiliate-links?filter=5#postform">rating and a review</a>. <br /><br /></div>
+
 
             
             <div id="aal_panel3">
