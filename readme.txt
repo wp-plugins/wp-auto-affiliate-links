@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 3.9
-Stable tag: 3.10.10
+Stable tag: 4.0
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -77,6 +77,12 @@ First you have to request an API key from the "API Key" menu. Then, from the "Cl
 If you encounter any problem with the plugin, please contact us using the form at http://autoaffiliatelinks.com and we will help you to solve your issue. It has been reported that some lightbox plugin my be interfeering with our plugin. 
 
 == Changelog ==
+
+= 4.0 =
+* Added Premium features into the plugin
+* Amazon links can be added automatically based on your content
+* Clickbanks links will be added automatically based on your content
+* Removed some old code
 
 = 3.10.9 =
 * Fixed a minor bug created in previous release
