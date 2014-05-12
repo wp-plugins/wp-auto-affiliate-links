@@ -143,13 +143,7 @@ function wpaal_add_affiliate_links($content) {
 		// data-relation="'. $relo .'"
 					
 		$left = $notimes - $sofar;		
-	/*	$content = $content .= ' 
-		
-		<div id="aal_api_data" data-divnumber="'. $aaldivnumber .'" data-target="'. $targeto .'"  data-postid="post-'. $post->ID .'" data-content="'. urlencode($content) .'" data-apikey="'. $apikey .'" data-clickbankid="'. $clickbankid .'" data-clickbankcat="'. $clickbankcat .'" data-clickbankgravity="'. $clickbankgravity .'" data-notimes="'. $left .'" data-apidata=\'{content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", notimes: "'. $left .'"}\' ></div>
 
-		<script type="text/javascript" src="'. plugin_dir_url( __FILE__ ) . 'js/api.js "></script>		
-		
-		'; */
 		
 $aurl = get_permalink($post->ID);;		
 		
