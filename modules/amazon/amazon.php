@@ -51,6 +51,11 @@ jQuery(document).ready(function() {
         
                 <h2>Amazon Links</h2>
                 <br /><br />
+                
+                
+<div class="updated"><br />How would you rate your experience with Wp Auto Affiliate Links ? Please send your feedback using the  <a href="http://autoaffiliatelinks.com/support-help/support-contact/">contact form on our website</a>. If you have problems you can open a ticket at  <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">wordpress support forums</a>. If you like the plugin and it works fine for you then please leave us a <a href="http://wordpress.org/support/view/plugin-reviews/wp-auto-affiliate-links?filter=5#postform">rating and a review</a>. <br /><br /></div>                
+                
+                
                 Once you add your affiliate ID and activate amazon links, they will start to appear on your website. The manual links that you add will have priority.<br />
                 This feature will only work if you have set the API Key in the "API Key" menu.
                 <br /><br />

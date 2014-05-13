@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 3.10.10
+Version: 4.0.2
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -88,7 +88,7 @@ function wpaal_create_menu() {
 
 	add_menu_page( 'Auto Affiliate Links', 'Wp Auto Affiliate Links', 'publish_pages', 'aal_topmenu', 'wpaal_manage_affiliates', $icon_url, $position );	
 	add_submenu_page( 'aal_topmenu', 'General Settings', 'General Settings', 'publish_pages', 'aal_general_settings', 'wpaal_general_settings' );
-	add_submenu_page( 'aal_topmenu', 'Modules', 'Modules', 'publish_pages', 'aal_modules', 'wpaal_modules' );
+	//add_submenu_page( 'aal_topmenu', 'Modules', 'Modules', 'publish_pages', 'aal_modules', 'wpaal_modules' );
 	add_submenu_page( 'aal_topmenu', 'Activate PRO features', 'Activate PRO features', 'publish_pages', 'aal_apimanagement', 'wpaal_apimanagement' );
 
 global $aalModules;
@@ -194,25 +194,14 @@ function wpaal_manage_affiliates() {
         <div class="icon32" id="icon-options-general"></div>  
         <h2>Wp Auto Affiliate Links PRO</h2>
 	<br /><br />
-	<?php /* <div class="updated" style="text-align:center;padding: 10px;"><a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Wp Auto Affiliate Links PRO 2.0 </a> has been released. The PRO version will automatically display links from amazon, clickbank, shareasale and comission junction. Yout only have to setup and activate your prefered networks and links will be extracted automatically. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Find out more</a>.</div>
-	*/ ?>
-	<br /><br />
-	<!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	<!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	<input type="hidden" name="cmd" value="_s-xclick">
-	<input type="hidden" name="hosted_button_id" value="RGNWD2T23VX2J">
-	<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-	<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-	</form>
-	<br /><br /> -->
         
 
-<div class="updated"><br />If you have any problems or questions about the plugin, please help us improve it and leave us a message using the <a href="http://autoaffiliatelinks.com/support-help/support-contact/">contact form on our website</a> or on <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">wordpress support forums</a>. If you like the plugin and it works fine for you then please leave us a <a href="http://wordpress.org/support/view/plugin-reviews/wp-auto-affiliate-links?filter=5#postform">rating and a review</a>. <br /><br /></div>
+<div class="updated"><br />How would you rate your experience with Wp Auto Affiliate Links ? Please send your feedback using the  <a href="http://autoaffiliatelinks.com/support-help/support-contact/">contact form on our website</a>. If you have problems you can open a ticket at  <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">wordpress support forums</a>. If you like the plugin and it works fine for you then please leave us a <a href="http://wordpress.org/support/view/plugin-reviews/wp-auto-affiliate-links?filter=5#postform">rating and a review</a>. <br /><br /></div>
 
-<div class="updated"><br />If your links are not saved after you refresh the page, update the plugin to the latest version and then deactivate it and activate it again. This will fix your problem.<br /><br /></div>
 
             
             <div id="aal_panel3">
+            			<p><b>Here you can add auto affiliate links manually. If you want links to be added automatically from Amazon, Clickbank and Shareasale use the "Activate PRO features" in the plugin menu ( on the left ), then go to each affiliate network menu and set your credentials. </b></p>
                     <p>After you add the affiliate links, make sure you write keywords in the respective field, separated by comma. If you don\'t enter any keyword, that link won\'t be displayed.</p>
                     <p>After you hit save, all keywords entered found in the content will be replaced with the links to the affiliate page</p>
 
