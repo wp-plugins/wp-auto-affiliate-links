@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.0.2
+Version: 4.0.3
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -196,7 +196,7 @@ function wpaal_manage_affiliates() {
 	<br /><br />
         
 
-<div class="updated"><br />How would you rate your experience with Wp Auto Affiliate Links ? Please send your feedback using the  <a href="http://autoaffiliatelinks.com/support-help/support-contact/">contact form on our website</a>. If you have problems you can open a ticket at  <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">wordpress support forums</a>. If you like the plugin and it works fine for you then please leave us a <a href="http://wordpress.org/support/view/plugin-reviews/wp-auto-affiliate-links?filter=5#postform">rating and a review</a>. <br /><br /></div>
+<div class="updated"><br />To activate PRO features, go to <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">our website</a> to get your API key. The PRO features include automated generation and insertion of Amazon and Clickbank links <br /><br /></div>
 
 
             
