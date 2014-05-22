@@ -56,16 +56,15 @@ $apikey = get_option('aal_apikey');
                 <?php echo $errormsg; ?>
                 <br />
                 <?php if($apikey) {
-                		echo 'Your API key: '. $apikey .' seems to be valid.';
+                		//echo 'Your API key: '. $apikey .' seems to be valid.';
                 	}
                 	else { ?>
                 <h3>Request an API key:</h3>
-                <form method="post">
-                Name: <input type="text" name="aal_apiname" /><br />
-                Email: <input type="text" name="aal_apiemail" /><br />
-                <input type="hidden" name="aal_apirequest" value="1" />
-                <input type="submit" value="Save" />
-                </form> 
+                To get you API key you have to subscribe to use our services. Use the following button to create your subscription. 
+                <br/><br />
+                <div ><a href="http://4.lucapostol.pay.ClickBank.net" target="_self"><img class="alignnone size-medium wp-image-110" title="download-now" alt="" src="http://autoaffiliatelinks.com/wp-content/uploads/2012/10/download-now-300x116.gif" width="180" /></a></div>
+                
+                
                 <?php } ?>
                 <br /><br />
     <form method="post" action="options.php" >
