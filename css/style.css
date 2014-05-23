@@ -3,3 +3,4 @@
 .aal_general_settings input[text], .aal_general_settings select, .aal_general_settings input[file] { width: 200px; }
 #aal_extended { display: none; }
 .aal_sugbox { width: 180px; float: left; }
+ul.aal_admin_list { list-style-type: disc; margin-left: 30px; }
