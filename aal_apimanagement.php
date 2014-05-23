@@ -49,22 +49,34 @@ $apikey = get_option('aal_apikey');
 <div class="wrap">  
         <div class="icon32" id="icon-options-general"></div>  
         
-                 <h2>Api Key Management</h2>
-                <br /><br />
-                <b>Revenue sharing. </b> If you activate PRO features and then you set-up Amazon and Clickbank links, along with your automatically generated links there will be one link with our affiliate code from amazon or clickbank. This will ensure the continued development of the plugin and if the outcome is good it will keep the PRO features of the plugin FREE. If you do not want this just disable Amazon and Clickbank links, or contact us and maybe we can work something out. 
+                 <h2>Auto Affiliate Links PRO features</h2>
+                 
+                 <br /><br />           
+                 
+              	 To use PRO features of Wp Auto Affiliate Links you have to go to our website and get  <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">your own API Key</a>. 
+              		<br /><br /><br />
+              	What you get by activating PRO features:
+              	<br />
+              	<ul class=aal_admin_list>
+						<li>Links will be added <b>automatically</b> based on your content 
+						<li><b>Amazon</b> Links are automatically extracted and inserted in content
+						<li><b>ClickBank</b> Links are automatically extracted and inserted
+						<li><b>Shareasale</b> links can be uploaded and displayed into your content              	
+              	</ul>
+              	<br /><br /><br />
+
+                <?php if($apikey) {
+                		
+                	}
+                	else { ?>                   	
+              	
+              	
+              	<h3>Request an API key:</h3><br /><br />
+              	You can get more info and request your API key on our website: <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Auto Affiliate Links</a>
                 <br /><br />
                 <?php echo $errormsg; ?>
                 <br />
-                <?php if($apikey) {
-                		//echo 'Your API key: '. $apikey .' seems to be valid.';
-                	}
-                	else { ?>
-                <h3>Request an API key:</h3>
-                To get you API key you have to subscribe to use our services. Use the following button to create your subscription. 
-                <br/><br />
-                <div ><a href="http://4.lucapostol.pay.ClickBank.net" target="_self"><img class="alignnone size-medium wp-image-110" title="download-now" alt="" src="http://autoaffiliatelinks.com/wp-content/uploads/2012/10/download-now-300x116.gif" width="180" /></a></div>
-                
-                
+
                 <?php } ?>
                 <br /><br />
     <form method="post" action="options.php" >

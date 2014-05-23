@@ -34,7 +34,7 @@ function wpaal_check_for_goto() {
        global $wpdb;
        global $wp_query;
 
-	   
+	    
 	   //echo $wp_query->query_vars['goto'];
        if(isset($wp_query->query_vars['goto'])) {
        //echo $wp_query->query_vars['goto'];
