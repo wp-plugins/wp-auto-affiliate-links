@@ -39,7 +39,7 @@ function wpaal_add_affiliate_links($content) {
 
 		
 		
-		$apikey = get_option('aal_apikey');
+		$apikey = trim(get_option('aal_apikey'));
 		
 		if($relationo=='nofollow') $relo = ' rel="nofollow" ';
 		else $relo = '';
