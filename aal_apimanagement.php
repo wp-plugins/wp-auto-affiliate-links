@@ -86,12 +86,25 @@ $apikey = get_option('aal_apikey');
 		do_settings_sections('aal_api_settings_display');
 		
 ?>    
+
+	<?php
+	
+		$valid = file_get_contents('http://autoaffiliatelinks.com/api/apivalidate.php?apikey='. $apikey );
+		$valid = json_decode($valid);
+		
+	
+	
+	?>
     
     
 	Enter your API key here: <input type="text" name="aal_apikey" value="<?php echo get_option('aal_apikey'); ?>" />
+	<br /><?php if($apikey) { ?>Your API key is <?php echo $valid->status; ?> <?php } ?> 
 	<?php submit_button('Save'); ?>	
 	
 	</form>
+	<br /><br />
+
+	.
 	
 	
 	</div>
