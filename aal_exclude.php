@@ -2,6 +2,8 @@
 
 
 function aalAddExcludePost(){
+			global $wpdb;            
+            
             
                 $aal_exclude_id= filter_input(INPUT_POST, 'aal_post', FILTER_SANITIZE_SPECIAL_CHARS);
                 $aal_posts =get_option('aal_exclude');
@@ -10,6 +12,11 @@ function aalAddExcludePost(){
                 $data['post_title'] = $post->post_title;
                 if(!$post->ID) {
                 die('nopost');
+					}
+					
+					$aal_posts_array = explode(',',$aal_posts);
+					if(in_array($post->ID,$aal_posts_array)) {
+						die('duplicate');					
 					}
                
                 
