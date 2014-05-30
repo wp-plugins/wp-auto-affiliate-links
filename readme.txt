@@ -78,6 +78,9 @@ If you encounter any problem with the plugin, please contact us using the form a
 
 == Changelog ==
 
+= 4.1.0 =
+* More details added to api management page
+
 = 4.0.9 =
 * Additional check on exclude post adding. If there is already a post added with that id.
 
