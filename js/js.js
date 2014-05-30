@@ -144,8 +144,11 @@ jQuery("#aal_changeOptions").submit(function() {
  							if(response=='nopost') { 
  									alert('The post ID does not correspond with any post or page'); 
  							}
+ 							else if(response=='duplicate') { 
+ 									alert('A posts with the same ID is already excluded'); 
+ 							}
  							else { 	
-                     jQuery(".aal_exclude_posts").append('<span>Post ID :<input type="text" value="'+id+'"/> ' + response + '<a href="javascript:;" id="'+id+'" class="aal_delete_exclude_link"><img src="'+ajax_script.aal_plugin_url+'images/delete.png"/></a></span><br/>');
+                     jQuery(".aal_exclude_posts").append('<span>Post ID :'+id+'   ' + response + '<a href="javascript:;" id="'+id+'" class="aal_delete_exclude_link"><img src="'+ajax_script.aal_plugin_url+'images/delete.png"/></a></span><br/>');
                      jQuery(".aal_exclude_status").append('<p><i>Exclude ID added!</i></p>');
                      
                   }

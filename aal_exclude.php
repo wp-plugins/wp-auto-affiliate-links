@@ -2,6 +2,8 @@
 
 
 function aalAddExcludePost(){
+			global $wpdb;            
+            
             
                 $aal_exclude_id= filter_input(INPUT_POST, 'aal_post', FILTER_SANITIZE_SPECIAL_CHARS);
                 $aal_posts =get_option('aal_exclude');
@@ -10,6 +12,11 @@ function aalAddExcludePost(){
                 $data['post_title'] = $post->post_title;
                 if(!$post->ID) {
                 die('nopost');
+					}
+					
+					$aal_posts_array = explode(',',$aal_posts);
+					if(in_array($post->ID,$aal_posts_array)) {
+						die('duplicate');					
 					}
                
                 
@@ -76,7 +83,7 @@ function wpaal_exclude_posts() {
 						
 				  
                     echo "<span>
-                            Post ID: <input type='text' name='aal_exclude_posts' class='all_exclude_post_item' value='".$aal_exclude_post_id."'/> <a href='".get_permalink($aal_exclude_post_id)."'>".get_the_title($aal_exclude_post_id)."</a>  -  ". $status ."                            <a href='javascript:' id='".$aal_exclude_post_id."' class='aal_delete_exclude_link'><img src='".plugin_dir_url(__FILE__)."images/delete.png'/></a><br/>
+                            Post ID: ".$aal_exclude_post_id."   <a href='".get_permalink($aal_exclude_post_id)."'>".get_the_title($aal_exclude_post_id)."</a>  -  ". $status ."                            <a href='javascript:' id='".$aal_exclude_post_id."' class='aal_delete_exclude_link'><img src='".plugin_dir_url(__FILE__)."images/delete.png'/></a><br/>
                           </span>";
 					
 				}
