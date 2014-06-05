@@ -143,6 +143,15 @@ if(get_option('aal_clickbankactive')) {
 <p>Links here will not appear right away. Someone has to access a post first before he gets linked. Then the links will be shown here too</p>
 <br /><br /><br />
 <div class="aal_link_list">
+	<div class="aal_link_item">
+
+		<div class="aal_post_link">
+			Post link
+		</div>
+		<div class="aal_key_link">
+			Keywords
+		</div>
+	</div>	
 <?php foreach($links as $link) { 
 
 		$keywords = json_decode($link->keywords);
@@ -155,15 +164,7 @@ if(get_option('aal_clickbankactive')) {
 		}
 
 ?>
-	<div class="aal_link_item">
 
-		<div class="aal_post_link">
-			Post link
-		</div>
-		<div class="aal_key_link">
-			Keywords
-		</div>
-	</div>	
 	<div style="clear: both; "></div>
 	
 	<div class="aal_link_item">
