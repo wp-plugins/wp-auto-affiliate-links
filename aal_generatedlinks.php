@@ -15,12 +15,25 @@ function wpaal_generatedlinks() {
 
 		$links = $data->links;
 		$number = $data->number;
+		$exposts = get_option('aal_exclude');
+		$exarray = explode(',',$exposts);
 		
 	
 	
 	
 	
 ?>
+
+                
+                <script type="text/javascript">
+						function forceExclude(postid) { 
+						
+							//document.aal_add_exclude_posts_form.aal_exclude_post_id.value = postid;
+						
+						
+						}               
+                
+                </script>
 
 
 <div class="wrap">  
@@ -43,6 +56,9 @@ function wpaal_generatedlinks() {
 		<div class="aal_key_link">
 			Keywords
 		</div>
+		<div class="aal_exclude_link">
+			Exclusion
+		</div>
 	</div>	
 <?php foreach($links as $link) { 
 
@@ -53,6 +69,19 @@ function wpaal_generatedlinks() {
 			
 			$kwlist .= '<a href="'. $keyword->url .'">'. $keyword->key .'</a> ';		
 		
+		}
+		
+		$exclude = '';
+		$exclude = url_to_postid( $link->url );
+		if(in_array($exclude,$exarray)) {
+			
+			$extext = "In this post links are not shown";		
+		
+		}
+		else {
+		
+			$extext = "This posts show links";		
+			
 		}
 
 ?>
@@ -65,6 +94,9 @@ function wpaal_generatedlinks() {
 		</div>
 		<div class="aal_key_link">
 			<?php echo $kwlist; ?>
+		</div>
+		<div class="aal_exclude_link">
+			<?php echo $extext; ?><!-- <a href="javascript:;" onclick="return forceExclude(<?php echo $exclude; ?>)" >Exclude this post</a> -->
 		</div>
 	</div>
 	<div style="clear: both; "></div>
