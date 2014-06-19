@@ -118,9 +118,17 @@ function aal_clickbank_validate() {
 	echo '</form></div>';
 	echo '</div>';
 
-}
-
-
-
+		
 
 ?>
+
+
+</div>
+
+
+
+
+<?php 
+	
+
+} ?>
