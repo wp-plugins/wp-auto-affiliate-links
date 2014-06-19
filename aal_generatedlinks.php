@@ -60,7 +60,10 @@ function wpaal_generatedlinks() {
 			Exclusion
 		</div>
 	</div>	
-<?php foreach($links as $link) { 
+<?php 
+
+$postsadd = array();
+foreach($links as $link) { 
 
 		$keywords = json_decode($link->keywords);
 		//print_r($keys);
@@ -73,6 +76,9 @@ function wpaal_generatedlinks() {
 		
 		$exclude = '';
 		$exclude = url_to_postid( $link->url );
+
+		if(!in_array($exclude,$postsadd)) { 		
+		
 		if(in_array($exclude,$exarray)) {
 			
 			$extext = "In this post links are not shown";		
@@ -83,6 +89,7 @@ function wpaal_generatedlinks() {
 			$extext = "This posts show links";		
 			
 		}
+		$postsadd[] = $exclude;
 
 ?>
 
@@ -100,7 +107,10 @@ function wpaal_generatedlinks() {
 		</div>
 	</div>
 	<div style="clear: both; "></div>
-<?php } ?>             
+<?php 
+	}
+
+} ?>             
              
                 
                 
