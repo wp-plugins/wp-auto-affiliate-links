@@ -79,6 +79,8 @@ function wpaal_add_affiliate_links($content) {
 					foreach($keys as $key) {
 		
 						$key = trim($key);
+						
+					  if(stripos($content, $key) !== false) {	
  						if($key) if(!in_array('/'. $key .'/', $patterns)) { 
 								
 							$redid = $row->id;
@@ -99,6 +101,9 @@ function wpaal_add_affiliate_links($content) {
 
 
 						}
+					  }
+						
+						
 					}
 				}
 		} //endforeach
