@@ -14,6 +14,9 @@ function wpaal_add_affiliate_links($content) {
 		$notimes = get_option('aal_notimes'); if(!$notimes) $notimes = -1;
 		$aal_exclude = get_option('aal_exclude');
 		$iscloacked = get_option('aal_iscloacked');
+		$cssclass = get_option('aal_cssclass');
+		if($cssclass) $lclass = $cssclass;
+		else $lclass = 'aal';
 		//$iscloacked = 0;
 		
 		$targeto = get_option('aal_target');
@@ -96,7 +99,7 @@ function wpaal_add_affiliate_links($content) {
 							$name = $key;
 							
 							$keys2[] = $name;
-							$replace[] = "<a title=\"$1\" class=\"aal\" target=\"". $targeto ."\" ". $relo ." href=\"$url\">$1</a>";
+							$replace[] = "<a title=\"$1\" class=\"". $lclass ."\" target=\"". $targeto ."\" ". $relo ." href=\"$url\">$1</a>";
 							$regexp[] = str_replace('$name', $name, $reg);	
 
 
