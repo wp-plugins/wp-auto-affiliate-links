@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.2.5
+Version: 4.2.6
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -92,7 +92,7 @@ function wpaal_create_menu() {
 	add_submenu_page( 'aal_topmenu', 'General Settings', 'General Settings', 'publish_pages', 'aal_general_settings', 'wpaal_general_settings' );
 	//add_submenu_page( 'aal_topmenu', 'Modules', 'Modules', 'publish_pages', 'aal_modules', 'wpaal_modules' );
 	add_submenu_page( 'aal_topmenu', 'Activate PRO features', 'Activate PRO features', 'publish_pages', 'aal_apimanagement', 'wpaal_apimanagement' );
-	add_submenu_page( 'aal_topmenu', 'Generated Links', 'Generated Links', 'publish_pages', 'aal_generatedlinks', 'wpaal_generatedlinks' );
+	if(get_option('aal_apikey'))  add_submenu_page( 'aal_topmenu', 'Generated Links', 'Generated Links', 'publish_pages', 'aal_generatedlinks', 'wpaal_generatedlinks' );
 	
 global $aalModules;
 		if(get_option('aal_apikey')) foreach($aalModules as $aalMod) {
