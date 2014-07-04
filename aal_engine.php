@@ -117,8 +117,6 @@ function wpaal_add_affiliate_links($content) {
 		//echo $timecounter . "<br/>";
 
 		
-
-
 			
 				if(is_array($regexp)) { 
 					

@@ -76,7 +76,7 @@ jQuery(".aalDeleteLink").live('click',function() {
             
             }else alert('Keyword must not be empty');
        
-        }else alert('URL incorect');
+        }else alert('Link entered is not valid, it should contain http://');
     
         return false;
      }); 
