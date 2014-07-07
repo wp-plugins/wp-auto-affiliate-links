@@ -116,7 +116,7 @@ function wpaal_add_affiliate_links($content) {
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";
 
-		
+	//	print_r($regexp);
 			
 				if(is_array($regexp)) { 
 					
@@ -134,6 +134,9 @@ function wpaal_add_affiliate_links($content) {
 				
 				}
 				
+	
+		$timecounter = microtime(true);
+		//echo $timecounter . "<br/>";	
 				
 				
 				//If the manual replacement did not found enough links
