@@ -100,7 +100,7 @@ foreach($links as $link) {
 			<a href="<?php echo $link->url; ?>"><?php echo $link->url; ?></a>
 		</div>
 		<div class="aal_key_link">
-			<?php echo $kwlist; ?>
+			<?php if(!$kwlist) echo 'No links generated for this post'; else echo $kwlist; ?>
 		</div>
 		<div class="aal_exclude_link">
 			<?php echo $extext; ?><!-- <a href="javascript:;" onclick="return forceExclude(<?php echo $exclude; ?>)" >Exclude this post</a> -->

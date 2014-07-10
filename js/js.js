@@ -48,7 +48,7 @@ jQuery(".aalDeleteLink").live('click',function() {
         
         if(aal_keywords!=''){
         
-            jQuery("#aal_formlink").val("");
+            jQuery("#aal_formlink").val("http://");
             jQuery("#aal_formkeywords").val("");
 
             var data = {

@@ -30,9 +30,9 @@ function aal_meta_box_callback( $post ) {
 	if(in_array($post->ID,$old)) { $checked = 'checked'; }
 
 	echo '<label for="aal_meta_exclude">';
-	_e( '<input type="checkbox" name="aal_meta_exclude" value="1" '. $checked .'> Exclude this post from affiliate linking: ', 'myplugin_textdomain' );
+	_e( '<input type="checkbox" name="aal_meta_exclude" value="1" '. $checked .'> Exclude this post from affiliate linking. ', 'myplugin_textdomain' );
 	echo '</label> ';
-	echo $value . '<br>';
+	//echo $value . '<br>';
 }
 
 
