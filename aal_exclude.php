@@ -75,16 +75,54 @@ function wpaal_exclude_posts() {
                 $aal_exclude_posts=get_option('aal_exclude');
                 $aal_exclude_posts_array=explode(',', $aal_exclude_posts);
                 
+?>
+
+
+			  	<div class='aal_excludeditem'>
+				  		<div class='aal_excludedcol'>
+				  			Post ID
+				  		</div>
+				  		<div class='aal_excludedcol aal_excludedtitle'>
+				  			Post Title
+				  		</div>
+				  		<div class='aal_excludedcol'>
+				  			Status
+				  		</div>
+				  		<div class='aal_excludedcol'>
+				  			Actions
+				  		</div>
+				  	
+				  	</div>
+				  	<div style='clear: both;'></div>
+
+
+
+<?php
+                
+                
+                
+                
                 foreach ($aal_exclude_posts_array as $aal_exclude_post_id)
                   if($aal_exclude_post_id!='') { 
 						$exclude_title = get_the_title($aal_exclude_post_id);
 						if(!$exclude_title) $status = 'post with the given id does not exist';
 							else $status = get_post_status($aal_exclude_post_id);
 						
-				  
-                    echo "<span>
-                            Post ID: ".$aal_exclude_post_id."   <a href='".get_permalink($aal_exclude_post_id)."'>".get_the_title($aal_exclude_post_id)."</a>  -  ". $status ."                            <a href='javascript:' id='".$aal_exclude_post_id."' class='aal_delete_exclude_link'><img src='".plugin_dir_url(__FILE__)."images/delete.png'/></a><br/>
-                          </span>";
+				  	if($status = 'publish') { $status = 'Published'; }
+				  	
+				  	?>
+				  	
+	
+				  	
+				  	<?php
+				  	
+				  	
+                    echo "<div class='aal_excludeditem'>
+                            <div class='aal_excludedcol'>".$aal_exclude_post_id."</div>
+                            <div class='aal_excludedcol aal_excludedtitle'> <a href='".get_permalink($aal_exclude_post_id)."'>".get_the_title($aal_exclude_post_id)."</a></div> 
+                            <div class='aal_excludedcol'>  ". $status ." </div> 
+                            <div class='aal_excludedcol'> <a href='javascript:' id='".$aal_exclude_post_id."' class='aal_delete_exclude_link'><img src='".plugin_dir_url(__FILE__)."images/delete.png'/></a></div><br/>
+                          </div><div style='clear: both;'></div>";
 					
 				}
                
