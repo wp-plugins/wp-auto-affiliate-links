@@ -88,6 +88,7 @@ jQuery("#aal_changeOptions").submit(function() {
       
         
             var aal_iscloacked = jQuery("#aal_iscloacked").is(":checked");
+            var aal_langsupport = jQuery("#aal_langsupport").is(":checked");
             var aal_showhome= jQuery("#aal_showhome").is(":checked");
             var aal_notimes= jQuery("#aal_notimes").val();
             var aal_cssclass= jQuery("#aal_cssclass").val();
@@ -99,6 +100,7 @@ jQuery("#aal_changeOptions").submit(function() {
             var data = {
                         action: 'aal_change_options',
                         aal_iscloacked: aal_iscloacked,
+                        aal_langsupport: aal_langsupport,
                         aal_showhome:aal_showhome,
                         aal_notimes:aal_notimes,
                         aal_target:aal_target,

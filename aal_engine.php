@@ -21,6 +21,8 @@ function wpaal_add_affiliate_links($content) {
 		
 		$targeto = get_option('aal_target');
 		$relationo = get_option('aal_relation');
+		$langsupport = get_option('aal_langsupport');
+		if($langsupport=='true') $langsupport = 'u';
 		$excludearray = explode(',',$aal_exclude);
 		$table_name = $wpdb->prefix . "automated_links";
 		$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
@@ -48,8 +50,8 @@ function wpaal_add_affiliate_links($content) {
 		else $relo = '';
 		
 		//regular expression setup
-		$reg_post		=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))($name)/imsU';	
-		$reg			=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))(?!(?:[^<\[]+[>\]]|[^>\]]+<\/h.>))\b($name)\b/imsU';
+		$reg_post		=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))($name)/ims'. $langsupport .'U';	
+		$reg			=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))(?!(?:[^<\[]+[>\]]|[^>\]]+<\/h.>))\b($name)\b/ims'. $langsupport .'U';
 		$strpos_fnc		=	 'stripos';		
 		global $wp_rewrite; 
 		global $post;
@@ -116,7 +118,7 @@ function wpaal_add_affiliate_links($content) {
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";
 
-	//	print_r($regexp);
+	//print_r($regexp);
 			
 				if(is_array($regexp)) { 
 					
@@ -125,7 +127,7 @@ function wpaal_add_affiliate_links($content) {
 					foreach($regexp as $regnumber => $reg1) {
 						
 						$count = 0;
-						if(stripos($content, $keys2[$regnumber]) !== false) $content = preg_replace($reg1, $replace[$regnumber], $content,1,$count);
+						if(stripos($content, $keys2[$regnumber]) !== false) { $content = preg_replace($reg1, $replace[$regnumber], $content,1,$count);  }
 						if($count>0) $sofar++;
 						if($sofar >= $notimes) break;
 						
