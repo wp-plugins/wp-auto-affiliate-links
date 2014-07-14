@@ -48,7 +48,7 @@ jQuery(".aalDeleteLink").live('click',function() {
         
         if(aal_keywords!=''){
         
-            jQuery("#aal_formlink").val("");
+            jQuery("#aal_formlink").val("http://");
             jQuery("#aal_formkeywords").val("");
 
             var data = {
@@ -76,7 +76,7 @@ jQuery(".aalDeleteLink").live('click',function() {
             
             }else alert('Keyword must not be empty');
        
-        }else alert('URL incorect');
+        }else alert('Link entered is not valid, it should contain http://');
     
         return false;
      }); 
@@ -88,8 +88,10 @@ jQuery("#aal_changeOptions").submit(function() {
       
         
             var aal_iscloacked = jQuery("#aal_iscloacked").is(":checked");
+            var aal_langsupport = jQuery("#aal_langsupport").is(":checked");
             var aal_showhome= jQuery("#aal_showhome").is(":checked");
             var aal_notimes= jQuery("#aal_notimes").val();
+            var aal_cssclass= jQuery("#aal_cssclass").val();
             var aal_target= jQuery('#aal_changeOptions input[type=radio][name=aal_target]:checked').val();
             var aal_relation= jQuery('#aal_changeOptions input[type=radio][name=aal_relation]:checked').val();
             
@@ -98,10 +100,12 @@ jQuery("#aal_changeOptions").submit(function() {
             var data = {
                         action: 'aal_change_options',
                         aal_iscloacked: aal_iscloacked,
+                        aal_langsupport: aal_langsupport,
                         aal_showhome:aal_showhome,
                         aal_notimes:aal_notimes,
                         aal_target:aal_target,
-                        aal_relation:aal_relation
+                        aal_relation:aal_relation,
+                        aal_cssclass:aal_cssclass
                        };
 
             jQuery.ajax({

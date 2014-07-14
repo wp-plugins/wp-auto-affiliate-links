@@ -14,10 +14,15 @@ function wpaal_add_affiliate_links($content) {
 		$notimes = get_option('aal_notimes'); if(!$notimes) $notimes = -1;
 		$aal_exclude = get_option('aal_exclude');
 		$iscloacked = get_option('aal_iscloacked');
+		$cssclass = get_option('aal_cssclass');
+		if($cssclass) $lclass = $cssclass;
+		else $lclass = 'aal';
 		//$iscloacked = 0;
 		
 		$targeto = get_option('aal_target');
 		$relationo = get_option('aal_relation');
+		$langsupport = get_option('aal_langsupport');
+		if($langsupport=='true') $langsupport = 'u';
 		$excludearray = explode(',',$aal_exclude);
 		$table_name = $wpdb->prefix . "automated_links";
 		$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
@@ -45,8 +50,8 @@ function wpaal_add_affiliate_links($content) {
 		else $relo = '';
 		
 		//regular expression setup
-		$reg_post		=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))($name)/imsU';	
-		$reg			=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))(?!(?:[^<\[]+[>\]]|[^>\]]+<\/h.>))\b($name)\b/imsU';
+		$reg_post		=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))($name)/ims'. $langsupport .'U';	
+		$reg			=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))(?!(?:[^<\[]+[>\]]|[^>\]]+<\/h.>))\b($name)\b/ims'. $langsupport .'U';
 		$strpos_fnc		=	 'stripos';		
 		global $wp_rewrite; 
 		global $post;
@@ -79,6 +84,8 @@ function wpaal_add_affiliate_links($content) {
 					foreach($keys as $key) {
 		
 						$key = trim($key);
+						
+					  if(stripos($content, $key) !== false) {	
  						if($key) if(!in_array('/'. $key .'/', $patterns)) { 
 								
 							$redid = $row->id;
@@ -94,11 +101,14 @@ function wpaal_add_affiliate_links($content) {
 							$name = $key;
 							
 							$keys2[] = $name;
-							$replace[] = "<a title=\"$1\" class=\"aal\" target=\"". $targeto ."\" ". $relo ." href=\"$url\">$1</a>";
+							$replace[] = "<a title=\"$1\" class=\"". $lclass ."\" target=\"". $targeto ."\" ". $relo ." href=\"$url\">$1</a>";
 							$regexp[] = str_replace('$name', $name, $reg);	
 
 
 						}
+					  }
+						
+						
 					}
 				}
 		} //endforeach
@@ -108,9 +118,7 @@ function wpaal_add_affiliate_links($content) {
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";
 
-		
-
-
+	//print_r($regexp);
 			
 				if(is_array($regexp)) { 
 					
@@ -119,7 +127,7 @@ function wpaal_add_affiliate_links($content) {
 					foreach($regexp as $regnumber => $reg1) {
 						
 						$count = 0;
-						if(stripos($content, $keys2[$regnumber]) !== false) $content = preg_replace($reg1, $replace[$regnumber], $content,1,$count);
+						if(stripos($content, $keys2[$regnumber]) !== false) { $content = preg_replace($reg1, $replace[$regnumber], $content,1,$count);  }
 						if($count>0) $sofar++;
 						if($sofar >= $notimes) break;
 						
@@ -128,6 +136,9 @@ function wpaal_add_affiliate_links($content) {
 				
 				}
 				
+	
+		$timecounter = microtime(true);
+		//echo $timecounter . "<br/>";	
 				
 				
 				//If the manual replacement did not found enough links

@@ -9,6 +9,8 @@ function aalChangeOptions(){
 		$aal_iscloacked = filter_input(INPUT_POST, 'aal_iscloacked', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_targeto = filter_input(INPUT_POST, 'aal_target', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_relationo = filter_input(INPUT_POST, 'aal_relation', FILTER_SANITIZE_SPECIAL_CHARS);
+		$aal_cssclass = filter_input(INPUT_POST, 'aal_cssclass', FILTER_SANITIZE_SPECIAL_CHARS);
+		$aal_langsupport = filter_input(INPUT_POST, 'aal_langsupport', FILTER_SANITIZE_SPECIAL_CHARS);
 		
 		//Delete the settings and re-add them		
                 delete_option('aal_iscloacked'); add_option( 'aal_iscloacked', $aal_iscloacked);		
@@ -17,7 +19,9 @@ function aalChangeOptions(){
 		delete_option('aal_exclude'); add_option( 'aal_exclude', $aal_exclude);		
 		delete_option('aal_target'); add_option( 'aal_target', $aal_targeto);
 		delete_option('aal_relation'); add_option( 'aal_relation', $aal_relationo);
-                
+      delete_option('aal_cssclass'); add_option( 'aal_cssclass', $aal_cssclass);
+      delete_option('aal_langsupport'); add_option( 'aal_langsupport', $aal_langsupport);
+               
            die();
 }
 
@@ -30,11 +34,15 @@ function wpaal_general_settings() {
         
         $iscloacked = get_option('aal_iscloacked');
 	if($iscloacked=='true') $isc = 'checked'; else $isc = '';
+	
+        $langsupport = get_option('aal_langsupport');
+	if($langsupport=='true') $langsc = 'checked'; else $langsc = '';
         
 	$showhome = get_option('aal_showhome');
         if($showhome=='true') $shse = 'checked'; else $shsel = '';
         
 	$notimes = get_option('aal_notimes');
+	$cssclass = get_option('aal_cssclass');
         
 	$targeto = get_option('aal_target');
 	if($targeto=="_blank") $tsc1 = 'checked'; else $tsc2 = 'checked';
@@ -69,7 +77,8 @@ function wpaal_general_settings() {
                     <br /><br />
                     <?php //echo $relationo; ?>
                     <span class="aal_label">Relation:</span> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1; ?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br /><br />
-                   
+                  <span class="aal_label">Link class :</span> <input type="text" name="aal_cssclass" id="aal_cssclass" value="<?php echo $cssclass; ?>" /> <br /><br /> 
+                    <span class="aal_label">International Language Support:</span> <input type="checkbox" name="aal_langsupport" id="aal_langsupport"  <?php echo $langsc;?> /> (Experimental, disable it if causing problems)<br /><br />
                    
                    <p class="submit"> <input type="submit" class="button-primary"  value="Save Changes" /> </p>
                 </form>
