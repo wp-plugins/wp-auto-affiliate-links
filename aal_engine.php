@@ -22,7 +22,7 @@ function wpaal_add_affiliate_links($content) {
 		$targeto = get_option('aal_target');
 		$relationo = get_option('aal_relation');
 		$langsupport = get_option('aal_langsupport');
-		if($langsupport=='true') $langsupport = 'u';
+		if($langsupport=='true') $langsupport = 'u'; else $langsupport = '';
 		$excludearray = explode(',',$aal_exclude);
 		$table_name = $wpdb->prefix . "automated_links";
 		$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
