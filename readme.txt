@@ -34,6 +34,18 @@ This section describes how to install the plugin and get it working.
 5. Select if you want your links to be nofollow, cloaked, to open in new window, and the maximum number of lniks that are added to every article. On some environments, the cloaking of the links is impossible. If you experience problems, turn the cloaking off and it should work just fine.
 6. If you don't get it how to make it work, or if something goes wrong, please consult http://autoaffiliatelinks.com for more info and use the contact form on the website to report the problem or to ask for help.
 
+== Screenshots ==
+
+1. Affiliate link management
+
+2. General Options
+
+3. Amazon Links
+
+4. Post example 1
+
+5. Post example 2
+
 == Frequently Asked Questions ==
 
 = The plugin will modify the content in the database ? =
