@@ -115,8 +115,9 @@ jQuery("#aal_changeOptions").submit(function() {
                     cache: false,
                     success: function(){
 
-                     jQuery(".aal_add_link_status").text('Options Saved');
-
+                     //jQuery(".aal_add_link_status").text('Options Saved');
+							alert("Settings saved");
+	
                     }
 
                });
