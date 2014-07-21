@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 3.9.1
-Stable tag: 4.3.1
+Stable tag: 4.3.1.1
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -94,7 +94,19 @@ There isn't a software limit of how many links you can import. However, you shou
 
 VERY IMPORTANT. Processing big lists of links ( over 500 ), might cause high server load if you are on a shared hosting, and the page load will be affected. Make sure that you only put the amount of links that you server can handle. With under 500 links you should be safe on every server type.
 
+= My CSV Import file is not working =
+
+Before attempting to import a file, make sure that the csv file is encoded as text file and does not have any custom formatting in it.
+
+Microsoft Excel adds odd formatting to the file and making problems at import and even breaking it. When you save a file in Microsoft Excel, make sure that you check the document type to be txt or csv, to prevent odd formatting, and on that page it should also let you select the separator or delimiter.
+
+If you can't find the options to do this, try LibreOffice, as it is a bit easier to find them there.
+
 == Changelog ==
+
+= 4.3.1.1 =
+* Updated FAQ section
+* Added some more info text inside the plugin
 
 = 4.3.1 =
 * Added option to delete multiple links at the same time
