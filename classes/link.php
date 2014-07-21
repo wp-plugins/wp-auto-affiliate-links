@@ -40,12 +40,14 @@ class AalLink
  		?>
             <form name="edit-link-<?php echo $this->id; ?>" method="post">
                   <input value="<?php echo $this->id; ?>" name="edit_id" type="hidden" />
+                  
                   <input type="hidden" name="aal_edit" value="ok" />
                                                 
                   <?php
                   if (function_exists('wp_nonce_field')) wp_nonce_field('WP-auto-affiliate-links_edit_link');
                   ?>
                   <li style="" class="aal_links_box">
+                  <input type="checkbox" name="aal_massids[]" value="<?php echo $this->id; ?>" />
                        Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="aal_link" value="<?php echo $this->link; ?>" />
                        Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="aal_keywords" value="<?php echo $this->keywords; ?>" />
                        <input style="margin: 5px 2px;" type="submit" name="ed" value="Edit" />
