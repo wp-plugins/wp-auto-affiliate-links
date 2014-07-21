@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 3.9.1
-Stable tag: 4.3.0.1
+Stable tag: 4.3.1
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -33,6 +33,18 @@ This section describes how to install the plugin and get it working.
 4. Add your affiliate links, along with one or more keywords. Do this for every affiliate link you want to display.
 5. Select if you want your links to be nofollow, cloaked, to open in new window, and the maximum number of lniks that are added to every article. On some environments, the cloaking of the links is impossible. If you experience problems, turn the cloaking off and it should work just fine.
 6. If you don't get it how to make it work, or if something goes wrong, please consult http://autoaffiliatelinks.com for more info and use the contact form on the website to report the problem or to ask for help.
+
+== Screenshots ==
+
+1. Affiliate link management
+
+2. General Options
+
+3. Amazon Links
+
+4. Post example 1
+
+5. Post example 2
 
 == Frequently Asked Questions ==
 
@@ -77,6 +89,19 @@ First you have to request an API key from the "API Key" menu. Then, from the "Cl
 If you encounter any problem with the plugin, please contact us using the form at http://autoaffiliatelinks.com and we will help you to solve your issue. It has been reported that some lightbox plugin my be interfeering with our plugin. 
 
 == Changelog ==
+
+= 4.3.1 =
+* Added option to delete multiple links at the same time
+* Added option to select all links on the page
+
+= 4.3.0.3 =
+* Added a confirmation box when the settings are updated
+
+= 4.3.0.2 =
+* Added an index.php file in every directory so directory content won't be seen from outside in certain environments
+
+= 4.3.0.1 =
+* Fixed a small bug caused by the latest update
 
 = 4.3 =
 * Added support for international chars ( european, russian, chinese, japanese, korean ). Thie has to be activated from plugin General settings page and the database should have the right charset, utf8_general_ci seems to be working well with this.
