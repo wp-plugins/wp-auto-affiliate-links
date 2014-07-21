@@ -115,8 +115,9 @@ jQuery("#aal_changeOptions").submit(function() {
                     cache: false,
                     success: function(){
 
-                     jQuery(".aal_add_link_status").text('Options Saved');
-
+                     //jQuery(".aal_add_link_status").text('Options Saved');
+							alert("Settings saved");
+	
                     }
 
                });
@@ -217,3 +218,31 @@ jQuery(".aal_delete_exclude_link").live('click',function() {
 
 }); 
 
+function aal_masscomplete() {
+
+		var checkboxes = document.getElementsByName('aal_massids[]');
+		var vals = "";
+		for (var i=0, n=checkboxes.length;i<n;i++) {
+		  if (checkboxes[i].checked) 
+		  {
+		  vals += ","+checkboxes[i].value;
+		  }
+		}
+		if (vals) vals = vals.substring(1);
+	
+	//alert(vals);
+		document.getElementById('aal_massstring').value = vals;
+
+		return confirm('Are you sure you want to delete all selected links ?');
+		return true;
+}
+
+jQuery( document ).ready(function() {
+ jQuery('#aal_selectall').click( function () {
+    jQuery('#aal_panel3 :checkbox').each(function() {
+          this.checked = true;
+      });
+  });
+
+
+});
