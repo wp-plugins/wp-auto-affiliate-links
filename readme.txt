@@ -88,6 +88,12 @@ First you have to request an API key from the "API Key" menu. Then, from the "Cl
 
 If you encounter any problem with the plugin, please contact us using the form at http://autoaffiliatelinks.com and we will help you to solve your issue. It has been reported that some lightbox plugin my be interfeering with our plugin. 
 
+= Is there a maximum limit on number of manual links I can import? =
+
+There isn't a software limit of how many links you can import. However, you should take into account that uploading a big file at once might cause problems with: maximum file size upload limit on your server ( it is usually 2MB ), and the fact that the script can break or exceed maximum execution time ( 30 seconds ), and only a part of the links will be saved. You should break your uploads into 100-200 links at once.
+
+VERY IMPORTANT. Processing big lists of links ( over 500 ), might cause high server load if you are on a shared hosting, and the page load will be affected. Make sure that you only put the amount of links that you server can handle. With under 500 links you should be safe on every server type.
+
 == Changelog ==
 
 = 4.3.1 =
