@@ -22,7 +22,12 @@ class AalLink
 	function showAll($medium = '') {
 			global $wpdb;
 			$table_name = $wpdb->prefix . "automated_links";	
-			$myrows = $wpdb->get_results( "SELECT * FROM ". $table_name );
+			$orderby = $_GET['aalorder'];
+			if($orderby) $ordersql = " ORDER BY ". $orderby; 			
+			
+			
+			$myrows = $wpdb->get_results( "SELECT * FROM ". $table_name . $ordersql);
+
 
         	 foreach($myrows as $row) {
 
