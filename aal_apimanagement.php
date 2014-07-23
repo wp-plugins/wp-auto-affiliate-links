@@ -63,7 +63,9 @@ $apikey = get_option('aal_apikey');
 						<li><b>ClickBank</b> Links are automatically extracted and inserted
 						<li><b>Shareasale</b> links can be uploaded and displayed into your content              	
               	</ul>
-              	<br /><br /><br />
+              	<br />
+					 More info about Auto Affiliate Links PRO features <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">here</a>.        	
+              	<br /><br />
 
                 <?php if($apikey) {
                 		
