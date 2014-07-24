@@ -17,6 +17,7 @@ function wpaal_add_affiliate_links($content) {
 		$cssclass = get_option('aal_cssclass');
 		if($cssclass) $lclass = $cssclass;
 		else $lclass = 'aal';
+		$displayo = get_option('aal_display');
 		//$iscloacked = 0;
 		
 		$targeto = get_option('aal_target');
@@ -61,6 +62,11 @@ function wpaal_add_affiliate_links($content) {
 		
 		//If the post is set for exclusion, exit
 		if(in_array($post->ID, $excludearray)) return $content;
+				
+		
+		//Check the display settings
+		if($post->post_type != 'post' && $post->post_type != 'page') return $content;
+		if($displayo && $post->post_type!=$displayo) return $content;
 		
 		
 			//Check to see if it is the homepage

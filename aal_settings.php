@@ -11,6 +11,7 @@ function aalChangeOptions(){
 		$aal_relationo = filter_input(INPUT_POST, 'aal_relation', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_cssclass = filter_input(INPUT_POST, 'aal_cssclass', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_langsupport = filter_input(INPUT_POST, 'aal_langsupport', FILTER_SANITIZE_SPECIAL_CHARS);
+		$aal_display = filter_input(INPUT_POST, 'aal_display', FILTER_SANITIZE_SPECIAL_CHARS);
 		
 		//Delete the settings and re-add them		
                 delete_option('aal_iscloacked'); add_option( 'aal_iscloacked', $aal_iscloacked);		
@@ -21,6 +22,7 @@ function aalChangeOptions(){
 		delete_option('aal_relation'); add_option( 'aal_relation', $aal_relationo);
       delete_option('aal_cssclass'); add_option( 'aal_cssclass', $aal_cssclass);
       delete_option('aal_langsupport'); add_option( 'aal_langsupport', $aal_langsupport);
+      delete_option('aal_display'); add_option( 'aal_display', $aal_display);
                
            die();
 }
@@ -47,6 +49,7 @@ function wpaal_general_settings() {
 	$targeto = get_option('aal_target');
 	if($targeto=="_blank") $tsc1 = 'checked'; else $tsc2 = 'checked';
 	
+	$displayo = get_option('aal_display');
         
         $relationo = get_option('aal_relation');
 	if($relationo=="nofollow") $rsc1 = 'checked'; else $rsc2 = 'checked';	
@@ -73,6 +76,16 @@ function wpaal_general_settings() {
 						<option value="3" <?php if($notimes=="3") echo "SELECTED"; ?> >Average</option>
 						<option value="4" <?php if($notimes=="4") echo "SELECTED"; ?> >High</option>
 						<option value="5" <?php if($notimes=="5") echo "SELECTED"; ?> >Very High</option>
+					</select>                    
+                    <br /><br />
+                    
+                    
+                    
+                    <span class="aal_label">Display:</span> <select name="aal_display" id="aal_display" value="<?php echo $displayo; ?>" size="1" />
+                  <option value="" <?php if($displayo=="") echo "SELECTED"; ?> >All content</option>
+						<option value="post" <?php if($displayo=="post") echo "SELECTED"; ?> >Posts Only</option>
+						<option value="page" <?php if($displayo=="page") echo "SELECTED"; ?> >Pages Only</option>
+
 					</select>                    
                     <br /><br />
                     <?php //echo $relationo; ?>
