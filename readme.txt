@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 3.9.1
-Stable tag: 4.3.3
+Stable tag: 4.3.3.1
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -104,8 +104,12 @@ If you can't find the options to do this, try LibreOffice, as it is a bit easier
 
 == Changelog ==
 
+= 4.3.3.1 =
+* Added links to support forum and FAQ section.
+
 = 4.3.3 =
 * Added option to select if links should be displayed on posts only, pages only, or both.
+* Excluded all other post types except posts and pages for execution.
 
 = 4.3.2 =
 * Order capability for affiliate links added
