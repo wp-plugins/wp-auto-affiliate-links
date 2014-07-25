@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 3.9.1
-Stable tag: 4.3.0.1
+Stable tag: 4.3.3.1
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -33,6 +33,18 @@ This section describes how to install the plugin and get it working.
 4. Add your affiliate links, along with one or more keywords. Do this for every affiliate link you want to display.
 5. Select if you want your links to be nofollow, cloaked, to open in new window, and the maximum number of lniks that are added to every article. On some environments, the cloaking of the links is impossible. If you experience problems, turn the cloaking off and it should work just fine.
 6. If you don't get it how to make it work, or if something goes wrong, please consult http://autoaffiliatelinks.com for more info and use the contact form on the website to report the problem or to ask for help.
+
+== Screenshots ==
+
+1. Affiliate link management
+
+2. General Options
+
+3. Amazon Links
+
+4. Post example 1
+
+5. Post example 2
 
 == Frequently Asked Questions ==
 
@@ -76,7 +88,48 @@ First you have to request an API key from the "API Key" menu. Then, from the "Cl
 
 If you encounter any problem with the plugin, please contact us using the form at http://autoaffiliatelinks.com and we will help you to solve your issue. It has been reported that some lightbox plugin my be interfeering with our plugin. 
 
+= Is there a maximum limit on number of manual links I can import? =
+
+There isn't a software limit of how many links you can import. However, you should take into account that uploading a big file at once might cause problems with: maximum file size upload limit on your server ( it is usually 2MB ), and the fact that the script can break or exceed maximum execution time ( 30 seconds ), and only a part of the links will be saved. You should break your uploads into 100-200 links at once.
+
+VERY IMPORTANT. Processing big lists of links ( over 500 ), might cause high server load if you are on a shared hosting, and the page load will be affected. Make sure that you only put the amount of links that you server can handle. With under 500 links you should be safe on every server type.
+
+= My CSV Import file is not working =
+
+Before attempting to import a file, make sure that the csv file is encoded as text file and does not have any custom formatting in it.
+
+Microsoft Excel adds odd formatting to the file and making problems at import and even breaking it. When you save a file in Microsoft Excel, make sure that you check the document type to be txt or csv, to prevent odd formatting, and on that page it should also let you select the separator or delimiter.
+
+If you can't find the options to do this, try LibreOffice, as it is a bit easier to find them there.
+
 == Changelog ==
+
+= 4.3.3.1 =
+* Added links to support forum and FAQ section.
+
+= 4.3.3 =
+* Added option to select if links should be displayed on posts only, pages only, or both.
+* Excluded all other post types except posts and pages for execution.
+
+= 4.3.2 =
+* Order capability for affiliate links added
+
+= 4.3.1.1 =
+* Updated FAQ section
+* Added some more info text inside the plugin
+
+= 4.3.1 =
+* Added option to delete multiple links at the same time
+* Added option to select all links on the page
+
+= 4.3.0.3 =
+* Added a confirmation box when the settings are updated
+
+= 4.3.0.2 =
+* Added an index.php file in every directory so directory content won't be seen from outside in certain environments
+
+= 4.3.0.1 =
+* Fixed a small bug caused by the latest update
 
 = 4.3 =
 * Added support for international chars ( european, russian, chinese, japanese, korean ). Thie has to be activated from plugin General settings page and the database should have the right charset, utf8_general_ci seems to be working well with this.
