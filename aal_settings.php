@@ -47,7 +47,8 @@ function wpaal_general_settings() {
 	$cssclass = get_option('aal_cssclass');
         
 	$targeto = get_option('aal_target');
-	if($targeto=="_blank") $tsc1 = 'checked'; else $tsc2 = 'checked';
+	if($targeto=="_blank") $tsc1 = 'checked';
+	if($targeto=="_self") $tsc2 = 'checked';
 	
 	$displayo = get_option('aal_display');
         

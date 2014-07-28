@@ -5,6 +5,8 @@ function aal_install() {
 	global $wpdb; 
 	$table_name = $wpdb->prefix . "automated_links";
 	
+	delete_option('aal_target'); add_option( 'aal_target', '_blank');
+	
 
 	//if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
 
@@ -12,7 +14,7 @@ function aal_install() {
 	  id mediumint(9) NOT NULL AUTO_INCREMENT,
 	  link text NOT NULL,
 	  keywords text,
-	  meta text,
+	  meta text,AQ
 	  medium varchar(255),
 	  grup int(5),
 	  grup_desc varchar(255),
