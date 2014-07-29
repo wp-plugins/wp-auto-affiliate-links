@@ -91,6 +91,7 @@ jQuery("#aal_changeOptions").submit(function() {
             var aal_langsupport = jQuery("#aal_langsupport").is(":checked");
             var aal_showhome= jQuery("#aal_showhome").is(":checked");
             var aal_notimes= jQuery("#aal_notimes").val();
+            var aal_display= jQuery("#aal_display").val();
             var aal_cssclass= jQuery("#aal_cssclass").val();
             var aal_target= jQuery('#aal_changeOptions input[type=radio][name=aal_target]:checked').val();
             var aal_relation= jQuery('#aal_changeOptions input[type=radio][name=aal_relation]:checked').val();
@@ -105,6 +106,7 @@ jQuery("#aal_changeOptions").submit(function() {
                         aal_notimes:aal_notimes,
                         aal_target:aal_target,
                         aal_relation:aal_relation,
+                        aal_display:aal_display,
                         aal_cssclass:aal_cssclass
                        };
 
@@ -115,8 +117,9 @@ jQuery("#aal_changeOptions").submit(function() {
                     cache: false,
                     success: function(){
 
-                     jQuery(".aal_add_link_status").text('Options Saved');
-
+                     //jQuery(".aal_add_link_status").text('Options Saved');
+							alert("Settings saved");
+	
                     }
 
                });
@@ -217,3 +220,31 @@ jQuery(".aal_delete_exclude_link").live('click',function() {
 
 }); 
 
+function aal_masscomplete() {
+
+		var checkboxes = document.getElementsByName('aal_massids[]');
+		var vals = "";
+		for (var i=0, n=checkboxes.length;i<n;i++) {
+		  if (checkboxes[i].checked) 
+		  {
+		  vals += ","+checkboxes[i].value;
+		  }
+		}
+		if (vals) vals = vals.substring(1);
+	
+	//alert(vals);
+		document.getElementById('aal_massstring').value = vals;
+
+		return confirm('Are you sure you want to delete all selected links ?');
+		return true;
+}
+
+jQuery( document ).ready(function() {
+ jQuery('#aal_selectall').click( function () {
+    jQuery('#aal_panel3 :checkbox').each(function() {
+          this.checked = true;
+      });
+  });
+
+
+});
