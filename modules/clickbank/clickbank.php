@@ -39,7 +39,7 @@ function aal_getScript(url, callback) {
 }
 
 
-aal_getScript("http://autoaffiliatelinks.com/api/api.php?action=allcats", function(){
+aal_getScript("//autoaffiliatelinks.com/api/api.php?action=allcats", function(){
  
 	var maincat = document.getElementById("aal_clickbankcat");
 			number = maincats.length;

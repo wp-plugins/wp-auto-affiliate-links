@@ -64,7 +64,10 @@ function wpaal_import_export() {
 			<input type="submit" value="Click here to export your links" /><input type="hidden" name="aal_export_check" value="1" />
 			</form>
 				
-				
+		<br />
+		<br />
+		
+<p>If you have problems or questions about the plugin, or if you just want to send a suggestion or request to our team, you can use the <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">support forum</a>. Make sure that you consult our <a href="http://wordpress.org/plugins/wp-auto-affiliate-links/faq/">FAQ section</a> first. </p>
 	
 	</div>
 	

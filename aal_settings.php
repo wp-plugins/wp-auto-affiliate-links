@@ -11,6 +11,7 @@ function aalChangeOptions(){
 		$aal_relationo = filter_input(INPUT_POST, 'aal_relation', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_cssclass = filter_input(INPUT_POST, 'aal_cssclass', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_langsupport = filter_input(INPUT_POST, 'aal_langsupport', FILTER_SANITIZE_SPECIAL_CHARS);
+		$aal_display = filter_input(INPUT_POST, 'aal_display', FILTER_SANITIZE_SPECIAL_CHARS);
 		
 		//Delete the settings and re-add them		
                 delete_option('aal_iscloacked'); add_option( 'aal_iscloacked', $aal_iscloacked);		
@@ -21,6 +22,7 @@ function aalChangeOptions(){
 		delete_option('aal_relation'); add_option( 'aal_relation', $aal_relationo);
       delete_option('aal_cssclass'); add_option( 'aal_cssclass', $aal_cssclass);
       delete_option('aal_langsupport'); add_option( 'aal_langsupport', $aal_langsupport);
+      delete_option('aal_display'); add_option( 'aal_display', $aal_display);
                
            die();
 }
@@ -45,8 +47,10 @@ function wpaal_general_settings() {
 	$cssclass = get_option('aal_cssclass');
         
 	$targeto = get_option('aal_target');
-	if($targeto=="_blank") $tsc1 = 'checked'; else $tsc2 = 'checked';
+	if($targeto=="_blank") $tsc1 = 'checked';
+	if($targeto=="_self") $tsc2 = 'checked';
 	
+	$displayo = get_option('aal_display');
         
         $relationo = get_option('aal_relation');
 	if($relationo=="nofollow") $rsc1 = 'checked'; else $rsc2 = 'checked';	
@@ -75,6 +79,16 @@ function wpaal_general_settings() {
 						<option value="5" <?php if($notimes=="5") echo "SELECTED"; ?> >Very High</option>
 					</select>                    
                     <br /><br />
+                    
+                    
+                    
+                    <span class="aal_label">Display:</span> <select name="aal_display" id="aal_display" value="<?php echo $displayo; ?>" size="1" />
+                  <option value="" <?php if($displayo=="") echo "SELECTED"; ?> >All content</option>
+						<option value="post" <?php if($displayo=="post") echo "SELECTED"; ?> >Posts Only</option>
+						<option value="page" <?php if($displayo=="page") echo "SELECTED"; ?> >Pages Only</option>
+
+					</select>                    
+                    <br /><br />
                     <?php //echo $relationo; ?>
                     <span class="aal_label">Relation:</span> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1; ?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br /><br />
                   <span class="aal_label">Link class :</span> <input type="text" name="aal_cssclass" id="aal_cssclass" value="<?php echo $cssclass; ?>" /> <br /><br /> 
@@ -84,6 +98,10 @@ function wpaal_general_settings() {
                 </form>
                 <span class="aal_add_link_status"> </span>	
 				</div>
+				
+	<br />
+	<br />
+<p>If you have problems or questions about the plugin, or if you just want to send a suggestion or request to our team, you can use the <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">support forum</a>. Make sure that you consult our <a href="http://wordpress.org/plugins/wp-auto-affiliate-links/faq/">FAQ section</a> first. </p>
 	
 	</div>
 	
