@@ -26,6 +26,9 @@ function aalAddLink(){
     
             	global $wpdb;
                 $table_name = $wpdb->prefix . "automated_links";
+
+
+
      	
 		// Security check and sanitize	
 		$aal_link = filter_input(INPUT_POST, 'aal_link', FILTER_SANITIZE_SPECIAL_CHARS); // $_POST['link'];
