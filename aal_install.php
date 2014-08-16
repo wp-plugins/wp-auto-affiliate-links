@@ -14,7 +14,7 @@ function aal_install() {
 	  id mediumint(9) NOT NULL AUTO_INCREMENT,
 	  link text NOT NULL,
 	  keywords text,
-	  meta text,AQ
+	  meta text,
 	  medium varchar(255),
 	  grup int(5),
 	  grup_desc varchar(255),
