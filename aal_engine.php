@@ -73,7 +73,7 @@ function wpaal_add_affiliate_links($content) {
 		else if(strlen($post->post_content)>4000) $notimes = $notimes * 3;
 		else if(strlen($post->post_content)>2000) $notimes = $notimes * 2;		
 		
-		echo $notimes;
+		//echo $notimes;
 		
 			//Check to see if it is the homepage
 			if($_SERVER['REQUEST_URI']=='/' || $_SERVER['REQUEST_URI']=='/index.php') $ishome = 1; else $ishome=0;	
