@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.3.4.1
+Version: 4.3.4.2
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -231,10 +231,10 @@ function wpaal_manage_affiliates() {
                                 <?php aalGetSugestions($myrows);?>
                     
                     <h3>Affiliate Links:</h3>
-                    
+                    <form name="aal_linksorderform" method="get">
                     <br />
                     Order list by: 
-                    <form name="aal_linksorderform" method="get">
+                    
                     <a href="?page=aal_topmenu&aalorder=id" >Date</a> | 
                     <a href="?page=aal_topmenu&aalorder=keywords">Name</a>
 							<input type="hidden" name="aal_linksorderinput" value="" />
@@ -245,8 +245,23 @@ function wpaal_manage_affiliates() {
 
 
                     </ul>
+                    
+                    
+                   <form name="aal_linksorderform" method="get">
+                    <br />
+                    Order list by: 
+                    
+                    <a href="?page=aal_topmenu&aalorder=id" >Date</a> | 
+                    <a href="?page=aal_topmenu&aalorder=keywords">Name</a>
+							<input type="hidden" name="aal_linksorderinput" value="" />
+							</form>                    
+                    
+                    
+                    <br /><br />
+                    
+                    <form name="aal_massactions" method="post" onsubmit="return aal_masscomplete(); " >
                     	<input type="submit" name="aal_selectall" id="aal_selectall" value="Select all" onclick=""/>
-							<form name="aal_massactions" method="post" onsubmit="return aal_masscomplete(); " >
+							
 							
 							<input type="hidden" name="aal_massactionscheck" value="1" />
 							<input type="hidden" name="aal_massstring" value="" id="aal_massstring" />
