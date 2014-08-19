@@ -91,6 +91,7 @@ jQuery("#aal_changeOptions").submit(function() {
             var aal_langsupport = jQuery("#aal_langsupport").is(":checked");
             var aal_showhome= jQuery("#aal_showhome").is(":checked");
             var aal_notimes= jQuery("#aal_notimes").val();
+            var aal_samekeyword= jQuery("#aal_samekeyword").val();
             var aal_display= jQuery("#aal_display").val();
             var aal_cssclass= jQuery("#aal_cssclass").val();
             var aal_target= jQuery('#aal_changeOptions input[type=radio][name=aal_target]:checked').val();
@@ -104,6 +105,7 @@ jQuery("#aal_changeOptions").submit(function() {
                         aal_langsupport: aal_langsupport,
                         aal_showhome:aal_showhome,
                         aal_notimes:aal_notimes,
+                        aal_samekeyword:aal_samekeyword,
                         aal_target:aal_target,
                         aal_relation:aal_relation,
                         aal_display:aal_display,
