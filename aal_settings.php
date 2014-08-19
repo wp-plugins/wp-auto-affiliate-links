@@ -12,6 +12,7 @@ function aalChangeOptions(){
 		$aal_cssclass = filter_input(INPUT_POST, 'aal_cssclass', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_langsupport = filter_input(INPUT_POST, 'aal_langsupport', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_display = filter_input(INPUT_POST, 'aal_display', FILTER_SANITIZE_SPECIAL_CHARS);
+		$aal_samekeyword = filter_input(INPUT_POST, 'aal_samekeyword', FILTER_SANITIZE_SPECIAL_CHARS);
 		
 		//Delete the settings and re-add them		
                 delete_option('aal_iscloacked'); add_option( 'aal_iscloacked', $aal_iscloacked);		
@@ -23,6 +24,7 @@ function aalChangeOptions(){
       delete_option('aal_cssclass'); add_option( 'aal_cssclass', $aal_cssclass);
       delete_option('aal_langsupport'); add_option( 'aal_langsupport', $aal_langsupport);
       delete_option('aal_display'); add_option( 'aal_display', $aal_display);
+      delete_option('aal_samekeyword'); add_option( 'aal_samekeyword', $aal_samekeyword);
                
            die();
 }
@@ -44,6 +46,7 @@ function wpaal_general_settings() {
         if($showhome=='true') $shse = 'checked'; else $shsel = '';
         
 	$notimes = get_option('aal_notimes');
+	$samekeyword = get_option('aal_samekeyword');
 	$cssclass = get_option('aal_cssclass');
         
 	$targeto = get_option('aal_target');
@@ -79,7 +82,15 @@ function wpaal_general_settings() {
 						<option value="5" <?php if($notimes=="5") echo "SELECTED"; ?> >Very High</option>
 					</select>                    
                     <br /><br />
-                    
+ 
+                     <span class="aal_label">Same keyword limit:</span> <select name="aal_samekeyword" id="aal_samekeyword" value="<?php echo $samekeyword ;?>" size="1" />
+                    	<option value="1" <?php if($samekeyword=="1") echo "SELECTED"; ?> >1</option>
+						<option value="2" <?php if($samekeyword=="2") echo "SELECTED"; ?> >2</option>
+						<option value="3" <?php if($samekeyword=="3") echo "SELECTED"; ?> >3</option>
+						<option value="4" <?php if($samekeyword=="4") echo "SELECTED"; ?> >4</option>
+						<option value="5" <?php if($samekeyword=="5") echo "SELECTED"; ?> >5</option>
+					</select>                    
+                    <br /><br />                   
                     
                     
                     <span class="aal_label">Display:</span> <select name="aal_display" id="aal_display" value="<?php echo $displayo; ?>" size="1" />
