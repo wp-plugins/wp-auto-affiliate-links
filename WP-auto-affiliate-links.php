@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.3.4.4
+Version: 4.3.4.5
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -210,10 +210,7 @@ function wpaal_manage_affiliates() {
 	<br /><br />
         
 
-<div class="updated"><br />To activate PRO features, go to <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">our website</a> to get your API key. The PRO features include automated generation and insertion of Amazon and Clickbank links <br /><br /></div>
-
-
-            
+       
             <div id="aal_panel3">
             			<p><b>Here you can add auto affiliate links manually. If you want links to be added automatically from Amazon, Clickbank and Shareasale use the "Activate PRO features" in the plugin menu ( on the left ), then go to each affiliate network menu and set your credentials. </b></p>
                     <p>After you add the affiliate links, make sure you write keywords in the respective field, separated by comma. If you don't enter any keyword, that link won't be displayed. </p>
@@ -228,6 +225,9 @@ function wpaal_manage_affiliates() {
                     </form>
                     
                     <br/>Here is a list with most used keywords in all your blog. Click on each and it will be added in the form above so you can assign a link for it.<br />
+                    
+<div class="updated"><br />If you want links to be extracted and displayed automatically from Amazon or Clickbank, you should consider activating PRO features. Go to <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">our website</a> to get your API key. <br /><br /></div>                    
+                    
                                 <?php aalGetSugestions($myrows);?>
                     
                     <h3>Affiliate Links:</h3>
