@@ -47,19 +47,40 @@ function wpaal_generatedlinks() {
              
              
 <br />
-<div class="aal_link_list">
-	<div class="aal_link_item">
+<table class="widefat fixed" >
+	<thead>
+		<tr>
 
-		<div class="aal_post_link">
+		<th>
 			Post link
-		</div>
-		<div class="aal_key_link">
+		</th>
+		<th>
 			Keywords
-		</div>
-		<div class="aal_exclude_link">
+		</th>
+		<th>
 			Exclusion
-		</div>
-	</div>	
+		</th>
+		</tr>
+	</thead>
+	
+	<tfoot>
+		<tr>
+
+		<th>
+			Post link
+		</th>
+		<th>
+			Keywords
+		</th>
+		<th>
+			Exclusion
+		</th>
+		</tr>
+	</tfoot>
+	
+	<tbody>
+	
+	
 <?php 
 
 $postsadd = array();
@@ -93,28 +114,26 @@ foreach($links as $link) {
 
 ?>
 
-	<div style="clear: both; "></div>
 	
-	<div class="aal_link_item">
-		<div class="aal_post_link">
+	<tr>
+		<td>
 			<a href="<?php echo $link->url; ?>"><?php echo $link->url; ?></a>
-		</div>
-		<div class="aal_key_link">
+		</td>
+		<td>
 			<?php if(!$kwlist) echo 'No links generated for this post'; else echo $kwlist; ?>
-		</div>
-		<div class="aal_exclude_link">
+		</td>
+		<td>
 			<?php echo $extext; ?><!-- <a href="javascript:;" onclick="return forceExclude(<?php echo $exclude; ?>)" >Exclude this post</a> -->
-		</div>
-	</div>
-	<div style="clear: both; "></div>
+		</td>
+	</tr>
 <?php 
 	}
 
 } ?>             
              
                 
-                
- </div>
+     </tbody>
+ </table>
 
 
 
