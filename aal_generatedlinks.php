@@ -83,6 +83,7 @@ function wpaal_generatedlinks() {
 	
 <?php 
 
+$alternate = 0;
 $postsadd = array();
 foreach($links as $link) { 
 
@@ -115,7 +116,7 @@ foreach($links as $link) {
 ?>
 
 	
-	<tr>
+	<tr class="<?php if($alternate % 2 == 0) echo 'alternate'; ?>" >
 		<td>
 			<a href="<?php echo $link->url; ?>"><?php echo $link->url; ?></a>
 		</td>
@@ -127,6 +128,7 @@ foreach($links as $link) {
 		</td>
 	</tr>
 <?php 
+	$alternate++;
 	}
 
 } ?>             
