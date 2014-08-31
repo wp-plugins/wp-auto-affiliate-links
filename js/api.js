@@ -14,6 +14,7 @@ jQuery(document).ready(function() {
 			aal_clickbankgravity = datadiv.getAttribute('data-clickbankgravity');
 			aal_notimes = datadiv.getAttribute('data-notimes');
 			aal_clickbankcat = datadiv.getAttribute('data-clickbankcat');
+			aal_amazonlocal = datadiv.getAttribute('data-amazonlocal');
 			aal_amazonid = datadiv.getAttribute('data-amazonid');
 			aal_amazoncat = datadiv.getAttribute('data-amazoncat');
 			aal_amazonactive = datadiv.getAttribute('data-amazonactive');
@@ -29,7 +30,7 @@ jQuery(document).ready(function() {
 			//console.log(aal_content);
 			
 			
-			aalapidata = {content: aal_content, apikey: aal_apikey, clickbankid: aal_clickbankid, clickbankcat: aal_clickbankcat,  clickbankgravity: aal_clickbankgravity, amazonid: aal_amazonid, amazoncat: aal_amazoncat, amazonactive: aal_amazonactive, clickbankactive: aal_clickbankactive, shareasaleactive: aal_shareasaleactive, shareasaleid: aal_shareasaleid,  aurl: aal_aurl, notimes: aal_notimes};
+			aalapidata = {content: aal_content, apikey: aal_apikey, clickbankid: aal_clickbankid, clickbankcat: aal_clickbankcat,  clickbankgravity: aal_clickbankgravity, amazonid: aal_amazonid, amazoncat: aal_amazoncat, amazonlocal: aal_amazonlocal, amazonactive: aal_amazonactive, clickbankactive: aal_clickbankactive, shareasaleactive: aal_shareasaleactive, shareasaleid: aal_shareasaleid,  aurl: aal_aurl, notimes: aal_notimes};
 			//alert(aalapidata);
 
 		

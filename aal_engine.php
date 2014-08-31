@@ -34,6 +34,7 @@ function wpaal_add_affiliate_links($content) {
 		$clickbankcat = get_option('aal_clickbankcat');
 		$clickbankgravity = get_option('aal_clickbankgravity');
 		$clickbankactive = get_option('aal_clickbankactive');
+		$amazonlocal = get_option('aal_amazonlocal');
 		
 		$amazonid = get_option('aal_amazonid');
 		$amazonapikey = get_option('aal_amazonapikey'); 
@@ -170,11 +171,11 @@ function wpaal_add_affiliate_links($content) {
 		$left = $notimes - $sofar;		
 
 		
-$aurl = get_permalink($post->ID);;		
+$aurl = get_permalink($post->ID);
 		
 $content = $content .= ' 
 		
-		<div id="aal_api_data" data-divnumber="'. $aaldivnumber .'" data-target="'. $targeto .'"  data-postid="post-'. $post->ID .'" data-apikey="'. $apikey .'" data-clickbankid="'. $clickbankid .'" data-clickbankcat="'. $clickbankcat .'" data-clickbankgravity="'. $clickbankgravity .'"  data-amazonid="'. $amazonid .'" data-amazoncat="'. $amazoncat .'" data-amazonactive="'. $amazonactive .'" data-clickbankactive="'. $clickbankactive .'"  data-shareasaleid="'. $shareasaleid .'"   data-shareasaleactive="'. $shareasaleactive .'"  data-aurl="'. $aurl .'" data-notimes="'. $left .'" data-apidata=\'{content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", amazonid: "'. $amazonid .'", amazoncat: "'. $amazoncat .'", amazonactive: "'. $amazonactive .'", clickbankactive: "'. $clickbankactive .'", shareasaleid: "'. $shareasaleid .'", shareasaleactive: "'. $shareasaleactive .'", aurl: "'. $aurl .'", notimes: "'. $left .'"}\' ></div>
+		<div id="aal_api_data" data-divnumber="'. $aaldivnumber .'" data-target="'. $targeto .'"  data-postid="post-'. $post->ID .'" data-apikey="'. $apikey .'" data-clickbankid="'. $clickbankid .'" data-clickbankcat="'. $clickbankcat .'" data-clickbankgravity="'. $clickbankgravity .'"  data-amazonid="'. $amazonid .'" data-amazoncat="'. $amazoncat .'" data-amazonlocal="'. $amazonlocal .'" data-amazonactive="'. $amazonactive .'" data-clickbankactive="'. $clickbankactive .'"  data-shareasaleid="'. $shareasaleid .'"   data-shareasaleactive="'. $shareasaleactive .'"  data-aurl="'. $aurl .'" data-notimes="'. $left .'" data-apidata=\'{content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", amazonid: "'. $amazonid .'", amazoncat: "'. $amazoncat .'", amazonlocal: "'. $amazonlocal .'", amazonactive: "'. $amazonactive .'", clickbankactive: "'. $clickbankactive .'", shareasaleid: "'. $shareasaleid .'", shareasaleactive: "'. $shareasaleactive .'", aurl: "'. $aurl .'", notimes: "'. $left .'"}\' ></div>
 
 		';		
 		
