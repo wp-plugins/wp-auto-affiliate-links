@@ -128,8 +128,8 @@ jQuery(document).ready(function() {
 		<option value="fr" <?php if(get_option('aal_amazonlocal')=='fr') echo "selected"; ?>>FR</option>
 		<option value="in" <?php if(get_option('aal_amazonlocal')=='in') echo "selected"; ?>>IN</option>
 		<option value="it" <?php if(get_option('aal_amazonlocal')=='it') echo "selected"; ?>>IT</option>
-		<option value="jp" <?php if(get_option('aal_amazonlocal')=='jp') echo "selected"; ?>>JP</option>
-		<option value="uk" <?php if(get_option('aal_amazonlocal')=='uk') echo "selected"; ?>>UK</option>
+		<option value="jp" <?php if(get_option('aal_amazonlocal')=='co.jp') echo "selected"; ?>>JP</option>
+		<option value="uk" <?php if(get_option('aal_amazonlocal')=='co.uk') echo "selected"; ?>>UK</option>
 	</select>
 	<br />
 		<span class="aal_label">Status: </span><select name="aal_amazonactive">
