@@ -16,6 +16,7 @@ function aal_amazon_register_settings() {
    register_setting( 'aal_amazon_settings', 'aal_amazonsecret' );
    register_setting( 'aal_amazon_settings', 'aal_amazoncat' );
    register_setting( 'aal_amazon_settings', 'aal_amazonactive' );
+   register_setting( 'aal_amazon_settings', 'aal_amazonlocal' );
 }
 
 
@@ -116,6 +117,19 @@ jQuery(document).ready(function() {
 		<option value="Wireless">Cell Phones</option>		
 		<option value="WirelessAccessories">Cell Phones & Accessories</option>		
 		<option value="All">All Categories</option>
+	</select>
+	<br />
+	<span class="aal_label">Localization: </span><select id="aal_amazonlocal"  name="aal_amazonlocal" >
+		<option value="com" <?php if(get_option('aal_amazonlocal')=='com') echo "selected"; ?> >COM</option>
+		<option value="ca" <?php if(get_option('aal_amazonlocal')=='ca') echo "selected"; ?>>CA</option>
+		<option value="cn" <?php if(get_option('aal_amazonlocal')=='cn') echo "selected"; ?>>CN</option>
+		<option value="de" <?php if(get_option('aal_amazonlocal')=='de') echo "selected"; ?>>DE</option>
+		<option value="es" <?php if(get_option('aal_amazonlocal')=='es') echo "selected"; ?>>ES</option>
+		<option value="fr" <?php if(get_option('aal_amazonlocal')=='fr') echo "selected"; ?>>FR</option>
+		<option value="in" <?php if(get_option('aal_amazonlocal')=='in') echo "selected"; ?>>IN</option>
+		<option value="it" <?php if(get_option('aal_amazonlocal')=='it') echo "selected"; ?>>IT</option>
+		<option value="jp" <?php if(get_option('aal_amazonlocal')=='co.jp') echo "selected"; ?>>JP</option>
+		<option value="uk" <?php if(get_option('aal_amazonlocal')=='co.uk') echo "selected"; ?>>UK</option>
 	</select>
 	<br />
 		<span class="aal_label">Status: </span><select name="aal_amazonactive">
