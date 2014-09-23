@@ -12,6 +12,9 @@ function wpaal_add_affiliate_links($content) {
 		//Getting the keywords and options
 		$showhome = get_option('aal_showhome');
 		$notimes = get_option('aal_notimes'); if(!$notimes) $notimes = -1;
+		$notimescustom = trim(get_option('aal_notimescustom'));
+		if($notimes=='custom') if(is_numeric($notimescustom) && $notimescustom>0) $notimes = $notimescustom; else $notimes = 3;
+		//echo $notimes;
 		$aal_exclude = get_option('aal_exclude');
 		$iscloacked = get_option('aal_iscloacked');
 		$cssclass = get_option('aal_cssclass');
