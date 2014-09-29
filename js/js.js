@@ -159,7 +159,7 @@ jQuery("#aal_changeOptions").submit(function() {
  									alert('A posts with the same ID is already excluded'); 
  							}
  							else { 	
-                     jQuery(".aal_exclude_posts").append('<span>Post ID :'+id+'   ' + response + '<a href="javascript:;" id="'+id+'" class="aal_delete_exclude_link"><img src="'+ajax_script.aal_plugin_url+'images/delete.png"/></a></span><br/>');
+                     jQuery(".aal_exclude_posts").append('<div class="aal_excludeditem"><div class="aal_excludedcol">'+id+'</div>   ' + response + '<div class="aal_excludedcol"><a href="javascript:;" id="'+id+'" class="aal_delete_exclude_link"><img src="'+ajax_script.aal_plugin_url+'images/delete.png"/></a></div><br/></div><div style="clear: both;"></div>');
                      jQuery(".aal_exclude_status").append('<p><i>Exclude ID added!</i></p>');
                      
                   }
@@ -181,7 +181,7 @@ jQuery(".aal_delete_exclude_link").live('click',function() {
         if (answer){
         
         //delete selected exclude id box from the form 
-        var linkContainer = jQuery(this).parent();
+        var linkContainer = jQuery(this).parent().parent();
         linkContainer.slideUp('slow', function() {jQuery(this).remove();
             
 });

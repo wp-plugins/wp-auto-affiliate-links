@@ -25,8 +25,9 @@ function aalAddExcludePost(){
                     
                  
                 delete_option('aal_exclude');add_option( 'aal_exclude', $aal_exclude);
-                echo " <a href='".get_permalink($post->ID)."'>".get_the_title($post->ID)."</a>  -  ". get_post_status($post->ID) ."                            ";
+                echo " <div class='aal_excludedcol aal_excludedtitle'><a href='".get_permalink($post->ID)."'>".get_the_title($post->ID)."</a></div>  <div class='aal_excludedcol'>  ". get_post_status($post->ID) ." </div>                           ";
                 
+   
                  
                 die();
 }
