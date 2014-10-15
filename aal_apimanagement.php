@@ -9,6 +9,9 @@ add_action( 'admin_init', 'aal_api_register_settings' );
 
 function aal_api_register_settings() { 
    register_setting( 'aal_api_settings', 'aal_apikey' );
+   register_setting( 'aal_api_settings', 'aal_amazonactive' );
+   register_setting( 'aal_api_settings', 'aal_clickbankactive' );
+   register_setting( 'aal_api_settings', 'aal_shareasaleactive' );
 }	
 	
 
@@ -110,12 +113,53 @@ $apikey = get_option('aal_apikey');
 	
 	}  ?>
 	
-	</form>
+
+<?php if($valid->status == 'valid' ) {  ?>
+	
 	<br /><br />
 
-	.
+	<h3>Manage PRO Modules</h3>
+	<table class="widefat fixed" > 
+	<tr class="alternate">
+		<td>Amazon</td>
+		<td><select name="aal_amazonactive">
+			<option value="0" <?php if(get_option('aal_amazonactive')=='0') echo "selected"; ?> > Inactive</option>
+			<option value="1" <?php if(get_option('aal_amazonactive')=='1') echo "selected"; ?> >Active</option>
+		</select></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Clickbank</td>
+		<td><select name="aal_clickbankactive">
+			<option value="0" <?php if(get_option('aal_clickbankactive')=='0') echo "selected"; ?> > Inactive</option>
+			<option value="1" <?php if(get_option('aal_clickbankactive')=='1') echo "selected"; ?> >Active</option>
+		</select></td>
+	</tr>
+	<tr class="alternate">
+		<td>Shareasale</td>
+		<td><select name="aal_shareasaleactive">
+			<option value="0" <?php if(get_option('aal_shareasaleactive')=='0') echo "selected"; ?> > Inactive</option>
+			<option value="1" <?php if(get_option('aal_shareasaleactive')=='1') echo "selected"; ?> >Active</option>
+		</select></td>
+	</tr>	
+	</table>
 	
 	
+	<?php submit_button('Save'); ?>	
+	
+	<?php } else { ?>
+	
+	
+	<input type="hidden" name="aal_amazonactive" value="<?php echo get_option('aal_amazonactive'); ?>" />
+	<input type="hidden" name="aal_clickbankactive" value="<?php echo get_option('aal_clickbankactive'); ?>" />
+	<input type="hidden" name="aal_shareasaleactive" value="<?php echo get_option('aal_shareasaleactive'); ?>" />
+	
+	<?php } ?>
+	
+	</form>
 	</div>
 	
 	
