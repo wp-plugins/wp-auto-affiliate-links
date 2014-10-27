@@ -104,6 +104,9 @@ If you can't find the options to do this, try LibreOffice, as it is a bit easier
 
 == Changelog ==
 
+= 4.4.3.2 =
+* Fixed shareasale link addition
+
 = 4.4.3.1 =
 * Added an info message on api management page
 
