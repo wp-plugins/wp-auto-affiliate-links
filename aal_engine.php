@@ -48,7 +48,10 @@ function wpaal_add_affiliate_links($content) {
 		$shareasaleid = get_option('aal_shareasaleid');
 		$shareasaleactive = get_option('aal_shareasaleactive');
 
-
+		$cjactive = get_option('aal_cjactive');
+		
+		$ebayactive = get_option('aal_ebayactive');
+		$ebayid = get_option('aal_ebayid');
 		
 		
 		$apikey = trim(get_option('aal_apikey'));
@@ -160,11 +163,12 @@ function wpaal_add_affiliate_links($content) {
 				
 				
 				//If the manual replacement did not found enough links
-				if($sofar<$notimes && ($clickbankactive || $amazonactive || $shareasaleactive)) {
+				if($sofar<$notimes && ($clickbankactive || $amazonactive || $shareasaleactive || $cjactive || $ebayactive)) {
 					
 					if(!$clickbankactive) { $clickbankid = ''; }
 					if(!$amazonactive) { $amazonid = ''; }
 					if(!$shareasaleactive) { $shareasaleid = ''; }
+					if(!$ebayactive) { $ebayid = ''; }
 
 					
 		$aaldivnumber = rand(1,10000);			
@@ -178,7 +182,7 @@ $aurl = get_permalink($post->ID);
 		
 $content = $content .= ' 
 		
-		<div id="aal_api_data" data-divnumber="'. $aaldivnumber .'" data-target="'. $targeto .'"  data-postid="post-'. $post->ID .'" data-apikey="'. $apikey .'" data-clickbankid="'. $clickbankid .'" data-clickbankcat="'. $clickbankcat .'" data-clickbankgravity="'. $clickbankgravity .'"  data-amazonid="'. $amazonid .'" data-amazoncat="'. $amazoncat .'" data-amazonlocal="'. $amazonlocal .'" data-amazonactive="'. $amazonactive .'" data-clickbankactive="'. $clickbankactive .'"  data-shareasaleid="'. $shareasaleid .'"   data-shareasaleactive="'. $shareasaleactive .'"  data-aurl="'. $aurl .'" data-notimes="'. $left .'" data-apidata=\'{content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", amazonid: "'. $amazonid .'", amazoncat: "'. $amazoncat .'", amazonlocal: "'. $amazonlocal .'", amazonactive: "'. $amazonactive .'", clickbankactive: "'. $clickbankactive .'", shareasaleid: "'. $shareasaleid .'", shareasaleactive: "'. $shareasaleactive .'", aurl: "'. $aurl .'", notimes: "'. $left .'"}\' ></div>
+		<div id="aal_api_data" data-divnumber="'. $aaldivnumber .'" data-target="'. $targeto .'"  data-postid="post-'. $post->ID .'" data-apikey="'. $apikey .'" data-clickbankid="'. $clickbankid .'" data-clickbankcat="'. $clickbankcat .'" data-clickbankgravity="'. $clickbankgravity .'"  data-amazonid="'. $amazonid .'" data-amazoncat="'. $amazoncat .'" data-amazonlocal="'. $amazonlocal .'" data-amazonactive="'. $amazonactive .'" data-clickbankactive="'. $clickbankactive .'"  data-shareasaleid="'. $shareasaleid .'"   data-shareasaleactive="'. $shareasaleactive .'" data-cjactive="'. $cjactive .'"  data-ebayactive="'. $ebayactive .'"  data-ebayid="'. $ebayid .'" data-aurl="'. $aurl .'" data-notimes="'. $left .'" data-apidata=\'{content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", amazonid: "'. $amazonid .'", amazoncat: "'. $amazoncat .'", amazonlocal: "'. $amazonlocal .'", amazonactive: "'. $amazonactive .'", clickbankactive: "'. $clickbankactive .'", shareasaleid: "'. $shareasaleid .'", shareasaleactive: "'. $shareasaleactive .'", cjactive: "'. $cjactive .'", ebayactive: "'. $ebayactive .'", ebayid: "'. $ebayid .'", aurl: "'. $aurl .'", notimes: "'. $left .'"}\' ></div>
 
 		';		
 		
