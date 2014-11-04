@@ -121,6 +121,11 @@ function aalShareasaleActions() {
 		while (($data = fgetcsv($handle, 1000, "|")) !== FALSE) {
 			//print_r($data);
 			$link = $data[4];
+			if(!strpos($link, 'YOURUSERID')) $link = $data[3]; 
+			if(!strpos($link, 'YOURUSERID')) $link = $data[2];
+			if(!strpos($link, 'YOURUSERID')) $link = $data[4];
+			if(!strpos($link, 'YOURUSERID')) $link = $data[5];
+			if(!strpos($link, 'YOURUSERID')) continue;
 			$merchant = $data[3];
 			//$link = str_replace("YOURUSERID", $sasid, $data[4]);
 			$meta = $data[1];
@@ -138,6 +143,7 @@ function aalShareasaleActions() {
 		
 		
 		}
+		// print_r($slearray);
 		fclose($handle);
 		
 				//$getcontent = 'content='. urlencode($content) .'&clickbankid='. $clickbankid;	
