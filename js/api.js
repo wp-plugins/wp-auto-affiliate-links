@@ -21,6 +21,11 @@ jQuery(document).ready(function() {
 			aal_clickbankactive = datadiv.getAttribute('data-clickbankactive');
 			aal_shareasaleid = datadiv.getAttribute('data-shareasaleid');
 			aal_shareasaleactive = datadiv.getAttribute('data-shareasaleactive');
+			aal_cjactive = datadiv.getAttribute('data-cjactive');
+			aal_ebayactive = datadiv.getAttribute('data-ebayactive');
+			aal_ebayid = datadiv.getAttribute('data-ebayid');
+			aal_bestbuyactive = datadiv.getAttribute('data-bestbuyactive');
+			aal_bestbuyid = datadiv.getAttribute('data-bestbuyid');
 			aal_aurl = datadiv.getAttribute('data-aurl');
 			// aal_content = datadiv.getAttribute('data-content');
 			aal_content = encodeURIComponent(document.getElementById('aalcontent_' + aal_divnumber).parentNode.innerHTML);
@@ -30,7 +35,7 @@ jQuery(document).ready(function() {
 			//console.log(aal_content);
 			
 			
-			aalapidata = {content: aal_content, apikey: aal_apikey, clickbankid: aal_clickbankid, clickbankcat: aal_clickbankcat,  clickbankgravity: aal_clickbankgravity, amazonid: aal_amazonid, amazoncat: aal_amazoncat, amazonlocal: aal_amazonlocal, amazonactive: aal_amazonactive, clickbankactive: aal_clickbankactive, shareasaleactive: aal_shareasaleactive, shareasaleid: aal_shareasaleid,  aurl: aal_aurl, notimes: aal_notimes};
+			aalapidata = {content: aal_content, apikey: aal_apikey, clickbankid: aal_clickbankid, clickbankcat: aal_clickbankcat,  clickbankgravity: aal_clickbankgravity, amazonid: aal_amazonid, amazoncat: aal_amazoncat, amazonlocal: aal_amazonlocal, amazonactive: aal_amazonactive, clickbankactive: aal_clickbankactive, shareasaleactive: aal_shareasaleactive, shareasaleid: aal_shareasaleid, cjactive: aal_cjactive, ebayactive: aal_ebayactive, ebayid: aal_ebayid, bestbuyactive: aal_bestbuyactive, bestbuyid: aal_bestbuyid, aurl: aal_aurl, notimes: aal_notimes};
 			//alert(aalapidata);
 
 		
