@@ -1,7 +1,7 @@
 <?php
 
 
-$aalEbay = new aalModule('ebay','Ebay Links');
+$aalEbay = new aalModule('ebay','Ebay Links',7);
 $aalModules[] = $aalEbay;
 
 $aalEbay->aalModuleHook('content','aalEbayDisplay');

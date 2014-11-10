@@ -1,7 +1,7 @@
 <?php
 
 
-$aalAmazon = new aalModule('amazon','Amazon Links');
+$aalAmazon = new aalModule('amazon','Amazon Links',3);
 $aalModules[] = $aalAmazon;
 
 $aalAmazon->aalModuleHook('content','aalAmazonDisplay');

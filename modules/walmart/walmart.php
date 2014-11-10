@@ -1,7 +1,7 @@
 <?php
 
 
-$aalWalmart = new aalModule('walmart','Walmart Links');
+$aalWalmart = new aalModule('walmart','Walmart Links',9);
 $aalModules[] = $aalWalmart;
 
 $aalWalmart->aalModuleHook('content','aalWalmartDisplay');

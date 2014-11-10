@@ -1,7 +1,7 @@
 <?php
 
 
-$aalBestbuy = new aalModule('bestbuy','Best Buy Links');
+$aalBestbuy = new aalModule('bestbuy','Best Buy Links',8);
 $aalModules[] = $aalBestbuy;
 
 $aalBestbuy->aalModuleHook('content','aalBestbuyDisplay');

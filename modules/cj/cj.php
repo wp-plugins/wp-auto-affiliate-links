@@ -1,7 +1,7 @@
 <?php
 
 
-$aalCj = new aalModule('cj','Commission Junction Links');
+$aalCj = new aalModule('cj','Commission Junction Links',6);
 $aalModules[] = $aalCj;
 
 $aalCj->aalModuleHook('content','aalCjDisplay');

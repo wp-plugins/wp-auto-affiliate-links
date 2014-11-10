@@ -1,7 +1,7 @@
 <?php
 
 
-$aalShareasale = new aalModule('shareasale','Shareasale Links');
+$aalShareasale = new aalModule('shareasale','Shareasale Links',5);
 $aalModules[] = $aalShareasale;
 
 $aalShareasale->aalModuleHook('content','aalShareasaleDisplay');

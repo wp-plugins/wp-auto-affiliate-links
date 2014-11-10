@@ -15,6 +15,7 @@ function aal_api_register_settings() {
    register_setting( 'aal_api_settings', 'aal_cjactive' );
    register_setting( 'aal_api_settings', 'aal_ebayactive' );
    register_setting( 'aal_api_settings', 'aal_bestbuyactive' );
+   register_setting( 'aal_api_settings', 'aal_walmartactive' );
 }	
 	
 
@@ -131,7 +132,7 @@ $apikey = get_option('aal_apikey');
 			<option value="0" <?php if(get_option('aal_amazonactive')=='0') echo "selected"; ?> > Inactive</option>
 			<option value="1" <?php if(get_option('aal_amazonactive')=='1') echo "selected"; ?> >Active</option>
 		</select></td>
-		<td><a href="<?php echo admin_url('admin.php?page=amazon'); ?>">Configure Amazon Module</a></td>
+		<td><a href="<?php echo admin_url('admin.php?page=aal_module_amazon'); ?>">Configure Amazon Module</a></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -142,7 +143,7 @@ $apikey = get_option('aal_apikey');
 			<option value="0" <?php if(get_option('aal_clickbankactive')=='0') echo "selected"; ?> > Inactive</option>
 			<option value="1" <?php if(get_option('aal_clickbankactive')=='1') echo "selected"; ?> >Active</option>
 		</select></td>
-		<td><a href="<?php echo admin_url('admin.php?page=clickbank'); ?>">Configure Clickbank Module</a></td>
+		<td><a href="<?php echo admin_url('admin.php?page=aal_module_clickbank'); ?>">Configure Clickbank Module</a></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -153,7 +154,7 @@ $apikey = get_option('aal_apikey');
 			<option value="0" <?php if(get_option('aal_shareasaleactive')=='0') echo "selected"; ?> > Inactive</option>
 			<option value="1" <?php if(get_option('aal_shareasaleactive')=='1') echo "selected"; ?> >Active</option>
 		</select></td>
-		<td><a href="<?php echo admin_url('admin.php?page=shareasale'); ?>">Configure Shareasale Module</a></td>
+		<td><a href="<?php echo admin_url('admin.php?page=aal_module_shareasale'); ?>">Configure Shareasale Module</a></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -164,7 +165,7 @@ $apikey = get_option('aal_apikey');
 			<option value="0" <?php if(get_option('aal_cjactive')=='0') echo "selected"; ?> > Inactive</option>
 			<option value="1" <?php if(get_option('aal_cjactive')=='1') echo "selected"; ?> >Active</option>
 		</select></td>
-		<td><a href="<?php echo admin_url('admin.php?page=cj'); ?>">Configure Commission Junction Module</a></td>
+		<td><a href="<?php echo admin_url('admin.php?page=aal_module_cj'); ?>">Configure Commission Junction Module</a></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -175,7 +176,7 @@ $apikey = get_option('aal_apikey');
 			<option value="0" <?php if(get_option('aal_bestbuyactive')=='0') echo "selected"; ?> > Inactive</option>
 			<option value="1" <?php if(get_option('aal_bestbuyactive')=='1') echo "selected"; ?> >Active</option>
 		</select></td>
-		<td><a href="<?php echo admin_url('admin.php?page=bestbuy'); ?>">Configure Best Buy Module</a></td>
+		<td><a href="<?php echo admin_url('admin.php?page=aal_module_bestbuy'); ?>">Configure Best Buy Module</a></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -186,7 +187,18 @@ $apikey = get_option('aal_apikey');
 			<option value="0" <?php if(get_option('aal_ebayactive')=='0') echo "selected"; ?> > Inactive</option>
 			<option value="1" <?php if(get_option('aal_ebayactive')=='1') echo "selected"; ?> >Active</option>
 		</select></td>
-		<td><a href="<?php echo admin_url('admin.php?page=ebay'); ?>">Configure Ebay Module</a></td>
+		<td><a href="<?php echo admin_url('admin.php?page=aal_module_ebay'); ?>">Configure Ebay Module</a></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>	
+	<tr>
+		<td>Walmart</td>
+		<td><select name="aal_walmartactive">
+			<option value="0" <?php if(get_option('aal_walmartactive')=='0') echo "selected"; ?> > Inactive</option>
+			<option value="1" <?php if(get_option('aal_walmartactive')=='1') echo "selected"; ?> >Active</option>
+		</select></td>
+		<td><a href="<?php echo admin_url('admin.php?page=aal_module_walmart'); ?>">Configure Walmart Module</a></td>
 		<td></td>
 		<td></td>
 		<td></td>
