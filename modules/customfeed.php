@@ -1,6 +1,6 @@
 <?php 
 
-$aalCustomFeed = new aalModule('customfeed','Custom Feed');
+$aalCustomFeed = new aalModule('customfeed','Custom Feed',23);
 
 
 $aalCustomFeed->aalModuleHook('content','aalCustomFeedDisplay');

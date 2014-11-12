@@ -19,9 +19,34 @@ foreach($aalFiles as $aalFile) {
 	 	
 	 }
  }
+ 
+ //print_r($aalModuleFiles);
+ 
+ 
+ // order modules
+ 
+$mnum = count($aalModules);
+while($sw==0) {
+	$sw=1;
+	for($i=0;$i<$mnum;$i++) {
+		if($aalModules[$i]->order > $aalModules[$i+1]->order) {
+		
+			$aux = $aalModules[$i];
+			$aalModules[$i] = $aalModules[$i+1];
+			$aalModules[$i+1] = $aux;
+			$sw=0;	
+			
+			
+		}
+		
+	}	
+	
+}
 
-
-//print_r($aalModuleFiles);
+ 
+ 
+ 
+ //end order modules
 
 
 class aalModule
@@ -29,12 +54,13 @@ class aalModule
     var $shortname;
     var $nicename;
     var $hooks = array();
+	var $order;
 
-
-	function aalModule($shortname,$nicename) {
+	function aalModule($shortname,$nicename, $order = 99) {
 		
 		$this->shortname = $shortname;
 		$this->nicename = $nicename;
+		$this->order = $order;
 
 	}
 
