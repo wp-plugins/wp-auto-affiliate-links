@@ -68,7 +68,11 @@ $apikey = get_option('aal_apikey');
 						<li>Links will be added <b>automatically</b> based on your content 
 						<li><b>Amazon</b> Links are automatically extracted and inserted in content
 						<li><b>ClickBank</b> Links are automatically extracted and inserted
-						<li><b>Shareasale</b> links can be uploaded and displayed into your content              	
+						<li><b>Shareasale</b> links can be uploaded and displayed into your content   
+						<li><b>Ebay</b> auctions can be automatically linked based on your content
+						<li><b>Walmart</b> links can be automatically extracted and displayed
+						<li><b>Commission Junction</b> product datafeeds can be uploaded and automatically displayed
+						<li><b>Shareasale</b> links will be automatically shown            	
               	</ul>
               	<br />
 					 More info about Auto Affiliate Links PRO features <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">here</a>.        	
