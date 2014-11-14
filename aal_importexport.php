@@ -12,7 +12,7 @@ function wpaal_import_export() {
         <div class="icon32" id="icon-options-general"></div>  
         
         
-                <h2>Import</h2>
+                <h2>Import Links</h2>
   				<br />
 				<br />
 				Upload your datafeed. The format should be keyword,url. The separator is the character who separate the columns, it can be a comma ( , ), a vertical bar ( | ) or a tab ( exactly 4 spaces ). For tab, just write "tab" in the text field. If you don't know, open the feed file in notepad or any other simple text editor. You can edit your datafeed in Microsoft Excell or Libre Office Calc. Make sure you save the file in csv format ( not in xls or odt ). Upon saving, you can select the separator. All the links inside the datafeed will be added to your affiliate links. 
@@ -45,7 +45,7 @@ function wpaal_import_export() {
         <div class="icon32" id="icon-options-general"></div>  
         
         
-                <h2>Export</h2>
+                <h2>Export Links</h2>
  				<br />
 				<br />
 				Here you can export your links so you can import to another blog or to make a backup. You can import this file later using the "Import" tab.
@@ -70,6 +70,41 @@ function wpaal_import_export() {
 <p>If you have problems or questions about the plugin, or if you just want to send a suggestion or request to our team, you can use the <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">support forum</a>. Make sure that you consult our <a href="http://wordpress.org/plugins/wp-auto-affiliate-links/faq/">FAQ section</a> first. </p>
 	
 	</div>
+
+
+
+
+
+
+
+<div class="wrap">  
+        <div class="icon32" id="icon-options-general"></div>  
+        
+        
+                <h2>Export Setting</h2>
+ 				<br />
+				<br />
+				Here you can export your plugin data, such as general settings, excluded posts, activated modules, api key, etc.
+				<br />
+				<br />
+				
+				
+			<form name="aal_export_settings" method="post" enctype="multipart/form-data" onsubmit="">
+
+			<input type="submit" value="Click here to export your settings" /><input type="hidden" name="aal_export_settings_check" value="1" />
+			</form>
+				
+		<br />
+		<br />
+		
+<p>If you have problems or questions about the plugin, or if you just want to send a suggestion or request to our team, you can use the <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">support forum</a>. Make sure that you consult our <a href="http://wordpress.org/plugins/wp-auto-affiliate-links/faq/">FAQ section</a> first. </p>
+	
+	</div>
+
+
+
+
+
 	
 	<?php
 }

@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.6.4.1
+Version: 4.6.4.2
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -163,6 +163,35 @@ foreach($myrows as $row) {
 	echo $row->keywords . $separator . $row->link . "\n";
 
 }
+		
+		die();
+		
+		wp_redirect("admin.php?page=aal_topmenu");	
+	}
+	
+	
+	
+	if($_POST['aal_export_settings_check']) {		
+	
+
+	$pluginDefinedOptions = array('aal_iscloacked', 'aal_showhome', 'aal_notimes', 'aal_notimescustom', 'aal_exclude', 'aal_target', 'aal_relation', 'aal_cssclass', 'aal_langsupport', 'aal_display', 'aal_samekeyword', 'aal_apikey', 'aal_amazonactive', 'aal_clickbankactive', 'aal_shareasaleactive', 'aal_cjactive', 'aal_ebayactive', 'aal_bestbuyactive', 'aal_walmartactive' ); // etc
+
+	// Clear up our settings
+	foreach($pluginDefinedOptions as $optionName) {
+    	if(get_option($optionName)) {
+    		$optionsToExport[$optionName] = get_option($optionName);
+    	}
+	}		
+	
+		
+
+		
+		$File = 'aal_exported_settings.txt';
+header("Content-Disposition: attachment; filename=\"" . basename($File) . "\"");
+header('Content-type: text/plain');
+header("Connection: close");
+		
+echo json_encode($optionsToExport);
 		
 		die();
 		
