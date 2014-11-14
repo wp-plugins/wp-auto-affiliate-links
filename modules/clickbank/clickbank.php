@@ -1,7 +1,7 @@
 <?php
 
 
-$aalClickbank = new aalModule('clickbank','Clickbank Links');
+$aalClickbank = new aalModule('clickbank','Clickbank Links',4);
 $aalModules[] = $aalClickbank;
 
 $aalClickbank->aalModuleHook('content','aalClickbankDisplay');
