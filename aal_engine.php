@@ -48,7 +48,16 @@ function wpaal_add_affiliate_links($content) {
 		$shareasaleid = get_option('aal_shareasaleid');
 		$shareasaleactive = get_option('aal_shareasaleactive');
 
-
+		$cjactive = get_option('aal_cjactive');
+		
+		$ebayactive = get_option('aal_ebayactive');
+		$ebayid = get_option('aal_ebayid');
+		
+		$bestbuyactive = get_option('aal_bestbuyactive');
+		$bestbuyid = get_option('aal_bestbuyid');
+		
+		$walmartactive = get_option('aal_walmartactive');
+		$walmartid = get_option('aal_walmartid');
 		
 		
 		$apikey = trim(get_option('aal_apikey'));
@@ -95,6 +104,9 @@ function wpaal_add_affiliate_links($content) {
 				
 				$link = $row->link;
 				$keywords = $row->keywords;
+				
+				
+				if($link == get_permalink($post->ID) ) continue;
 
 				if(!is_null($keywords)) {
 					$keys = explode(',',$keywords);
@@ -160,11 +172,14 @@ function wpaal_add_affiliate_links($content) {
 				
 				
 				//If the manual replacement did not found enough links
-				if($sofar<$notimes && ($clickbankactive || $amazonactive || $shareasaleactive)) {
+				if($sofar<$notimes && ($clickbankactive || $amazonactive || $shareasaleactive || $cjactive || $ebayactive || $bestbuyactive || $walmartactive )) {
 					
 					if(!$clickbankactive) { $clickbankid = ''; }
 					if(!$amazonactive) { $amazonid = ''; }
 					if(!$shareasaleactive) { $shareasaleid = ''; }
+					if(!$ebayactive) { $ebayid = ''; }
+					if(!$bestbuyactive) { $bestbuyid = ''; }
+					if(!$walmartactive) { $walmartid = ''; }
 
 					
 		$aaldivnumber = rand(1,10000);			
@@ -178,11 +193,10 @@ $aurl = get_permalink($post->ID);
 		
 $content = $content .= ' 
 		
-		<div id="aal_api_data" data-divnumber="'. $aaldivnumber .'" data-target="'. $targeto .'"  data-postid="post-'. $post->ID .'" data-apikey="'. $apikey .'" data-clickbankid="'. $clickbankid .'" data-clickbankcat="'. $clickbankcat .'" data-clickbankgravity="'. $clickbankgravity .'"  data-amazonid="'. $amazonid .'" data-amazoncat="'. $amazoncat .'" data-amazonlocal="'. $amazonlocal .'" data-amazonactive="'. $amazonactive .'" data-clickbankactive="'. $clickbankactive .'"  data-shareasaleid="'. $shareasaleid .'"   data-shareasaleactive="'. $shareasaleactive .'"  data-aurl="'. $aurl .'" data-notimes="'. $left .'" data-apidata=\'{content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", amazonid: "'. $amazonid .'", amazoncat: "'. $amazoncat .'", amazonlocal: "'. $amazonlocal .'", amazonactive: "'. $amazonactive .'", clickbankactive: "'. $clickbankactive .'", shareasaleid: "'. $shareasaleid .'", shareasaleactive: "'. $shareasaleactive .'", aurl: "'. $aurl .'", notimes: "'. $left .'"}\' ></div>
+		<div id="aal_api_data" data-divnumber="'. $aaldivnumber .'" data-target="'. $targeto .'"  data-postid="post-'. $post->ID .'" data-apikey="'. $apikey .'" data-clickbankid="'. $clickbankid .'" data-clickbankcat="'. $clickbankcat .'" data-clickbankgravity="'. $clickbankgravity .'"  data-amazonid="'. $amazonid .'" data-amazoncat="'. $amazoncat .'" data-amazonlocal="'. $amazonlocal .'" data-amazonactive="'. $amazonactive .'" data-clickbankactive="'. $clickbankactive .'"  data-shareasaleid="'. $shareasaleid .'"   data-shareasaleactive="'. $shareasaleactive .'" data-cjactive="'. $cjactive .'"  data-ebayactive="'. $ebayactive .'"  data-ebayid="'. $ebayid .'"   data-bestbuyactive="'. $bestbuyactive .'"  data-bestbuyid="'. $bestbuyid .'" data-walmartactive="'. $walmartactive .'"  data-walmartid="'. $walmartid .'" data-aurl="'. $aurl .'" data-notimes="'. $left .'" data-apidata=\'{content:"'. urlencode($content) .'",apikey: "'. $apikey .'", clickbankid: "'. $clickbankid .'", clickbankcat: "'. $clickbankcat .'", clickbankgravity: "'. $clickbankgravity .'", amazonid: "'. $amazonid .'", amazoncat: "'. $amazoncat .'", amazonlocal: "'. $amazonlocal .'", amazonactive: "'. $amazonactive .'", clickbankactive: "'. $clickbankactive .'", shareasaleid: "'. $shareasaleid .'", shareasaleactive: "'. $shareasaleactive .'", cjactive: "'. $cjactive .'", ebayactive: "'. $ebayactive .'", ebayid: "'. $ebayid .'", bestbuyactive: "'. $bestbuyactive .'", bestbuyid: "'. $bestbuyid .'", walmartactive: "'. $walmartactive .'", walmartid: "'. $walmartid .'", aurl: "'. $aurl .'", notimes: "'. $left .'"}\' ></div>
 
-		';		
 		
-		
+		';	
 		
 		
 		$content = $content .'<div id="aalcontent_'. $aaldivnumber .'"></div>';

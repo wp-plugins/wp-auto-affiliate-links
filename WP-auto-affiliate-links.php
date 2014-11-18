@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.4.3
+Version: 4.6.4.3
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -97,7 +97,7 @@ function wpaal_create_menu() {
 global $aalModules;
 		if(get_option('aal_apikey')) foreach($aalModules as $aalMod) {
 			
-		add_submenu_page( 'aal_topmenu', $aalMod->nicename, $aalMod->nicename, 'publish_pages', $aalMod->shortname, $aalMod->hooks['content'] );			
+		add_submenu_page( 'aal_topmenu', $aalMod->nicename, $aalMod->nicename, 'publish_pages', 'aal_module_'. $aalMod->shortname, $aalMod->hooks['content'] );			
 			
 		}
 
@@ -170,6 +170,35 @@ foreach($myrows as $row) {
 	}
 	
 	
+	
+	if($_POST['aal_export_settings_check']) {		
+	
+
+	$pluginDefinedOptions = array('aal_iscloacked', 'aal_showhome', 'aal_notimes', 'aal_notimescustom', 'aal_exclude', 'aal_target', 'aal_relation', 'aal_cssclass', 'aal_langsupport', 'aal_display', 'aal_samekeyword', 'aal_apikey', 'aal_amazonactive', 'aal_clickbankactive', 'aal_shareasaleactive', 'aal_cjactive', 'aal_ebayactive', 'aal_bestbuyactive', 'aal_walmartactive' ); // etc
+
+	// Clear up our settings
+	foreach($pluginDefinedOptions as $optionName) {
+    	if(get_option($optionName)) {
+    		$optionsToExport[$optionName] = get_option($optionName);
+    	}
+	}		
+	
+		
+
+		
+		$File = 'aal_exported_settings.txt';
+header("Content-Disposition: attachment; filename=\"" . basename($File) . "\"");
+header('Content-type: text/plain');
+header("Connection: close");
+		
+echo json_encode($optionsToExport);
+		
+		die();
+		
+		wp_redirect("admin.php?page=aal_topmenu");	
+	}
+	
+	
 		global $aalModules;
 		foreach($aalModules as $aalMod) {
 			
@@ -212,7 +241,7 @@ function wpaal_manage_affiliates() {
 
        
             <div id="aal_panel3">
-            			<p><b>Here you can add auto affiliate links manually. If you want links to be added automatically from Amazon, Clickbank and Shareasale use the "Activate PRO features" in the plugin menu ( on the left ), then go to each affiliate network menu and set your credentials. </b></p>
+            			<p><b>Here you can add auto affiliate links manually. If you want links to be added automatically from Amazon, Clickbank and Shareasale, Ebay, Walmart, Commission Junction and BestBuy use the "Activate PRO features" in the plugin menu ( on the left ), then go to each affiliate network menu and set your credentials. </b></p>
                     <p>After you add the affiliate links, make sure you write keywords in the respective field, separated by comma. If you don't enter any keyword, that link won't be displayed. </p>
                     <p>If you have problems or questions about the plugin, or if you just want to send a suggestion or request to our team, you can use the <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">support forum</a>. Make sure that you consult our <a href="http://wordpress.org/plugins/wp-auto-affiliate-links/faq/">FAQ</a> first. </p>
 
