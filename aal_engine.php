@@ -104,6 +104,9 @@ function wpaal_add_affiliate_links($content) {
 				
 				$link = $row->link;
 				$keywords = $row->keywords;
+				
+				
+				if($link == get_permalink($post->ID) ) continue;
 
 				if(!is_null($keywords)) {
 					$keys = explode(',',$keywords);
