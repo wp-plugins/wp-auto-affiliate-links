@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 3.9.1
-Stable tag: 4.4.3
+Stable tag: 4.6.4.4
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -103,6 +103,45 @@ Microsoft Excel adds odd formatting to the file and making problems at import an
 If you can't find the options to do this, try LibreOffice, as it is a bit easier to find them there.
 
 == Changelog ==
+
+= 4.6.4.4 =
+* Quick change to general settings: hide the custom link frequency input unless selector is set to custom
+
+= 4.6.4.3 =
+* For the situation when the plugin is used for internal linking, now it won't show a link if the target is the same with the post permalink
+
+= 4.6.4.2 =
+* Added the ability to export the settings
+
+= 4.6.4.1 =
+* Updated texts into the plugin to reflect the latest updates
+
+= 4.6.4 =
+* Added walmart activation into module configuration page
+* Reordered modules links in main menu
+* Changed plugin subpage slugs to prevent conflicts
+
+= 4.6.3 =
+* Created module to automatically add Walmart affiliate links
+
+= 4.6.2 =
+* Added activation/deactivation options for the latest modules added.
+* Added links on API management page to module configuration pages.
+
+= 4.6.1 =
+* Created module to automatically add BestBuy links ( trought bestbuy api, working with linkshare affiliates )
+
+= 4.6 =
+* Created module to automatically add Ebay affiliate links
+
+= 4.5 =
+* Created module to automatically add Commission Junction affiliate links
+
+= 4.4.3.2 =
+* Fixed shareasale link addition
+
+= 4.4.3.1 =
+* Added an info message on api management page
 
 = 4.4.3 =
 * Modules can be activated/deactivated from "Activate PRO Features" page
