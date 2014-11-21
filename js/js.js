@@ -252,3 +252,23 @@ jQuery( document ).ready(function() {
 
 	return false;
 });
+
+
+
+//Frequency selector, display custom value
+function aalFrequencySelector() {
+	
+	var es = document.getElementById('aal_notimes');
+	//alert(es.options[es.selectedIndex].value);
+
+	if(es.options[es.selectedIndex].value == 'custom') { 
+	
+		document.getElementById('aal_custom_frequency').style.display = 'block';
+		
+	}
+	else {
+		document.getElementById('aal_custom_frequency').style.display = 'none';
+	}
+	
+
+}

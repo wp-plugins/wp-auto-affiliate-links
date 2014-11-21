@@ -77,7 +77,7 @@ function wpaal_general_settings() {
                     
                     <span class="aal_label">Target:</span> <input type="radio" name="aal_target" value="_blank" <?php echo $tsc1;?> /> New window <input type="radio" name="aal_target" value="_self" <?php echo $tsc2 ;?>/> Same Window <br /><br />
                     
-                    <span class="aal_label">Link Frequency:</span> <select name="notimes" id="aal_notimes" value="<?php echo $notimes ;?>" size="1" />
+                    <span class="aal_label">Link Frequency:</span> <select name="notimes" id="aal_notimes" value="<?php echo $notimes ;?>" size="1" onchange="aalFrequencySelector();" />
                     	<option value="1" <?php if($notimes=="1") echo "SELECTED"; ?> >Very Low</option>
 						<option value="2" <?php if($notimes=="2") echo "SELECTED"; ?> >Low</option>
 						<option value="3" <?php if($notimes=="3") echo "SELECTED"; ?> >Average</option>
@@ -87,8 +87,8 @@ function wpaal_general_settings() {
 					</select>                    
                     <br /><br />
 
-                    <span class="aal_label">Links in every article:</span> <input type="text" name="notimes" id="aal_notimescustom" value="<?php echo $notimescustom ;?>" size="1" />            
-                    <br /><br />
+                    <div id="aal_custom_frequency" <?php if($notimes=="custom") echo 'style="display: block;"'; else echo 'style="display: none;"'; ?>><span class="aal_label">Links in every article:</span> <input type="text" name="notimes" id="aal_notimescustom" value="<?php echo $notimescustom ;?>" size="1" />            
+                    <br /><br /></div>
  
                      <span class="aal_label">Same keyword limit:</span> <select name="aal_samekeyword" id="aal_samekeyword" value="<?php echo $samekeyword ;?>" size="1" />
                     	<option value="1" <?php if($samekeyword=="1") echo "SELECTED"; ?> >1</option>
