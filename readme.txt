@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 4.0.1
-Stable tag: 4.6.4.5
+Stable tag: 4.6.4.6
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -103,6 +103,9 @@ Microsoft Excel adds odd formatting to the file and making problems at import an
 If you can't find the options to do this, try LibreOffice, as it is a bit easier to find them there.
 
 == Changelog ==
+
+= 4.6.4.6 =
+* Displayed links from CJ affiliates on the module page
 
 = 4.6.4.6 =
 * Checked and tested for wordpress 4.0.1 compatibility issues

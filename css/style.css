@@ -10,3 +10,8 @@ ul.aal_admin_list { list-style-type: disc; margin-left: 30px; }
 .aal_exclude_link { width: 300px; float: left; border-bottom: 1px solid #000000; border-right: 1px solid #000000; height: 40px; padding: 3px;  }
 .aal_excludedcol { float: left; width: 100px; border: 1px solid #000000; padding: 5px; height: 15px; }
 .aal_excludedtitle { width: 300px; }
+
+.aalcustomlink_item { padding: 7px; border: 1px solid; }
+span.aalcustomlink_url { margin-right: 20px; width: 200px; }
+span.aalcustomlink_title { margin-right: 20px; width: 400px; }
+span.aalcustomlink_merchant { float: right; }

@@ -272,3 +272,73 @@ function aalFrequencySelector() {
 	
 
 }
+
+
+
+//show custom links
+
+jQuery(document).ready(function() {
+      canvas = document.getElementById('aalshowcustomlinks');
+      if(canvas) { 
+      	apikey = canvas.getAttribute('data-apikey');
+      	network = canvas.getAttribute('data-network');
+      
+		apidata = { network: network, apikey: apikey };
+
+	jQuery.ajax({
+         type: "GET",
+         url: "http://autoaffiliatelinks.com/api/getcustomlinks.php",
+         data: apidata,
+         cache: false,
+         success: function(returned){
+         	
+         	//console.log('succes');   
+         	console.log(returned); 
+         	
+         	
+         	canvas = document.getElementById('aalshowcustomlinks');
+         	
+         	
+         	if(!returned || returned == 'there was an error' ) {
+					canvas.innerHTML = 'Sorry, no results matched your search query';	         		
+         		return false;
+				}	                    
+                  
+				var farray = jQuery.parseJSON(returned);
+				//console.log(farray.list.q);
+				//console.log(farray);
+
+				if(!farray.number) {
+					canvas.innerHTML = 'Sorry, no results matched your search query';	         		
+         		return false;			
+				}
+
+					
+					while (canvas.firstChild) {
+					    canvas.removeChild(canvas.firstChild);
+					}
+
+
+				farray.links.forEach(function(entry) {
+	    
+					//console.log(entry.title + entry.link);	    
+					
+					 var div = document.createElement('div');
+					div.className = "aalcustomlink_item";
+					var htmltext = '<span class="aalcustomlink_url"><a href="' + entry.link +'">Link      </a></span><span class="aalcustomlink_title">' + entry.title + '</span><span class="aalcustomlink_merchant">' + entry.merchant +'      </span><div style="clear: both;"></div>';
+					div.innerHTML = htmltext;
+
+	    			canvas.appendChild(div);
+	    			
+				});
+	
+                   
+     		}
+     
+   });      
+      
+      
+      
+      } 
+      else {  }
+});
