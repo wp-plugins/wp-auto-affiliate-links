@@ -104,4 +104,15 @@ function wpaal_modules() {
 }
 
 
+function aal_showcustomlinks($network) {
+
+	$content = '<div id="aalshowcustomlinks" data-network="'. $network .'" data-apikey="'. trim(get_option('aal_apikey')) .'" ></div>';
+
+	return $content;
+}
+
+
+
+
+
 ?>

@@ -92,7 +92,7 @@ function aal_cj_validate() {
 
 	}
 	
-	
+	echo aal_showcustomlinks('cj');
 	
 	
 	echo '</div>';
