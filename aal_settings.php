@@ -6,7 +6,7 @@ function aalChangeOptions(){
 		$aal_showhome = filter_input(INPUT_POST, 'aal_showhome', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_notimes = filter_input(INPUT_POST, 'aal_notimes', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_notimescustom = filter_input(INPUT_POST, 'aal_notimescustom', FILTER_SANITIZE_SPECIAL_CHARS);
-		$aal_exclude = filter_input(INPUT_POST, 'aal_exclude', FILTER_SANITIZE_SPECIAL_CHARS);
+		//$aal_exclude = filter_input(INPUT_POST, 'aal_exclude', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_iscloacked = filter_input(INPUT_POST, 'aal_iscloacked', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_targeto = filter_input(INPUT_POST, 'aal_target', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_relationo = filter_input(INPUT_POST, 'aal_relation', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -20,7 +20,7 @@ function aalChangeOptions(){
 		delete_option('aal_showhome'); add_option( 'aal_showhome', $aal_showhome);		
 		delete_option('aal_notimes'); add_option( 'aal_notimes', $aal_notimes);	
 		delete_option('aal_notimescustom'); add_option( 'aal_notimescustom', $aal_notimescustom);				
-		delete_option('aal_exclude'); add_option( 'aal_exclude', $aal_exclude);		
+		//delete_option('aal_exclude'); add_option( 'aal_exclude', $aal_exclude);		
 		delete_option('aal_target'); add_option( 'aal_target', $aal_targeto);
 		delete_option('aal_relation'); add_option( 'aal_relation', $aal_relationo);
       delete_option('aal_cssclass'); add_option( 'aal_cssclass', $aal_cssclass);
