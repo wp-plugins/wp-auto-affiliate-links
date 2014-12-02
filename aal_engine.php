@@ -171,8 +171,13 @@ function wpaal_add_affiliate_links($content) {
 		//echo $timecounter . "<br/>";	
 				
 				
+				
+				global $aal_apirequestno;
+				if(!$aal_apirequestno) $aal_apirequestno = 0;
 				//If the manual replacement did not found enough links
-				if($sofar<$notimes && ($clickbankactive || $amazonactive || $shareasaleactive || $cjactive || $ebayactive || $bestbuyactive || $walmartactive )) {
+				if($aal_apirequestno < 3 ) if($sofar<$notimes && ($clickbankactive || $amazonactive || $shareasaleactive || $cjactive || $ebayactive || $bestbuyactive || $walmartactive )) {
+					
+					$aal_apirequestno = $aal_apirequestno + 1;
 					
 					if(!$clickbankactive) { $clickbankid = ''; }
 					if(!$amazonactive) { $amazonid = ''; }
