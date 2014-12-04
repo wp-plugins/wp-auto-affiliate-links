@@ -16,6 +16,7 @@ function aal_api_register_settings() {
    register_setting( 'aal_api_settings', 'aal_ebayactive' );
    register_setting( 'aal_api_settings', 'aal_bestbuyactive' );
    register_setting( 'aal_api_settings', 'aal_walmartactive' );
+   register_setting( 'aal_api_settings', 'aal_envatoactive' );
 }	
 	
 
@@ -72,7 +73,8 @@ $apikey = get_option('aal_apikey');
 						<li><b>Ebay</b> auctions can be automatically linked based on your content
 						<li><b>Walmart</b> links can be automatically extracted and displayed
 						<li><b>Commission Junction</b> product datafeeds can be uploaded and automatically displayed
-						<li><b>Shareasale</b> links will be automatically shown            	
+						<li><b>Shareasale</b> links will be automatically shown          
+						<li><b>Envato Marketplace</b> automatic links    	
               	</ul>
               	<br />
 					 More info about Auto Affiliate Links PRO features <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">here</a>.        	
@@ -207,6 +209,17 @@ $apikey = get_option('aal_apikey');
 		<td></td>
 		<td></td>
 	</tr>	
+	<tr>
+		<td>Envato Marketplace</td>
+		<td><select name="aal_envatoactive">
+			<option value="0" <?php if(get_option('aal_envatoactive')=='0') echo "selected"; ?> > Inactive</option>
+			<option value="1" <?php if(get_option('aal_envatoactive')=='1') echo "selected"; ?> >Active</option>
+		</select></td>
+		<td><a href="<?php echo admin_url('admin.php?page=aal_module_envato'); ?>">Configure Envato Module</a></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
 	</table>
 	
 	
@@ -221,6 +234,8 @@ $apikey = get_option('aal_apikey');
 	<input type="hidden" name="aal_ebayactive" value="<?php echo get_option('aal_sebayactive'); ?>" />
 	<input type="hidden" name="aal_cjactive" value="<?php echo get_option('aal_cjactive'); ?>" />
 	<input type="hidden" name="aal_bestbuyactive" value="<?php echo get_option('aal_bestbuyactive'); ?>" />
+	<input type="hidden" name="aal_walmartactive" value="<?php echo get_option('aal_walmartactive'); ?>" />
+	<input type="hidden" name="aal_envatoactive" value="<?php echo get_option('aal_envatoactive'); ?>" />
 	
 	<?php } ?>
 	
