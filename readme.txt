@@ -4,13 +4,13 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 4.0.1
-Stable tag: 4.7.1
+Stable tag: 4.7.2
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
 == Description ==
 
-Wp Auto Affiliate Links will automatically add affiliate links into your content. You can manually set affiliate links and keywords where they should be added into your content, or you can let the plugin to automatically extract and display links from Amazon, Clickbank or Shareasale.
+Wp Auto Affiliate Links will automatically add affiliate links into your content. You can manually set affiliate links and keywords where they should be added into your content, or you can let the plugin to automatically extract and display links from Amazon, Clickbank, Shareasale, Ebay, Walmart, Commission Junction, BestBuy and Envato Marketplace.
 
 If you prefer to select your keywords and add your links manually, you can do this from "Wp Auto Affiliate Links" menu in your administration panel. In "General Settings" you can set if you want the links to be cloaked, if you want them to be added on your homepage or not and several other options.
 
@@ -103,6 +103,9 @@ Microsoft Excel adds odd formatting to the file and making problems at import an
 If you can't find the options to do this, try LibreOffice, as it is a bit easier to find them there.
 
 == Changelog ==
+
+= 4.7.2 =
+* Module submenu items are not shown if they are not activated from API management page.
 
 = 4.7.1 =
 * Added Envato options and settings link on API management page
