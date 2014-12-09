@@ -98,7 +98,19 @@ jQuery("#aal_changeOptions").submit(function() {
             var aal_target= jQuery('#aal_changeOptions input[type=radio][name=aal_target]:checked').val();
             var aal_relation= jQuery('#aal_changeOptions input[type=radio][name=aal_relation]:checked').val();
             
-            //console.log(aal_target);
+            
+            var aal_displayca = [];
+            
+            
+           jQuery("#aal_changeOptions input#aal_displayc:checkbox:checked").each(function(){
+    			 aal_displayca.push(jQuery(this).val());
+    			//return aal_displayca;
+  			  });
+  			  
+  			 var aal_displayc = JSON.stringify(aal_displayca);
+            
+           // console.log(aal_displayc);
+            //return false;
             
             var data = {
                         action: 'aal_change_options',
@@ -111,7 +123,8 @@ jQuery("#aal_changeOptions").submit(function() {
                         aal_target:aal_target,
                         aal_relation:aal_relation,
                         aal_display:aal_display,
-                        aal_cssclass:aal_cssclass
+                        aal_cssclass:aal_cssclass,
+                        aal_displayc:aal_displayc
                        };
 
             jQuery.ajax({

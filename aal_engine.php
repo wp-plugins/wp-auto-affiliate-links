@@ -21,6 +21,8 @@ function wpaal_add_affiliate_links($content) {
 		if($cssclass) $lclass = $cssclass;
 		else $lclass = 'aal';
 		$displayo = get_option('aal_display');
+		$displayc = get_option('aal_displayc');
+		$displayc =json_decode(stripslashes($displayc));
 		//$iscloacked = 0;
 		
 		
@@ -84,8 +86,17 @@ function wpaal_add_affiliate_links($content) {
 				
 		
 		//Check the display settings
-		if($post->post_type != 'post' && $post->post_type != 'page') return $content;
-		if($displayo && $post->post_type!=$displayo) return $content;
+		if($displayc[0]) {
+			if(!in_array($post->post_type,$displayc)) return $content;
+		}
+		else {
+
+			if($post->post_type != 'post' && $post->post_type != 'page') return $content;
+			if($displayo && $post->post_type!=$displayo) return $content;			
+			
+		}		
+		
+
 		
 		//Adjust the number of links added based on the post content length
 		if(strlen($post->post_content)>8000) $notimes = $notimes * 4;
