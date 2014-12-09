@@ -14,6 +14,8 @@ function aalChangeOptions(){
 		$aal_langsupport = filter_input(INPUT_POST, 'aal_langsupport', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_display = filter_input(INPUT_POST, 'aal_display', FILTER_SANITIZE_SPECIAL_CHARS);
 		$aal_samekeyword = filter_input(INPUT_POST, 'aal_samekeyword', FILTER_SANITIZE_SPECIAL_CHARS);
+		$aal_displayc = $_POST['aal_displayc'];
+		//$aal_displayc = json_encode($aal_displayc);
 		
 		//Delete the settings and re-add them		
                 delete_option('aal_iscloacked'); add_option( 'aal_iscloacked', $aal_iscloacked);		
@@ -27,6 +29,7 @@ function aalChangeOptions(){
       delete_option('aal_langsupport'); add_option( 'aal_langsupport', $aal_langsupport);
       delete_option('aal_display'); add_option( 'aal_display', $aal_display);
       delete_option('aal_samekeyword'); add_option( 'aal_samekeyword', $aal_samekeyword);
+      delete_option('aal_displayc'); add_option( 'aal_displayc', $aal_displayc);
                
            die();
 }
@@ -60,6 +63,13 @@ function wpaal_general_settings() {
         
         $relationo = get_option('aal_relation');
 	if($relationo=="nofollow") $rsc1 = 'checked'; else $rsc2 = 'checked';	
+	
+	
+	$displayc = get_option('aal_displayc');
+	$displayc =json_decode(stripslashes($displayc));
+	$post_types = get_post_types( '', 'names' ); 
+	//print_r($post_types);	
+	
 	
 	?>
 	
@@ -100,12 +110,16 @@ function wpaal_general_settings() {
                     <br /><br />                   
                     
                     
-                    <span class="aal_label">Display:</span> <select name="aal_display" id="aal_display" value="<?php echo $displayo; ?>" size="1" />
+                    <span class="aal_label">Display:</span> 
+                    <?php foreach($post_types as $pt) { ?>
+                    	<input id="aal_displayc" type="checkbox" name="aal_displayc[]" value="<?php echo $pt; ?>" <?php if(in_array($pt,$displayc)) echo 'checked'; ?> /><?php echo $pt; ?> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <?php } ?>
+                    <!-- <select name="aal_display" id="aal_display" value="<?php echo $displayo; ?>" size="1" />
                   <option value="" <?php if($displayo=="") echo "SELECTED"; ?> >All content</option>
 						<option value="post" <?php if($displayo=="post") echo "SELECTED"; ?> >Posts Only</option>
 						<option value="page" <?php if($displayo=="page") echo "SELECTED"; ?> >Pages Only</option>
 
-					</select>                    
+					</select>  -->                  
                     <br /><br />
                     <?php //echo $relationo; ?>
                     <span class="aal_label">Relation:</span> <input type="radio" name="aal_relation" value="nofollow" <?php echo $rsc1; ?> /> Nofollow <input type="radio" name="aal_relation" value="dofollow" <?php echo $rsc2 ;?>/> Dofollow <br /><br /><br />
