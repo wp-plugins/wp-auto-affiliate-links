@@ -31,13 +31,13 @@ function aal_install() {
 
 function aal_admin_notice() {
 	
-	$aal_notice_dismissed = get_option('aal_option_dismissed9'); 
+	$aal_notice_dismissed = get_option('aal_option_dismissed10'); 
 	if(!$aal_notice_dismissed)
 	{ 
     ?>
     <div id="aal_notice_div" class="updated">
-       <!--  <p align="center"><?php _e( 'Amazon, Clickbank and Shareasale links can be automatically added into your content , you only have to <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">get your API key</a> and then activate each module on their menu pages. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a>', 'wp-auto-affiliate-links' ); ?></p> -->
-		<p align="center"><?php _e( 'WP Auto Affiliate Links update: Ebay, Walmart, Best Buy and Commission Junction links automation have been added in the latest version of the plugin. You only have to <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">get your API key</a> and then activate each module on their menu pages. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a>', 'wp-auto-affiliate-links' ); ?></p>
+      <p align="center"><?php _e( 'Amazon, Clickbank and Shareasale, Ebay, Walmart, Commission Junction, Bestbuy and Envato Marketplace  links can be automatically added into your content , you only have to <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">get your API key</a>, add your affiliate ID and start earning. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a>', 'wp-auto-affiliate-links' ); ?></p>
+		<!-- <p align="center"><?php _e( 'WP Auto Affiliate Links update: Ebay, Walmart, Best Buy and Commission Junction links automation have been added in the latest version of the plugin. You only have to <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">get your API key</a> and then activate each module on their menu pages. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a>', 'wp-auto-affiliate-links' ); ?></p> -->
     </div>
     
 <script type="text/javascript">
@@ -81,7 +81,8 @@ function aalDismissNotice() {
 		delete_option('aal_option_dismissed6');
 		delete_option('aal_option_dismissed7');
 		delete_option('aal_option_dismissed8');
-		add_option('aal_option_dismissed9',true);
+		delete_option('aal_option_dismissed9');
+		add_option('aal_option_dismissed10',true);
 	
 	
 }

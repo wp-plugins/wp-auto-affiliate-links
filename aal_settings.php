@@ -68,6 +68,9 @@ function wpaal_general_settings() {
 	$displayc = get_option('aal_displayc');
 	$displayc =json_decode(stripslashes($displayc));
 	$post_types = get_post_types( '', 'names' ); 
+	unset($post_types['revision']);
+	unset($post_types['attachment']);
+	unset($post_types['nav_menu_item']);
 	//print_r($post_types);	
 	
 	
