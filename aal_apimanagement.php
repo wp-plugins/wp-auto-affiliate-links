@@ -124,7 +124,7 @@ $apikey = get_option('aal_apikey');
 	}  ?>
 	
 
-<?php if($valid->status == 'valid' ) {  ?>
+<?php if(get_option('aal_apikey') ) {  ?>
 	
 	<br /><br />
 	After you activate the modules, you need to set them up from the Wp Auto Affiliate Links menu ( Amazon Links, Clickbank Links, Shareasale Links ).
