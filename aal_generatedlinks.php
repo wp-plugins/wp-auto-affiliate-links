@@ -1,6 +1,5 @@
 <?php
 
-
 function wpaal_generatedlinks() {
 	global $wpdb; 
 	
@@ -9,7 +8,7 @@ function wpaal_generatedlinks() {
 
 
 
-		$data = file_get_contents('http://autoaffiliatelinks.com/api/getlinks.php?apikey='. get_option('aal_apikey') );
+		//$data = file_get_contents('http://autoaffiliatelinks.com/api/getlinks.php?apikey='. get_option('aal_apikey') );
 		//echo $data;
 		$data = json_decode($data);
 
@@ -20,11 +19,12 @@ function wpaal_generatedlinks() {
 		$exarray = explode(',',$exposts);
 		
 	
-	
-	
-	
+		wp_enqueue_script( "generatedlinksjs", plugin_dir_url( __FILE__ ) . 'js/generatedlinks.js' );
+
 ?>
 
+					<div id="aal_apikey" data-apikey="<?php echo get_option('aal_apikey'); ?>" ></div>               
+                
                 
                 <script type="text/javascript">
 						function forceExclude(postid) { 
@@ -48,7 +48,7 @@ function wpaal_generatedlinks() {
              
              
 <br />
-<table class="widefat fixed" >
+<table id="aal_gltable" class="widefat fixed" >
 	<thead>
 		<tr>
 
@@ -84,7 +84,7 @@ function wpaal_generatedlinks() {
 	
 <?php 
 
-if(!$data) echo '<p style="font-weight: bold; color: #ff0000;">A server configuration prevents data to be loaded here. Your links are probably appearing on the site but we cannot fetch it here. We are working for a soltuion to this problem</p>';
+//if(!$data) echo '<p style="font-weight: bold; color: #ff0000;">A server configuration prevents data to be loaded here. Your links are probably appearing on the site but we cannot fetch it here. We are working for a soltuion to this problem</p>';
 
 $alternate = 0;
 $postsadd = array();

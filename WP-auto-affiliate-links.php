@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.7.3.3
+Version: 4.7.4
 Author URI: http://autoaffiliatelinks.com
 */
 

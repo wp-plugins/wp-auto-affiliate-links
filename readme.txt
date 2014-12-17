@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 4.0.1
-Stable tag: 4.7.3.3
+Stable tag: 4.7.4
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -103,6 +103,9 @@ Microsoft Excel adds odd formatting to the file and making problems at import an
 If you can't find the options to do this, try LibreOffice, as it is a bit easier to find them there.
 
 == Changelog ==
+
+= 4.7.4 =
+* Generated links are now requested, parsed and displayed trough javascript
 
 = 4.7.3.3 =
 * Removed a warning message on "generated links page" when there are no links to display
