@@ -94,8 +94,18 @@ function aal_shareasale_validate() {
 
 	}
 	
+	?>
+	
+	<br /><br />
+	<h3>Your Shareasale links</h3>
+	<br />
 	
 	
+	<?php
+	
+	
+	
+	echo aal_showcustomlinks('shareasale');
 	
 	echo '</div>';
 
