@@ -92,6 +92,16 @@ function aal_cj_validate() {
 
 	}
 	
+	
+	?>
+	
+	<br /><br />
+	<h3>Your Commission Junction links</h3>
+	<br />
+	
+	
+	<?php
+	
 	echo aal_showcustomlinks('cj');
 	
 	

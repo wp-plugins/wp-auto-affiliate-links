@@ -306,14 +306,14 @@ jQuery(document).ready(function() {
          success: function(returned){
          	
          	//console.log('succes');   
-         	console.log(returned); 
+         	//console.log(returned); 
          	
          	
          	canvas = document.getElementById('aalshowcustomlinks');
          	
          	
          	if(!returned || returned == 'there was an error' ) {
-					canvas.innerHTML = 'Sorry, no results matched your search query';	         		
+					canvas.innerHTML = 'No shareasale links added yet';	         		
          		return false;
 				}	                    
                   
