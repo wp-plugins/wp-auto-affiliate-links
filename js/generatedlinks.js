@@ -43,7 +43,7 @@ jQuery(document).ready(function() {
 							});
 							
 						}
-						if(kwlist=='') kwlist = 'No links displayed for thsi psot';
+						if(kwlist=='') kwlist = 'No links displayed for thsi post';
 
 	    
 					var tr = document.createElement('tr');
