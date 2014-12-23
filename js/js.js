@@ -334,11 +334,13 @@ jQuery(document).ready(function() {
 
 				farray.links.forEach(function(entry) {
 	    
-					//console.log(entry.title + entry.link);	    
+					//console.log(entry.title + entry.link);	 
+					
+					var deletelink = '';   
 					
 					 var div = document.createElement('div');
 					div.className = "aalcustomlink_item";
-					var htmltext = '<span class="aalcustomlink_url"><a href="' + entry.link +'">Link      </a></span><span class="aalcustomlink_title">' + entry.title + '</span><span class="aalcustomlink_merchant">' + entry.merchant +'      </span><div style="clear: both;"></div>';
+					var htmltext = '<span class="aalcustomlink_url"><a href="' + entry.link +'">Link</a>&nbsp;&nbsp;&nbsp;</span><span class="aalcustomlink_url" ><a onclick="return aalCustomLinkDelete('+ entry.id +');" style="color: #ff0000;" href="' + deletelink +'">Delete</a>&nbsp;&nbsp;&nbsp;</span><span class="aalcustomlink_title">' + entry.title + '</span><span class="aalcustomlink_merchant">' + entry.merchant +'      </span><div style="clear: both;"></div>';
 					div.innerHTML = htmltext;
 
 	    			canvas.appendChild(div);
@@ -355,3 +357,61 @@ jQuery(document).ready(function() {
       } 
       else {  }
 });
+
+
+
+function aalCustomLinkDelete(linkid) {
+	var answer = confirm("Are you sure you want to delete this link  ?")
+	if (answer){
+		
+		
+      var canvas = document.getElementById('aalshowcustomlinks');
+      if(canvas) { 
+      	apikey = canvas.getAttribute('data-apikey');
+      	network = canvas.getAttribute('data-network');
+		
+		var apidata = { network: network, apikey: apikey, linkid: linkid };
+
+	jQuery.ajax({
+         type: "GET",
+         url: "http://autoaffiliatelinks.com/api/deletecustomlinks.php",
+         data: apidata,
+         cache: false,
+         success: function(returned){
+         	
+         	//console.log('succes');   
+         	console.log(returned); 
+         	
+         	
+         	var canvas = document.getElementById('aalshowcustomlinks');
+         	
+         	
+         	if(!returned || returned == 'there was an error' ) {
+					alert("There was a problem completing your action, please refresh the page and try again");	         		
+         		return false;
+				}	                    
+                  
+				//var farray = jQuery.parseJSON(returned);
+
+
+					
+					while (canvas.firstChild) {
+					    canvas.removeChild(canvas.firstChild);
+					}
+	
+                   
+     		}
+     
+   });     		
+		
+		
+		
+	}	
+		
+	}
+	else{
+		return false;
+	}
+	
+	//return false;
+}
