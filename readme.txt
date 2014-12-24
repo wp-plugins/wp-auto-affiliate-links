@@ -3,7 +3,7 @@ Contributors: Lucian Apostol
 Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
-Tested up to: 4.0.1
+Tested up to: 4.1
 Stable tag: 4.7.6
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
