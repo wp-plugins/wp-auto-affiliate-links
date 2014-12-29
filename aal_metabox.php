@@ -85,6 +85,8 @@ function aal_save_meta_box_data( $post_id ) {
 	$new = implode(',', $ids);
 	update_option('aal_exclude', $new);
 }
+
+
 add_action( 'save_post', 'aal_save_meta_box_data' );
 
 

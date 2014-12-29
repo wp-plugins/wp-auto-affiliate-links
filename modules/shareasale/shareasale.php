@@ -153,33 +153,17 @@ function aalShareasaleActions() {
 		
 		
 		}
-		// print_r($slearray);
+		
 		fclose($handle);
 		
-				//$getcontent = 'content='. urlencode($content) .'&clickbankid='. $clickbankid;	
-				//$products = aal_post($getcontent,'http://autoaffiliatelinks.com/api/pro.php');
-				//$products = json_decode($products);
 
 		$slejson = json_encode($slearray); 
 		$postcontent = "slejson=". urlencode($slejson) ."&shareasaleid=". get_option('aal_shareasaleid') ."&apikey=". get_option('aal_apikey');
 		$response = aal_post($postcontent, 'http://autoaffiliatelinks.com/api/shareasale.php');
 		
 		echo $response;
-
-
-
 		$uploadmessage = "Upload succesfull";
 		
-		
-		
-		
-		//print_r($slearray);
-		
-		//wp_redirect("options-general.php?page=wp-auto-affiliate-links-pro.php");
-		
-		// echo $scontent;
-		
-		//die();
 		}
 		
 	
@@ -187,8 +171,4 @@ function aalShareasaleActions() {
 	}	
 	
 }
-
-
-
-
 ?>

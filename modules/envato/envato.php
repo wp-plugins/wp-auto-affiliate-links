@@ -24,9 +24,6 @@ function aalEnvatoDisplay() {
 
 <script type="text/javascript">
 
-
-
-
 function aal_envato_validate() {
 	
 		if(!document.aal_envato.aal_envato.value) { alert("Please add your Envato Marketplace affiliate ID"); return false; }
@@ -34,10 +31,6 @@ function aal_envato_validate() {
 		return true;
 				
 	}
-
-
-
-	
 </script>
 	
 	
@@ -86,7 +79,6 @@ Enter your Envato Marketpalce affiliate ID and activate the module
 	
 ?>
 
-
 <?php
 
 	}
@@ -97,9 +89,4 @@ Enter your Envato Marketpalce affiliate ID and activate the module
 	echo '</div>';
 
 }
-
-
-
-
-
 ?>

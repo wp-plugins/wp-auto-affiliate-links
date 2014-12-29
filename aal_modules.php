@@ -20,7 +20,6 @@ foreach($aalFiles as $aalFile) {
 	 }
  }
  
- //print_r($aalModuleFiles);
  
  
  // order modules
