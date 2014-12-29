@@ -116,11 +116,6 @@ function aalCjActions() {
 	
 	if($_POST['aal_cjaction']) {
 	
-		//$sasid = get_option('aal_shareasaleid');
-		//$scontent = file_get_contents($_FILES['aal_sasfeed']['tmp_name']);
-		//print_r($_FILES['aal_sasfeed']);
-
-
 		global $uploadmessage;
 		if($_FILES['aal_cjfeed']["error"]) { $uploadmessage = "File was too large"; }
 		else {			
@@ -147,12 +142,7 @@ function aalCjActions() {
 		
 		
 		}
-		 //print_r($slearray);
 		fclose($handle);
-		
-				//$getcontent = 'content='. urlencode($content) .'&clickbankid='. $clickbankid;	
-				//$products = aal_post($getcontent,'http://autoaffiliatelinks.com/api/pro.php');
-				//$products = json_decode($products);
 
 		$slejson = json_encode($slearray); 
 		$postcontent = "slejson=". urlencode($slejson) ."&apikey=". get_option('aal_apikey');
@@ -164,16 +154,6 @@ function aalCjActions() {
 
 		$uploadmessage = "Upload succesfull";
 		
-		
-		
-		
-		//print_r($slearray);
-		
-		//wp_redirect("options-general.php?page=wp-auto-affiliate-links-pro.php");
-		
-		// echo $scontent;
-		
-		//die();
 		}
 		
 	

@@ -44,17 +44,8 @@ aal_getScript("//autoaffiliatelinks.com/api/api.php?action=allcats", function(){
 	var maincat = document.getElementById("aal_clickbankcat");
 			number = maincats.length;
 			
-			//alert(number);
 			var i=0;
 			for(ir=1;ir<number+1;ir++) {
-				
-			
-			//alert("aaa");
-			
-			//alert(catarray[parent][ir-1][0] + catarray[parent][ir-1][1] );
-			
-
-					
 				ovalue = maincats[ir-1][0];
 				otext = maincats[ir-1][1];
 				if(maincats[ir-1][2] != 0) otext = '--- ' + otext;
