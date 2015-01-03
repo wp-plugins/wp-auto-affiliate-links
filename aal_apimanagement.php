@@ -1,5 +1,5 @@
 <?php
-
+//error_reporting(0);
 
 	
 	
@@ -24,6 +24,9 @@ function aal_api_register_settings() {
 function wpaal_apimanagement() {
 	global $wpdb;
 	
+	
+	//Old code for requesting api key
+	/*
 	if($_POST['aal_apirequest']) {
 		
 		$apiname = $_POST['aal_apiname'];
@@ -46,7 +49,7 @@ function wpaal_apimanagement() {
 			
 		}
 		
-	}
+	} */
 	
 	
 $apikey = get_option('aal_apikey');
@@ -114,17 +117,31 @@ $apikey = get_option('aal_apikey');
     
 	Enter your API key here: <input type="text" name="aal_apikey" value="<?php echo get_option('aal_apikey'); ?>" />
 	<br /><?php if($apikey) { ?>Your API key is <?php echo $valid->status; ?> <?php } ?> 
-	<?php submit_button('Save'); ?>	
 	
+	<br />
 	<?php if($valid->status == 'expired' ) { 
 	
 	echo 'If you requested your API key for free then it is no longer usable. You have to go to <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">our website</a> and get a new one by subscribing for PRO version <br /><br />';
 	
 	
 	}  ?>
+
+
+	<?php if($valid->status == 'invalid' ) { 
+	
+	echo 'The API key you entered is invalid. You have to go to  <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">our website</a> to get a valid API key. <br /><br />';
+	
+	
+	}  ?>
+	
+	
+	
+	
+	<?php submit_button('Save'); ?>	
+
 	
 
-<?php if(get_option('aal_apikey') ) {  ?>
+<?php if(get_option('aal_apikey') && $valid->status!='expired' && $valid->status!='invalid' ) {  ?>
 	
 	<br /><br />
 	After you activate the modules, you need to set them up from the Wp Auto Affiliate Links menu ( Amazon Links, Clickbank Links, Shareasale Links ).
@@ -132,6 +149,16 @@ $apikey = get_option('aal_apikey');
 
 	<h3>Manage PRO Modules</h3>
 	<table class="widefat fixed" > 
+	<thead>
+		<th>Module name</th>
+		<th>Status</th>
+		<th>Actions</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</thead>
+	
+	
 	<tr class="alternate">
 		<td>Amazon</td>
 		<td><select name="aal_amazonactive">

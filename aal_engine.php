@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 
 // The function that will actually add links when the post content is rendered
 function wpaal_add_affiliate_links($content) {   
@@ -33,7 +33,30 @@ function wpaal_add_affiliate_links($content) {
 		if($langsupport=='true') $langsupport = 'u'; else $langsupport = '';
 		$excludearray = explode(',',$aal_exclude);
 		$table_name = $wpdb->prefix . "automated_links";
-		$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
+
+
+
+
+		//set priority
+
+		$myrows = $wpdb->get_results( "SELECT id,link,keywords,meta FROM ". $table_name );
+		
+		
+		//Priority defaults
+		
+		/* for($i=0;$i<count($myrows);$i++) {
+			$meta = new StdClass();
+			$meta = json_decode($myrows[$i]->meta);
+			if(!$meta->priority) 
+				$meta->priority = $myrows[$i]->id;
+			$myrows[$i]->meta = $meta;
+		}  */
+		
+		//print_r($myrows);
+		
+		
+		
+		
 		
 		$clickbankid = get_option('aal_clickbankid');
 		$clickbankcat = get_option('aal_clickbankcat');
