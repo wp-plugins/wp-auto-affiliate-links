@@ -330,6 +330,14 @@ jQuery(document).ready(function() {
 					while (canvas.firstChild) {
 					    canvas.removeChild(canvas.firstChild);
 					}
+					
+					
+					 var div = document.createElement('div');
+					div.className = "aalcustomlinkdeleteall";
+					var htmltext = '<span class=""><a href="" onclick="aalCustomLinkDeleteAll();" >Delete All Links</a></span><div style="clear: both;"></div>';
+					div.innerHTML = htmltext;
+
+	    			canvas.appendChild(div);
 
 
 				farray.links.forEach(function(entry) {
@@ -407,6 +415,8 @@ function aalCustomLinkDelete(linkid) {
 		
 		
 	}	
+	
+	//return false;
 		
 	}
 	else{
@@ -414,4 +424,70 @@ function aalCustomLinkDelete(linkid) {
 	}
 	
 	//return false;
+}
+
+
+
+
+
+function aalCustomLinkDeleteAll() {
+
+var answer = confirm("Are you sure you want to delete all the links below  ?")
+	if (answer){
+		
+		
+      var canvas = document.getElementById('aalshowcustomlinks');
+      if(canvas) { 
+      	apikey = canvas.getAttribute('data-apikey');
+      	network = canvas.getAttribute('data-network');
+		
+		var apidata = { network: network, apikey: apikey, massdelete: 'all' };
+
+	jQuery.ajax({
+         type: "GET",
+         url: "http://autoaffiliatelinks.com/api/deletecustomlinks.php",
+         data: apidata,
+         cache: false,
+         success: function(returned){
+         	
+         	//console.log('succes');   
+         	console.log(returned); 
+         	
+         	
+         	var canvas = document.getElementById('aalshowcustomlinks');
+         	
+         	
+         	if(!returned || returned == 'there was an error' ) {
+					alert("There was a problem completing your action, please refresh the page and try again");	         		
+         		return false;
+				}	                    
+                  
+				//var farray = jQuery.parseJSON(returned);
+
+
+					
+					while (canvas.firstChild) {
+					    canvas.removeChild(canvas.firstChild);
+					}
+	
+                   
+     		}
+     
+   });     		
+		
+		
+		
+	}	
+	
+	//return false;
+		
+	}
+	else{
+		return false;
+	}
+
+
+
+
+//return false;
 }
