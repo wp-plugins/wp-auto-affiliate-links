@@ -15,3 +15,4 @@ ul.aal_admin_list { list-style-type: disc; margin-left: 30px; }
 span.aalcustomlink_url { margin-right: 20px; width: 200px; }
 span.aalcustomlink_title { margin-right: 20px; width: 400px; }
 span.aalcustomlink_merchant { float: right; }
+.aalcustomlinkdeleteall { padding: 10px; font-size: 14px; }
