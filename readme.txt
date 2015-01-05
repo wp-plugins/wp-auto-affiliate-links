@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 4.1
-Stable tag: 4.8.2
+Stable tag: 4.8.3
 
 Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
 
@@ -103,6 +103,11 @@ Microsoft Excel adds odd formatting to the file and making problems at import an
 If you can't find the options to do this, try LibreOffice, as it is a bit easier to find them there.
 
 == Changelog ==
+
+= 4.8.3 =
+* Fixed API key status reporting messages
+* Cache is now reset every 3 days
+* Added a comma between keyphrases in generated links page
 
 = 4.8.2 =
 * Added mass delete actions for Shareasale and Commission Junction custom links added trough datafeed

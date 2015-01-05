@@ -37,7 +37,7 @@ jQuery(document).ready(function() {
 								
 								//console.log('aaa');
 								
-								kwlist = kwlist + '<a href="' + keyword.url + '">'+ keyword.key +'</a>';
+								kwlist = kwlist + '<a href="' + keyword.url + '">'+ keyword.key +'</a>,&nbsp;';
 							
 							
 							});
