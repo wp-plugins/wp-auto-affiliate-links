@@ -116,18 +116,18 @@ $apikey = get_option('aal_apikey');
     
     
 	Enter your API key here: <input type="text" name="aal_apikey" value="<?php echo get_option('aal_apikey'); ?>" />
-	<br /><?php if($apikey) { ?>Your API key is <?php echo $valid->status; ?> <?php } ?> 
+	<br /><!-- <?php if($apikey) { ?>Your API key is <?php echo $valid->status; ?> <?php } ?> -->
 	
 	<br />
-	<?php if($valid->status == 'expired' ) { 
+	<?php if($valid->status == 'expired' && $apikey) { 
 	
-	echo 'If you requested your API key for free then it is no longer usable. You have to go to <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">our website</a> and get a new one by subscribing for PRO version <br /><br />';
+	echo 'Your subscription to Wp Auto Affiliate Links PRO is expired. Please renew your subscription or <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">create a new API key</a> <br /><br />';
 	
 	
 	}  ?>
 
 
-	<?php if($valid->status == 'invalid' ) { 
+	<?php if($valid->status == 'invalid' && $apikey) { 
 	
 	echo 'The API key you entered is invalid. You have to go to  <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">our website</a> to get a valid API key. <br /><br />';
 	
