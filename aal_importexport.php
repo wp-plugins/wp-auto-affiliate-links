@@ -81,7 +81,7 @@ function wpaal_import_export() {
         <div class="icon32" id="icon-options-general"></div>  
         
         
-                <h2>Export Setting</h2>
+                <h2>Export Settings</h2>
  				<br />
 				<br />
 				Here you can export your plugin data, such as general settings, excluded posts, activated modules, api key, etc.
@@ -97,6 +97,31 @@ function wpaal_import_export() {
 		<br />
 		<br />
 		
+	</div>
+	
+	
+	
+<div class="wrap">  
+        <div class="icon32" id="icon-options-general"></div>  
+        
+        
+                <h2>Import Settings</h2>
+ 				<br />
+				<br />
+				Here you can import Wp Auto Affiliate Links Settings if you have a previously exported backup
+				<br />
+				<br />
+				
+				
+			<form name="aal_import_settings" method="post" enctype="multipart/form-data" onsubmit="">
+			Upload the file here:    <input name="aal_importsettings_file" type="file" /><br />
+	<br />
+			<input type="submit" value="Import" /><input type="hidden" name="MAX_FILE_SIZE" value="10000000" /><input type="hidden" name="aal_importsettings_check" value="1" />
+			</form>
+				
+		<br />
+		<br />
+		
 <p>If you have problems or questions about the plugin, or if you just want to send a suggestion or request to our team, you can use the <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">support forum</a>. Make sure that you consult our <a href="http://wordpress.org/plugins/wp-auto-affiliate-links/faq/">FAQ section</a> first. </p>
 	
 	</div>
@@ -107,6 +132,49 @@ function wpaal_import_export() {
 
 	
 	<?php
+}
+
+
+
+add_action('admin_init', 'aalImportSettingsAction');
+function aalImportSettingsAction() {
+global $wpdb;
+        $table_name = $wpdb->prefix . "automated_links";
+	if($_POST['aal_importsettings_check']) {
+	
+		//$sasid = filter_input(INPUT_POST, 'aal_sasid', FILTER_SANITIZE_SPECIAL_CHARS);
+		//$scontent = file_get_contents($_FILES['aal_sasfeed']['tmp_name']);
+		//print_r($_FILES['aal_sasfeed']);
+		
+		//$handle = fopen($_FILES['aal_importsettings_file']['tmp_name'], "r");
+		$filename = $_FILES['aal_importsettings_file']['tmp_name'];
+		if($filename) $data = file_get_contents($filename);
+			
+			if($data) $options = json_decode($data);
+			if(($options)) foreach($options as $option => $value) {
+				
+				//remove old settings
+				
+				delete_option($option);				
+				
+				//add new settings
+				add_option($option,$value);
+				
+			}
+			
+		
+		//fclose($handle);
+		
+		//wp_redirect("admin.php?page=aal_topmenu#aal_panel4");
+		
+		// echo $scontent;
+		
+		//die();
+		
+	
+	
+	}
+
 }
 
 
