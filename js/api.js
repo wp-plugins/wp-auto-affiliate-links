@@ -55,7 +55,6 @@ jQuery(document).ready(function() {
 
 function aal_retrievelinks(aalapidata,aal_divnumber,aal_target,aal_relation) {
 	
-	//alert('aaa');
 	//console.log(aalapidata);
 
 	//aalapidata = {action: 'aal_update_exclude_posts',aal_exclude_posts:'aaa'};
@@ -98,10 +97,6 @@ function aal_retrievelinks(aalapidata,aal_divnumber,aal_target,aal_relation) {
 	var reg = '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))\b($name)\b/imsU';
 	var rep = '<a title="$1" class="aal" target="$targeto" relation="$relo" href="$url">$1</a>';
 
-	
-
-
-	//alert(bcontent);
 
 	parentdiv.innerHTML = acontent;
 

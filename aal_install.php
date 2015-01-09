@@ -31,12 +31,20 @@ function aal_install() {
 
 function aal_admin_notice() {
 	
-	$aal_notice_dismissed = get_option('aal_option_dismissed10'); 
-	if(!$aal_notice_dismissed)
+	$aal_notice_dismissed = get_option('aal_option_dismissed11'); 
+	if(!$aal_notice_dismissed && !get_option('aal_apikey') )
 	{ 
     ?>
     <div id="aal_notice_div" class="updated">
-      <p align="center"><?php _e( 'Amazon, Clickbank and Shareasale, Ebay, Walmart, Commission Junction, Bestbuy and Envato Marketplace  links can be automatically added into your content , you only have to <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">get your API key</a>, add your affiliate ID and start earning. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a>', 'wp-auto-affiliate-links' ); ?></p>
+     <div style="float: right;padding-top: 10px;"><a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a></div>
+      <p><?php // _e( 'Amazon, Clickbank and Shareasale, Ebay, Walmart, Commission Junction, Bestbuy and Envato Marketplace  links can be automatically added into your content , you only have to <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">get your API key</a>, add your affiliate ID and start earning. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a>', 'wp-auto-affiliate-links' ); 
+      
+_e( 'Thank you for using Wp Auto Affiliate Links. To take advantage of all the plugin features, you need to go to our website and  <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">get your API key</a>.', 'wp-auto-affiliate-links' );      
+      
+      
+      
+      ?></p>
+     
     </div>
     
 <script type="text/javascript">
@@ -81,6 +89,7 @@ function aalDismissNotice() {
 		delete_option('aal_option_dismissed7');
 		delete_option('aal_option_dismissed8');
 		delete_option('aal_option_dismissed9');
+		delete_option('aal_option_dismissed10');
 		add_option('aal_option_dismissed10',true);
 	
 	

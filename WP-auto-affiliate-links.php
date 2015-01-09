@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.8.4
+Version: 4.8.5
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -241,6 +241,10 @@ function wpaal_manage_affiliates() {
 
        
             <div id="aal_panel3">
+            
+            
+<div class="updated"><br />How would you rate your experience with Wp Auto Affiliate Links ? Please send your feedback using the  <a href="http://autoaffiliatelinks.com/support-help/support-contact/">contact form on our website</a>. If you have problems you can open a ticket at  <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">wordpress support forums</a>. If you like the plugin and it works fine for you then please leave us a <a href="http://wordpress.org/support/view/plugin-reviews/wp-auto-affiliate-links?filter=5#postform">rating and a review</a>. <br /><br /></div>                  
+            
                     
 <h3>Add affiliate links and keywords to be replaced:</h3>
 
@@ -248,20 +252,16 @@ function wpaal_manage_affiliates() {
                         <input type="hidden" name="action" value="add_link" />
                         Affiliate link: <input type="text" name="link" value="http://" id="aal_formlink" />
                         Keywords: <input type="text" name="aal_keywords" id="aal_formkeywords" />
-                        <input type="submit" name="Save" value="Save" />
+                        <input type="submit" name="Save" value="Save" /> <?php aalGetSugestions($myrows);?>
                     </form>
                     
-<p>If you have problems or questions about the plugin, or if you just want to send a suggestion or request to our team, you can use the <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">support forum</a>. Make sure that you consult our <a href="http://wordpress.org/plugins/wp-auto-affiliate-links/faq/">FAQ</a> first. </p>
-                    
 <div>
-<h3>Wp Auto Affiliate Links PRO</h3>
 
 <br />If you want links to be extracted and displayed automatically from Amazon, Clickbank, Shareasale, Ebay, Walmart, Commision Junction and Envato Marketplace you should consider activating PRO features. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Upgrade to PRO</a><br /><br /></div>   
                     
-                    <br/>Here is a list with most used keywords in all your blog. Click on each and it will be added in the form above so you can assign a link for it.<br />
                                      
                     
-                                <?php aalGetSugestions($myrows);?>
+                               
                     
                     <h3>Affiliate Links:</h3>
                     <form name="aal_linksorderform" method="get">
@@ -300,6 +300,9 @@ function wpaal_manage_affiliates() {
 							<input type="hidden" name="aal_massstring" value="" id="aal_massstring" />
 							<input type="submit" value="Delete selected" onclick="" />
 							</form>                    
+                    
+<p>If you have problems or questions about the plugin, or if you just want to send a suggestion or request to our team, you can use the <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">support forum</a>. Make sure that you consult our <a href="http://wordpress.org/plugins/wp-auto-affiliate-links/faq/">FAQ</a> first. </p>                    
+                    
                     
                     
                     
