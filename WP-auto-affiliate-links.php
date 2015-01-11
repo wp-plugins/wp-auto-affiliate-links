@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.8.5
+Version: 4.9
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -57,6 +57,7 @@ include(plugin_dir_path(__FILE__) . 'aal_importexport.php');
 include(plugin_dir_path(__FILE__) . 'aal_apimanagement.php');
 include(plugin_dir_path(__FILE__) . 'aal_generatedlinks.php');
 include(plugin_dir_path(__FILE__) . 'aal_metabox.php');
+include(plugin_dir_path(__FILE__) . 'aal_getstarted.php');
 
 include(plugin_dir_path(__FILE__) . 'classes/link.php');
 
@@ -89,6 +90,7 @@ register_activation_hook(__FILE__,'aal_install');
 function wpaal_create_menu() {
 
 	add_menu_page( 'Auto Affiliate Links', 'Wp Auto Affiliate Links', 'publish_pages', 'aal_topmenu', 'wpaal_manage_affiliates', $icon_url, $position );	
+	add_submenu_page( 'aal_topmenu', 'Getting Started', 'Getting Started', 'publish_pages', 'aal_gettingstarted', 'wpaal_gettingstarted' );
 	add_submenu_page( 'aal_topmenu', 'General Settings', 'General Settings', 'publish_pages', 'aal_general_settings', 'wpaal_general_settings' );
 	//add_submenu_page( 'aal_topmenu', 'Modules', 'Modules', 'publish_pages', 'aal_modules', 'wpaal_modules' );
 	add_submenu_page( 'aal_topmenu', 'Upgrade to PRO', 'Upgrade to PRO', 'publish_pages', 'aal_apimanagement', 'wpaal_apimanagement' );
