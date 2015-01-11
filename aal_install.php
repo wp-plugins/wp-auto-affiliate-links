@@ -90,7 +90,7 @@ function aalDismissNotice() {
 		delete_option('aal_option_dismissed8');
 		delete_option('aal_option_dismissed9');
 		delete_option('aal_option_dismissed10');
-		add_option('aal_option_dismissed10',true);
+		add_option('aal_option_dismissed11',true);
 	
 	
 }
