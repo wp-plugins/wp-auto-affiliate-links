@@ -4,13 +4,15 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 4.1
-Stable tag: 4.9
+Stable tag: 4.9.1
 
-Provide an interface to add your affiliate links and associate them with keywords. The affiliate links will be added to all the terms specified found in your content.
+Automatically add affiliate links in your website content so you can make more money. You can specify the keywords and affiliate links you want to be added or you can let the plugin to automatically decide where to add links from available affiliate networks: Amazon, Clickbank, Ebay, Walmart, Shareasale, Commission Junction, Bestbuy or Envato.
 
 == Description ==
 
 Wp Auto Affiliate Links will automatically add affiliate links into your content. You can manually set affiliate links and keywords where they should be added into your content, or you can let the plugin to automatically extract and display links from Amazon, Clickbank, Shareasale, Ebay, Walmart, Commission Junction, BestBuy and Envato Marketplace.
+
+IMPORTANT: Your content won't be modified in any way. The links are added when the content is displayed. 
 
 If you prefer to select your keywords and add your links manually, you can do this from "Wp Auto Affiliate Links" menu in your administration panel. In "General Settings" you can set if you want the links to be cloaked, if you want them to be added on your homepage or not and several other options.
 
@@ -20,7 +22,7 @@ You can limit the number of links that are shown in every article. The frequency
 
 If you choose to automatically generate and display links from Amazon, Clickbank or Shareasale you have to first request an API key, and then to activate each module. The links will be added trough javascript so you do not have to worry about nofollowing and search engines. 
 
-Your content won't be modified in any way. The links are added when the content is displayed.
+
 
 
 == Installation ==
@@ -29,7 +31,7 @@ This section describes how to install the plugin and get it working.
 
 1. Upload the plugin to the `/wp-content/plugins/` directory or download it directly from your administration panel.
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Go to 'Wp Auto Affiliate Links' link, under "Settings",  in your Administration Panel Menu.
+3. Go to 'Wp Auto Affiliate Links' menu in your Wordpress Admin panel.
 4. Add your affiliate links, along with one or more keywords. Do this for every affiliate link you want to display.
 5. Select if you want your links to be nofollow, cloaked, to open in new window, and the maximum number of lniks that are added to every article. On some environments, the cloaking of the links is impossible. If you experience problems, turn the cloaking off and it should work just fine.
 6. If you don't get it how to make it work, or if something goes wrong, please consult http://autoaffiliatelinks.com for more info and use the contact form on the website to report the problem or to ask for help.
@@ -103,6 +105,9 @@ Microsoft Excel adds odd formatting to the file and making problems at import an
 If you can't find the options to do this, try LibreOffice, as it is a bit easier to find them there.
 
 == Changelog ==
+
+= 4.9.1 =
+* Updated plugin description
 
 = 4.9 =
 * Created a Getting Started page with information on how to use the plugin.
