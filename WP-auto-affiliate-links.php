@@ -4,7 +4,7 @@ Plugin Name: WP Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.9.1
+Version: 4.9.2
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -14,15 +14,10 @@ function aal_load_css() {
         //load css styles
         wp_register_style( 'aal_style', plugins_url('css/style.css', __FILE__) );
         wp_enqueue_style('aal_style');
-
-
 }
 
 //load javascript files
 function aal_load_js() {
-	
-		
-		
 	
         // load our jquery file that sends the $.post request1
 		wp_enqueue_script( "js", plugin_dir_url( __FILE__ ) . 'js/js.js', array( 'jquery' ) );
@@ -39,11 +34,6 @@ function aal_load_front_scripts() {
 	}
 	
 }
-
-
-//Get list of link showed on Add Affiliate Links tab
-
-
 
 include(plugin_dir_path(__FILE__) . 'aal_install.php');
 include(plugin_dir_path(__FILE__) . 'aal_cloaking.php');
@@ -77,7 +67,6 @@ add_action('wp_ajax_aal_add_exclude_posts', 'aalAddExcludePost');
 add_action('wp_ajax_aal_update_exclude_posts', 'aalUpdateExcludePosts');
 add_action('wp_enqueue_scripts', 'aal_load_front_scripts');
 
-// Installation
 
 register_activation_hook(__FILE__,'aal_install');
 
@@ -225,45 +214,35 @@ function wpaal_manage_affiliates() {
 	global $wpdb;
 	$table_name = $wpdb->prefix . "automated_links";
 
-
 	//Load the keywords and options
 	$myrows = $wpdb->get_results( "SELECT id,link,keywords FROM ". $table_name );
-	
-        
-        $excludeposts = get_option('aal_exclude');
+	//Load excluded posts	
+	$excludeposts = get_option('aal_exclude');
         
 	
 	//Render the page
-        ?>
-<div class="wrap">  
+    ?>
+	<div class="wrap">  
         <div class="icon32" id="icon-options-general"></div>  
         <h2>Wp Auto Affiliate Links</h2>
-	<br /><br />
-        
-
+		<br /><br />
+        <div id="aal_panel3">
        
-            <div id="aal_panel3">
-            
-            
-<div class="updated"><br />How would you rate your experience with Wp Auto Affiliate Links ? Please send your feedback using the  <a href="http://autoaffiliatelinks.com/support-help/support-contact/">contact form on our website</a>. If you have problems you can open a ticket at  <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">wordpress support forums</a>. If you like the plugin and it works fine for you then please leave us a <a href="http://wordpress.org/support/view/plugin-reviews/wp-auto-affiliate-links?filter=5#postform">rating and a review</a>. <br /><br /></div>                  
-            
-                    
-<h3>Add affiliate links and keywords to be replaced:</h3>
+<!-- <div class="updated"><br />Thank you for using Wp Auto Affiliate Links. To take advantage of all the plugin features, you need to go to our website and  <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">get your API key</a>   . <br /><br /></div>  -->
+                                
+			<h3>Add affiliate links and keywords to be replaced:</h3>
 
-                    <form name="add-link" method="post" action="<?php echo admin_url( "admin-ajax.php");?>" id="aal_add_new_link_form">
-                        <input type="hidden" name="action" value="add_link" />
-                        Affiliate link: <input type="text" name="link" value="http://" id="aal_formlink" />
-                        Keywords: <input type="text" name="aal_keywords" id="aal_formkeywords" />
-                        <input type="submit" name="Save" value="Save" /> <?php aalGetSugestions($myrows);?>
-                    </form>
+            <form name="add-link" method="post" action="<?php echo admin_url( "admin-ajax.php");?>" id="aal_add_new_link_form">
+                <input type="hidden" name="action" value="add_link" />
+                Affiliate link: <input type="text" name="link" value="http://" id="aal_formlink" />
+                Keywords: <input type="text" name="aal_keywords" id="aal_formkeywords" />
+                <input type="submit" name="Save" value="Save" /> <?php aalGetSugestions($myrows);?>
+            </form>
                     
-<div>
-
-<br />If you want links to be extracted and displayed automatically from Amazon, Clickbank, Shareasale, Ebay, Walmart, Commision Junction and Envato Marketplace you should consider activating PRO features. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Upgrade to PRO</a><br /><br /></div>   
-                    
-                                     
-                    
-                               
+			<div>
+				<br />If you want links to be extracted and displayed automatically from Amazon, Clickbank, Shareasale, Ebay, Walmart, Commision Junction and Envato Marketplace you should consider activating PRO features. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Upgrade to PRO</a><br /><br />
+			</div>   
+                                    
                     
                     <h3>Affiliate Links:</h3>
                     <form name="aal_linksorderform" method="get">
@@ -295,12 +274,12 @@ function wpaal_manage_affiliates() {
                     <br /><br />
                     
                     <form name="aal_massactions" method="post" onsubmit="return aal_masscomplete(); " >
-                    	<input type="submit" name="aal_selectall" id="aal_selectall" value="Select all" onclick="return false"/>
+                    	<input class="button-primary" type="submit" name="aal_selectall" id="aal_selectall" value="Select all" onclick="return false"/>
 							
 							
 							<input type="hidden" name="aal_massactionscheck" value="1" />
 							<input type="hidden" name="aal_massstring" value="" id="aal_massstring" />
-							<input type="submit" value="Delete selected" onclick="" />
+							<input type="submit"  class="button-primary"  value="Delete selected" onclick="" />
 							</form>                    
                     
 <p>If you have problems or questions about the plugin, or if you just want to send a suggestion or request to our team, you can use the <a href="http://wordpress.org/support/plugin/wp-auto-affiliate-links">support forum</a>. Make sure that you consult our <a href="http://wordpress.org/plugins/wp-auto-affiliate-links/faq/">FAQ</a> first. </p>                    

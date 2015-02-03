@@ -66,7 +66,7 @@ function wpaal_exclude_posts() {
                  <form name="aal_add_exclude_posts_form" id="aal_add_exclude_posts_form" method="post">
                     <b>Enter post ID </b>:
                     <input type="text" name="aal_exclude_post_id" id="aal_add_exclude_post_id"  size="10" />
-                    <input type="submit" value="Exclude Post"/>
+                    <input  class="button-primary"  type="submit" value="Exclude Post"/>
                 </form>
                 
                 <br /><br /><br />
