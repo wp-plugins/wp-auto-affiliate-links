@@ -32,7 +32,7 @@ function wpaal_import_export() {
 			</select>
 			<br /><input type="text" name="aal_import_other" value="|" style="display: none;"/>
 			<br />
-			<input type="submit" value="Import" /><input type="hidden" name="MAX_FILE_SIZE" value="10000000" /><input type="hidden" name="aal_import_check" value="1" />
+			<input  class="button-primary"  type="submit" value="Import" /><input type="hidden" name="MAX_FILE_SIZE" value="10000000" /><input type="hidden" name="aal_import_check" value="1" />
 			</form>
 				
 				
@@ -61,7 +61,7 @@ function wpaal_import_export() {
 			<option value=";">; ( semicolon )</option>
 			<option value=".">. ( dot )</option>
 			</select>
-			<input type="submit" value="Click here to export your links" /><input type="hidden" name="aal_export_check" value="1" />
+			<input  class="button-primary"  type="submit" value="Click here to export your links" /><input type="hidden" name="aal_export_check" value="1" />
 			</form>
 				
 		<br />
@@ -91,7 +91,7 @@ function wpaal_import_export() {
 				
 			<form name="aal_export_settings" method="post" enctype="multipart/form-data" onsubmit="">
 
-			<input type="submit" value="Click here to export your settings" /><input type="hidden" name="aal_export_settings_check" value="1" />
+			<input  class="button-primary"  type="submit" value="Click here to export your settings" /><input type="hidden" name="aal_export_settings_check" value="1" />
 			</form>
 				
 		<br />
@@ -116,7 +116,7 @@ function wpaal_import_export() {
 			<form name="aal_import_settings" method="post" enctype="multipart/form-data" onsubmit="">
 			Upload the file here:    <input name="aal_importsettings_file" type="file" /><br />
 	<br />
-			<input type="submit" value="Import" /><input type="hidden" name="MAX_FILE_SIZE" value="10000000" /><input type="hidden" name="aal_importsettings_check" value="1" />
+			<input  class="button-primary"  type="submit" value="Import" /><input type="hidden" name="MAX_FILE_SIZE" value="10000000" /><input type="hidden" name="aal_importsettings_check" value="1" />
 			</form>
 				
 		<br />

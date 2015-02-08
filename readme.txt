@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 4.1
-Stable tag: 4.9.1
+Stable tag: 4.9.3
 
 Automatically add affiliate links in your website content so you can make more money. You can specify the keywords and affiliate links you want to be added or you can let the plugin to automatically decide where to add links from available affiliate networks: Amazon, Clickbank, Ebay, Walmart, Shareasale, Commission Junction, Bestbuy or Envato.
 
@@ -105,6 +105,15 @@ Microsoft Excel adds odd formatting to the file and making problems at import an
 If you can't find the options to do this, try LibreOffice, as it is a bit easier to find them there.
 
 == Changelog ==
+
+= 4.9.3 =
+* If the value for "links in every article" is set to 0, then no automated links are added.
+* Added "No Links" option to "Link Frequency" select. If this option is set, then the plugins won't display any links
+* If the link frequency is set to custom, then the word count will have no effect to the number of links shown
+
+= 4.9.2 =
+* Applied wordpress style to submit buttons
+* Rearranged some code, removed unnecessary comments, fixed the indenting, removed unnecessary blank lines
 
 = 4.9.1 =
 * Updated plugin description

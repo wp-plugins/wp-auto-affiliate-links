@@ -13,7 +13,7 @@ function wpaal_add_affiliate_links($content) {
 		$showhome = get_option('aal_showhome');
 		$notimes = get_option('aal_notimes'); if(!$notimes) $notimes = -1;
 		$notimescustom = trim(get_option('aal_notimescustom'));
-		if($notimes=='custom') if(is_numeric($notimescustom) && $notimescustom>0) $notimes = $notimescustom; else $notimes = 3;
+		if($notimes=='custom') if(is_numeric($notimescustom) && $notimescustom>=0) { $notimes = $notimescustom; $notimesc = 'on'; } else $notimes = 3;
 		//echo $notimes;
 		$aal_exclude = get_option('aal_exclude');
 		$iscloacked = get_option('aal_iscloacked');
@@ -117,14 +117,19 @@ function wpaal_add_affiliate_links($content) {
 			if($post->post_type != 'post' && $post->post_type != 'page') return $content;
 			if($displayo && $post->post_type!=$displayo) return $content;			
 			
-		}		
+		}	
+		
+		//if notimes equals 0, then exit
+		if($notimes <= 0 ) return $content;	
 		
 
 		
-		//Adjust the number of links added based on the post content length
-		if(strlen($post->post_content)>8000) $notimes = $notimes * 4;
-		else if(strlen($post->post_content)>4000) $notimes = $notimes * 3;
-		else if(strlen($post->post_content)>2000) $notimes = $notimes * 2;		
+		//Adjust the number of links added based on the post content length, unless notimes is set to custom
+		if($notimesc != 'on') {
+			if(strlen($post->post_content)>8000) $notimes = $notimes * 4;
+			else if(strlen($post->post_content)>4000) $notimes = $notimes * 3;
+			else if(strlen($post->post_content)>2000) $notimes = $notimes * 2;		
+		}
 		
 		//echo $notimes;
 		

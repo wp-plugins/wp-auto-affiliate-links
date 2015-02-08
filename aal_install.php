@@ -31,7 +31,7 @@ function aal_install() {
 
 function aal_admin_notice() {
 	
-	$aal_notice_dismissed = get_option('aal_option_dismissed11'); 
+	$aal_notice_dismissed = get_option('aal_option_dismissed12'); 
 	if(!$aal_notice_dismissed && !get_option('aal_apikey') )
 	{ 
     ?>
@@ -90,7 +90,8 @@ function aalDismissNotice() {
 		delete_option('aal_option_dismissed8');
 		delete_option('aal_option_dismissed9');
 		delete_option('aal_option_dismissed10');
-		add_option('aal_option_dismissed11',true);
+		delete_option('aal_option_dismissed11');
+		add_option('aal_option_dismissed12',true);
 	
 	
 }
