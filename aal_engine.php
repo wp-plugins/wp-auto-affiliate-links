@@ -252,34 +252,7 @@ $content = $content .= '
 		$content = $content .'<div id="aalcontent_'. $aaldivnumber .'"></div>';
 						
 					
-				/* $getcontent = 'content='. urlencode($content) .'&clickbankid='. $clickbankid;	
-				$products = aal_post($getcontent,'http://autoaffiliatelinks.com/api/pro.php');
-				$products = json_decode($products);
-				
-				
-				
-				//print_r($products);
-				//echo $products;
-
-					foreach($products as $product) {
-						
-						$name = $product->key;
-						$url = $product->url;
-
-						$replacesingle = "<a title=\"$1\" class=\"aal\" target=\"". $targeto ."\" ". $relo ." href=\"$url\">$1</a>";
-						$regexpsingle = str_replace('$name', $name, $reg);						
-
-						//$content = preg_replace($regexpsingle, $replacesingle, $content,1,$count);
-						//if($count>0) $sofar++;
-
-					
-					
-					
-					}  */
-
-
-
-					
+		
 				}
 				
 		
