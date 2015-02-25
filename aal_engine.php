@@ -139,7 +139,6 @@ function wpaal_add_affiliate_links($content) {
 			if($ishome && $showhome!='true') return $content;
 		
 
-
 		//If no keywords are set, exit the function
 		if(!is_null($myrows)) {
 		
@@ -188,6 +187,8 @@ function wpaal_add_affiliate_links($content) {
 		
 		} //endif
 		
+		//print_r($replace);
+		
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";
 
@@ -200,7 +201,7 @@ function wpaal_add_affiliate_links($content) {
 					foreach($regexp as $regnumber => $reg1) {
 						
 						$count = 0;
-						if(stripos($content, $keys2[$regnumber]) !== false) { $content = preg_replace($reg1, $replace[$regnumber], $content,$samekeyword,$count);  }
+						if(stripos($content, $keys2[$regnumber]) !== false) { $content = preg_replace($reg1, $replace[$regnumber], $content,$samekeyword,$count);  } echo $count;
 						if($count>0) $sofar = $sofar + $count;
 						if($sofar >= $notimes) break;
 						
