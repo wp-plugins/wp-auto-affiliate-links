@@ -23,7 +23,6 @@ function wpaal_add_affiliate_links($content) {
 		$displayo = get_option('aal_display');
 		$displayc = get_option('aal_displayc');
 		$displayc =json_decode(stripslashes($displayc));
-		//$iscloacked = 0;
 		
 		
 		$samekeyword = get_option('aal_samekeyword'); if(!$samekeyword) $samekeyword = 1;
@@ -33,8 +32,6 @@ function wpaal_add_affiliate_links($content) {
 		if($langsupport=='true') $langsupport = 'u'; else $langsupport = '';
 		$excludearray = explode(',',$aal_exclude);
 		$table_name = $wpdb->prefix . "automated_links";
-
-
 
 
 		//set priority
@@ -54,9 +51,7 @@ function wpaal_add_affiliate_links($content) {
 		
 		//print_r($myrows);
 		
-		
-		
-		
+				
 		
 		$clickbankid = get_option('aal_clickbankid');
 		$clickbankcat = get_option('aal_clickbankcat');
@@ -187,12 +182,11 @@ function wpaal_add_affiliate_links($content) {
 		
 		} //endif
 		
-		//print_r($replace);
+		
 		
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";
 
-	//print_r($regexp);
 			
 				if(is_array($regexp)) { 
 					
