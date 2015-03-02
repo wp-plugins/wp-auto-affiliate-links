@@ -23,7 +23,6 @@ function wpaal_add_affiliate_links($content) {
 		$displayo = get_option('aal_display');
 		$displayc = get_option('aal_displayc');
 		$displayc =json_decode(stripslashes($displayc));
-		//$iscloacked = 0;
 		
 		
 		$samekeyword = get_option('aal_samekeyword'); if(!$samekeyword) $samekeyword = 1;
@@ -33,8 +32,6 @@ function wpaal_add_affiliate_links($content) {
 		if($langsupport=='true') $langsupport = 'u'; else $langsupport = '';
 		$excludearray = explode(',',$aal_exclude);
 		$table_name = $wpdb->prefix . "automated_links";
-
-
 
 
 		//set priority
@@ -54,9 +51,7 @@ function wpaal_add_affiliate_links($content) {
 		
 		//print_r($myrows);
 		
-		
-		
-		
+				
 		
 		$clickbankid = get_option('aal_clickbankid');
 		$clickbankcat = get_option('aal_clickbankcat');
@@ -139,7 +134,6 @@ function wpaal_add_affiliate_links($content) {
 			if($ishome && $showhome!='true') return $content;
 		
 
-
 		//If no keywords are set, exit the function
 		if(!is_null($myrows)) {
 		
@@ -188,10 +182,11 @@ function wpaal_add_affiliate_links($content) {
 		
 		} //endif
 		
+		
+		
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";
 
-	//print_r($regexp);
 			
 				if(is_array($regexp)) { 
 					
@@ -200,7 +195,7 @@ function wpaal_add_affiliate_links($content) {
 					foreach($regexp as $regnumber => $reg1) {
 						
 						$count = 0;
-						if(stripos($content, $keys2[$regnumber]) !== false) { $content = preg_replace($reg1, $replace[$regnumber], $content,$samekeyword,$count);  }
+						if(stripos($content, $keys2[$regnumber]) !== false) { $content = preg_replace($reg1, $replace[$regnumber], $content,$samekeyword,$count);  } 
 						if($count>0) $sofar = $sofar + $count;
 						if($sofar >= $notimes) break;
 						
