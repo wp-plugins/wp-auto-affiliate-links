@@ -110,6 +110,7 @@ function wpaal_general_settings() {
 						<option value="3" <?php if($samekeyword=="3") echo "SELECTED"; ?> >3</option>
 						<option value="4" <?php if($samekeyword=="4") echo "SELECTED"; ?> >4</option>
 						<option value="5" <?php if($samekeyword=="5") echo "SELECTED"; ?> >5</option>
+						<option value="nolimit" <?php if($samekeyword=="nolimit") echo "SELECTED"; ?> >No limit</option>
 					</select>                    
                     <br /><br />                   
                     

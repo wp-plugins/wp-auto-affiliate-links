@@ -26,6 +26,7 @@ function wpaal_add_affiliate_links($content) {
 		
 		
 		$samekeyword = get_option('aal_samekeyword'); if(!$samekeyword) $samekeyword = 1;
+		if($samekeyword=='nolimit') $samekeyword = -1;
 		$targeto = get_option('aal_target');
 		$relationo = get_option('aal_relation');
 		$langsupport = get_option('aal_langsupport');
