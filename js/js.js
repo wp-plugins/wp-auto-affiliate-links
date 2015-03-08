@@ -491,3 +491,26 @@ var answer = confirm("Are you sure you want to delete all the links below  ?")
 
 //return false;
 }
+
+
+
+
+//AAL javascript code for keyword suggestions
+
+jQuery(document).ready(function() {
+	jQuery(".aal_sugkey").click(function() { 
+ 		if(jQuery("#aal_formkeywords").val())  {
+ 				jQuery("#aal_formkeywords").val(jQuery("#aal_formkeywords").val() + ", " + jQuery(this).attr("title"));
+ 			}
+ 			else { 
+ 				jQuery("#aal_formkeywords").val(jQuery(this).attr("title"));
+ 		}
+ 		jQuery(this).hide();
+	});
+
+
+	jQuery("#aal_moresug").click(function() {
+ 		jQuery("#aal_extended").toggle();
+	});
+
+});
