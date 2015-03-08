@@ -106,6 +106,9 @@ If you can't find the options to do this, try LibreOffice, as it is a bit easier
 
 == Changelog ==
 
+= 4.9.3.6 =
+* Cleaned some jquery code
+
 = 4.9.3.5 =
 * Added "no limit" option to same keyword limit
 
