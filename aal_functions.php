@@ -96,28 +96,7 @@ function aalGetSugestions($myrows){
         echo '
         </div>
         <div style="clear: both;" ></div>
-        
-<script type="text/javascript">
-
-
-jQuery(".aal_sugkey").click(function() { 
- 		if(jQuery("#aal_formkeywords").val())  {
- 				jQuery("#aal_formkeywords").val(jQuery("#aal_formkeywords").val() + ", " + jQuery(this).attr("title"));
- 			}
- 			else { 
- 				jQuery("#aal_formkeywords").val(jQuery(this).attr("title"));
- 		}
- 		jQuery(this).hide();
-});
-
-
-jQuery("#aal_moresug").click(function() {
- 		jQuery("#aal_extended").toggle();
-});
-
-
-</script>        
-        
+       
         
         
         ';        
