@@ -229,8 +229,6 @@ function wpaal_add_affiliate_links($content) {
 
 					
 		$aaldivnumber = rand(1,10000);			
-		
-		// data-relation="'. $relo .'"
 					
 		$left = $notimes - $sofar;		
 
