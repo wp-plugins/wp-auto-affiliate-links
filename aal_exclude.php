@@ -58,10 +58,24 @@ function wpaal_exclude_posts() {
 	
 <div class="wrap">  
         <div class="icon32" id="icon-options-general"></div>  
-        
+ 
+         
         
                 <h2>Exclude Posts</h2>
                 <br /><br /><br />
+                
+<h3>Automatic rules for post exclusions</h3>    
+
+                 <form name="aal_excluderules" id="aal_excluderules" method="post">
+                    <b>Exclude all posts before this date:  </b>:
+                    <input type="date" name="aal_excluderulesdatebefore" id="aal_excluderulesdatebefore" value="<?php echo get_option('aal_excluderulesdatebefore'); ?>" />
+                    <input type="hidden" name="aal_excluderulesaction" id="aal_excluderulesaction"  value="1" />
+                    <input  class="button-primary"  type="submit" value="Save"/>
+                </form>
+
+<br /><br />
+
+<h3>Manually exclude posts</h3>                
                 
                  <form name="aal_add_exclude_posts_form" id="aal_add_exclude_posts_form" method="post">
                     <b>Enter post ID </b>:
@@ -69,7 +83,7 @@ function wpaal_exclude_posts() {
                     <input  class="button-primary"  type="submit" value="Exclude Post"/>
                 </form>
                 
-                <br /><br /><br />
+                <br />
                 <h4>Excluded Posts ID's</h4>
                 <form class="aal_exclude_posts">
                 <?php 

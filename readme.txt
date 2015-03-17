@@ -3,8 +3,8 @@ Contributors: Lucian Apostol
 Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
-Tested up to: 4.1
-Stable tag: 4.9.3.1
+Tested up to: 4.1.1
+Stable tag: 4.9.3.7
 
 Automatically add affiliate links in your website content so you can make more money. You can specify the keywords and affiliate links you want to be added or you can let the plugin to automatically decide where to add links from available affiliate networks: Amazon, Clickbank, Ebay, Walmart, Shareasale, Commission Junction, Bestbuy or Envato.
 
@@ -105,6 +105,21 @@ Microsoft Excel adds odd formatting to the file and making problems at import an
 If you can't find the options to do this, try LibreOffice, as it is a bit easier to find them there.
 
 == Changelog ==
+
+= 4.9.4 =
+* Added option to exclude posts created before a specific date
+
+= 4.9.3.7 =
+* Changed some links to more information.
+
+= 4.9.3.6 =
+* Cleaned some jquery code
+
+= 4.9.3.5 =
+* Added "no limit" option to same keyword limit
+
+= 4.9.3.2 =
+* Tested and updated for wordpress 4.1.1
 
 = 4.9.3.1 =
 * Fixed some minor display bugs
