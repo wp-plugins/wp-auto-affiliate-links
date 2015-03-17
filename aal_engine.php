@@ -6,6 +6,8 @@ function wpaal_add_affiliate_links($content) {
 		global $wpdb;
 		if(!is_main_query()) return $content;
 		
+		global $post;
+		
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";
 		
@@ -33,6 +35,13 @@ function wpaal_add_affiliate_links($content) {
 		if($langsupport=='true') $langsupport = 'u'; else $langsupport = '';
 		$excludearray = explode(',',$aal_exclude);
 		$table_name = $wpdb->prefix . "automated_links";
+		
+		
+		$pdate = get_the_date('Y-m-d',$post->ID);
+		//echo $pdate;
+		$edate = get_option('aal_excluderulesdatebefore');
+		
+		if($pdate<$edate && $edate) return $content;
 
 
 		//set priority
@@ -95,7 +104,7 @@ function wpaal_add_affiliate_links($content) {
 		$reg			=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))(?!(?:[^<\[]+[>\]]|[^>\]]+<\/h.>))\b($name)\b/ims'. $langsupport .'U';
 		$strpos_fnc		=	 'stripos';		
 		global $wp_rewrite; 
-		global $post;
+
 
 
 		$patterns = array();

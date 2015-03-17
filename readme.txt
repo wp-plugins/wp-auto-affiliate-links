@@ -106,6 +106,9 @@ If you can't find the options to do this, try LibreOffice, as it is a bit easier
 
 == Changelog ==
 
+= 4.9.4 =
+* Added option to exclude posts created before a specific date
+
 = 4.9.3.7 =
 * Changed some links to more information.
 
