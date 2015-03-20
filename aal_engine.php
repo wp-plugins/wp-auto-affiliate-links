@@ -6,6 +6,8 @@ function wpaal_add_affiliate_links($content) {
 		global $wpdb;
 		if(!is_main_query()) return $content;
 		
+		global $post;
+		
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";
 		
@@ -23,18 +25,23 @@ function wpaal_add_affiliate_links($content) {
 		$displayo = get_option('aal_display');
 		$displayc = get_option('aal_displayc');
 		$displayc =json_decode(stripslashes($displayc));
-		//$iscloacked = 0;
 		
 		
 		$samekeyword = get_option('aal_samekeyword'); if(!$samekeyword) $samekeyword = 1;
+		if($samekeyword=='nolimit') $samekeyword = -1;
 		$targeto = get_option('aal_target');
 		$relationo = get_option('aal_relation');
 		$langsupport = get_option('aal_langsupport');
 		if($langsupport=='true') $langsupport = 'u'; else $langsupport = '';
 		$excludearray = explode(',',$aal_exclude);
 		$table_name = $wpdb->prefix . "automated_links";
-
-
+		
+		
+		$pdate = get_the_date('Y-m-d',$post->ID);
+		//echo $pdate;
+		$edate = get_option('aal_excluderulesdatebefore');
+		
+		if($pdate<$edate && $edate) return $content;
 
 
 		//set priority
@@ -54,9 +61,7 @@ function wpaal_add_affiliate_links($content) {
 		
 		//print_r($myrows);
 		
-		
-		
-		
+				
 		
 		$clickbankid = get_option('aal_clickbankid');
 		$clickbankcat = get_option('aal_clickbankcat');
@@ -99,7 +104,7 @@ function wpaal_add_affiliate_links($content) {
 		$reg			=	 '/(?!(?:[^<\[]+[>\]]|[^>\]]+<\/a>))(?!(?:[^<\[]+[>\]]|[^>\]]+<\/h.>))\b($name)\b/ims'. $langsupport .'U';
 		$strpos_fnc		=	 'stripos';		
 		global $wp_rewrite; 
-		global $post;
+
 
 
 		$patterns = array();
@@ -138,7 +143,6 @@ function wpaal_add_affiliate_links($content) {
 			//If it is home and ishome is set do none, then exit the function
 			if($ishome && $showhome!='true') return $content;
 		
-
 
 		//If no keywords are set, exit the function
 		if(!is_null($myrows)) {
@@ -188,10 +192,11 @@ function wpaal_add_affiliate_links($content) {
 		
 		} //endif
 		
+		
+		
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";
 
-	//print_r($regexp);
 			
 				if(is_array($regexp)) { 
 					
@@ -200,7 +205,7 @@ function wpaal_add_affiliate_links($content) {
 					foreach($regexp as $regnumber => $reg1) {
 						
 						$count = 0;
-						if(stripos($content, $keys2[$regnumber]) !== false) { $content = preg_replace($reg1, $replace[$regnumber], $content,$samekeyword,$count);  }
+						if(stripos($content, $keys2[$regnumber]) !== false) { $content = preg_replace($reg1, $replace[$regnumber], $content,$samekeyword,$count);  } 
 						if($count>0) $sofar = $sofar + $count;
 						if($sofar >= $notimes) break;
 						
@@ -233,8 +238,6 @@ function wpaal_add_affiliate_links($content) {
 
 					
 		$aaldivnumber = rand(1,10000);			
-		
-		// data-relation="'. $relo .'"
 					
 		$left = $notimes - $sofar;		
 
