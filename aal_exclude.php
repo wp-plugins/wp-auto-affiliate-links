@@ -68,9 +68,10 @@ function wpaal_exclude_posts() {
 
                  <form name="aal_excluderules" id="aal_excluderules" method="post">
                     <b>Exclude all posts before this date:  </b>:
-                    <input type="date" name="aal_excluderulesdatebefore" id="aal_excluderulesdatebefore" value="<?php echo get_option('aal_excluderulesdatebefore'); ?>" />
+                    <input type="date" name="aal_excluderulesdatebefore" id="aal_excluderulesdatebefore" value="<?php echo get_option('aal_excluderulesdatebefore'); ?>" />Use this option if you want links to show only in posts published after the selected date
+                    <br /><br />
                     <input type="hidden" name="aal_excluderulesaction" id="aal_excluderulesaction"  value="1" />
-                    <input  class="button-primary"  type="submit" value="Save"/>
+                    <input  class="button-primary"  type="submit" value="Save"/> 
                 </form>
 
 <br /><br />

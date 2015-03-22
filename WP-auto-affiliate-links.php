@@ -4,7 +4,7 @@ Plugin Name: Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.9.5
+Version: 4.9.5.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -249,7 +249,7 @@ function wpaal_manage_affiliates() {
             </form>
                     
 			<div>
-				<br />If you want links to be extracted and displayed automatically from Amazon, Clickbank, Shareasale, Ebay, Walmart, Commision Junction and Envato Marketplace you should consider activating PRO features. <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Upgrade to PRO</a><br /><br />
+				<br />If you want links to be extracted and displayed automatically from Amazon, Clickbank, Shareasale, Ebay, Walmart, Commision Junction and Envato Marketplace you should consider activating PRO features. <a href="http://autoaffiliatelinks.com/wp-login.php?action=register">Get your API key.</a><br /><br />
 			</div>   
                                     
                     
