@@ -96,7 +96,7 @@ function wpaal_general_settings() {
 						<option value="3" <?php if($notimes=="3") echo "SELECTED"; ?> >Average</option>
 						<option value="4" <?php if($notimes=="4") echo "SELECTED"; ?> >High</option>
 						<option value="5" <?php if($notimes=="5") echo "SELECTED"; ?> >Very High</option>
-						<option value="0" <?php if($notimes=="5") echo "SELECTED"; ?> >No Links</option>
+						<option value="0" <?php if($notimes=="0") echo "SELECTED"; ?> >No Links</option>
 						<option value="custom" <?php if($notimes=="custom") echo "SELECTED"; ?> >Custom Value</option>
 					</select>                    
                     <br /><br />
@@ -110,6 +110,7 @@ function wpaal_general_settings() {
 						<option value="3" <?php if($samekeyword=="3") echo "SELECTED"; ?> >3</option>
 						<option value="4" <?php if($samekeyword=="4") echo "SELECTED"; ?> >4</option>
 						<option value="5" <?php if($samekeyword=="5") echo "SELECTED"; ?> >5</option>
+						<option value="nolimit" <?php if($samekeyword=="nolimit") echo "SELECTED"; ?> >No limit</option>
 					</select>                    
                     <br /><br />                   
                     
