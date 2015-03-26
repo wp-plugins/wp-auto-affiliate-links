@@ -90,7 +90,7 @@ $apikey = get_option('aal_apikey');
               	
               	
               	<h3>Request an API key:</h3><br /><br />
-              	You can get more info and request your API key on our website: <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">Auto Affiliate Links</a>
+              	 <a href="http://autoaffiliatelinks.com/wp-login.php?action=register">Click here</a> to get your own API key.
                 <br /><br />
                 <?php echo $errormsg; ?>
                 <br />

@@ -17,6 +17,23 @@ function aalChangeOptions(){
 		$aal_displayc = $_POST['aal_displayc'];
 		//$aal_displayc = json_encode($aal_displayc);
 		
+		
+		$aal_showhome = sanitize_text_field($aal_showhome);	
+		$aal_notimes = sanitize_text_field($aal_notimes);	
+		$aal_notimescustom = sanitize_text_field($aal_notimescustom);	
+		$aal_iscloacked = sanitize_text_field($aal_iscloacked);	
+		$aal_targeto = sanitize_text_field($aal_targeto);	
+		$aal_relationo = sanitize_text_field($aal_relationo);	
+		$aal_cssclass = sanitize_text_field($aal_cssclass);	
+		$aal_langsupport = sanitize_text_field($aal_langsupport);	
+		$aal_display = sanitize_text_field($aal_display);	
+		$aal_samekeyword = sanitize_text_field($aal_samekeyword);	
+		$aal_displayc = sanitize_text_field($aal_displayc);	
+		
+		
+		
+		
+		
 		//Delete the settings and re-add them		
                 delete_option('aal_iscloacked'); add_option( 'aal_iscloacked', $aal_iscloacked);		
 		delete_option('aal_showhome'); add_option( 'aal_showhome', $aal_showhome);		
@@ -96,7 +113,7 @@ function wpaal_general_settings() {
 						<option value="3" <?php if($notimes=="3") echo "SELECTED"; ?> >Average</option>
 						<option value="4" <?php if($notimes=="4") echo "SELECTED"; ?> >High</option>
 						<option value="5" <?php if($notimes=="5") echo "SELECTED"; ?> >Very High</option>
-						<option value="0" <?php if($notimes=="5") echo "SELECTED"; ?> >No Links</option>
+						<option value="0" <?php if($notimes=="0") echo "SELECTED"; ?> >No Links</option>
 						<option value="custom" <?php if($notimes=="custom") echo "SELECTED"; ?> >Custom Value</option>
 					</select>                    
                     <br /><br />
@@ -110,6 +127,7 @@ function wpaal_general_settings() {
 						<option value="3" <?php if($samekeyword=="3") echo "SELECTED"; ?> >3</option>
 						<option value="4" <?php if($samekeyword=="4") echo "SELECTED"; ?> >4</option>
 						<option value="5" <?php if($samekeyword=="5") echo "SELECTED"; ?> >5</option>
+						<option value="nolimit" <?php if($samekeyword=="nolimit") echo "SELECTED"; ?> >No limit</option>
 					</select>                    
                     <br /><br />                   
                     
