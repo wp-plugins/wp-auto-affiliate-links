@@ -17,6 +17,23 @@ function aalChangeOptions(){
 		$aal_displayc = $_POST['aal_displayc'];
 		//$aal_displayc = json_encode($aal_displayc);
 		
+		
+		$aal_showhome = sanitize_text_field($aal_showhome);	
+		$aal_notimes = sanitize_text_field($aal_notimes);	
+		$aal_notimescustom = sanitize_text_field($aal_notimescustom);	
+		$aal_iscloacked = sanitize_text_field($aal_iscloacked);	
+		$aal_targeto = sanitize_text_field($aal_targeto);	
+		$aal_relationo = sanitize_text_field($aal_relationo);	
+		$aal_cssclass = sanitize_text_field($aal_cssclass);	
+		$aal_langsupport = sanitize_text_field($aal_langsupport);	
+		$aal_display = sanitize_text_field($aal_display);	
+		$aal_samekeyword = sanitize_text_field($aal_samekeyword);	
+		$aal_displayc = sanitize_text_field($aal_displayc);	
+		
+		
+		
+		
+		
 		//Delete the settings and re-add them		
                 delete_option('aal_iscloacked'); add_option( 'aal_iscloacked', $aal_iscloacked);		
 		delete_option('aal_showhome'); add_option( 'aal_showhome', $aal_showhome);		

@@ -39,7 +39,7 @@ function aalUpdateExcludePosts(){
     $update_exclude_posts=  $_POST['aal_exclude_posts'];
     $update_exclude_posts=  implode(',', $update_exclude_posts);
     $update_exclude_posts= esc_sql(htmlentities($update_exclude_posts));
-    delete_option('aal_exclude');add_option( 'aal_exclude', $update_exclude_posts);
+    //delete_option('aal_exclude');add_option( 'aal_exclude', $update_exclude_posts);
 
     
     die();
