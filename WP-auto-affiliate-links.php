@@ -4,7 +4,7 @@ Plugin Name: Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.9.6
+Version: 4.9.6.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -249,7 +249,58 @@ function wpaal_manage_affiliates() {
             </form>
                     
 			<div>
-				<br />If you want links to be extracted and displayed automatically from Amazon, Clickbank, Shareasale, Ebay, Walmart, Commision Junction and Envato Marketplace you should consider activating PRO features. <a href="http://autoaffiliatelinks.com/wp-login.php?action=register">Get your API key.</a><br /><br />
+			
+			<br /><br />
+			
+			
+			
+	
+				
+				
+	<?php
+	
+	
+		$apikey = get_option('aal_apikey');
+		
+	
+		
+	if($apikey) {
+		
+		$valid = file_get_contents('http://autoaffiliatelinks.com/api/apivalidate.php?apikey='. $apikey );
+		$valid = json_decode($valid);
+		
+	
+	
+	 if($valid->status == 'expired' && $apikey) { 
+	
+	echo 'Your subscription to Wp Auto Affiliate Links PRO is expired. Please <a href="https://safecart.com/autoaffiliate/.aalmonth?apikey='. $apikey .'">renew your subscription</a> or <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">create a new API key</a> <br /><br />';
+	
+	
+	}  
+	
+	if($valid->status == 'invalid' && $apikey) { 
+	
+	echo 'The API key you entered is invalid. You have to <a href="http://autoaffiliatelinks.com/wp-login.php?action=register">register on our website</a> to get a valid API key. <br /><br />';
+	
+	
+		}
+	
+	
+	
+	}	
+	
+	else {
+	
+		echo 'If you want links to be extracted and displayed automatically from Amazon, Clickbank, Shareasale, Ebay, Walmart, Commision Junction and Envato Marketplace you should consider activating PRO features. <a href="http://autoaffiliatelinks.com/wp-login.php?action=register">Get your API key.</a>';	
+	
+	
+	}
+	
+	  ?>				
+				
+			<br /><br />	
+				
+				
 			</div>   
                                     
                     
