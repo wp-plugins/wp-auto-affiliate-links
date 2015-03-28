@@ -115,33 +115,33 @@ $apikey = get_option('aal_apikey');
 	?>
     
     
-	Enter your API key here: <input type="text" name="aal_apikey" value="<?php echo get_option('aal_apikey'); ?>" />
+	Enter your API key here: <input type="text" name="aal_apikey" value="<?php echo get_option('aal_apikey'); ?>" /> 
+	<?php submit_button('Save');  ?>	
+	
+	
+	
 	<br /><!-- <?php if($apikey) { ?>Your API key is <?php echo $valid->status; ?> <?php } ?> -->
 	
 	<br />
+	
+		
+	
 	<?php if($valid->status == 'expired' && $apikey) { 
 	
-	echo 'Your subscription to Wp Auto Affiliate Links PRO is expired. Please renew your subscription or <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">create a new API key</a> <br /><br />';
+	echo 'Your subscription to Wp Auto Affiliate Links PRO is expired. Please <a href="https://safecart.com/autoaffiliate/.aalmonth?apikey='. $apikey .'">renew your subscription</a> or <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">create a new API key</a> <br /><br />';
 	
 	
-	}  ?>
-
-
-	<?php if($valid->status == 'invalid' && $apikey) { 
+	} 
 	
-	echo 'The API key you entered is invalid. You have to go to  <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">our website</a> to get a valid API key. <br /><br />';
+	 if($valid->status == 'invalid' && $apikey) { 
 	
-	
-	}  ?>
+	echo 'The API key you entered is invalid. You have to <a href="http://autoaffiliatelinks.com/wp-login.php?action=register">register on our website</a> to get a valid API key. <br /><br />';
 	
 	
+	}   
 	
 	
-	<?php submit_button('Save'); ?>	
-
-	
-
-<?php if(get_option('aal_apikey') && $valid->status!='expired' && $valid->status!='invalid' ) {  ?>
+	 if(get_option('aal_apikey') && $valid->status!='expired' && $valid->status!='invalid' ) {  ?>
 	
 	<br /><br />
 	After you activate the modules, you need to set them up from the Wp Auto Affiliate Links menu ( Amazon Links, Clickbank Links, Shareasale Links ).
