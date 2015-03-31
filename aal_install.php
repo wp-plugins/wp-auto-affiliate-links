@@ -6,6 +6,7 @@ function aal_install() {
 	$table_name = $wpdb->prefix . "automated_links";
 	
 	delete_option('aal_target'); add_option( 'aal_target', '_blank');
+	delete_option('aal_notimes'); add_option( 'aal_notimes', '_blank');
 	
 
 	//if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
@@ -19,7 +20,7 @@ function aal_install() {
 	  grup int(5),
 	  grup_desc varchar(255),
 	  PRIMARY KEY (id)
-	  );";
+	  ) CHARACTER SET utf8 COLLATE utf8_general_ci;";
     
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);

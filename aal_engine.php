@@ -153,6 +153,7 @@ function wpaal_add_affiliate_links($content) {
 				$keywords = $row->keywords;
 				
 				
+				
 				if($link == get_permalink($post->ID) ) continue;
 
 				if(!is_null($keywords)) {
@@ -161,6 +162,8 @@ function wpaal_add_affiliate_links($content) {
 					foreach($keys as $key) {
 		
 						$key = trim($key);
+						
+				
 						
 					  if(stripos($content, $key) !== false) {	
  						if($key) if(!in_array('/'. $key .'/', $patterns)) { 
@@ -176,6 +179,8 @@ function wpaal_add_affiliate_links($content) {
 								} //$link = get_option( 'home' ) . "/goto/" . wpaal_generateSlug($key);
 							$url = $link;
 							$name = $key;
+							
+							
 							
 							$keys2[] = $name;
 							$replace[] = "<a title=\"$1\" class=\"". $lclass ."\" target=\"". $targeto ."\" ". $relo ." href=\"$url\">$1</a>";
@@ -198,11 +203,16 @@ function wpaal_add_affiliate_links($content) {
 		//echo $timecounter . "<br/>";
 
 			
+				//print_r($regexp);			
+			
 				if(is_array($regexp)) { 
 					
 				
 					$sofar = 0;
 					foreach($regexp as $regnumber => $reg1) {
+						
+						//echo $keys2[$regnumber];
+						
 						
 						$count = 0;
 						if(stripos($content, $keys2[$regnumber]) !== false) { $content = preg_replace($reg1, $replace[$regnumber], $content,$samekeyword,$count);  } 

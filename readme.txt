@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 4.1.1
-Stable tag: 4.9.6.3
+Stable tag: 4.9.7
 
 Automatically add affiliate links in your website content so you can make more money. You can specify the keywords and affiliate links you want to be added or you can let the plugin to automatically decide where to add links from available affiliate networks: Amazon, Clickbank, Ebay, Walmart, Shareasale, Commission Junction, Bestbuy or Envato.
 
@@ -105,6 +105,10 @@ Microsoft Excel adds odd formatting to the file and making problems at import an
 If you can't find the options to do this, try LibreOffice, as it is a bit easier to find them there.
 
 == Changelog ==
+
+= 4.9.7 =
+* Changed database collation to utf8_general_ci
+* Added default value for Link frequency to Average.
 
 = 4.9.6.3 =
 * Fixed notice message bug
@@ -355,7 +359,7 @@ If you can't find the options to do this, try LibreOffice, as it is a bit easier
 * Fixed a small bug caused by the latest update
 
 = 4.3 =
-* Added support for international chars ( european, russian, chinese, japanese, korean ). Thie has to be activated from plugin General settings page and the database should have the right charset, utf8_general_ci seems to be working well with this.
+* Added support for international chars ( european, russian, chinese, japanese, korean ). This has to be activated from plugin General settings page and the database should have the right charset, utf8_general_ci seems to be working well with this.
 
 = 4.2.8 =
 * Removed some development code  from metabox
