@@ -31,17 +31,16 @@ function aal_install() {
 
 function aal_admin_notice() {
 	
-	$aal_notice_dismissed = get_option('aal_option_dismissed14'); 
+	$aal_notice_dismissed = get_option('aal_option_dismissed15'); 
 	if(!$aal_notice_dismissed && !get_option('aal_apikey') )
 	{ 
     ?>
     <div id="aal_notice_div" class="updated">
      <div style="float: right;padding-top: 10px;"><a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a></div>
-      <p><?php // _e( 'Amazon, Clickbank and Shareasale, Ebay, Walmart, Commission Junction, Bestbuy and Envato Marketplace  links can be automatically added into your content , you only have to <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">get your API key</a>, add your affiliate ID and start earning. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="return aalDismiss();" >Dismiss this notice</a>', 'wp-auto-affiliate-links' ); 
+      <p><?php  _e( 'Amazon, Clickbank and Shareasale, Ebay, Walmart, Commission Junction, Bestbuy and Envato Marketplace  links can be automatically added into your content , you only have to <a href="http://autoaffiliatelinks.com/wp-login.php?action=register">get your API key</a>, add your affiliate ID and start earning. ', 'wp-auto-affiliate-links' ); 
       
 // _e( 'Thank you for using Wp Auto Affiliate Links. To take advantage of all the plugin features, you need to go to our website and  <a href="http://autoaffiliatelinks.com/wp-login.php?action=register">get your API key</a>.', 'wp-auto-affiliate-links' );      
-      
-       _e( 'Do you want links to be automatically extracted and displayed from Amazon, Clickbank, Ebay, Shareasale, Walmart or Bestbuy ? <a href="http://autoaffiliatelinks.com/wp-login.php?action=register">Get your API key. </a>', 'wp-auto-affiliate-links' ); 
+
       
       ?></p>
      
@@ -93,7 +92,8 @@ function aalDismissNotice() {
 		delete_option('aal_option_dismissed11');
 		delete_option('aal_option_dismissed12');
 		delete_option('aal_option_dismissed13');
-		add_option('aal_option_dismissed14',true);
+		delete_option('aal_option_dismissed14');
+		add_option('aal_option_dismissed15',true);
 	
 	
 }

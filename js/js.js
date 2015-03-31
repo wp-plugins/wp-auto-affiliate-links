@@ -199,18 +199,25 @@ jQuery(".aal_delete_exclude_link").live('click',function() {
             
 });
         
-        var removeItem=jQuery(this).closest('span').find('.all_exclude_post_item').val();
-        //console.log(test);
+        var removeItem=jQuery(this).parent().parent().children(".aal_excludedcol:first-child").text();
+        //console.log(removeItem);
         
         var posts=new Array();
         
-        jQuery(".all_exclude_post_item").each(function(){
-            posts.push(jQuery(this).val());
+        
+        jQuery(".aal_excludeditem").each(function(){
+			//console.log(jQuery(this).children(".aal_excludedcol:first-child").text());
+        	
+            posts.push(jQuery(this).children(".aal_excludedcol:first-child").text());
         });
+        
+        //console.log(posts);
         
         posts=jQuery.grep(posts,function(value){
             return value!=removeItem;
         });
+        
+       //console.log(posts);
         
         
         var data = {action: 'aal_update_exclude_posts',aal_exclude_posts:posts};
