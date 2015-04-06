@@ -6,7 +6,13 @@ function aal_install() {
 	$table_name = $wpdb->prefix . "automated_links";
 	
 	delete_option('aal_target'); add_option( 'aal_target', '_blank');
-	delete_option('aal_notimes'); add_option( 'aal_notimes', '_blank');
+	delete_option('aal_notimes'); add_option( 'aal_notimes', '3');
+	delete_option('aal_showhome'); add_option( 'aal_showhome', 'true');
+	$displayc[] = 'post';
+	$displayc[] = 'page';
+	$dc = json_encode($displayc); 
+	delete_option('aal_displayc'); add_option( 'aal_displayc', $dc);
+	
 	
 
 	//if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
@@ -32,7 +38,7 @@ function aal_install() {
 
 function aal_admin_notice() {
 	
-	$aal_notice_dismissed = get_option('aal_option_dismissed15'); 
+	$aal_notice_dismissed = get_option('aal_option_dismissed16'); 
 	if(!$aal_notice_dismissed && !get_option('aal_apikey') )
 	{ 
     ?>
@@ -94,7 +100,8 @@ function aalDismissNotice() {
 		delete_option('aal_option_dismissed12');
 		delete_option('aal_option_dismissed13');
 		delete_option('aal_option_dismissed14');
-		add_option('aal_option_dismissed15',true);
+		delete_option('aal_option_dismissed15');
+		add_option('aal_option_dismissed16',true);
 	
 	
 }
