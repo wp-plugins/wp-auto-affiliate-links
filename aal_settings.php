@@ -46,7 +46,8 @@ function aalChangeOptions(){
       delete_option('aal_langsupport'); add_option( 'aal_langsupport', $aal_langsupport);
       delete_option('aal_display'); add_option( 'aal_display', $aal_display);
       delete_option('aal_samekeyword'); add_option( 'aal_samekeyword', $aal_samekeyword);
-      delete_option('aal_displayc'); add_option( 'aal_displayc', $aal_displayc);
+      delete_option('aal_displayc'); add_option( 'aal_displayc', $aal_displayc);           
+               
                
            die();
 }
@@ -64,7 +65,7 @@ function wpaal_general_settings() {
         $langsupport = get_option('aal_langsupport');
 	if($langsupport=='true') $langsc = 'checked'; else $langsc = '';
         
-	$showhome = get_option('aal_showhome');
+	$showhome = get_option('aal_showhome'); echo $showhome;
         if($showhome=='true') $shse = 'checked'; else $shsel = '';
         
 	$notimes = get_option('aal_notimes');
@@ -82,7 +83,7 @@ function wpaal_general_settings() {
 	if($relationo=="nofollow") $rsc1 = 'checked'; else $rsc2 = 'checked';	
 	
 	
-	$displayc = get_option('aal_displayc');
+	$displayc = get_option('aal_displayc'); 
 	$displayc =json_decode(stripslashes($displayc));
 	$post_types = get_post_types( '', 'names' ); 
 	unset($post_types['revision']);
