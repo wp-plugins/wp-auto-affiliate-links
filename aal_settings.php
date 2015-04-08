@@ -65,7 +65,7 @@ function wpaal_general_settings() {
         $langsupport = get_option('aal_langsupport');
 	if($langsupport=='true') $langsc = 'checked'; else $langsc = '';
         
-	$showhome = get_option('aal_showhome'); echo $showhome;
+	$showhome = get_option('aal_showhome'); //echo $showhome;
         if($showhome=='true') $shse = 'checked'; else $shsel = '';
         
 	$notimes = get_option('aal_notimes');

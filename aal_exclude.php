@@ -84,6 +84,15 @@ function wpaal_exclude_posts() {
                     <input  class="button-primary"  type="submit" value="Exclude Post"/>
                 </form>
                 
+ <br />
+ 
+                  <form name="aal_add_exclude_posts_byurl_form" id="aal_add_exclude_posts_byurl_form" method="post">
+                    <b>Enter post URL </b>:
+                    <input type="text" name="aal_exclude_post_url" id="aal_add_exclude_post_url"  size="10" />
+                    <input type="hidden" name="aal_exclude_post_byurl_check" value="1" />
+                    <input  class="button-primary"  type="submit" value="Exclude Post"/>
+                </form>
+                
                 <br />
                 <h4>Excluded Posts ID's</h4>
                 <form class="aal_exclude_posts">
