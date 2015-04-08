@@ -4,7 +4,7 @@ Plugin Name: Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.9.7.2
+Version: 4.9.7.3
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -204,6 +204,44 @@ echo json_encode($optionsToExport);
 			
 		
 			if(function_exists($aalMod->hooks['actions'])) call_user_func($aalMod->hooks['actions']);		
+			
+		}
+		
+		
+		
+		
+		if($_POST['aal_exclude_post_byurl_check'] && $_POST['aal_exclude_post_url']) {
+			
+			
+			$url = esc_url($_POST['aal_exclude_post_url']);
+			$postid = url_to_postid( $url );
+			
+			if($postid) {
+				
+				$aal_exclude_id = $postid;
+			
+			 $aal_posts = get_option('aal_exclude');
+			    $post = get_post($aal_exclude_id);
+                $data['post_title'] = $post->post_title;
+                if(!$post->ID) {
+                die('nopost');
+					}
+					
+					$aal_posts_array = explode(',',$aal_posts);
+					if(in_array($post->ID,$aal_posts_array)) {
+						die('duplicate');					
+					}
+               
+                
+                if($aal_posts=='')$aal_exclude=$aal_exclude_id;
+                    else $aal_exclude=$aal_posts.",".$aal_exclude_id;
+                    
+                 
+                delete_option('aal_exclude'); add_option( 'aal_exclude', $aal_exclude);
+			 
+		}
+			
+			
 			
 		}	
 	
