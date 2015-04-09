@@ -61,13 +61,13 @@ function wpaal_exclude_posts() {
  
          
         
-                <h2>Exclude Posts</h2>
+                <h2>Exclude Posts/Pages from Auto Affiliate Links</h2>
                 <br /><br /><br />
                 
 <h3>Automatic rules for post exclusions</h3>    
 
                  <form name="aal_excluderules" id="aal_excluderules" method="post">
-                    <b>Exclude all posts before this date:  </b>:
+                    <b>Exclude all posts/pages published before this date:  </b>:
                     <input type="date" name="aal_excluderulesdatebefore" id="aal_excluderulesdatebefore" value="<?php echo get_option('aal_excluderulesdatebefore'); ?>" />Use this option if you want links to show only in posts published after the selected date
                     <br /><br />
                     <input type="hidden" name="aal_excluderulesaction" id="aal_excluderulesaction"  value="1" />
@@ -76,10 +76,10 @@ function wpaal_exclude_posts() {
 
 <br /><br />
 
-<h3>Manually exclude posts</h3>                
+<h3>Manually exclude posts/pages</h3>                
                 
                  <form name="aal_add_exclude_posts_form" id="aal_add_exclude_posts_form" method="post">
-                    <b>Enter post ID </b>:
+                    <b>Enter post/page ID </b>:
                     <input type="text" name="aal_exclude_post_id" id="aal_add_exclude_post_id"  size="10" />
                     <input  class="button-primary"  type="submit" value="Exclude Post"/>
                 </form>
@@ -87,7 +87,7 @@ function wpaal_exclude_posts() {
  <br />
  
                   <form name="aal_add_exclude_posts_byurl_form" id="aal_add_exclude_posts_byurl_form" method="post">
-                    <b>Enter post URL </b>:
+                    <b>Enter post/page URL </b>:
                     <input type="text" name="aal_exclude_post_url" id="aal_add_exclude_post_url"  size="10" />
                     <input type="hidden" name="aal_exclude_post_byurl_check" value="1" />
                     <input  class="button-primary"  type="submit" value="Exclude Post"/>
@@ -108,7 +108,7 @@ function wpaal_exclude_posts() {
 				  			Post ID
 				  		</div>
 				  		<div class='aal_excludedcol aal_excludedtitle'>
-				  			Post Title
+				  			Post/Page Title
 				  		</div>
 				  		<div class='aal_excludedcol'>
 				  			Status
