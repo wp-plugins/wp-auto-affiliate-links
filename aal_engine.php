@@ -146,6 +146,9 @@ function wpaal_add_affiliate_links($content) {
 
 		//If no keywords are set, exit the function
 		if(!is_null($myrows)) {
+			
+		$allkeys = array();
+		$alllinks = array();
 		
 		foreach($myrows as $row) {
 				
@@ -162,8 +165,30 @@ function wpaal_add_affiliate_links($content) {
 					foreach($keys as $key) {
 		
 						$key = trim($key);
+						$allkeys[] = $key;
+						$alllinks[] = $link;
 						
-				
+						
+					}
+			
+			}
+		
+		}
+
+
+		
+		
+	
+		
+		
+			
+		uasort($allkeys, 'aal_keyscmp');
+
+		
+		
+		foreach($allkeys as $ident => $key) { { { 
+		
+					$link = $alllinks[$ident];
 						
 					  if(stripos($content, $key) !== false) {	
  						if($key) if(!in_array('/'. $key .'/', $patterns)) { 
@@ -307,6 +332,20 @@ function aal_post($requestJson,$postUrl) {
 }
 
 
-
+		function aal_keyscmp($a, $b) {
+   			 if (str_word_count($a) == str_word_count($b)) {
+      		  	if(strlen($a) == strlen($b)) {
+      		  		return 0;
+      		  	}
+      		  	else {
+      		  		if(strlen($a)>strlen($b)) return -1;
+      		  		else return 1;	
+      		  	}
+  			  }
+  			  else {
+  			  	if(str_word_count($a) > str_word_count($b)) return -1;
+  			  	else return 1;	  	
+  			  }
+}	
 
 ?>
