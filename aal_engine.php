@@ -148,6 +148,7 @@ function wpaal_add_affiliate_links($content) {
 		if(!is_null($myrows)) {
 			
 		$allkeys = array();
+		$alllinks = array();
 		
 		foreach($myrows as $row) {
 				
@@ -165,6 +166,8 @@ function wpaal_add_affiliate_links($content) {
 		
 						$key = trim($key);
 						$allkeys[] = $key;
+						$alllinks[] = $link;
+						
 						
 					}
 			
@@ -183,9 +186,9 @@ function wpaal_add_affiliate_links($content) {
 
 		
 		
-		foreach($allkeys as $key) { { { 
+		foreach($allkeys as $ident => $key) { { { 
 		
-				
+					$link = $alllinks[$ident];
 						
 					  if(stripos($content, $key) !== false) {	
  						if($key) if(!in_array('/'. $key .'/', $patterns)) { 
