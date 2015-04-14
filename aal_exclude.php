@@ -104,7 +104,7 @@ function wpaal_exclude_posts() {
 
 
 			  	<div class='aal_excludeditemheader'>
-				  		<div class='aal_excludedcol'>
+				  		<div class='aal_excludedcol aal_excludedidcol'>
 				  			Post ID
 				  		</div>
 				  		<div class='aal_excludedcol aal_excludedtitle'>
@@ -143,7 +143,7 @@ function wpaal_exclude_posts() {
 				  	
 				  	
                     echo "<div class='aal_excludeditem'>
-                            <div class='aal_excludedcol'>".$aal_exclude_post_id."</div>
+                            <div class='aal_excludedcol aal_excludedidcol'>".$aal_exclude_post_id."</div>
                             <div class='aal_excludedcol aal_excludedtitle'> <a href='".get_permalink($aal_exclude_post_id)."'>".get_the_title($aal_exclude_post_id)."</a></div> 
                             <div class='aal_excludedcol'>  ". $status ." </div> 
                             <div class='aal_excludedcol'> <a href='javascript:' id='".$aal_exclude_post_id."' class='aal_delete_exclude_link'><img src='".plugin_dir_url(__FILE__)."images/delete.png'/></a></div><br/>
