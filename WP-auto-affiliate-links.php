@@ -4,7 +4,7 @@ Plugin Name: Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.9.7.6.1
+Version: 4.9.7.7
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -266,6 +266,7 @@ function wpaal_manage_affiliates() {
 	//Load excluded posts	
 	$excludeposts = get_option('aal_exclude');
         
+	$apikey = get_option('aal_apikey');	
 	
 	//Render the page
     ?>
@@ -276,8 +277,11 @@ function wpaal_manage_affiliates() {
         <div id="aal_panel3">
        
 <!-- <div class="updated"><br />Thank you for using Wp Auto Affiliate Links. To take advantage of all the plugin features, you need to go to our website and  <a href="http://autoaffiliatelinks.com/wp-auto-affiliate-links-pro/">get your API key</a>   . <br /><br /></div>  -->
+
+			Thank you for using Auto Affiliate Links. The plugin will display affiliate links to your visitors based on your chosen keywords. Add affiliate links that you want to be displayed, and the keywords or keyphrases where you want them to be displayed into your content. 
+			<br /><br />
                                 
-			<h3>Add affiliate links and keywords to be replaced:</h3>
+			<h3>Add affiliate links and keywords to be displayed:</h3>
 
             <form name="add-link" method="post" action="<?php echo admin_url( "admin-ajax.php");?>" id="aal_add_new_link_form">
                 <input type="hidden" name="action" value="add_link" />
@@ -298,7 +302,7 @@ function wpaal_manage_affiliates() {
 	<?php
 	
 	
-		$apikey = get_option('aal_apikey');
+		
 		
 	
 		
