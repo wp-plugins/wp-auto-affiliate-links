@@ -521,3 +521,25 @@ jQuery(document).ready(function() {
 	});
 
 });
+
+
+
+//Aal notice dismiss function
+	function aalDismiss() {
+
+
+        var data = {action: 'aal_dismiss_notice'};
+        
+            jQuery.ajax({
+                    type: "POST",
+                    url: ajax_script.ajaxurl,
+                    data: data,
+                    cache: false,
+                    success: function(){
+                    jQuery("#aal_notice_div").slideUp('slow', function() {jQuery("#aal_notice_div").remove();});
+                                        }
+                });
+        	
+		
+		
+	}
