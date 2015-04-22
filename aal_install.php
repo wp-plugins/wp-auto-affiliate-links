@@ -36,7 +36,7 @@ function aal_install() {
 }
 
 
-function aal_admin_notice() {
+function aal_admin_notice() {  
 	
 	$aal_notice_dismissed = get_option('aal_option_dismissed18'); 
 	if(!$aal_notice_dismissed && !get_option('aal_apikey') )
