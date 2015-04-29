@@ -4,7 +4,7 @@ Donate link: http://autoaffiliatelinks.com
 Tags: affiliate, links, post, plugin, posts, url, keywords, text, content, automatic
 Requires at least: 2.5.2
 Tested up to: 4.2.1
-Stable tag: 4.9.7.12
+Stable tag: 4.9.7.13
 
 Automatically display affiliate links in your website content so you can make more money. You can specify the keywords and affiliate links you want to be added or you can let the plugin to automatically decide where to add links from available affiliate networks: Amazon, Clickbank, Ebay, Walmart, Shareasale, Commission Junction, Bestbuy or Envato Marketplace.
 
@@ -56,7 +56,7 @@ No, the plugin only add the links when the page is rendered. The content remain 
 
 = Cloaked links are not working, what should I do ? =
 
-Link cloaking can cause problems on some environments ( shared hosting with too much restrictions ). If you experience problems please turn cloaking off.
+Link cloaking can cause problems on some environments ( shared hosting with too many restrictions ). If you experience problems please turn cloaking off.
 
 = Do i have to change my theme to make the plugin work? =
 
@@ -105,6 +105,9 @@ Microsoft Excel adds odd formatting to the file and making problems at import an
 If you can't find the options to do this, try LibreOffice, as it is a bit easier to find them there.
 
 == Changelog ==
+
+= 4.9.7.13 =
+* Removed wp prefix from page titles
 
 = 4.9.7.12 -
 * Checked and tested with Wordpress 4.2.1

@@ -8,7 +8,7 @@ function wpaal_gettingstarted() {
 <div class="wrap" >  
     <div class="icon32" id="icon-options-general"></div>  
     <div class="aal_leftadmin">	
-		<h2>Getting Started with WP Auto Affiliate Links</h2>
+		<h2>Getting Started with Auto Affiliate Links</h2>
 		<br /><br />
 		<p>Thank you for installing WP Auto Affiliate Links. The plugin will replace keywords with affiliate links that you manually add, or automatic trough our supported affiliate networks.</p>
 		<p>To get started, go to "WP Auto Affiliate Links" menu item, and add your affiliate links, and keyphrases where you want the links to appear. For example, if you want to add a link to http://amazon.com to each occurences of the keyword "Samsung" in your posts, then enter the link into "Affiliate Links" field, and the keyword into "Keywords" field. You can add more keywords for every affiliate links if you separate them by comma. For example: "samsung, galaxy, galaxy s2, galaxy s3, galaxy s4".</p>
