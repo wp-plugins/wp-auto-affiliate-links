@@ -65,8 +65,8 @@ jQuery(".aalDeleteLink").live('click',function() {
                     cache: false,
                     success: function(data){
                         
-                    jQuery(".aal_links").append('<li>Link: <input style="margin: 5px 10px;width: 250px;" type="text" name="aal_link" value="'+aal_link+'" />\
-                                                  Keywords: <input style="margin: 5px 10px;width: 110px;" type="text" name="aal_keywords" value="'+aal_keywords+'" /> \
+                    jQuery(".aal_links").append('<li class="aal_links_box">Link: <input style="margin: 5px 10px;width: 37%;" type="text" name="aal_link" value="'+aal_link+'" />\
+                                                  Keywords: <input style="margin: 5px 10px;width: 20%;" type="text" name="aal_keywords" value="'+aal_keywords+'" /> \
                                                   <a href="#" id="'+data['aal_delete_id']+'" class="aalDeleteLink"><img src="'+ajax_script.aal_plugin_url+'images/delete.png"/></a>\
                                                 </li>');
 

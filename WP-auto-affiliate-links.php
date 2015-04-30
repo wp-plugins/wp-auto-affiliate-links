@@ -286,13 +286,12 @@ function wpaal_manage_affiliates() {
                 <input type="hidden" name="action" value="add_link" />
                 Affiliate link: <input class="aal_biginput" type="text" name="link" value="http://" id="aal_formlink" />
                 Keywords: <input class="aal_biginput" type="text" name="aal_keywords" id="aal_formkeywords" />
-                <input type="submit" class="button-primary" name="Save" value="Save" /> <?php aalGetSugestions($myrows);?>
+                <input type="submit" class="button-primary" name="Save" value="Save" />&nbsp;&nbsp;&nbsp; <?php aalGetSugestions($myrows);?>
             </form>
                     
 			<div>
 			
-			<br /><br />
-			
+			<br />
 			
 			
 	

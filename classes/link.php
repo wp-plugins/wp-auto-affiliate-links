@@ -28,13 +28,19 @@ class AalLink
 			
 			$myrows = $wpdb->get_results( "SELECT * FROM ". $table_name . $ordersql);
 
-
+			if($myrows) {
         	 foreach($myrows as $row) {
 
 				$link = new AalLink($row->id,$row->link,$row->keywords,$row->medium);
 				$link->display();
             
              } 	
+            }
+          else {
+          
+          	echo '<div>Add some links using the form above</div>';
+          
+          }
 		
 	}	
 	
@@ -43,6 +49,9 @@ class AalLink
 	function display() {
 		
  		?>
+ 		
+
+ 		
             <form name="edit-link-<?php echo $this->id; ?>" method="post">
                   <input value="<?php echo $this->id; ?>" name="edit_id" type="hidden" />
                   
