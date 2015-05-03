@@ -149,12 +149,12 @@ function wpaal_add_affiliate_links($content) {
 			
 		$allkeys = array();
 		$alllinks = array();
+		$allids = array();
 		
 		foreach($myrows as $row) {
 				
 				$link = $row->link;
 				$keywords = $row->keywords;
-				
 				
 				
 				if($link == get_permalink($post->ID) ) continue;
@@ -167,6 +167,7 @@ function wpaal_add_affiliate_links($content) {
 						$key = trim($key);
 						$allkeys[] = $key;
 						$alllinks[] = $link;
+						$allids[] = $row->id;
 						
 						
 					}
@@ -193,7 +194,7 @@ function wpaal_add_affiliate_links($content) {
 					  if(stripos($content, $key) !== false) {	
  						if($key) if(!in_array('/'. $key .'/', $patterns)) { 
 								
-							$redid = $row->id;
+							$redid = $allids[$ident];
 							if($iscloacked=='true')  {
 								
 							// echo $wp_rewrite->permalink_structure;
