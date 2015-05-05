@@ -134,12 +134,7 @@ function wpaal_exclude_posts() {
 							else $status = get_post_status($aal_exclude_post_id);
 						
 				  	if($status = 'publish') { $status = 'Published'; }
-				  	
-				  	?>
-				  	
-	
-				  	
-				  	<?php
+				
 				  	
 				  	
                     echo "<div class='aal_excludeditem'>

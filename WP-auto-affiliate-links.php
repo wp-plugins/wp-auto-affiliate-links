@@ -4,7 +4,7 @@ Plugin Name: Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.9.8.1
+Version: 4.9.8.2
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -250,12 +250,6 @@ echo json_encode($optionsToExport);
 }  // wpaal_actions end
 
 
-
-
-	
-
-
-
 //Function that will render the administration page
 function wpaal_manage_affiliates() {
 	global $wpdb;
@@ -299,9 +293,6 @@ function wpaal_manage_affiliates() {
 				
 	<?php
 	
-	
-		
-		
 	
 		
 	if($apikey) {
@@ -393,9 +384,6 @@ function wpaal_manage_affiliates() {
 
 
  <?php  }  // manage_affliate links
-
-
-
 
 
 ?>
