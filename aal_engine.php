@@ -4,8 +4,7 @@ error_reporting(0);
 // The function that will actually add links when the post content is rendered
 function wpaal_add_affiliate_links($content) {   
 		global $wpdb;
-		if(!is_main_query()) return $content;
-		
+		if(!is_main_query()) return $content;		
 		global $post;
 		
 		$timecounter = microtime(true);
@@ -38,7 +37,6 @@ function wpaal_add_affiliate_links($content) {
 		
 		
 		$pdate = get_the_date('Y-m-d',$post->ID);
-		//echo $pdate;
 		$edate = get_option('aal_excluderulesdatebefore');
 		
 		if($pdate<$edate && $edate) return $content;
@@ -218,7 +216,7 @@ function wpaal_add_affiliate_links($content) {
 						
 						
 					}
-				}
+			}
 		} //endforeach
 		
 		} //endif
@@ -228,17 +226,13 @@ function wpaal_add_affiliate_links($content) {
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";
 
-			
-				//print_r($regexp);			
+				
 			
 				if(is_array($regexp)) { 
 					
 				
 					$sofar = 0;
 					foreach($regexp as $regnumber => $reg1) {
-						
-						//echo $keys2[$regnumber];
-						
 						
 						$count = 0;
 						if(stripos($content, $keys2[$regnumber]) !== false) { $content = preg_replace($reg1, $replace[$regnumber], $content,$samekeyword,$count);  } 
@@ -292,7 +286,7 @@ $content = $content .= '
 						
 					
 		
-				}
+			}
 				
 		
 
