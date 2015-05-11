@@ -274,7 +274,7 @@ function wpaal_add_affiliate_links($content) {
 		
 $aurl = get_permalink($post->ID);
 		
-$content = $content .= ' 
+$content = $content . ' 
 		
 		<div id="aal_api_data" data-divnumber="'. $aaldivnumber .'" data-target="'. $targeto .'"  data-postid="post-'. $post->ID .'" data-apikey="'. $apikey .'" data-clickbankid="'. $clickbankid .'" data-clickbankcat="'. $clickbankcat .'" data-clickbankgravity="'. $clickbankgravity .'"  data-amazonid="'. $amazonid .'" data-amazoncat="'. $amazoncat .'" data-amazonlocal="'. $amazonlocal .'" data-amazonactive="'. $amazonactive .'" data-clickbankactive="'. $clickbankactive .'"  data-shareasaleid="'. $shareasaleid .'"   data-shareasaleactive="'. $shareasaleactive .'" data-cjactive="'. $cjactive .'"  data-ebayactive="'. $ebayactive .'"  data-ebayid="'. $ebayid .'"   data-bestbuyactive="'. $bestbuyactive .'"  data-bestbuyid="'. $bestbuyid .'" data-walmartactive="'. $walmartactive .'"  data-walmartid="'. $walmartid .'" data-envatoid="'. $envatoid .'" data-envatosite="'. $envatosite .'" data-envatoactive="'. $envatoactive .'" data-aurl="'. $aurl .'" data-notimes="'. $left .'" data-apidata=\'\' ></div>
 
