@@ -244,6 +244,8 @@ function wpaal_add_affiliate_links($content) {
 				
 				}
 				
+				$content .= '<!-- aal pro check -->';
+				
 	
 		$timecounter = microtime(true);
 		//echo $timecounter . "<br/>";	
@@ -253,7 +255,9 @@ function wpaal_add_affiliate_links($content) {
 				global $aal_apirequestno;
 				if(!$aal_apirequestno) $aal_apirequestno = 0;
 				//If the manual replacement did not found enough links
-				if($aal_apirequestno < 3 ) if($sofar<$notimes && ($clickbankactive || $amazonactive || $shareasaleactive || $cjactive || $ebayactive || $bestbuyactive || $walmartactive || $envatoactive)) {
+		//		if($aal_apirequestno < 3 ) 
+				
+				if($sofar<$notimes && ($clickbankactive || $amazonactive || $shareasaleactive || $cjactive || $ebayactive || $bestbuyactive || $walmartactive || $envatoactive)) {
 					
 					$aal_apirequestno = $aal_apirequestno + 1;
 					
