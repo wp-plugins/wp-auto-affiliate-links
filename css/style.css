@@ -22,3 +22,5 @@ span.aalcustomlink_merchant { float: right; }
 .aalcustomlinkdeleteall { padding: 10px; font-size: 14px; }
 .aal_leftadmin { width: 70%; font-size: 16px; }
 .aal_leftadmin p { font-size: 15px;  }
+
+.yellowhighlight { border: 2px solid #ffff00 !important; }

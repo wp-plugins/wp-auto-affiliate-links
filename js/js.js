@@ -512,6 +512,8 @@ jQuery(document).ready(function() {
  			else { 
  				jQuery("#aal_formkeywords").val(jQuery(this).attr("title"));
  		}
+ 		jQuery(window).scrollTop(0);
+		jQuery("#aal_formkeywords").addClass( "yellowhighlight" );
  		jQuery(this).hide();
 	});
 
