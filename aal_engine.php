@@ -19,8 +19,9 @@ function wpaal_add_affiliate_links($content) {
 		$aal_exclude = get_option('aal_exclude');
 		$iscloacked = get_option('aal_iscloacked');
 		$cssclass = get_option('aal_cssclass');
-		if($cssclass) $lclass = $cssclass;
-		else $lclass = 'aal';
+		if($cssclass) $lclass = "aalmanual ". $cssclass;
+		else $lclass = 'aalmanual';
+		
 		$displayo = get_option('aal_display');
 		$displayc = get_option('aal_displayc');
 		$displayc =json_decode(stripslashes($displayc));

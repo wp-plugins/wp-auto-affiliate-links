@@ -83,7 +83,7 @@ function aal_retrievelinks(aalapidata,aal_divnumber,aal_target,aal_relation) {
 		
 	var re2 = new RegExp("(?!(?:[^<\\[]+[>\\]]|[^>\\]]+<\/a>))\\b("+ entry.key +")\\b","i");
 	var re = new RegExp("(?!(?:[^<\\[]+[>\\]]|[^>\\]]+<\/a>))(?!(?:[^<\\[]+[>\\]]|[^>\\]]+<\/h.>))\\b("+ entry.key +")\\b","i");
-	acontent = acontent.replace(re, '<a title="$1" class="aal" target="' + aal_target + '" ' + aal_relation + ' href="'+ entry.url +'">$1</a>');	    
+	acontent = acontent.replace(re, '<a title="$1" class="aalauto" target="' + aal_target + '" ' + aal_relation + ' href="'+ entry.url +'">$1</a>');	    
 	    
 	    
 	    
