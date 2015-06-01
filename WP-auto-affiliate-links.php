@@ -4,7 +4,7 @@ Plugin Name: Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.9.8.8
+Version: 4.9.8.9
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -48,6 +48,7 @@ include(plugin_dir_path(__FILE__) . 'aal_apimanagement.php');
 include(plugin_dir_path(__FILE__) . 'aal_generatedlinks.php');
 include(plugin_dir_path(__FILE__) . 'aal_metabox.php');
 include(plugin_dir_path(__FILE__) . 'aal_getstarted.php');
+include(plugin_dir_path(__FILE__) . 'aal_stats.php');
 
 include(plugin_dir_path(__FILE__) . 'classes/link.php');
 
@@ -83,6 +84,7 @@ function wpaal_create_menu() {
 	add_submenu_page( 'aal_topmenu', 'General Settings', 'General Settings', 'publish_pages', 'aal_general_settings', 'wpaal_general_settings' );
 	//add_submenu_page( 'aal_topmenu', 'Modules', 'Modules', 'publish_pages', 'aal_modules', 'wpaal_modules' );
 	add_submenu_page( 'aal_topmenu', 'Upgrade to PRO', 'Upgrade to PRO', 'publish_pages', 'aal_apimanagement', 'wpaal_apimanagement' );
+	//add_submenu_page( 'aal_topmenu', 'Statistics', 'Statistics', 'publish_pages', 'aal_stats', 'wpaal_stats' );
 	if(get_option('aal_apikey'))  add_submenu_page( 'aal_topmenu', 'Generated Links', 'Generated Links', 'publish_pages', 'aal_generatedlinks', 'wpaal_generatedlinks' );
 	
 global $aalModules;

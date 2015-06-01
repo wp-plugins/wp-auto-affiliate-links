@@ -23,5 +23,3 @@ function wpaal_gettingstarted() {
 }
 
 
-
-?>

@@ -25,6 +25,7 @@ function aal_install() {
 	  medium varchar(255),
 	  grup int(5),
 	  grup_desc varchar(255),
+	  stats text,
 	  PRIMARY KEY (id)
 	  ) CHARACTER SET utf8 COLLATE utf8_general_ci;";
     
