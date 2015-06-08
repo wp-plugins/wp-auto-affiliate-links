@@ -106,6 +106,9 @@ If you can't find the options to do this, try LibreOffice, as it is a bit easier
 
 == Changelog ==
 
+= 4.9.9.1 =
+* Added a new line before plugin content is added
+
 = 4.9.9 =
 * Added option to exclude words from automatic linking
 

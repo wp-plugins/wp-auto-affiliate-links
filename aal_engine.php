@@ -247,7 +247,7 @@ function wpaal_add_affiliate_links($content) {
 				
 				}
 				
-				$content .= '<!-- aal pro check -->';
+				$content .= "\n <!-- aal pro check -->";
 				
 	
 		$timecounter = microtime(true);
@@ -289,7 +289,7 @@ $content = $content . '
 		';	
 		
 		
-		$content = $content .'<div id="aalcontent_'. $aaldivnumber .'"></div>';
+		$content = $content .'<div id="aalcontent_'. $aaldivnumber .'"></div> ';
 						
 					
 		
