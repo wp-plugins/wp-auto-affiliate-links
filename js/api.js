@@ -32,6 +32,7 @@ jQuery(document).ready(function() {
 			aal_envatosite = datadiv.getAttribute('data-envatosite');
 			aal_envatoactive = datadiv.getAttribute('data-envatoactive');
 			aal_aurl = datadiv.getAttribute('data-aurl');
+			aal_excludewords = datadiv.getAttribute('data-excludewords');
 			// aal_content = datadiv.getAttribute('data-content');
 			aal_content = encodeURIComponent(document.getElementById('aalcontent_' + aal_divnumber).parentNode.innerHTML);
 			//aalapidata = datadiv.getAttribute('data-apidata');		
@@ -40,7 +41,7 @@ jQuery(document).ready(function() {
 			//console.log(aal_content);
 			
 			
-			aalapidata = {content: aal_content, apikey: aal_apikey, clickbankid: aal_clickbankid, clickbankcat: aal_clickbankcat,  clickbankgravity: aal_clickbankgravity, amazonid: aal_amazonid, amazoncat: aal_amazoncat, amazonlocal: aal_amazonlocal, amazonactive: aal_amazonactive, clickbankactive: aal_clickbankactive, shareasaleactive: aal_shareasaleactive, shareasaleid: aal_shareasaleid, cjactive: aal_cjactive, ebayactive: aal_ebayactive, ebayid: aal_ebayid, bestbuyactive: aal_bestbuyactive, bestbuyid: aal_bestbuyid, walmartactive: aal_walmartactive, walmartid: aal_walmartid, envatoid: aal_envatoid, envatosite: aal_envatosite, envatoactive: aal_envatoactive, aurl: aal_aurl, notimes: aal_notimes};
+			aalapidata = {content: aal_content, apikey: aal_apikey, clickbankid: aal_clickbankid, clickbankcat: aal_clickbankcat,  clickbankgravity: aal_clickbankgravity, amazonid: aal_amazonid, amazoncat: aal_amazoncat, amazonlocal: aal_amazonlocal, amazonactive: aal_amazonactive, clickbankactive: aal_clickbankactive, shareasaleactive: aal_shareasaleactive, shareasaleid: aal_shareasaleid, cjactive: aal_cjactive, ebayactive: aal_ebayactive, ebayid: aal_ebayid, bestbuyactive: aal_bestbuyactive, bestbuyid: aal_bestbuyid, walmartactive: aal_walmartactive, walmartid: aal_walmartid, envatoid: aal_envatoid, envatosite: aal_envatosite, envatoactive: aal_envatoactive, aurl: aal_aurl, notimes: aal_notimes, excludewords: aal_excludewords};
 			//alert(aalapidata);
 
 		

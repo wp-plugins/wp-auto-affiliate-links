@@ -4,7 +4,7 @@ Plugin Name: Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 4.9.8.9
+Version: 4.9.9
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -49,6 +49,7 @@ include(plugin_dir_path(__FILE__) . 'aal_generatedlinks.php');
 include(plugin_dir_path(__FILE__) . 'aal_metabox.php');
 include(plugin_dir_path(__FILE__) . 'aal_getstarted.php');
 include(plugin_dir_path(__FILE__) . 'aal_stats.php');
+include(plugin_dir_path(__FILE__) . 'aal_excludewords.php');
 
 include(plugin_dir_path(__FILE__) . 'classes/link.php');
 
@@ -88,12 +89,16 @@ function wpaal_create_menu() {
 	if(get_option('aal_apikey'))  add_submenu_page( 'aal_topmenu', 'Generated Links', 'Generated Links', 'publish_pages', 'aal_generatedlinks', 'wpaal_generatedlinks' );
 	
 global $aalModules;
-		if(get_option('aal_apikey')) foreach($aalModules as $aalMod) {
+		if(get_option('aal_apikey')) {
+			
+		  foreach($aalModules as $aalMod) {
 			
 			if(get_option('aal_'. $aalMod->shortname .'active')) add_submenu_page( 'aal_topmenu', $aalMod->nicename, $aalMod->nicename, 'publish_pages', 'aal_module_'. $aalMod->shortname, $aalMod->hooks['content'] );			
 			
+		  }
+		  
+		  add_submenu_page( 'aal_topmenu', 'Exclude Words', 'Exclude Words', 'publish_pages', 'aal_exclude_words', 'wpaal_exclude_words' );
 		}
-
 
 	add_submenu_page( 'aal_topmenu', 'Exclude Posts/Pages', 'Exclude Posts/Pages', 'publish_pages', 'aal_exclude_posts', 'wpaal_exclude_posts' );
 	add_submenu_page( 'aal_topmenu', 'Import/Export', 'Import/Export', 'publish_pages', 'aal_import_export', 'wpaal_import_export' );
