@@ -64,7 +64,7 @@ class AalLink
                   <input type="checkbox" name="aal_massids[]" value="<?php echo $this->id; ?>" />
                        Link: <input style="margin: 5px 10px;width: 37%;" type="text" name="aal_link" value="<?php echo $this->link; ?>" />
                        Keywords: <input style="margin: 5px 10px;width: 20%;" type="text" name="aal_keywords" value="<?php echo $this->keywords; ?>" />
-                       <input  class="button-primary" style="margin: 5px 2px;" type="submit" name="ed" value="Edit" />
+                       <input  class="button-primary" style="margin: 5px 2px;" type="submit" name="ed" value="Update" />
                         <a href="#" id="<?php echo $this->id; ?>" class="aalDeleteLink"><img src="<?php echo plugin_dir_url(__FILE__);?>../images/delete.png"/></a>
                   </li>    
 </form>
