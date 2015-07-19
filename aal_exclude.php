@@ -35,10 +35,11 @@ function aalAddExcludePost(){
 
 function aalUpdateExcludePosts(){
             
-    //$update_exclude_posts= filter_input(INPUT_POST, 'aal_exclude_posts', FILTER_SANITIZE_SPECIAL_CHARS);
-    $update_exclude_posts=  $_POST['aal_exclude_posts'];
+    // $update_exclude_posts= filter_input(INPUT_POST, 'aal_exclude_posts', FILTER_SANITIZE_SPECIAL_CHARS);
+   $update_exclude_posts=  $_POST['aal_exclude_posts'];
     $update_exclude_posts=  implode(',', $update_exclude_posts);
     $update_exclude_posts= esc_sql(htmlentities($update_exclude_posts));
+    $update_exclude_posts = filter_var($update_exclude_posts, FILTER_SANITIZE_SPECIAL_CHARS);
     delete_option('aal_exclude');add_option( 'aal_exclude', $update_exclude_posts);
 
     
