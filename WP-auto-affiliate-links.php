@@ -4,7 +4,7 @@ Plugin Name: Auto Affiliate Links
 Plugin URI: http://autoaffiliatelinks.com
 Description: Auto add affiliate links to your blog content
 Author: Lucian Apostol
-Version: 5.0
+Version: 5.0.1
 Author URI: http://autoaffiliatelinks.com
 */
 
@@ -50,9 +50,7 @@ include(plugin_dir_path(__FILE__) . 'aal_metabox.php');
 include(plugin_dir_path(__FILE__) . 'aal_getstarted.php');
 include(plugin_dir_path(__FILE__) . 'aal_stats.php');
 include(plugin_dir_path(__FILE__) . 'aal_excludewords.php');
-
 include(plugin_dir_path(__FILE__) . 'classes/link.php');
-
 
 add_action('admin_init', 'wpaal_actions');
 add_action('admin_menu', 'wpaal_create_menu');
@@ -69,12 +67,9 @@ add_action('wp_ajax_aal_add_exclude_posts', 'aalAddExcludePost');
 add_action('wp_ajax_aal_update_exclude_posts', 'aalUpdateExcludePosts');
 add_action('wp_enqueue_scripts', 'aal_load_front_scripts');
 
-
 register_activation_hook(__FILE__,'aal_install');
 
 //add_action('wp_ajax_exclude_posts', 'aalExcludePosts');
-
-
 
 
 // Add Wp Auto Affiliate Links to Wordpress Admnistration panel menu
@@ -124,9 +119,7 @@ function wpaal_actions() {
 
 		//Update the database and redirect
 		$rows_affected = $wpdb->update( $table_name, array( 'link' => $link, 'keywords' => $keywords ), array( 'id' => $id ));
-		wp_redirect("admin.php?page=aal_topmenu");
-
-			
+		wp_redirect("admin.php?page=aal_topmenu");	
 	}
 	
 	
@@ -140,9 +133,6 @@ function wpaal_actions() {
 	
 			wp_redirect("admin.php?page=aal_topmenu");	
 	}
-	
-
-	
 	
 	
 	if($_POST['aal_export_check']) {				
@@ -177,8 +167,7 @@ foreach($myrows as $row) {
 		add_option('aal_excluderulesdatebefore', $date);
 	
 	}
-	
-	
+		
 	
 	if($_POST['aal_export_settings_check']) {		
 	
@@ -191,7 +180,6 @@ foreach($myrows as $row) {
     		$optionsToExport[$optionName] = get_option($optionName);
     	}
 	}		
-	
 		
 
 		
@@ -215,8 +203,7 @@ echo json_encode($optionsToExport);
 			if(function_exists($aalMod->hooks['actions'])) call_user_func($aalMod->hooks['actions']);		
 			
 		}
-		
-		
+			
 		
 		
 		if($_POST['aal_exclude_post_byurl_check'] && $_POST['aal_exclude_post_url']) {
@@ -254,8 +241,6 @@ echo json_encode($optionsToExport);
 			
 		}	
 	
-	
-
 }  // wpaal_actions end
 
 
@@ -294,11 +279,7 @@ function wpaal_manage_affiliates() {
                     
 			<div>
 			
-			<br />
-			
-			
-	
-				
+			<br />			
 				
 	<?php
 	
