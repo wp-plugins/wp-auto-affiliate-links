@@ -58,10 +58,10 @@ Enter your Ebay campaign ID and activate the module
 ?>
 
 			<span class="aal_label">Campaign ID:</span> <input type="text" name="aal_ebayid" value="<?php echo get_option('aal_ebayid'); ?>" /><br />
-				<span class="aal_label">Status: </span><select name="aal_ebayactive">
+		<!-- <span class="aal_label">Status: </span><select name="aal_ebayactive">
 			<option value="0" <?php if(get_option('aal_ebayactive')=='0') echo "selected"; ?> > Inactive</option>
 			<option value="1" <?php if(get_option('aal_ebayactive')=='1') echo "selected"; ?> >Active</option>
-		</select>
+		</select> -->
 
 
 

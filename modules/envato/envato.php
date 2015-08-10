@@ -63,10 +63,10 @@ Enter your Envato Marketpalce affiliate ID and activate the module
 			<option value="photodune" <?php if(get_option('aal_envatosite')=='photodune') echo "selected"; ?> >Photo Dune</option>
 			
 		</select><br />
-				<span class="aal_label">Status: </span><select name="aal_envatoactive">
+		<!-- <span class="aal_label">Status: </span><select name="aal_envatoactive">
 			<option value="0" <?php if(get_option('aal_envatoactive')=='0') echo "selected"; ?> > Inactive</option>
 			<option value="1" <?php if(get_option('aal_envatoactive')=='1') echo "selected"; ?> >Active</option>
-		</select>
+		</select> -->
 
 
 

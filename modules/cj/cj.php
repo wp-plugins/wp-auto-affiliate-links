@@ -56,10 +56,10 @@ function aal_cj_validate() {
 		do_settings_sections('aal_cj_settings_display');
 		
 ?>
-				<span class="aal_label">Status: </span><select name="aal_cjactive">
+				<!-- <span class="aal_label">Status: </span><select name="aal_cjactive">
 			<option value="0" <?php if(get_option('aal_cjactive')=='0') echo "selected"; ?> > Inactive</option>
 			<option value="1" <?php if(get_option('aal_cjactive')=='1') echo "selected"; ?> >Active</option>
-		</select>
+		</select> -->
 
 
 

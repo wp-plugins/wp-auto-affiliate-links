@@ -58,10 +58,10 @@ function aal_shareasale_validate() {
 		
 ?>
 		<span class="aal_label">Affiliate ID:</span> <input type="text" name="aal_shareasaleid" value="<?php echo get_option('aal_shareasaleid'); ?>" /><br />
-				<span class="aal_label">Status: </span><select name="aal_shareasaleactive">
+		<!--		<span class="aal_label">Status: </span><select name="aal_shareasaleactive">
 			<option value="0" <?php if(get_option('aal_shareasaleactive')=='0') echo "selected"; ?> > Inactive</option>
 			<option value="1" <?php if(get_option('aal_shareasaleactive')=='1') echo "selected"; ?> >Active</option>
-		</select>
+		</select> -->
 
 
 
