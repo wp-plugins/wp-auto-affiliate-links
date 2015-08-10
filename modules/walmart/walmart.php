@@ -58,10 +58,10 @@ Enter your Linkshare affiliate ID for Walmart merchant and activate the module
 ?>
 
 			<span class="aal_label">Affiliate ID:</span> <input type="text" name="aal_walmartid" value="<?php echo get_option('aal_walmartid'); ?>" /><br />
-				<span class="aal_label">Status: </span><select name="aal_walmartactive">
+		<!-- 		<span class="aal_label">Status: </span><select name="aal_walmartactive">
 			<option value="0" <?php if(get_option('aal_walmartactive')=='0') echo "selected"; ?> > Inactive</option>
 			<option value="1" <?php if(get_option('aal_walmartactive')=='1') echo "selected"; ?> >Active</option>
-		</select>
+		</select>  -->
 
 
 

@@ -130,11 +130,11 @@ jQuery(document).ready(function() {
 		<option value="jp" <?php if(get_option('aal_amazonlocal')=='co.jp') echo "selected"; ?>>JP</option>
 		<option value="uk" <?php if(get_option('aal_amazonlocal')=='co.uk') echo "selected"; ?>>UK</option>
 	</select>
-	<br />
+	<!-- <br />
 		<span class="aal_label">Status: </span><select name="aal_amazonactive">
 			<option value="0" <?php if(get_option('aal_amazonactive')=='0') echo "selected"; ?> > Inactive</option>
 			<option value="1" <?php if(get_option('aal_amazonactive')=='1') echo "selected"; ?> >Active</option>
-		</select><br />
+		</select><br /> -->
 
 
 

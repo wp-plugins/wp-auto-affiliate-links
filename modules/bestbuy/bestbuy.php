@@ -58,10 +58,10 @@ Enter your Linkshare affiliate ID for BestBuy merchant and activate the module
 ?>
 
 			<span class="aal_label">Affiliate ID:</span> <input type="text" name="aal_bestbuyid" value="<?php echo get_option('aal_bestbuyid'); ?>" /><br />
-				<span class="aal_label">Status: </span><select name="aal_bestbuyactive">
+			<!--	<span class="aal_label">Status: </span><select name="aal_bestbuyactive">
 			<option value="0" <?php if(get_option('aal_bestbuyactive')=='0') echo "selected"; ?> > Inactive</option>
 			<option value="1" <?php if(get_option('aal_bestbuyactive')=='1') echo "selected"; ?> >Active</option>
-		</select>
+		</select> -->
 
 
 

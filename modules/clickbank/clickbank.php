@@ -101,10 +101,10 @@ function aal_clickbank_validate() {
 	</select>
 	<br />
 		<span class="aal_label">Minimum gravity: </span><input type="text" name="aal_clickbankgravity" value="<?php echo get_option('aal_clickbankgravity'); ?>" /><br />
-		<span class="aal_label">Status: </span><select name="aal_clickbankactive">
+		<!-- <span class="aal_label">Status: </span><select name="aal_clickbankactive">
 			<option value="0" <?php if(get_option('aal_clickbankactive')=='0') echo "selected"; ?> >Inactive</option>
 			<option value="1" <?php if(get_option('aal_clickbankactive')=='1') echo "selected"; ?> >Active</option>
-		</select><br />
+		</select><br /> -->
 
 
 
